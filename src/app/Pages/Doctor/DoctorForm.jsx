@@ -6,7 +6,8 @@ import {
     NotificationContainer,
     NotificationManager,
   } from "react-notifications";
-  import { Box, styled } from '@mui/material';
+  import { Box, styled,Button,Icon } from '@mui/material';
+  import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import '../Patient/Patient.css'
 const initialValue = {
@@ -273,9 +274,13 @@ const DoctorForm = () => {
                         </div>
 
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white", marginTop: '2rem' }} onClick={handleSubmit}>Submit</button>
-                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end',marginTop:'2rem' }}>
+                            {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white", marginTop: '2rem' }} onClick={handleSubmit}>Submit</button> */}
+                            <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
+          <Icon>send</Icon>
+          <Span sx={{ pl: 1, textTransform: "capitalize" }} >Submit</Span>
+        </Button>
+</div>
 
 
                     </div>

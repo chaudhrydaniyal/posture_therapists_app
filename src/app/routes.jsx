@@ -12,6 +12,7 @@ import DoctorForm from './Pages/Doctor/DoctorForm';
 import RegisteredDoctors from './Pages/Doctor/RegisteredDoctors';
 import DoctorDetails from './Pages/Doctor/DoctorDetails';
 import AppointmentSchedule from './Pages/Appointment/AppointmentSchedule';
+import PatientDetails from './Pages/Patient/PatientDetails';
 
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
@@ -53,6 +54,10 @@ const routes = [
         path: '/registeredPatient',
         element: <RegisteredPatients />,
         // auth: authRoles.admin
+      },
+      {
+        path:'/patientdetails',
+        element:<PatientDetails/>,
       },
 
 

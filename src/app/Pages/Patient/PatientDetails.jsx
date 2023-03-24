@@ -6,6 +6,17 @@ import {
     NotificationManager,
   } from "react-notifications";
 import axios from 'axios';
+import { Box, styled } from '@mui/material';
+import { Breadcrumb, SimpleCard } from 'app/components';
+import './Patient.css'
+const Container = styled('div')(({ theme }) => ({
+    margin: '30px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+    '& .breadcrumb': {
+      marginBottom: '30px',
+      [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+    }
+  }));
 const PatientDetails = () => {
     var patient = useLocation();
     console.log("itemofpatientdata", patient);
@@ -75,32 +86,11 @@ const PatientDetails = () => {
       },[])
 
     return (
-        <>
-            <section className="content">
-                <div className="container-fluid">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul className="breadcrumb breadcrumb-style ">
-                                    <li className="breadcrumb-item">
-                                        <h4 className="page-title">Patient Details</h4>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-1">
-                                        <a href="../../index.html">
-                                            <i className="fas fa-home"></i> Home
-                                        </a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-2">
-                                        <a href="#">Patient Management</a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-3"><a href="#">Registered Patient</a></li>
-                                    <li className="breadcrumb-item active">Patient Details</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <Container>
+        <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[ { name: 'Patient Details' }]} />
+      </Box>
+     
 
                 {/* ************Patient Information*********** */}
 
@@ -109,10 +99,10 @@ const PatientDetails = () => {
                         <h4>PATIENT INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-                            <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                            <button style={{ padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
                                 setDisableFields(false);
                             }}>Edit</button>
-                            <button style={{ marginLeft: '2rem', padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                            <button style={{ marginLeft: '2rem', padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
                                 setDisableFields(true); updatePatient()
                             }} >Save</button>
 
@@ -125,9 +115,9 @@ const PatientDetails = () => {
                                     <strong>Surname:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border ">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="surname" placeholder="Surname..." value={data.surname} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="surname" placeholder="Surname..." value={data.surname} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
@@ -135,9 +125,9 @@ const PatientDetails = () => {
                                     <strong>First Name:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="first_name" placeholder="First Name..." value={data.first_name} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="first_name" placeholder="First Name..." value={data.first_name} onChange={handleInput} disabled={disableFields} />
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -146,9 +136,9 @@ const PatientDetails = () => {
                                     <strong>Middle Name:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="middle_name" placeholder="Middle Name..." value={data.middle_name} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={data.middle_name} onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
 
@@ -159,7 +149,7 @@ const PatientDetails = () => {
                                     <strong>Date of Birth:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <input
                                     type="date"
                                     name="date_of_birth"
@@ -174,9 +164,10 @@ const PatientDetails = () => {
                                     <strong>Age:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <input
+                                className="input_border"
                                     name="age"
                                     type="text"
                                     placeholder="age..."
@@ -197,7 +188,7 @@ const PatientDetails = () => {
                                     <strong>Gender:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields}>
                                     <option
@@ -221,8 +212,8 @@ const PatientDetails = () => {
                                     <strong>Address:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="address" placeholder="Address..." value={data.address} onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="address" placeholder="Address..." value={data.address} onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -235,8 +226,8 @@ const PatientDetails = () => {
                                     <strong>Home Phone:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="homephone" placeholder="Home Phone..." onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="homephone" placeholder="Home Phone..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
@@ -244,16 +235,16 @@ const PatientDetails = () => {
                                     <strong>Work Phone:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="workphone" placeholder="Work Phone..." onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="workphone" placeholder="Work Phone..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
                                     <strong>Mobile No:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="number" name="mobile_no" placeholder="Mobile No..." onInput={(e) => {
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -268,24 +259,24 @@ const PatientDetails = () => {
                                     <strong>Email:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="email" name="email" placeholder="Email..." value={data.email} onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="email" name="email" placeholder="Email..." value={data.email} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
                                     <strong>Occupation:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="occupation" placeholder="Occupation..." value={data.occupation} onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="occupation" placeholder="Occupation..." value={data.occupation} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
                                     <strong>Designation:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="designation" placeholder="Designation..." onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="designation" placeholder="Designation..." onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
 
@@ -295,8 +286,8 @@ const PatientDetails = () => {
                                     <strong>Your Doctor"s Name:</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="doctorname" placeholder="Your Doctor Name..." onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="doctorname" placeholder="Your Doctor Name..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
@@ -305,13 +296,14 @@ const PatientDetails = () => {
                             </div>
 
 
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
                                 <PatternFormat
                                     style={{
                                         width: "100%",
                                         borderColor: "grey",
                                     }}
+                                    className="input_border"
                                     required
                                     name="cnic"
                                     format="#####-#######-#"
@@ -357,7 +349,7 @@ const PatientDetails = () => {
                 </div>
 
                 {/* ***********Previous Treatment*************** */}
-                <div className="card">
+                <div className="card" style={{marginTop:'2rem'}}>
                     <div className="card-body" style={{ margin: "10px" }}>
                         <h4>PREVIOUS TREATMENT</h4>
 
@@ -368,7 +360,7 @@ const PatientDetails = () => {
                                     <strong>Have you seen another physiotherapist before?</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <div style={{ marginLeft: "4rem" }}>
                                     {/* <input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
                             <span>
@@ -408,9 +400,9 @@ const PatientDetails = () => {
                                     <strong>If Yes, was there anything yu were not happy about?</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 {/* <input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                                <input type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -423,8 +415,8 @@ const PatientDetails = () => {
                                     <strong>What aspects were you most happy with?</strong>
                                 </label>
                             </div>
-                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -438,8 +430,8 @@ const PatientDetails = () => {
                                 </label>
                             </div>
 
-                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="todaysession" onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="todaysession" onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -452,8 +444,8 @@ const PatientDetails = () => {
                                 </label>
                             </div>
 
-                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -465,8 +457,8 @@ const PatientDetails = () => {
                                 </label>
                             </div>
 
-                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="fixednow" onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="fixednow" onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -480,7 +472,7 @@ const PatientDetails = () => {
 
                 {/* ************In Case of Emergency*********** */}
                 
-                <div className="card">
+                <div className="card" style={{marginTop:'2rem'}}>
                     <div className="card-body" style={{ margin: "10px" }}>
                         <h4>In Case of Emergency</h4>
 
@@ -492,8 +484,8 @@ const PatientDetails = () => {
                                 </label>
                             </div>
 
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="patientrelationship">
@@ -501,8 +493,8 @@ const PatientDetails = () => {
                                 </label>
                             </div>
 
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="prevmobileno">
@@ -510,8 +502,8 @@ const PatientDetails = () => {
                                 </label>
                             </div>
 
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="number" name="prevmobileno" onInput={(e) => {
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="number" name="prevmobileno" onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -526,8 +518,8 @@ const PatientDetails = () => {
                 </div>
 
 
-            </section>
-        </>
+            
+        </Container>
     )
 }
 

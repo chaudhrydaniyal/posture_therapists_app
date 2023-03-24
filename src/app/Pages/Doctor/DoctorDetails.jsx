@@ -11,7 +11,9 @@ import {
   import DemoApp from './DoctorSlots/DemoApp';
   import { Box, styled } from '@mui/material';
 import { Breadcrumb, SimpleCard } from 'app/components';
-
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import '../../Pages/Patient/Patient.css'
   const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -104,36 +106,22 @@ const DoctorDetails = () => {
         <Box className="breadcrumb">
         <Breadcrumb routeSegments={[ { name: 'Doctor Details' }]} />
       </Box>
-     
-
-          {/* <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="card"> */}
-          
-            
-
-              
-            
-              {/* <!-- Tab panes --> */}
-              <div class="tab-content">
-                <div
-                  role="tabpanel"
-                  class="tab-pane fade in active show"
-                  id="home"
-                >
-
-                    {/* **************Doctor Information*********** */}
-
-                    
-                <div className="card">
-                    <div className="card-body" style={{ margin: "10px" }}>
+      <Tabs
+      defaultActiveKey="Doctor Details"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+    >
+      <Tab eventKey="Doctor Details" title="Doctor Details">
+        {/* <Sonnet /> */}
+        <div className="card">
+                    <div className="card-body" style={{ margin: "0px" }}>
                         <h4>DOCTOR INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-                            <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                            <button style={{ padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
                                 setDisableFields(false);
                             }}>Edit</button>
-                            <button style={{ marginLeft: '2rem', padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                            <button style={{ marginLeft: '2rem', padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
                                 setDisableFields(true); updateDoctor()
                             }} >Save</button>
 
@@ -148,7 +136,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="surname" placeholder="Surname..." value={data.surname} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="surname" placeholder="Surname..." value={data.surname} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
@@ -158,7 +146,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="first_name" placeholder="First Name..." value={data.first_name} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="first_name" placeholder="First Name..." value={data.first_name} onChange={handleInput} disabled={disableFields} />
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -169,7 +157,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="middle_name" placeholder="Middle Name..." value={data.middle_name} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={data.middle_name} onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
 
@@ -198,6 +186,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <input
+                                className="input_border"
                                     name="age"
                                     type="text"
                                     placeholder="age..."
@@ -243,7 +232,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                                <input type="text" name="address" placeholder="Address..." value={data.address} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_width"  type="text" name="address" placeholder="Address..." value={data.address} onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -257,7 +246,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="text" name="homephone" placeholder="Home Phone..." onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="homephone" placeholder="Home Phone..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
@@ -266,7 +255,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="text" name="workphone" placeholder="Work Phone..." onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="workphone" placeholder="Work Phone..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
@@ -274,7 +263,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="number" name="mobile_no" placeholder="Mobile No..." onInput={(e) => {
+                                <input className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -290,7 +279,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="email" name="email" placeholder="Email..." value={data.email} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="email" name="email" placeholder="Email..." value={data.email} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
@@ -298,7 +287,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="text" name="occupation" placeholder="Occupation..." value={data.occupation} onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="occupation" placeholder="Occupation..." value={data.occupation} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
@@ -306,7 +295,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="text" name="designation" placeholder="Designation..." onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="designation" placeholder="Designation..." onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
 
@@ -317,7 +306,7 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input type="text" name="doctorname" placeholder="Your Doctor Name..." onChange={handleInput} disabled={disableFields} />
+                                <input className="input_border" type="text" name="doctorname" placeholder="Your Doctor Name..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
@@ -333,6 +322,7 @@ const DoctorDetails = () => {
                                         width: "100%",
                                         borderColor: "grey",
                                     }}
+                                    className="input_border"
                                     required
                                     name="cnic"
                                     format="#####-#######-#"
@@ -350,11 +340,38 @@ const DoctorDetails = () => {
 
                     </div>
                 </div>
+      </Tab>
+      <Tab eventKey="Available Slots" title="Available Slots">
+        <DemoApp data={data.id}/>
+      </Tab>
+
+     
+
+          {/* <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card"> */}
+          
+            
+
+              
+            
+              {/* <!-- Tab panes --> */}
+              {/* <div class="tab-content">
+                <div
+                  role="tabpanel"
+                  class="tab-pane fade in active show"
+                  id="home"
+                > */}
+
+                    {/* **************Doctor Information*********** */}
+
+                    
+                
               
                 
 
-                <div role="tabpanel" class="tab-pane fade" id="profile">
-                 <DemoApp data={data.id} />
+                {/* <div role="tabpanel" class="tab-pane fade" id="profile"> */}
+                 {/* <DemoApp data={data.id} /> */}
             
                 
 
@@ -380,10 +397,11 @@ const DoctorDetails = () => {
                 {/* <div role="tabpanel" class="tab-pane fade" id="details">
                <EmployementDetails/>
                 </div> */}
-              </div>
-            </div>
+              {/* </div> */}
+            {/* // </div> */}
 
-          </div>
+          {/* </div> */}
+          </Tabs>
         </Container>
 
       

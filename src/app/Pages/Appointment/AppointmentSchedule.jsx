@@ -7,8 +7,19 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios';
-
+import { Box, styled } from '@mui/material';
+import { Breadcrumb, SimpleCard } from 'app/components';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 // import './index.css'
+const Container = styled('div')(({ theme }) => ({
+  margin: '30px',
+  [theme.breakpoints.down('sm')]: { margin: '16px' },
+  '& .breadcrumb': {
+    marginBottom: '30px',
+    [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+  }
+}));
 export default class AppointmentSchedule extends React.Component {
 
 
@@ -21,7 +32,7 @@ export default class AppointmentSchedule extends React.Component {
 
   async componentDidMount() {
 
-    let events = await (await axios.get('http://localhost:8081/api/doctortimeslots/')).data
+    let events = await (await axios.get('/api/doctortimeslots/')).data
 
     this.setState({ INITIAL_EVENTS: events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green" })) })
 
@@ -35,31 +46,12 @@ export default class AppointmentSchedule extends React.Component {
 
 
     return (
-      <>
-        <section className="content">
-          <div className="container-fluid">
-            <div className="block-header">
-              <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <ul className="breadcrumb breadcrumb-style ">
-                    <li className="breadcrumb-item">
-                      <h4 className="page-title">Appointment Scheduling</h4>
-                    </li>
-                    <li className="breadcrumb-item bcrumb-1">
-                      <a href="../../index.html">
-                        <i className="fas fa-home"></i> Home
-                      </a>
-                    </li>
-                    <li className="breadcrumb-item bcrumb-2">
-                      <a href="#">Appointment Scheduling</a>
-                    </li>
-                    {/* <li className="breadcrumb-item active">Doctor Registration</li> */}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-          </div>
+      <Container>
+      <Box className="breadcrumb">
+      <Breadcrumb routeSegments={[ { name: 'Appointment Scheduling' }]} />
+    </Box>
+  
+   
           <div className='card'>
             <div className='card-body'>
               <div className='demo-app'>
@@ -113,8 +105,8 @@ export default class AppointmentSchedule extends React.Component {
             </div>
           </div>
 
-        </section>
-      </>
+  
+  </Container>
     )
   }
 
