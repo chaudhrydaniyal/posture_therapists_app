@@ -53,7 +53,6 @@ export default class DemoApp extends React.Component {
               this.state.currentEvents.map(ce => ({ start_time: ce._instance.range.start, end_time: ce._instance.range.end, doctor: this.props.data }))
             )
             // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
-
           }}
           >Update</button>
         </div>
