@@ -14,15 +14,19 @@ export default class AppointmentSchedule extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: []
+    currentEvents: [],
+    INITIAL_EVENTS: []
   }
 
-  
-  componentDidMount() {
 
-    // document.getElementsByClassName('fc-dayGridMonth-button') && document.getElementsByClassName('fc-dayGridMonth-button').click()
+  async componentDidMount() {
+
+    let events = await (await axios.get('http://localhost:8081/api/doctortimeslots/')).data
+
+    this.setState({ INITIAL_EVENTS: events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green" })) })
 
   }
+
 
 
 
@@ -32,82 +36,84 @@ export default class AppointmentSchedule extends React.Component {
 
     return (
       <>
-          <section className="content">
-                <div className="container-fluid">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul className="breadcrumb breadcrumb-style ">
-                                    <li className="breadcrumb-item">
-                                        <h4 className="page-title">Appointment Scheduling</h4>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-1">
-                                        <a href="../../index.html">
-                                            <i className="fas fa-home"></i> Home
-                                        </a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-2">
-                                        <a href="#">Appointment Scheduling</a>
-                                    </li>
-                                    {/* <li className="breadcrumb-item active">Doctor Registration</li> */}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
+        <section className="content">
+          <div className="container-fluid">
+            <div className="block-header">
+              <div className="row">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <ul className="breadcrumb breadcrumb-style ">
+                    <li className="breadcrumb-item">
+                      <h4 className="page-title">Appointment Scheduling</h4>
+                    </li>
+                    <li className="breadcrumb-item bcrumb-1">
+                      <a href="../../index.html">
+                        <i className="fas fa-home"></i> Home
+                      </a>
+                    </li>
+                    <li className="breadcrumb-item bcrumb-2">
+                      <a href="#">Appointment Scheduling</a>
+                    </li>
+                    {/* <li className="breadcrumb-item active">Doctor Registration</li> */}
+                  </ul>
                 </div>
-                <div className='card'>
-                  <div className='card-body'>
-                  <div className='demo-app'>
-        <div style={{display:'flex',justifyContent:'flex-end',margin:'1rem'}}>
+              </div>
+            </div>
 
-        <button style={{borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white"}} onClick={async()=>
-          {console.log("iddddd",this.props)
-          await axios.post('api/doctortimeslots',
-          this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end,doctor:this.props.data}))
-          )
-          // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
+          </div>
+          <div className='card'>
+            <div className='card-body'>
+              <div className='demo-app'>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
 
-        }}
-        >Update</button>
-        </div>
-        {/* {this.renderSidebar()} */}
-        <div className='demo-app-main'>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-           
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            }}
-            
+                  <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
+                    console.log("iddddd", this.props)
+                    await axios.post('api/doctortimeslots',
+                      this.state.currentEvents.map(ce => ({ start_time: ce._instance.range.start, end_time: ce._instance.range.end, doctor: this.props.data }))
+                    )
+                    // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
 
-            initialView='dayGridMonth'
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
-          />
-        </div>
-      </div>
-      
-
-                  </div>
+                  }}
+                  >Update</button>
                 </div>
-    
-      </section>
+                {/* {this.renderSidebar()} */}
+                <div className='demo-app-main'>
+                  <FullCalendar
+                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+
+                    headerToolbar={{
+                      left: 'prev,next today',
+                      center: 'title',
+                      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    }}
+
+
+                    initialView='timeGridWeek'
+                    editable={true}
+                    selectable={true}
+                    selectMirror={true}
+                    dayMaxEvents={true}
+                    weekends={this.state.weekendsVisible}
+                    events={this.state.INITIAL_EVENTS}
+                    // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+                    select={this.handleDateSelect}
+                    eventContent={renderEventContent} // custom render function
+                    eventClick={this.handleEventClick}
+                    eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+                    /* you can update a remote database when these fire:
+                    eventAdd={function(){}}
+                    eventChange={function(){}}
+                    eventRemove={function(){}}
+                    */
+                    eventColor="purple"
+                  />
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+        </section>
       </>
     )
   }
@@ -136,8 +142,8 @@ export default class AppointmentSchedule extends React.Component {
         <div className='demo-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
 
-          {console.log("events",this.state.currentEvents)}
-          
+          {console.log("events", this.state.currentEvents)}
+
           <ul>
             {this.state.currentEvents.map(renderSidebarEvent)}
           </ul>
@@ -176,9 +182,11 @@ export default class AppointmentSchedule extends React.Component {
   }
 
   handleEvents = (events) => {
+
     this.setState({
       currentEvents: events
     })
+
   }
 
 }
@@ -196,8 +204,9 @@ function renderSidebarEvent(event) {
   return (
 
     <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+      <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
       <i>{event.title}</i>
     </li>
-  )
+
+ )
 }

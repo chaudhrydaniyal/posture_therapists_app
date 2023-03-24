@@ -12,15 +12,27 @@ import axios from 'axios';
 export default class DemoApp extends React.Component {
 
 
+
+
+
   state = {
     weekendsVisible: true,
-    currentEvents: []
+    currentEvents: [],
+    INITIAL_EVENTS: []
   }
 
-  
-  componentDidMount() {
 
-    // document.getElementsByClassName('fc-dayGridMonth-button') && document.getElementsByClassName('fc-dayGridMonth-button').click()
+
+
+  async componentDidMount() {
+
+    let events = await (await axios.get(`/api/doctortimeslots/${this.props.data}`)).data
+
+
+    this.setState({ INITIAL_EVENTS: events.map((e) => ({ start: e.start_time, end: e.end_time, color: "green" })) })
+
+    console.log("events of doctor", events)
+
 
   }
 
@@ -28,50 +40,52 @@ export default class DemoApp extends React.Component {
 
   render() {
 
+    console.log("this props", this.props)
 
 
     return (
       <div className='demo-app'>
-        <div style={{display:'flex',justifyContent:'flex-end',margin:'1rem'}}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
 
-        <button style={{borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white"}} onClick={async()=>
-          {console.log("iddddd",this.props)
-          await axios.post('api/doctortimeslots',
-          this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end,doctor:this.props.data}))
-          )
-          // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
+          <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
+            console.log("iddddd", this.props)
+            await axios.post('http://192.168.5.21:8081/api/doctortimeslots',
+              this.state.currentEvents.map(ce => ({ start_time: ce._instance.range.start, end_time: ce._instance.range.end, doctor: this.props.data }))
+            )
+            // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
 
-        }}
-        >Update</button>
+          }}
+          >Update</button>
         </div>
         {/* {this.renderSidebar()} */}
         <div className='demo-app-main'>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-           
+
             headerToolbar={{
               left: 'prev,next today',
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
-            
 
-            initialView='dayGridMonth'
+
+            initialView='timeGridWeek'
             editable={true}
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            events={this.state.INITIAL_EVENTS}
+            // initialEvents={this.state.INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
             select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
+          /* you can update a remote database when these fire:
+          eventAdd={function(){}}
+          eventChange={function(){}}
+          eventRemove={function(){}}
+          */
           />
         </div>
       </div>
@@ -102,8 +116,8 @@ export default class DemoApp extends React.Component {
         <div className='demo-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
 
-          {console.log("events",this.state.currentEvents)}
-          
+          {console.log("events", this.state.currentEvents)}
+
           <ul>
             {this.state.currentEvents.map(renderSidebarEvent)}
           </ul>
@@ -162,7 +176,7 @@ function renderSidebarEvent(event) {
   return (
 
     <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+      <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
       <i>{event.title}</i>
     </li>
   )

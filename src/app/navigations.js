@@ -55,6 +55,16 @@ export const navigations = [
 
     ]
   },
+
+  { label: 'Setup', type: 'label' },
+  {
+    name: 'Appointment Scheduling',
+    icon: 'favorite',
+    path: '/appointmentSchedule',
+   
+  },
+
+
   {
     name: 'Charts',
     icon: 'trending_up',

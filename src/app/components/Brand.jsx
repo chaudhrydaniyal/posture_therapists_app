@@ -11,7 +11,7 @@ const BrandRoot = styled(Box)(() => ({
 }));
 
 const StyledSpan = styled(Span)(({ mode }) => ({
-  fontSize: 18,
+  fontSize: 15,
   marginLeft: '.5rem',
   display: mode === 'compact' ? 'none' : 'block',
 }));
@@ -26,13 +26,13 @@ const Brand = ({ children }) => {
       <Box display="flex" alignItems="center">
         <MatxLogo />
         <StyledSpan mode={mode} className="sidenavHoverShow">
-          Matx
+          Therapists
         </StyledSpan>
       </Box>
 
-      <Box className="sidenavHoverShow" sx={{ display: mode === 'compact' ? 'none' : 'block' }}>
+      {/* <Box className="sidenavHoverShow" sx={{ display: mode === 'compact' ? 'none' : 'block' }}>
         {children || null}
-      </Box>
+      </Box> */}
     </BrandRoot>
   );
 };

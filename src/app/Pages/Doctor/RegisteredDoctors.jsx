@@ -57,7 +57,7 @@ const RegisteredDoctors = () => {
                                              <td>{items.mobile_no}</td>
                                              <td>{items.practitioner_type}</td>
                                              <td><Link
-                                                 to="/doctordetails"
+                                                 to="/registeredDoctors/doctordetails"
                                                  state={{doctors: items}}
 
                                                  style={{ textDecoration: "none" }}
