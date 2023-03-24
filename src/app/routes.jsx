@@ -11,6 +11,7 @@ import RegisteredPatients from './Pages/Patient/RegisteredPatients';
 import DoctorForm from './Pages/Doctor/DoctorForm';
 import RegisteredDoctors from './Pages/Doctor/RegisteredDoctors';
 import DoctorDetails from './Pages/Doctor/DoctorDetails';
+import AppointmentSchedule from './Pages/Appointment/AppointmentSchedule';
 
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
@@ -69,10 +70,17 @@ const routes = [
       },
 
       {
-        path: '/doctordetails',
+        path: '/registeredDoctors/doctordetails',
         element: <DoctorDetails />,
         // auth: authRoles.admin
       },
+
+      {
+        path: '/appointmentSchedule',
+        element: <AppointmentSchedule />,
+        // auth: authRoles.admin
+      },
+
 
 
       // e-chart rooute

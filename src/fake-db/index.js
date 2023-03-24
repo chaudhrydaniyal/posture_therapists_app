@@ -8,7 +8,7 @@ import './db/auth';
 
 
 
-// Mock.restore();
+Mock.restore();
 
 
 
