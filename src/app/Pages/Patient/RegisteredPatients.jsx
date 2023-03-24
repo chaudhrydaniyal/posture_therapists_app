@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { Box, styled } from '@mui/material';
+import { Breadcrumb, SimpleCard } from 'app/components';
+
+const Container = styled('div')(({ theme }) => ({
+    margin: '30px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+    '& .breadcrumb': {
+      marginBottom: '30px',
+      [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+    }
+  }));
 const RegisteredPatients = () => {
     const [patients, setPatients] = useState([])
 
@@ -11,61 +22,15 @@ const RegisteredPatients = () => {
     }, [])
 
     return (
-        <div>
-            <section className="content">
-                <div className="container-fluid">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul className="breadcrumb breadcrumb-style ">
-                                    <li className="breadcrumb-item">
-                                        <h4 className="page-title">Registered Patient</h4>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-1">
-                                        <a href="../../index.html">
-                                            <i className="fas fa-home"></i> Home
-                                        </a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-2">
-                                        <a href="#">Patient Management</a>
-                                    </li>
-                                    <li className="breadcrumb-item active">Registered Patient</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div className="row clearfix">
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div className="card">
-                            <div className="header">
-              
-                                <ul className="header-dropdown m-r--5">
-                                    <li className="dropdown">
-                                        <a href="#" onClick="return false;" className="dropdown-toggle"
-                                            data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i className="material-icons">more_vert</i>
-                                        </a>
-                                        <ul className="dropdown-menu float-end">
-                                            <li>
-                                                <a href="#" onClick="return false;">Action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Another action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Something else here</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+        <Container>
+        <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[ { name: 'Registered Patients' }]} />
+      </Box>
+<div className='card'>
                             <div className="body">
                                 <div className="table-responsive">
                                     <table className="table table-bordered table-striped table-hover save-stage dataTable"
-                                        style={{ width: "100%" }}>
+                                        style={{ width: "100%",marginTop:'2rem'}}>
                                         <thead>
                                             <tr>
                                                 <th>Token No</th>
@@ -106,11 +71,10 @@ const RegisteredPatients = () => {
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-           </section>
-            </div>
+                            </div>
+                        
+</Container>
+                    
     )
 }
 

@@ -6,6 +6,9 @@ import {
     NotificationContainer,
     NotificationManager,
   } from "react-notifications";
+  import { Box, styled } from '@mui/material';
+import { Breadcrumb, SimpleCard } from 'app/components';
+import '../Patient/Patient.css'
 const initialValue = {
     surname: "",
     first_name: "",
@@ -21,6 +24,15 @@ const initialValue = {
     home_phone: "",
     work_phone: "",
 }
+
+const Container = styled('div')(({ theme }) => ({
+    margin: '30px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+    '& .breadcrumb': {
+      marginBottom: '30px',
+      [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+    }
+  }));
 const DoctorForm = () => {
 
     const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
@@ -54,31 +66,15 @@ const DoctorForm = () => {
 
     })
     return (
-        <>
-            <section className="content">
-                <div className="container-fluid">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul className="breadcrumb breadcrumb-style ">
-                                    <li className="breadcrumb-item">
-                                        <h4 className="page-title">Doctor Registration</h4>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-1">
-                                        <a href="../../index.html">
-                                            <i className="fas fa-home"></i> Home
-                                        </a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-2">
-                                        <a href="#">Doctor Management</a>
-                                    </li>
-                                    <li className="breadcrumb-item active">Doctor Registration</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+        <Container>
 
-                </div>
+        {/* <section className="content"> */}
+
+        <Box className="breadcrumb">
+    <Breadcrumb routeSegments={[ { name: 'Doctor Registration' }]} />
+  </Box>
+        
+
 
 
                 {/* ****************Doctor Information**************** */}
@@ -91,33 +87,33 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="surname">
                                     {" "}
-                                    <strong>Surname:</strong>
+                                    <h6>Surname:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border ">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3 ">
                                 {" "}
-                                <input type="text" name="surname" placeholder="Surname..." value={values.surname} onChange={handleChange} onBlur={handleBlur} />
+                                <input className="input_border" type="text" name="surname" placeholder="Surname..." value={values.surname} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
                                     {" "}
-                                    <strong>First Name:</strong>
+                                    <h6>First Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border">
                                 {" "}
-                                <input type="text" name="first_name" placeholder="First Name..." value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                                <input className="input_border" type="text" name="first_name" placeholder="First Name..." value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="middle_name">
                                     {" "}
-                                    <strong>Middle Name:</strong>
+                                    <h6>Middle Name:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input type="text" name="middle_name" placeholder="Middle Name..." value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
+                                <input className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                         </div>
 
@@ -125,10 +121,10 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="date_of_birth">
                                     {" "}
-                                    <strong>Date of Birth:</strong>
+                                    <h6>Date of Birth:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <input
                                     type="date"
                                     name="date_of_birth"
@@ -139,12 +135,13 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="age">
                                     {" "}
-                                    <strong>Age:</strong>
+                                    <h6>Age:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2  p-3">
                                 {" "}
                                 <input
+                                className="input_border"
                                     name="age"
                                     type="text"
                                     placeholder="age..."
@@ -161,7 +158,7 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="gender">
                                     {" "}
-                                    <strong>Gender:</strong>
+                                    <h6>Gender:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
@@ -185,11 +182,11 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="address">
                                     {" "}
-                                    <strong>Address:</strong>
+                                    <h6>Address:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="address" placeholder="Address..." value={values.address} onChange={handleChange} />
+                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="address" placeholder="Address..." value={values.address} onChange={handleChange} />
                             </div>
 
 
@@ -199,28 +196,28 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="home_phone">
                                     {" "}
-                                    <strong>Home Phone:</strong>
+                                    <h6>Home Phone:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="home_phone" placeholder="Home Phone..." value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="home_phone" placeholder="Home Phone..." value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="work_phone">
                                     {" "}
-                                    <strong>Work Phone:</strong>
+                                    <h6>Work Phone:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="work_phone" placeholder="Work Phone..." value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="work_phone" placeholder="Work Phone..." value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
-                                    <strong>Mobile No:</strong>
+                                    <h6>Mobile No:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="number" name="mobile_no" placeholder="Mobile No..." value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input  className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -232,18 +229,19 @@ const DoctorForm = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
-                                    <strong>CNIC:</strong>
+                                    <h6>CNIC:</h6>
                                 </label>
                             </div>
 
 
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
                                 <PatternFormat
                                     style={{
                                         width: "100%",
                                         borderColor: "grey",
                                     }}
+                                    className="input_border" 
                                     required
                                     name="cnic"
                                     format="#####-#######-#"
@@ -257,20 +255,20 @@ const DoctorForm = () => {
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
-                                    <strong>Email:</strong>
+                                    <h6>Email:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="email" name="email" placeholder="Email..." value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="email" name="email" placeholder="Email..." value={values.email} onChange={handleChange} onBlur={handleBlur} />
                             </div>
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="practitioner_type">
-                                    <strong>Practitioner Type:</strong>
+                                    <h6>Practitioner Type:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
-                                <input type="text" name="practitioner_type" placeholder="Practitioner Type..." value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="practitioner_type" placeholder="Practitioner Type..." value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                         </div>
 
@@ -282,11 +280,9 @@ const DoctorForm = () => {
 
                     </div>
                 </div>
+</Container>
 
 
-
-            </section>
-        </>
     )
 }
 
