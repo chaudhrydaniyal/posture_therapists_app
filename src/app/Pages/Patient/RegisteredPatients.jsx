@@ -30,7 +30,7 @@ const RegisteredPatients = () => {
                             <div className="body">
                                 <div className="table-responsive">
                                     <table className="table table-bordered table-striped table-hover save-stage dataTable"
-                                        style={{ width: "100%",marginTop:'2rem'}}>
+                                        style={{ width: "100%",margin:'2rem',marginLeft:'0.5rem',marginRight:'0.5rem'}}>
                                         <thead>
                                             <tr>
                                                 <th>Token No</th>
