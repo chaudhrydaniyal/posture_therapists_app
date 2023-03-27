@@ -26,6 +26,9 @@ export default class DemoApp extends React.Component {
 
   async componentDidMount() {
 
+
+    console.log("doctor time slots",this.props.data)
+
     let events = await (await axios.get(`/api/doctortimeslots/${this.props.data}`)).data
 
 

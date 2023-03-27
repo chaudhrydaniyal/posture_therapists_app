@@ -1,69 +1,79 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import {
+    Box,
+    Icon,
+    IconButton,
+    styled,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TablePagination,
+    TableRow,
+  } from "@mui/material";
+  import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom'
+import { Breadcrumb, SimpleCard } from 'app/components';
+
+
+// import Sonnet from '../../components/Sonnet';
+
+const StyledTable = styled(Table)(() => ({
+    whiteSpace: "pre",
+    "& thead": {
+      "& tr": { "& th": { paddingLeft: 0, paddingRight: 0 } },
+    },
+    "& tbody": {
+      "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
+    },
+  }));
+
+const Container = styled('div')(({ theme }) => ({
+    margin: '30px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+    '& .breadcrumb': {
+      marginBottom: '30px',
+      [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+    }
+  }));
+
+
 const RegisteredDoctors = () => {
     const [doctors,setDoctors] = useState([])
 
-    useEffect(()=>{
-        axios.get('/api/users/').then((res)=>setDoctors(res.data))
-    },[])
-   
-    return (
-        <div>
-            <section className="content">
-                <div className="container-fluid">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul className="breadcrumb breadcrumb-style ">
-                                    <li className="breadcrumb-item">
-                                        <h4 className="page-title">Registered Doctor</h4>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-1">
-                                        <a href="../../index.html">
-                                            <i className="fas fa-home"></i> Home
-                                        </a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-2">
-                                        <a href="#">Patient Doctor</a>
-                                    </li>
-                                    <li className="breadcrumb-item active">Registered Doctor</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-                </div>
-                <div className="row clearfix">
+  const handleChangePage = (_, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  useEffect(()=>{
+    axios.get('/api/users/').then((res)=>setDoctors(res.data))
+},[])
+    return (
+        <Container>
+        <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[ { name: 'Available Doctors' }]} />
+      </Box>
+    
+
+
+                
+                {/* <div className="row clearfix">
                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div className="card">
-                            <div className="header">
-                               
-                                <ul className="header-dropdown m-r--5">
-                                    <li className="dropdown">
-                                        <a href="#" onClick="return false;" className="dropdown-toggle"
-                                            data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i className="material-icons">more_vert</i>
-                                        </a>
-                                        <ul className="dropdown-menu float-end">
-                                            <li>
-                                                <a href="#" onClick="return false;">Action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Another action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Something else here</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                           
                             <div className="body">
                                 <div className="table-responsive">
                                     <table className="table table-bordered table-striped table-hover save-stage dataTable"
-                                        style={{ width: "100%" }}>
+                                        style={{ width: "100%",marginTop:"2rem" }}>
                                         <thead>
                                             <tr>
                                                 <th>Sr</th>
@@ -112,12 +122,73 @@ const RegisteredDoctors = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
+<div className='card'>
+    <div className='card-body'>
 
-            </section>
 
-            </div>
+ <StyledTable>
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">Sr</TableCell>
+            <TableCell align="center">First Name</TableCell>
+            <TableCell align="center">Last Name</TableCell>
+            <TableCell align="center">CNIC</TableCell>
+            <TableCell align="center">Mobile No</TableCell>
+            <TableCell align="center">Practitioner Type</TableCell>
+            <TableCell align="right">Details</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {doctors
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((items, id) => (
+              <TableRow key={id}>
+                <TableCell align="left">{id}</TableCell>
+                <TableCell align="center">{items.first_name}</TableCell>
+                <TableCell align="center">{items.surname}</TableCell>
+                <TableCell align="center">{items.cnic}</TableCell>
+                <TableCell align="center">{items.mobile_no}</TableCell>
+                <TableCell align="center">{items.practitioner_type}</TableCell>
+                <TableCell align="right"><Link
+                                                 to="/registeredDoctors/doctordetails"
+                                                 state={{doctors: items}}
+
+                                                 style={{ textDecoration: "none" }}
+                                             >
+                                                 <button
+                                                     style={{ padding: "0.2rem", border: "0.1px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }}
+                                                     variant="success"
+                                                 >
+                                                     Details
+                                                 </button>
+                                             </Link>
+                  
+                </TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </StyledTable>
+
+
+      <TablePagination
+        sx={{ px: 2 }}
+        page={page}
+        component="div"
+        rowsPerPage={rowsPerPage}
+        count={doctors.length}
+        onPageChange={handleChangePage}
+        rowsPerPageOptions={[5, 10, 25]}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        nextIconButtonProps={{ "aria-label": "Next Page" }}
+        backIconButtonProps={{ "aria-label": "Previous Page" }}
+      />
+          </div>
+</div>
+            </Container>
+
+            
     )
-}
+            }
 
 export default RegisteredDoctors
