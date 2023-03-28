@@ -37,6 +37,8 @@ export default class AppointmentSchedule extends React.Component {
     appointmentStartTime: '',
     appointmentEndTime: '',
     appointmentDate: '',
+    patients:[],
+    selectedPatient: ''
 
 
   }
@@ -46,13 +48,32 @@ export default class AppointmentSchedule extends React.Component {
 
     let events = await (await axios.get('/api/doctortimeslots/')).data
 
-    this.setState({ INITIAL_EVENTS: events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green" })) })
+    let scheduledAppointments = await (await axios.get('/api/scheduledappointments/')).data
+
+
+
+    console.log("time of app",events[0].start_time)
+
+
+    let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id }))
+
+    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id }))
+
+    this.setState({ INITIAL_EVENTS:  array1.concat(array2)})
 
 
 
     let doctors = await (await axios.get('/api/users/')).data
 
     this.setState({ doctors: doctors })
+
+
+
+    let patients = await (await axios.get('/api/patients')).data
+
+    this.setState({ patients: patients })
+
+
 
     console.log("doctors", doctors)
 
@@ -104,7 +125,7 @@ export default class AppointmentSchedule extends React.Component {
               <div className='demo-app-main'>
                 <FullCalendar
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-
+                  timeZone= 'America/New_York'
                   headerToolbar={{
                     left: 'prev,next today',
                     center: 'title',
@@ -146,55 +167,81 @@ export default class AppointmentSchedule extends React.Component {
           </Modal.Header>
           <Modal.Body>
 
-<div style={{padding:"30px"}}>
-            <br /><br />
-
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-
-              <label>Title:</label>
-
-              <input onChange={(e) => { this.setState({ appointmentTitle: e.target.value }) }}></input>
-
-            </div>
-
-            <br />
-
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ padding: "30px" }}>
+              <br /><br />
 
 
-              <b>Appointment start time: </b><div>{this.state.appointmentStartTime}</div>
-            </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <label>Select the patient:</label>
 
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-
-              <div><b>Appointment end time: </b></div><div>{this.state.appointmentEndTime}</div></div>
-
-            <br />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <label>Select the doctor:</label>
-
-              &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp;
 
 
 
-              <select name="doctors" id="doctors" onClick={(e) => {
+                <select name="patients" id="patients" onClick={(e) => {
 
-                this.setState({ selectedDoctor: e.target.value })
-
-                console.log("value", e.target.value)
-
-              }}>
-
+                  this.setState({ selectedPatient: e.target.value })
               
+                }}>
 
 
-                {this.state.doctors.map((d) => <option value={d.id}>{d.first_name}</option>)}
 
-              </select>
 
-            </div>
 
-            <br /><br />
+                  {this.state.patients.map((d) => <option value={d.id}>{d.first_name}</option>)}
+
+                </select>
+
+              </div>
+
+              <br />
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+                <label>Title:</label>
+
+                <input onChange={(e) => { this.setState({ appointmentTitle: e.target.value }) }}></input>
+
+              </div>
+
+              <br />
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+
+                <b>Appointment start time: </b><div>{this.state.appointmentStartTime}</div>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+                <div><b>Appointment end time: </b></div><div>{this.state.appointmentEndTime}</div></div>
+
+              <br />
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <label>Select the doctor:</label>
+
+                &nbsp; &nbsp; &nbsp;
+
+
+
+                <select name="doctors" id="doctors" onClick={(e) => {
+
+                  this.setState({ selectedDoctor: e.target.value })
+
+                  console.log("value", e.target.value)
+
+                }}>
+
+
+
+
+                  {this.state.doctors.map((d) => <option value={d.id}>{d.first_name}</option>)}
+
+                </select>
+
+              </div>
+
+              <br /><br />
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -216,7 +263,11 @@ export default class AppointmentSchedule extends React.Component {
                 // allDay: selectInfo.allDay,
                 // doctor,
                 // patient,
-                scheduledAppointment: true
+                scheduledAppointment: true,
+                doctor: this.state.selectedDoctor,
+                patient: this.state.selectedPatient
+
+              
               })
 
 
@@ -326,6 +377,11 @@ export default class AppointmentSchedule extends React.Component {
   }
 
   handleEventClick = (clickInfo) => {
+
+
+    console.log("eventClickInfo", clickInfo)
+
+
     if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
       clickInfo.event.remove()
     }

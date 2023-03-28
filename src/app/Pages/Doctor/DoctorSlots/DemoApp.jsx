@@ -53,7 +53,7 @@ export default class DemoApp extends React.Component {
           <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
             console.log("iddddd", this.props)
             await axios.post('http://192.168.5.21:8081/api/doctortimeslots',
-              this.state.currentEvents.map(ce => ({ start_time: ce._instance.range.start, end_time: ce._instance.range.end, doctor: this.props.data }))
+              this.state.currentEvents.map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
             )
             // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
           }}
