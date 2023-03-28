@@ -58,11 +58,23 @@ export const navigations = [
 
   { label: 'Setup', type: 'label' },
   {
+    name:'Setup',
+    icon:'favorite',
+  children:[
+  {
     name: 'Appointment Scheduling',
-    icon: 'favorite',
     path: '/appointmentSchedule',
    
   },
+  {
+    name: 'Add Diseases',
+    path: '/addDiseases',
+   
+  },{
+    name: 'Add Branches',
+    path: '/addBranches',
+   
+  },]},
 
 
   {

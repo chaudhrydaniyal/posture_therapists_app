@@ -3,6 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { styled,  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,Table } from '@mui/material';
+import { Span } from "app/components/Typography";
+
+import { Breadcrumb, SimpleCard } from 'app/components';
 const style = {
     position: 'absolute',
     top: '30%',
@@ -15,40 +23,51 @@ const style = {
     p: 4,
   };
   
+  const StyledTable = styled(Table)(() => ({
+    whiteSpace: "pre",
+    "& thead": {
+      "& tr": { "& th": { paddingLeft: 0, paddingRight: 0 } },
+    },
+    "& tbody": {
+      "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
+    },
+  }));
+  
+  
+  const Container = styled('div')(({ theme }) => ({
+    margin: '30px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+    '& .breadcrumb': {
+      marginBottom: '30px',
+      [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+    }
+  }));
+  
 
 const AddBranches = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [patients, setPatients] = useState([])
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+  
+    const handleChangePage = (_, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(+event.target.value);
+      setPage(0);
+    };
   return (
-   <>
-   <>
-        <section class="content">
-        <div class="container-fluid">
-          <div class="block-header">
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="breadcrumb breadcrumb-style ">
-                  <li class="breadcrumb-item">
-                    <h4 class="page-title">Add Branches</h4>
-                  </li>
-                  <li class="breadcrumb-item bcrumb-1">
-                    <a href="../../index.html">
-                      <i class="fas fa-home"></i> Home
-                    </a>
-                  </li>
-                  <li class="breadcrumb-item bcrumb-2">
-                    <a href="#" >
-                      Setup
-                    </a>
-                  </li>
-                  <li class="breadcrumb-item active">Add Branches</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="row clearfix">
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  
+   <Container>
+        <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[ { name: 'Add Disease' }]} />
+      </Box>
+
                         <div className="card">
                             <div className="header">
 
@@ -85,87 +104,65 @@ const AddBranches = () => {
     
                                 {/* <h2> */}
                                     {/* <strong>Table</strong> With State Save</h2> */}
-                                <ul className="header-dropdown m-r--5">
-                                    <li className="dropdown">
-                                        <a href="#" onClick="return false;" className="dropdown-toggle"
-                                            data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i className="material-icons">more_vert</i>
-                                        </a>
-                                        <ul className="dropdown-menu float-end">
-                                            <li>
-                                                <a href="#" onClick="return false;">Action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Another action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Something else here</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                             
                             </div>
                             <div className="body">
                                 <div className="table-responsive" style={{display:'flex',justifyContent:'center'}}>
-                                    <table className="table table-bordered table-striped table-hover save-stage dataTable"
-                                        style={{ width: "50%"}}>
-                                        <thead>
-                                            <tr>
-                                                <th>Sr</th>
-                                                <th>Clinic Branches</th>
-                                                <th>Delete</th>
-                                                {/* <th>CNIC</th>
-                                                <th>Mobile No</th>
-                                                <th>Practitioner Type</th>
-                                                <th>Details</th> */}
-                        
-                                            </tr>
-                                        </thead>
-                                        {/* <tbody>
-                                     {doctors && doctors.map((items, id) => (
-                                         <tr>
-                                             {console.log("items", items)}
-                                             <td>{id}</td>
-                                             <td>{items.first_name}</td>
-                                             <td>{items.surname}</td>
-                                             <td>{items.cnic}</td>
-                                             <td>{items.mobile_no}</td>
-                                             <td>{items.practitioner_type}</td>
-                                             <td><Link
-                                                 to="/doctordetails"
-                                                 state={{doctors: items}}
+                                
 
-                                                 style={{ textDecoration: "none" }}
-                                             >
-                                                 <button
-                                                     style={{ padding: "0.2rem", border: "0.1px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }}
-                                                     variant="success"
-                                                 >
-                                                     Details
-                                                 </button>
-                                             </Link></td>
-                                       
-                                         </tr>
+                                    <StyledTable>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Sr</TableCell>
+                <TableCell align="center">Clinic Branches</TableCell>
+                <TableCell align="center">Delete</TableCell>
+                <TableCell align="center">CNIC</TableCell>
+          
+              </TableRow>
+            </TableHead>
+            {/* <TableBody>
+              {getDi
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((items, id) => (
+                  <TableRow key={id}>
+                    <TableCell align="center">{id}</TableCell>
+                    <TableCell align="center">{items.name}</TableCell>
+                    <TableCell align="center"><button onClick={async () => {
+                              await axios.delete(`api/diseases/${items.id}`); setUpdate(!update)
+                            }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
+                            //   title="Delete"
+                            >Delete</button></TableCell>
+                    <TableCell align="center"><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditDisease({ id: items.id, name: items.name }); handleOpenEdit() }}>Edit</button></TableCell>
+        
+                                 {/* <Button color="primary" variant="contained">
+          {/* <Icon>send</Icon> */}
+          {/* <Span sx={{ pl: 1, textTransform: "capitalize" }}>Details</Span> */}
+        {/* </Button>  */}
+                    
 
-                                     ))}
-
-
-
-                                 </tbody> */}
-                                    </table>
+                    
+                  {/* </TableRow> */}
+                {/* ))} */}
+            {/* </TableBody>  */}
+          </StyledTable>
+          <TablePagination
+            sx={{ px: 2 }}
+            page={page}
+            component="div"
+            rowsPerPage={rowsPerPage}
+            count={patients.length}
+            onPageChange={handleChangePage}
+            rowsPerPageOptions={[5, 10, 25]}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            nextIconButtonProps={{ "aria-label": "Next Page" }}
+            backIconButtonProps={{ "aria-label": "Previous Page" }}
+          />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-          </div>
-          </section>
-          
-    </>
-   </>
+        
+        
+          </Container>
   )
 }
 

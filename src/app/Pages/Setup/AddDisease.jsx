@@ -4,6 +4,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
+import { styled,  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,Table } from '@mui/material';
+import { Span } from "app/components/Typography";
+
+import { Breadcrumb, SimpleCard } from 'app/components';
 const style = {
   position: 'absolute',
   top: '30%',
@@ -15,6 +23,27 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+
+const StyledTable = styled(Table)(() => ({
+  whiteSpace: "pre",
+  "& thead": {
+    "& tr": { "& th": { paddingLeft: 0, paddingRight: 0 } },
+  },
+  "& tbody": {
+    "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
+  },
+}));
+
+
+const Container = styled('div')(({ theme }) => ({
+  margin: '30px',
+  [theme.breakpoints.down('sm')]: { margin: '16px' },
+  '& .breadcrumb': {
+    marginBottom: '30px',
+    [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+  }
+}));
 
 const AddDisease = () => {
   const [open, setOpen] = React.useState(false);
@@ -32,7 +61,19 @@ const AddDisease = () => {
   const handleClose = () => setOpen(false);
   const handleOpenEdit = () => setOpenEdit(true)
   const handleCloseEdit = () => setOpenEdit(false)
+  const [patients, setPatients] = useState([])
 
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (_, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   const apiDisease = () => {
     return (
       axios.post('api/diseases', {
@@ -56,40 +97,19 @@ const AddDisease = () => {
 
   }, [update])
   return (
-    <>
-      <section class="content">
-        <div class="container-fluid">
-          <div class="block-header">
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="breadcrumb breadcrumb-style ">
-                  <li class="breadcrumb-item">
-                    <h4 class="page-title">Add Diseases</h4>
-                  </li>
-                  <li class="breadcrumb-item bcrumb-1">
-                    <a href="../../index.html">
-                      <i class="fas fa-home"></i> Home
-                    </a>
-                  </li>
-                  <li class="breadcrumb-item bcrumb-2">
-                    <a href="#" >
-                      Setup
-                    </a>
-                  </li>
-                  <li class="breadcrumb-item active">Add Diseases</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="row clearfix">
-            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div className="card">
-                <div className="header">
+    
+        <Container>
+        <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[ { name: 'Add Disease' }]} />
+      </Box>
+     
+              <div className='card'>
+                <div className='card_body'>
 
                   {/* ***************Add Disease Modal************* */}
 
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button onClick={handleOpen} style={{ fontWeight: 'bolder', fontSize: '15px' }}>Add Diseases</Button>
+                    <Button onClick={handleOpen} style={{marginTop:'2rem',marginBottom:'2rem'}} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Disease</Span></Button>
                     <Modal
                       open={open}
                       onClose={handleClose}
@@ -113,7 +133,7 @@ const AddDisease = () => {
                     </Modal>
                   </div>
 
-
+                  
                   {/******************Edit Disease Model*****************/}
 
                   <Modal
@@ -147,80 +167,53 @@ const AddDisease = () => {
 
                   {/* *************************Add Disease Table******************************* */}
 
-                  {/* <h2> */}
-                  {/* <strong>Table</strong> With State Save</h2> */}
-                  <ul className="header-dropdown m-r--5">
-                    <li className="dropdown">
-                      {/* <a href="#" onClick="return false;" className="dropdown-toggle"
-                                            data-bs-toggle="dropdown" role="button" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i className="material-icons">more_vert</i>
-                                        </a> */}
-                      {/* <ul className="dropdown-menu float-end">
-                                            <li>
-                                                <a href="#" onClick="return false;">Action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Another action</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" onClick="return false;">Something else here</a>
-                                            </li>
-                                        </ul> */}
-                    </li>
-                  </ul>
-                </div>
-                <div className="body">
-                  <div className="table-responsive" style={{ display: 'flex', justifyContent: 'center' }}>
-                    <table className="table table-bordered table-striped table-hover save-stage dataTable"
-                      style={{ width: "50%" }}>
-                      <thead>
-                        <tr>
-                          <th>Sr</th>
-                          <th>Diseases</th>
-                          <th>Delete</th>
-                          <th>Edit</th>
-                          {/* <th>CNIC</th>
-                                                <th>Mobile No</th>
-                                                <th>Practitioner Type</th>
-                                                <th>Details</th> */}
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {getDisease && getDisease.map((items, id) => (
-                          <tr>
-                            {console.log("items", items)}
-                            <td>{id}</td>
-                            <td>{items.name}</td>
-                            <td><button onClick={async () => {
+              
+               
+                    <StyledTable>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Sr</TableCell>
+                <TableCell align="center">Diseases</TableCell>
+                <TableCell align="center">Delete</TableCell>
+                <TableCell align="center">Edit</TableCell>
+          
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {getDisease
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((items, id) => (
+                  <TableRow key={id}>
+                    <TableCell align="center">{id}</TableCell>
+                    <TableCell align="center">{items.name}</TableCell>
+                    <TableCell align="center"><button onClick={async () => {
                               await axios.delete(`api/diseases/${items.id}`); setUpdate(!update)
                             }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
-                            //   title="Delete"
-                            >Delete</button></td>
-                            <td><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditDisease({ id: items.id, name: items.name }); handleOpenEdit() }}>Edit</button></td>
-
-
-
-                          </tr>
-
-                        ))}
-
-
-
-                      </tbody>
-                    </table>
+                            
+                            >Delete</button></TableCell>
+                    <TableCell align="center"><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditDisease({ id: items.id, name: items.name }); handleOpenEdit() }}>Edit</button></TableCell>
+          
+                  </TableRow>
+                ))}
+            </TableBody>
+          </StyledTable>
+          <TablePagination
+            sx={{ px: 2 }}
+            page={page}
+            component="div"
+            rowsPerPage={rowsPerPage}
+            count={patients.length}
+            onPageChange={handleChangePage}
+            rowsPerPageOptions={[5, 10, 25]}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            nextIconButtonProps={{ "aria-label": "Next Page" }}
+            backIconButtonProps={{ "aria-label": "Previous Page" }}
+          />
+</div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      </Container>
 
-
-        </div>
-      </section>
-
-    </>
+    
   )
 }
 
