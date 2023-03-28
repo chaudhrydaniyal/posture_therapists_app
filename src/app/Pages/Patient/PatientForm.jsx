@@ -39,9 +39,9 @@ const initialValue = {
     prevmobileno: "",
     contactperson: "",
     doctorname: "",
-
-
 }
+
+
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -89,16 +89,17 @@ const PatientForm = () => {
 
 
     })
+
     const test = () => {
         console.log("values", values)
     }
-    useEffect(() => {
-        axios.get('api/diseases').then((res) => { setDiseases(res.data); console.log("res", res) }
 
-
+    useEffect(()=>{
+        axios.get('api/diseases').then((res)=>{setDiseases(res.data);console.log("res",res)}
         )
+    },[])
 
-    }, [])
+    
     return (
         // <>
         <Container>
@@ -106,32 +107,9 @@ const PatientForm = () => {
             {/* <section className="content"> */}
 
             <Box className="breadcrumb">
-                <Breadcrumb routeSegments={[{ name: 'Patient Registration' }]} />
-            </Box>
-            {/* <div className="container-fluid">
-                    <div className="block-header">
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul className="breadcrumb breadcrumb-style ">
-                                    <li className="breadcrumb-item">
-                                        <h4 className="page-title">Patient Registration</h4>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-1">
-                                        <a href="../../index.html">
-                                            <i className="fas fa-home"></i> Home
-                                        </a>
-                                    </li>
-                                    <li className="breadcrumb-item bcrumb-2">
-                                        <a href="#">Patient Management</a>
-                                    </li>
-                                    <li className="breadcrumb-item active">Patient Registration</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> */}
-
+        <Breadcrumb routeSegments={[ { name: 'Patient Registration' }]} />
+      </Box>
+            
 
             {/* ***********************Patient Information********************* */}
 
@@ -582,9 +560,8 @@ const PatientForm = () => {
             </div>
 
 
-            {/* </section>
-             */}
-        </Container>
+
+    </Container>
 
 
     )

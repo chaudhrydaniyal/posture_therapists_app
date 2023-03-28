@@ -8,7 +8,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Icon,Button
 } from '@mui/material';
+import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 
 const StyledTable = styled(Table)(() => ({
@@ -29,11 +31,14 @@ const Container = styled('div')(({ theme }) => ({
     [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
   }
 }));
+
+
+
 const RegisteredPatients = () => {
   const [patients, setPatients] = useState([])
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (_, newPage) => {
     setPage(newPage);
@@ -139,6 +144,10 @@ const RegisteredPatients = () => {
                       >
                         Details
                       </button>
+                                 {/* <Button color="primary" variant="contained">
+          {/* <Icon>send</Icon> */}
+          {/* <Span sx={{ pl: 1, textTransform: "capitalize" }}>Details</Span> */}
+        {/* </Button>  */}
                     </Link>
 
                     </TableCell>
