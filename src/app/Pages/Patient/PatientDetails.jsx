@@ -6,9 +6,13 @@ import {
     NotificationManager,
   } from "react-notifications";
 import axios from 'axios';
-import { Box, styled } from '@mui/material';
+import { Box, styled,Button,Icon } from '@mui/material';
+import { Span } from "app/components/Typography";
+
 import { Breadcrumb, SimpleCard } from 'app/components';
 import './Patient.css'
+
+
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -17,6 +21,8 @@ const Container = styled('div')(({ theme }) => ({
       [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
     }
   }));
+
+
 const PatientDetails = () => {
     var patient = useLocation();
     console.log("itemofpatientdata", patient);
@@ -41,7 +47,6 @@ const PatientDetails = () => {
         patient_concerns_for_previous_physiotherapist: patientData.patient_concerns_for_previous_physiotherapist,
         patient_satisfactions_for_previous_physiotherapist: patientData.patient_satisfactions_for_previous_physiotherapist,
 
-
     });
 
 
@@ -53,6 +58,8 @@ const PatientDetails = () => {
         value = e.target.value;
         setData({ ...data, [name]: value });
     };
+
+
       const updatePatient = async () => {
         try {
           const updateUser = await axios
@@ -80,6 +87,8 @@ const PatientDetails = () => {
 
         }
       };
+
+
       useEffect(()=>{
         axios.get('api/diseases').then((res)=>setGetDiseases(res.data))
 
@@ -99,12 +108,14 @@ const PatientDetails = () => {
                         <h4>PATIENT INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-                            <button style={{ padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                        <Button color='primary' variant="contained"
+                             onClick={() => {
                                 setDisableFields(false);
-                            }}>Edit</button>
-                            <button style={{ marginLeft: '2rem', padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                            }}><Span sx={{ pl: 0, textTransform: "capitalize" }}>Edit</Span></Button>
+                            <Button style={{marginLeft:'1rem'}} color='primary' variant="contained"
+                            onClick={() => {
                                 setDisableFields(true); updatePatient()
-                            }} >Save</button>
+                            }} ><Span sx={{ pl: 0, textTransform: "capitalize" }}>Save</Span></Button>
 
 
                         </div>
@@ -112,7 +123,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="surname">
                                     {" "}
-                                    <strong>Surname:</strong>
+                                    <h6>Surname:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -122,7 +133,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
                                     {" "}
-                                    <strong>First Name:</strong>
+                                    <h6>First Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -133,7 +144,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="middle_name">
                                     {" "}
-                                    <strong>Middle Name:</strong>
+                                    <h6>Middle Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -146,7 +157,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="date_of_birth">
                                     {" "}
-                                    <strong>Date of Birth:</strong>
+                                    <h6>Date of Birth:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -161,7 +172,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="age">
                                     {" "}
-                                    <strong>Age:</strong>
+                                    <h6>Age:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -185,7 +196,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="gender">
                                     {" "}
-                                    <strong>Gender:</strong>
+                                    <h6>Gender:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -209,7 +220,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="address">
                                     {" "}
-                                    <strong>Address:</strong>
+                                    <h6>Address:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
@@ -223,7 +234,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="homephone">
                                     {" "}
-                                    <strong>Home Phone:</strong>
+                                    <h6>Home Phone:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -232,7 +243,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
                                     {" "}
-                                    <strong>Work Phone:</strong>
+                                    <h6>Work Phone:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -240,7 +251,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
-                                    <strong>Mobile No:</strong>
+                                    <h6>Mobile No:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -256,7 +267,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
-                                    <strong>Email:</strong>
+                                    <h6>Email:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -264,7 +275,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
-                                    <strong>Occupation:</strong>
+                                    <h6>Occupation:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -272,7 +283,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
-                                    <strong>Designation:</strong>
+                                    <h6>Designation:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -283,7 +294,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="doctorname">
-                                    <strong>Your Doctor"s Name:</strong>
+                                    <h6>Your Doctor"s Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -291,7 +302,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
-                                    <strong>CNIC:</strong>
+                                    <h6>CNIC:</h6>
                                 </label>
                             </div>
 
@@ -316,7 +327,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="past_medical_history">
-                                    <strong>Disease:</strong>
+                                    <h6>Disease:</h6>
                                 </label>
                             </div>
 
@@ -357,22 +368,12 @@ const PatientDetails = () => {
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="physiotherapist_seen_before">
-                                    <strong>Have you seen another physiotherapist before?</strong>
+                                    <h6>Have you seen another physiotherapist before?</h6>
                                 </label>
                             </div>
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <div style={{ marginLeft: "4rem" }}>
-                                    {/* <input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
-                            <span>
-                                Yes
-                            </span>
-
-                            <span style={{ marginLeft: "3rem" }}>
-                                <input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
-                                <span>
-                                    No
-                                </span>
-                            </span> */}
+                             
 
                                     {" "}
                                     <select name="physiotherapist_seen_before" class="form-control dropdown" value={data.physiotherapist_seen_before} onChange={handleInput} disabled={disableFields}>
@@ -397,7 +398,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="patient_concerns_for_previous_physiotherapist">
-                                    <strong>If Yes, was there anything yu were not happy about?</strong>
+                                    <h6>If Yes, was there anything yu were not happy about?</h6>
                                 </label>
                             </div>
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
@@ -412,7 +413,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="patient_satisfactions_for_previous_physiotherapist">
-                                    <strong>What aspects were you most happy with?</strong>
+                                    <h6>What aspects were you most happy with?</h6>
                                 </label>
                             </div>
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
@@ -426,7 +427,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="todaysession">
-                                    <strong>What are the main things you would like to achieve by the end of today"s session?</strong>
+                                    <h6>What are the main things you would like to achieve by the end of today"s session?</h6>
                                 </label>
                             </div>
 
@@ -440,7 +441,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="stoppingyou">
-                                    <strong>What is this problem you are here for stopping you from doing?</strong>
+                                    <h6>What is this problem you are here for stopping you from doing?</h6>
                                 </label>
                             </div>
 
@@ -453,7 +454,7 @@ const PatientDetails = () => {
                         <div className="row">
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="fixednow">
-                                    <strong>Why is it important that you get this problem fixed NOW?</strong>
+                                    <h6>Why is it important that you get this problem fixed NOW?</h6>
                                 </label>
                             </div>
 
@@ -480,7 +481,7 @@ const PatientDetails = () => {
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="contactperson">
-                                    <strong>Contact Person:</strong>
+                                    <h6>Contact Person:</h6>
                                 </label>
                             </div>
 
@@ -489,7 +490,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="patientrelationship">
-                                    <strong>Relationship to Patient:</strong>
+                                    <h6>Relationship to Patient:</h6>
                                 </label>
                             </div>
 
@@ -498,7 +499,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="prevmobileno">
-                                    <strong>Mobile No:</strong>
+                                    <h6>Mobile No:</h6>
                                 </label>
                             </div>
 

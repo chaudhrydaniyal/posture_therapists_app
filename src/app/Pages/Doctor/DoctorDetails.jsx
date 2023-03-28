@@ -9,7 +9,8 @@ import {
     NotificationManager,
   } from "react-notifications";
   import DemoApp from './DoctorSlots/DemoApp';
-  import { Box, styled } from '@mui/material';
+  import { Box, styled,Icon,Button } from '@mui/material';
+  import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -26,7 +27,10 @@ const DoctorDetails = () => {
     var doctor = useLocation()
     var doctorDetails = doctor.state.doctors
     const [disableFields, setDisableFields] = useState(true);
+    const [availableSlots,setAvailableSlots] = useState(false)
+    const [doctorSlots,setDoctorSlots] = useState(true)
 
+    
     const [data, setData] = useState({
         id: doctorDetails.id,
         first_name: doctorDetails.first_name,
@@ -53,6 +57,24 @@ const DoctorDetails = () => {
         value = e.target.value;
         setData({ ...data, [name]: value });
     };
+
+    // ******************Doctor Details Toggle********************
+
+    const handleDoctorSlots=()=>{
+        setDoctorSlots(false)
+    }
+    const handleDoctorSlot=()=>{
+        setDoctorSlots(true)
+    }
+
+    // ********************Available Slots Toggle***********************
+    const handleAvailableSlots=()=>{
+        setAvailableSlots(true)
+    }
+
+    const handleAvailableSlot=()=>{
+        setAvailableSlots(false)
+    }
 
        const updateDoctor = async () => {
         // e.preventDefault();
@@ -106,24 +128,28 @@ const DoctorDetails = () => {
         <Box className="breadcrumb">
         <Breadcrumb routeSegments={[ { name: 'Doctor Details' }]} />
       </Box>
-      <Tabs
-      defaultActiveKey="Doctor Details"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
-      <Tab eventKey="Doctor Details" title="Doctor Details">
-        {/* <Sonnet /> */}
-        <div className="card">
+ 
+
+        <div style={{display:"flex"}}>
+        <button style={{border:"none"}} onClick={()=>{handleDoctorSlot();handleAvailableSlot()}}>Doctor Details</button>
+        <button style={{border:"none",marginLeft:'2rem'}} onClick={()=>{handleDoctorSlots();handleAvailableSlots()}}>Available Slots</button>
+        </div>
+
+<div style={{marginTop:'2rem'}}>
+
+
+        {doctorSlots ?  <div className="card">
                     <div className="card-body" style={{ margin: "0px" }}>
                         <h4>DOCTOR INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-                            <button style={{ padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+                            <Button color='primary' variant="contained" onClick={() => {
                                 setDisableFields(false);
-                            }}>Edit</button>
-                            <button style={{ marginLeft: '2rem', padding: "0.3rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={() => {
+            
+                            }}> <Span sx={{ pl: 0, textTransform: "capitalize" }}>Edit</Span></Button>
+                            <Button style={{marginLeft:'1rem'}} color='primary' variant="contained" onClick={() => {
                                 setDisableFields(true); updateDoctor()
-                            }} >Save</button>
+                            }} ><Span sx={{ pl: 0, textTransform: "capitalize" }}>Save</Span></Button>
 
 
                         </div>
@@ -131,7 +157,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="surname">
                                     {" "}
-                                    <strong>Surname:</strong>
+                                    <h6>Surname:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -141,7 +167,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
                                     {" "}
-                                    <strong>First Name:</strong>
+                                    <h6>First Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -152,7 +178,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="middle_name">
                                     {" "}
-                                    <strong>Middle Name:</strong>
+                                    <h6>Middle Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -165,7 +191,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="date_of_birth">
                                     {" "}
-                                    <strong>Date of Birth:</strong>
+                                    <h6>Date of Birth:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -180,7 +206,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="age">
                                     {" "}
-                                    <strong>Age:</strong>
+                                    <h6>Age:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -204,7 +230,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="gender">
                                     {" "}
-                                    <strong>Gender:</strong>
+                                    <h6>Gender:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
@@ -228,7 +254,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="address">
                                     {" "}
-                                    <strong>Address:</strong>
+                                    <h6>Address:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
@@ -242,7 +268,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="homephone">
                                     {" "}
-                                    <strong>Home Phone:</strong>
+                                    <h6>Home Phone:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -251,7 +277,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
                                     {" "}
-                                    <strong>Work Phone:</strong>
+                                    <h6>Work Phone:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -259,7 +285,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
-                                    <strong>Mobile No:</strong>
+                                    <h6>Mobile No:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -275,7 +301,7 @@ const DoctorDetails = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
-                                    <strong>Email:</strong>
+                                    <h6>Email:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -283,7 +309,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
-                                    <strong>Occupation:</strong>
+                                    <h6>Occupation:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -291,7 +317,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
-                                    <strong>Designation:</strong>
+                                    <h6>Designation:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -302,7 +328,7 @@ const DoctorDetails = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="doctorname">
-                                    <strong>Your Doctor"s Name:</strong>
+                                    <h6>Your Doctor"s Name:</h6>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -310,7 +336,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
-                                    <strong>CNIC:</strong>
+                                    <h6>CNIC:</h6>
                                 </label>
                             </div>
 
@@ -339,69 +365,26 @@ const DoctorDetails = () => {
 
 
                     </div>
+                </div> :null }
                 </div>
-      </Tab>
-      <Tab eventKey="Available Slots" title="Available Slots">
-        <DemoApp data={data.id}/>
-      </Tab>
-
-     
-
-          {/* <div class="row clearfix">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="card"> */}
+  
+        
           
-            
+<div style={{marginTop:'2rem'}}>
 
-              
-            
-              {/* <!-- Tab panes --> */}
-              {/* <div class="tab-content">
-                <div
-                  role="tabpanel"
-                  class="tab-pane fade in active show"
-                  id="home"
-                > */}
+{availableSlots ?
+<div className='card'>
+    <div className='card-body'>
+    <DemoApp data={data.id}/>
 
-                    {/* **************Doctor Information*********** */}
+    </div>
+</div>
+:null}
+</div>
 
-                    
-                
-              
-                
 
-                {/* <div role="tabpanel" class="tab-pane fade" id="profile"> */}
-                 {/* <DemoApp data={data.id} /> */}
-            
-                
 
-                {/* <div role="tabpanel" class="tab-pane fade" id="messages">
-                  <EducationSkills />
-                </div> */}
-
-                {/* <div role="tabpanel" class="tab-pane fade" id="setting">
-                  <WorkExperience />
-                </div> */}
-
-                {/* <div role="tabpanel" class="tab-pane fade" id="other">
-                  <OtherDetails />
-                </div> */}
-{/* 
-                <div role="tabpanel" class="tab-pane fade" id="reference">
-                  <Reference />
-                </div> */}
-
-                {/* <div role="tabpanel" class="tab-pane fade" id="bank">
-                  <BankDetails />
-                </div> */}
-                {/* <div role="tabpanel" class="tab-pane fade" id="details">
-               <EmployementDetails/>
-                </div> */}
-              {/* </div> */}
-            {/* // </div> */}
-
-          {/* </div> */}
-          </Tabs>
+          
         </Container>
 
       
