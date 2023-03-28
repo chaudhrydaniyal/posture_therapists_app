@@ -135,15 +135,15 @@ export default class DemoApp extends React.Component {
   }
 
   handleDateSelect = (selectInfo) => {
-    let title = prompt('Please enter a new title for your event')
+    // let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
 
     calendarApi.unselect() // clear date selection
 
-    if (title) {
+    if (true) {
       calendarApi.addEvent({
         id: createEventId(),
-        title,
+        // title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
