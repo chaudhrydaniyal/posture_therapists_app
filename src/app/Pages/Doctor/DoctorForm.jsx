@@ -101,7 +101,7 @@ const DoctorForm = () => {
                                     <h6>First Name:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border P-3">
                                 {" "}
                                 <input className="input_border" type="text" name="first_name" placeholder="First Name..." value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
 
@@ -162,7 +162,7 @@ const DoctorForm = () => {
                                     <h6>Gender:</h6>
                                 </label>
                             </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <select name="gender" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
                                     <option

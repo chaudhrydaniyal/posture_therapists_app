@@ -13,7 +13,8 @@ import RegisteredDoctors from './Pages/Doctor/RegisteredDoctors';
 import DoctorDetails from './Pages/Doctor/DoctorDetails';
 import AppointmentSchedule from './Pages/Appointment/AppointmentSchedule';
 import PatientDetails from './Pages/Patient/PatientDetails';
-
+import AddDisease from './Pages/Setup/AddDisease';
+import AddBranches from './Pages/Setup/AddBranches';
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
 const JwtLogin = Loadable(lazy(() => import('app/views/sessions/JwtLogin')));
@@ -84,6 +85,15 @@ const routes = [
         path: '/appointmentSchedule',
         element: <AppointmentSchedule />,
         // auth: authRoles.admin
+      },
+      {
+        path :'/addDiseases',
+        element: <AddDisease/>
+
+      },
+      {
+        path: '/addBranches',
+        element: <AddBranches/>
       },
 
 
