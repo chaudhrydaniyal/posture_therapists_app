@@ -24,6 +24,7 @@ const initialValue = {
     practitioner_type:"",
     home_phone: "",
     work_phone: "",
+    remarks:""
 }
 
 const Container = styled('div')(({ theme }) => ({
@@ -54,6 +55,8 @@ const DoctorForm = () => {
                     cnic: values.cnic,
                     home_phone:values.home_phone,
                     work_phone:values.work_phone,
+                    remarks:values.remarks
+
                 })
                 doctorForm && NotificationManager.success("Successfully Registered");
 
@@ -271,6 +274,20 @@ const DoctorForm = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <input className="input_border" type="text" name="practitioner_type" placeholder="Practitioner Type..." value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
                             </div>
+                            
+                        </div>
+                        <div className="row">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
+                                <label htmlFor="remarks">
+                                    {" "}
+                                    <h6>Remarks:</h6>
+                                </label>
+                            </div>
+                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width" type="text" name="remarks" placeholder="remarks..." value={values.remarks} onChange={handleChange} />
+                            </div>
+
+
                         </div>
 
 

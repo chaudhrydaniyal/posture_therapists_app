@@ -54,8 +54,8 @@ export default class DemoApp extends React.Component {
 
     return (
       <div className='demo-app'>
+{/* <h6>Name:{this.props.data.first_name}</h6> */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
-
           <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
             console.log("iddddd", this.props)
             await axios.post('http://192.168.5.21:8081/api/doctortimeslots',

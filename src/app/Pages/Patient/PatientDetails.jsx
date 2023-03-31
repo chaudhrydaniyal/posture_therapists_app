@@ -6,12 +6,30 @@ import {
     NotificationManager,
   } from "react-notifications";
 import axios from 'axios';
-import { Box, styled,Button,Icon } from '@mui/material';
+import { Box, styled,Button,Icon,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TablePagination,
+    TableRow } from '@mui/material';
 import { Span } from "app/components/Typography";
+import { Link } from 'react-router-dom';
 
 import { Breadcrumb, SimpleCard } from 'app/components';
 import './Patient.css'
+import PatientVisit from './PatientVisit';
 
+
+const StyledTable = styled(Table)(() => ({
+    whiteSpace: "pre",
+    "& thead": {
+      "& tr": { "& th": { paddingLeft: 0, paddingRight: 0 } },
+    },
+    "& tbody": {
+      "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
+    },
+  }));
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -29,7 +47,24 @@ const PatientDetails = () => {
     var patientData = patient.state.patient;
 
     const [disableFields, setDisableFields] = useState(true);
+    const [patientInformation,setPatientInformation] = useState(true)
+    const [patientVisits,setPatientVisits] = useState(false)
     const [getDiseases,setGetDiseases] = useState([])
+    const [doctors,setDoctors] = useState([])
+    const [visitsHistory,setVisitsHistory] = useState([])
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (_, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
     const [data, setData] = useState({
         id: patientData.id,
         first_name: patientData.first_name,
@@ -48,6 +83,21 @@ const PatientDetails = () => {
         patient_satisfactions_for_previous_physiotherapist: patientData.patient_satisfactions_for_previous_physiotherapist,
 
     });
+    const openPatientInformation=()=>{
+        setPatientInformation(true)
+    }
+
+    const closePatientInformation=()=>{
+        setPatientInformation(false)
+    }
+
+    const openPatientVisits=()=>{
+        setPatientVisits(true)
+    }
+
+    const closePatientVisits = ()=>{
+        setPatientVisits(false)
+    }
 
 
     const handleInput = (e) => {
@@ -90,7 +140,8 @@ const PatientDetails = () => {
 
 
       useEffect(()=>{
-        axios.get('api/diseases').then((res)=>setGetDiseases(res.data))
+        axios.get('api/diseases').then((res)=>setGetDiseases(res.data));
+        axios.get('/api/patientvisits/').then((res)=>{setVisitsHistory(res.data);console.log("res333",res)})
 
       },[])
 
@@ -99,11 +150,16 @@ const PatientDetails = () => {
         <Box className="breadcrumb">
         <Breadcrumb routeSegments={[ { name: 'Patient Details' }]} />
       </Box>
+
+      <div style={{display:"flex"}}>
+        <button style={{border:"none"}} onClick={()=>{openPatientInformation();closePatientVisits()}}>Patient Information</button>
+        <button style={{border:"none",marginLeft:'2rem'}} onClick={()=>{closePatientInformation();openPatientVisits()}}>Patient Visits</button>
+        </div>
      
 
                 {/* ************Patient Information*********** */}
-
-                <div className="card">
+                <div style={{marginTop:'2rem'}}>
+             {patientInformation ?   (<><div className="card">
                     <div className="card-body" style={{ margin: "10px" }}>
                         <h4>PATIENT INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -359,6 +415,55 @@ const PatientDetails = () => {
                     </div>
                 </div>
 
+                   {/* ************In Case of Emergency*********** */}
+                
+                   <div className="card" style={{marginTop:'2rem'}}>
+                    <div className="card-body" style={{ margin: "10px" }}>
+                        <h4>In Case of Emergency</h4>
+
+                        <div className="row" style={{ marginTop: "2rem" }}>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="contactperson">
+                                    <h6>Contact Person:</h6>
+                                </label>
+                            </div>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="patientrelationship">
+                                    <h6>Relationship to Patient:</h6>
+                                </label>
+                            </div>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="prevmobileno">
+                                    <h6>Mobile No:</h6>
+                                </label>
+                            </div>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="number" name="prevmobileno" onInput={(e) => {
+                                    e.target.value = Math.max(0, parseInt(e.target.value))
+                                        .toString()
+                                        .slice(0, 11);
+                                }} onChange={handleInput} disabled={disableFields} />
+
+                            </div>
+                        </div>
+                    </div>
+                  
+
+
+                </div>
+
+
+
                 {/* ***********Previous Treatment*************** */}
                 <div className="card" style={{marginTop:'2rem'}}>
                     <div className="card-body" style={{ margin: "10px" }}>
@@ -468,56 +573,73 @@ const PatientDetails = () => {
 
                     </div>
 
+                </div></>) : null}
                 </div>
+                <div style={{marginTop:'2rem'}}>
+                {patientVisits ?(<><div className="card">
+    <div className="card-body">
+        <div style={{display:'flex'}}>
+<h6>Name:</h6>
+<h6 style={{color:'green',marginLeft:'0.3rem'}}>{data.first_name}</h6>
+</div>
+   <StyledTable>
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">Sr</TableCell>
+            <TableCell align="center">Personal Conditions</TableCell>
+            <TableCell align="center">Current Treatment</TableCell>
+            <TableCell align="center">Remarks</TableCell>
+            <TableCell align="right">Details</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {visitsHistory
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((items, id) => (
+              <TableRow key={id}>
+                <TableCell align="left">{id}</TableCell>
+                <TableCell align="center">{items.personal_conditions}</TableCell>
+                <TableCell align="center">{items.current_treatment}</TableCell>
+                <TableCell align="center">{items.remarks}</TableCell>
+                <TableCell align="right"><Link
+                                                 to="/visitDetails"
+                                                 state={{visitsHistory: items}}
 
-
-                {/* ************In Case of Emergency*********** */}
-                
-                <div className="card" style={{marginTop:'2rem'}}>
-                    <div className="card-body" style={{ margin: "10px" }}>
-                        <h4>In Case of Emergency</h4>
-
-                        <div className="row" style={{ marginTop: "2rem" }}>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="contactperson">
-                                    <h6>Contact Person:</h6>
-                                </label>
-                            </div>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="patientrelationship">
-                                    <h6>Relationship to Patient:</h6>
-                                </label>
-                            </div>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="prevmobileno">
-                                    <h6>Mobile No:</h6>
-                                </label>
-                            </div>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="number" name="prevmobileno" onInput={(e) => {
-                                    e.target.value = Math.max(0, parseInt(e.target.value))
-                                        .toString()
-                                        .slice(0, 11);
-                                }} onChange={handleInput} disabled={disableFields} />
-
-                            </div>
-                        </div>
-                    </div>
+                                                 style={{ textDecoration: "none" }}
+                                             >
+                                                 <button
+                                                     style={{ padding: "0.2rem", border: "0.1px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }}
+                                                     variant="success"
+                                                 >
+                                                     Details
+                                                 </button>
+                                             </Link>
                   
+                </TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </StyledTable> 
+      <TablePagination
+        sx={{ px: 2 }}
+        page={page}
+        component="div"
+        rowsPerPage={rowsPerPage}
+        count={doctors.length}
+        onPageChange={handleChangePage}
+        rowsPerPageOptions={[5,10, 25]}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        nextIconButtonProps={{ "aria-label": "Next Page" }}
+        backIconButtonProps={{ "aria-label": "Previous Page" }}
+      />
 
 
-                </div>
 
+    </div>
+ </div></>): null }
+ </div>
+
+             
 
             
         </Container>
