@@ -10,7 +10,7 @@ import axios from 'axios';
 import { Box, styled } from '@mui/material';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';import Button from 'react-bootstrap/Button';
+import Tabs from 'react-bootstrap/Tabs'; import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 // import './index.css'
@@ -26,10 +26,21 @@ export default class AppointmentSchedule extends React.Component {
 
 
   state = {
+
     weekendsVisible: true,
     currentEvents: [],
     INITIAL_EVENTS: [],
-    show: false
+    show: false,
+    doctors: [],
+    selectedDoctor: null,
+    appointmentTitle: '',
+    appointmentStartTime: '',
+    appointmentEndTime: '',
+    appointmentDate: '',
+    patients:[],
+    selectedPatient: ''
+
+
   }
 
 
@@ -37,7 +48,34 @@ export default class AppointmentSchedule extends React.Component {
 
     let events = await (await axios.get('/api/doctortimeslots/')).data
 
-    this.setState({ INITIAL_EVENTS: events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green" })) })
+    let scheduledAppointments = await (await axios.get('/api/scheduledappointments/')).data
+
+
+
+    console.log("time of app",events[0].start_time)
+
+
+    let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id }))
+
+    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id }))
+
+    this.setState({ INITIAL_EVENTS:  array1.concat(array2)})
+
+
+
+    let doctors = await (await axios.get('/api/users/')).data
+
+    this.setState({ doctors: doctors })
+
+
+
+    let patients = await (await axios.get('/api/patients')).data
+
+    this.setState({ patients: patients })
+
+
+
+    console.log("doctors", doctors)
 
   }
 
@@ -53,7 +91,7 @@ export default class AppointmentSchedule extends React.Component {
   }
 
 
-
+  calendarRef = React.createRef()
 
   render() {
 
@@ -61,15 +99,15 @@ export default class AppointmentSchedule extends React.Component {
 
     return (
 
-<Container>
-      <Box className="breadcrumb">
-      <Breadcrumb routeSegments={[ { name: 'Appointment Scheduling' }]} />
-    </Box>
-        
-          <div className='card'>
-            <div className='card-body'>
-              <div className='demo-app'>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
+      <Container>
+        <Box className="breadcrumb">
+          <Breadcrumb routeSegments={[{ name: 'Appointment Scheduling' }]} />
+        </Box>
+
+        <div className='card'>
+          <div className='card-body'>
+            <div className='demo-app'>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
 
                 <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
                   console.log("iddddd", this.props)
@@ -79,7 +117,6 @@ export default class AppointmentSchedule extends React.Component {
                       patient: ce._def.extendedProps.patient, title: ce._def.title, date: "2023-03-01T00:00:00.000Z"
                     }))
                   )
-                  // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
 
                 }}
                 >Update</button>
@@ -88,13 +125,14 @@ export default class AppointmentSchedule extends React.Component {
               <div className='demo-app-main'>
                 <FullCalendar
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-
+                  timeZone= 'America/New_York'
                   headerToolbar={{
                     left: 'prev,next today',
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                   }}
 
+                  ref={this.calendarRef}
 
                   initialView='timeGridWeek'
                   editable={true}
@@ -123,22 +161,146 @@ export default class AppointmentSchedule extends React.Component {
         </div>
 
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal show={this.state.show} onHide={this.handleClose} style={{ marginTop: "30vh" }}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Schedule appointment</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body>
+
+            <div style={{ padding: "30px" }}>
+              <br /><br />
+
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <label>Select the patient:</label>
+
+                &nbsp; &nbsp; &nbsp;
+
+
+
+                <select name="patients" id="patients" onClick={(e) => {
+
+                  this.setState({ selectedPatient: e.target.value })
+              
+                }}>
+
+
+
+
+
+                  {this.state.patients.map((d) => <option value={d.id}>{d.first_name}</option>)}
+
+                </select>
+
+              </div>
+
+              <br />
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+                <label>Title:</label>
+
+                <input onChange={(e) => { this.setState({ appointmentTitle: e.target.value }) }}></input>
+
+              </div>
+
+              <br />
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+
+                <b>Appointment start time: </b><div>{this.state.appointmentStartTime}</div>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+
+                <div><b>Appointment end time: </b></div><div>{this.state.appointmentEndTime}</div></div>
+
+              <br />
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <label>Select the doctor:</label>
+
+                &nbsp; &nbsp; &nbsp;
+
+
+
+                <select name="doctors" id="doctors" onClick={(e) => {
+
+                  this.setState({ selectedDoctor: e.target.value })
+
+                  console.log("value", e.target.value)
+
+                }}>
+
+
+
+
+                  {this.state.doctors.map((d) => <option value={d.id}>{d.first_name}</option>)}
+
+                </select>
+
+              </div>
+
+              <br /><br />
+            </div>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
+            <Button variant="primary" onClick={async () => {
+
+
+
+              let calendarApi = this.calendarRef.current.getApi()
+
+
+              calendarApi.addEvent({
+                id: createEventId(),
+                title: this.state.appointmentTitle,
+                start: this.state.appointmentStartTime,
+                end: this.state.appointmentEndTime,
+                // allDay: selectInfo.allDay,
+                // doctor,
+                // patient,
+                scheduledAppointment: true,
+                doctor: this.state.selectedDoctor,
+                patient: this.state.selectedPatient
+
+              
+              })
+
+
+
+
+              // console.log("calendarAPI", calendarApi.addEvent)
+
+
+
+              // const doctorForm = await axios.post('/api/scheduledappointments/', [{
+
+              //   date: this.state.appointmentDate,
+              //   start_time: this.state.appointmentStartTime,
+              //   end_time: this.state.appointmentEndTime,
+              //   title: this.state.appointmentTitle,
+              //   doctor: this.state.selectedDoctor,
+              //   patient: 3
+              // }
+              // ])
+
+
+
+
+              // doctorForm && NotificationManager.success("Successfully Registered");
+
+              this.handleClose()
+            }}>
+              Save
             </Button>
           </Modal.Footer>
         </Modal>
 
-        </Container>
+      </Container>
     )
   }
 
@@ -183,10 +345,11 @@ export default class AppointmentSchedule extends React.Component {
   }
 
   handleDateSelect = (selectInfo) => {
-    let title = prompt('Please enter a new title for your event')
-    let doctor = prompt('Please enter the doctor id')
-    let patient = prompt('Please enter the patient id')
+    // let title = prompt('Please enter a new title for your event')
+    // let doctor = prompt('Please enter the doctor id')
+    // let patient = prompt('Please enter the patient id')
 
+    this.setState({ appointmentStartTime: selectInfo.startStr, appointmentEndTime: selectInfo.endStr, appointmentDate: new Date(selectInfo.start) })
 
     this.handleOpen()
 
@@ -194,25 +357,31 @@ export default class AppointmentSchedule extends React.Component {
 
     calendarApi.unselect() // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-        doctor,
-        patient,
-        scheduledAppointment: true
-      })
-    }
+    // console.log("date selected", new Date(selectInfo.start))
 
+    // if (true) {
+    //   calendarApi.addEvent({
+    //     id: createEventId(),
+    //     // title,
+    //     start: selectInfo.startStr,
+    //     end: selectInfo.endStr,
+    //     allDay: selectInfo.allDay,
+    //     // doctor,
+    //     // patient,
+    //     scheduledAppointment: true
+    //   })
+    // }
 
     console.log("events", this.state.currentEvents)
 
   }
 
   handleEventClick = (clickInfo) => {
+
+
+    console.log("eventClickInfo", clickInfo)
+
+
     if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
       clickInfo.event.remove()
     }
