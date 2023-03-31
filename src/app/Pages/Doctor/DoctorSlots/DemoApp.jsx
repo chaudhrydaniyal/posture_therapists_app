@@ -31,10 +31,16 @@ export default class DemoApp extends React.Component {
 
     let events = await (await axios.get(`/api/doctortimeslots/${this.props.data}`)).data
 
+    
+    let scheduledAppointments = await (await axios.get(`/api/scheduledappointments/${this.props.data}`)).data
 
-    this.setState({ INITIAL_EVENTS: events.map((e) => ({ start: e.start_time, end: e.end_time, color: "green" })) })
 
-    console.log("events of doctor", events)
+    let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id }))
+
+    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id }))
+
+
+    this.setState({ INITIAL_EVENTS:  array1.concat(array2)})
 
 
   }
@@ -70,6 +76,7 @@ export default class DemoApp extends React.Component {
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
 
+            timeZone= 'America/New_York'
 
             initialView='timeGridWeek'
             editable={true}
