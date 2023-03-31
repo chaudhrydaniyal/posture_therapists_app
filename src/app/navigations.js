@@ -41,7 +41,7 @@ export const navigations = [
     children: [
       { name: 'Patient Registration', path: '/patientForm', iconText: 'A' },
       { name: 'Patients Record', path: '/registeredPatient', iconText: 'B' },
-
+      {name:'Patient Visit', path:'/patientVisit',iconText:'B'}
     ]
   },
   { label: 'Doctor Management', type: 'label' },
@@ -52,6 +52,7 @@ export const navigations = [
     children: [
       { name: 'Doctor Registration', path: '/doctorform', iconText: 'A' },
       { name: 'Available Doctors', path: '/registeredDoctors', iconText: 'B' },
+      
 
     ]
   },

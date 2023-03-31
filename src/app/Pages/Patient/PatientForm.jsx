@@ -371,6 +371,56 @@ const PatientForm = () => {
                     </div>
                 </div>
 
+    {/* ************In Case of Emergency******************* */}
+                
+    <div className="card" style={{marginTop:'2rem'}}>
+                    <div className="card-body" style={{ margin: "10px" }}>
+                        <h4>In Case of Emergency</h4>
+
+                        <div className="row" style={{ marginTop: "2rem" }}>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="contactperson">
+                                    <h6>Contact Person:</h6>
+                                </label>
+                            </div>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
+                                <input className="input_border" type="text" name="contactperson" value={values.contactperson} onChange={handleChange} onBlur={handleBlur} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="patientrelationship">
+                                    <h6>Relationship to Patient:</h6>
+                                </label>
+                            </div>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
+                                <input className="input_border" type="text" name="patientrelationship" value={values.patientrelationship} onChange={handleChange} onBlur={handleBlur} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="prevmobileno">
+                                    <h6>Mobile No:</h6>
+                                </label>
+                            </div>
+
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
+                                <input className="input_border" type="number" name="prevmobileno" value={values.prevmobileno} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                                    e.target.value = Math.max(0, parseInt(e.target.value))
+                                        .toString()
+                                        .slice(0, 11);
+                                }} />
+                                {errors.prevmobileno && touched.prevmobileno ? (<p style={{ color: "red" }}>{errors.prevmobileno}</p>) : null}
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "flex-end", margin: "1rem" }}>
+                        
+                    </div>
+
+
+                </div>
+
+
                 {/* *****************Previous Treatment************ */}
 
 
@@ -489,68 +539,20 @@ const PatientForm = () => {
 
 
                         </div>
+                        <div style={{display:'flex',justifyContent:'flex-end',marginTop:'1rem'}}>
 
+{/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
+<Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
+<Icon>send</Icon>
+<Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
+</Button>
+</div>
 
                     </div>
 
                 </div>
 
-                {/* ************In Case of Emergency******************* */}
-                
-                <div className="card" style={{marginTop:'2rem'}}>
-                    <div className="card-body" style={{ margin: "10px" }}>
-                        <h4>In Case of Emergency</h4>
-
-                        <div className="row" style={{ marginTop: "2rem" }}>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="contactperson">
-                                    <h6>Contact Person:</h6>
-                                </label>
-                            </div>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                                <input className="input_border" type="text" name="contactperson" value={values.contactperson} onChange={handleChange} onBlur={handleBlur} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="patientrelationship">
-                                    <h6>Relationship to Patient:</h6>
-                                </label>
-                            </div>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                                <input className="input_border" type="text" name="patientrelationship" value={values.patientrelationship} onChange={handleChange} onBlur={handleBlur} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="prevmobileno">
-                                    <h6>Mobile No:</h6>
-                                </label>
-                            </div>
-
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                                <input className="input_border" type="number" name="prevmobileno" value={values.prevmobileno} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
-                                    e.target.value = Math.max(0, parseInt(e.target.value))
-                                        .toString()
-                                        .slice(0, 11);
-                                }} />
-                                {errors.prevmobileno && touched.prevmobileno ? (<p style={{ color: "red" }}>{errors.prevmobileno}</p>) : null}
-                            </div>
-                        </div>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "flex-end", margin: "1rem" }}>
-                        <div>
-
-                            {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
-                            <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
-          <Icon>send</Icon>
-          <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
-        </Button>
-                        </div>
-                    </div>
-
-
-                </div>
-
+            
 
 
     </Container>

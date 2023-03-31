@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useLocation } from 'react-router-dom';
 import { PatternFormat } from 'react-number-format';
 import axios from 'axios';
@@ -29,6 +29,7 @@ const DoctorDetails = () => {
     const [disableFields, setDisableFields] = useState(true);
     const [availableSlots,setAvailableSlots] = useState(false)
     const [doctorSlots,setDoctorSlots] = useState(true)
+    
 
     
     const [data, setData] = useState({
@@ -46,6 +47,7 @@ const DoctorDetails = () => {
         home_phone:doctorDetails.home_phone,
         work_phone:doctorDetails.work_phone,
         practitioner_type: doctorDetails.practitioner_type,
+        remarks:doctorDetails.remarks
     });
 
 
@@ -96,7 +98,8 @@ const DoctorDetails = () => {
                 cnic: data.cnic,
                 home_phone:data.home_phone,
                 work_phone:data.work_phone,
-                practitioner_type:data.practitioner_type
+                practitioner_type:data.practitioner_type,
+                remarks:data.remarks
             
             })
             .then((user) => {
@@ -115,6 +118,7 @@ const DoctorDetails = () => {
               data.cnic = user.data.updateData.cnic;
               data.home_phone = user.data.updateData.home_phone;
               data.work_phone = user.data.updateData.work_phone
+              data.remarks = user.data.updateData.remarks
             });
             updateUser && NotificationManager.success("Successfully Updated");
 
@@ -122,6 +126,8 @@ const DoctorDetails = () => {
 
         }
       };
+
+    
 
     return (
         <Container>
@@ -359,9 +365,28 @@ const DoctorDetails = () => {
                                     disabled={disableFields}
                                 />
                             </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="practitioner_type">
+                                    <h6>Practitioner Type:</h6>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_border" type="text" name="practitioner_type" placeholder="practitioner_type..." value={data.practitioner_type} onChange={handleInput} disabled={disableFields} />
+                            </div>
 
 
                         </div>
+                        <div className="row">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
+                                <label htmlFor="remarks">
+                                    {" "}
+                                    <h6>Remarks:</h6>
+                                </label>
+                            </div>
+                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
+                                <input className="input_width"  type="text" name="remarks" placeholder="remarks..." value={data.remarks} onChange={handleInput} disabled={disableFields} />
+                            </div>
+                            </div>
 
 
                     </div>
@@ -375,6 +400,15 @@ const DoctorDetails = () => {
 {availableSlots ?
 <div className='card'>
     <div className='card-body'>
+        {/* <div>
+            <h6>Name:{doctorName.map((items)=>(
+                <h6 key={items.id}>{items.first_name}</h6>
+            ))}</h6>
+        </div> */}
+        <div style={{display:'flex'}}>
+            <h6>Doctor Name:</h6> &nbsp;
+            <h6 style={{color:'green'}}>{data.first_name}</h6>
+        </div>
     <DemoApp data={data.id}/>
 
     </div>
