@@ -163,7 +163,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="surname">
                                     {" "}
-                                    <h6>Surname:</h6>
+                                    <div>Surname:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -173,7 +173,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
                                     {" "}
-                                    <h6>First Name:</h6>
+                                    <div>First Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -184,7 +184,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="middle_name">
                                     {" "}
-                                    <h6>Middle Name:</h6>
+                                    <div>Middle Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -197,7 +197,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="date_of_birth">
                                     {" "}
-                                    <h6>Date of Birth:</h6>
+                                    <div>Date of Birth:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -212,7 +212,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="age">
                                     {" "}
-                                    <h6>Age:</h6>
+                                    <div>Age:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -236,7 +236,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="gender">
                                     {" "}
-                                    <h6>Gender:</h6>
+                                    <div>Gender:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
@@ -260,7 +260,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="address">
                                     {" "}
-                                    <h6>Address:</h6>
+                                    <div>Address:</div>
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
@@ -274,7 +274,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="homephone">
                                     {" "}
-                                    <h6>Home Phone:</h6>
+                                    <div>Home Phone:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -283,7 +283,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
                                     {" "}
-                                    <h6>Work Phone:</h6>
+                                    <div>Work Phone:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -291,7 +291,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
-                                    <h6>Mobile No:</h6>
+                                    <div>Mobile No:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -307,7 +307,7 @@ const DoctorDetails = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
-                                    <h6>Email:</h6>
+                                    <div>Email:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -315,7 +315,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
-                                    <h6>Occupation:</h6>
+                                    <div>Occupation:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -323,7 +323,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
-                                    <h6>Designation:</h6>
+                                    <div>Designation:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -334,7 +334,7 @@ const DoctorDetails = () => {
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="doctorname">
-                                    <h6>Your Doctor"s Name:</h6>
+                                    <div>Your Doctor"s Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -342,7 +342,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
-                                    <h6>CNIC:</h6>
+                                    <div>CNIC:</div>
                                 </label>
                             </div>
 
@@ -367,7 +367,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="practitioner_type">
-                                    <h6>Practitioner Type:</h6>
+                                    <div>Practitioner Type:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -380,7 +380,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="remarks">
                                     {" "}
-                                    <h6>Remarks:</h6>
+                                    <div>Remarks:</div>
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
@@ -401,13 +401,13 @@ const DoctorDetails = () => {
 <div className='card'>
     <div className='card-body'>
         {/* <div>
-            <h6>Name:{doctorName.map((items)=>(
-                <h6 key={items.id}>{items.first_name}</h6>
-            ))}</h6>
+            <div>Name:{doctorName.map((items)=>(
+                <div key={items.id}>{items.first_name}</div>
+            ))}</div>
         </div> */}
         <div style={{display:'flex'}}>
-            <h6>Doctor Name:</h6> &nbsp;
-            <h6 style={{color:'green'}}>{data.first_name}</h6>
+            <div>Doctor Name:</div> &nbsp;
+            <div style={{color:'green'}}>{data.first_name}</div>
         </div>
     <DemoApp data={data.id}/>
 

@@ -121,7 +121,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="surname">
                                 {" "}
-                                <h6>Surname:</h6>
+                                <div>Surname:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3" >
@@ -131,7 +131,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="first_name">
                                 {" "}
-                                <h6>First Name:</h6>
+                                <div>First Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -142,7 +142,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="middle_name">
                                 {" "}
-                                <h6>Middle Name:</h6>
+                                <div>Middle Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -155,7 +155,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="date_of_birth">
                                 {" "}
-                                <h6>Date of Birth:</h6>
+                                <div>Date of Birth:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -169,7 +169,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="age">
                                 {" "}
-                                <h6>Age:</h6>
+                                <div>Age:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -192,7 +192,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="gender">
                                 {" "}
-                                <h6>Gender:</h6>
+                                <div>Gender:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
@@ -216,7 +216,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                             <label htmlFor="address">
                                 {" "}
-                                <h6>Address:</h6>
+                                <div>Address:</div>
                             </label>
                         </div>
                         <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
@@ -230,7 +230,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                             <label htmlFor="homephone">
                                 {" "}
-                                <h6>Home Phone:</h6>
+                                <div>Home Phone:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -239,7 +239,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="workphone">
                                 {" "}
-                                <h6>Work Phone:</h6>
+                                <div>Work Phone:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -247,7 +247,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="mobile_no">
-                                <h6>Mobile No:</h6>
+                                <div>Mobile No:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -263,7 +263,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="email">
-                                <h6>Email:</h6>
+                                <div>Email:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -271,7 +271,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="occupation">
-                                <h6>Occupation:</h6>
+                                <div>Occupation:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -279,7 +279,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="designation">
-                                <h6>Designation:</h6>
+                                <div>Designation:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -290,7 +290,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="doctorname">
-                                <h6>Your Doctor"s Name:</h6>
+                                <div>Your Doctor"s Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -298,7 +298,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="cnic">
-                                <h6>CNIC:</h6>
+                                <div>CNIC:</div>
                             </label>
                         </div>
 
@@ -324,7 +324,7 @@ const PatientForm = () => {
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="past_medical_history">
-                                <h6>Disease:</h6>
+                                <div>Disease:</div>
                             </label>
                         </div>
 
@@ -381,7 +381,7 @@ const PatientForm = () => {
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="contactperson">
-                                    <h6>Contact Person:</h6>
+                                    <div>Contact Person:</div>
                                 </label>
                             </div>
 
@@ -390,7 +390,7 @@ const PatientForm = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="patientrelationship">
-                                    <h6>Relationship to Patient:</h6>
+                                    <div>Relationship to Patient:</div>
                                 </label>
                             </div>
 
@@ -399,7 +399,7 @@ const PatientForm = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="prevmobileno">
-                                    <h6>Mobile No:</h6>
+                                    <div>Mobile No:</div>
                                 </label>
                             </div>
 
@@ -433,7 +433,7 @@ const PatientForm = () => {
                     <div className="row" style={{ marginTop: "2rem" }}>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="physiotherapist_seen_before">
-                                <h6>Have you seen another physiotherapist before?</h6>
+                                <div>Have you seen another physiotherapist before?</div>
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
@@ -473,7 +473,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="patient_concerns_for_previous_physiotherapist">
-                                <h6>If Yes, was there anything you were not happy about?</h6>
+                                <div>If Yes, was there anything you were not happy about?</div>
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
@@ -488,7 +488,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="patient_satisfactions_for_previous_physiotherapist">
-                                <h6>What aspects were you most happy with?</h6>
+                                <div>What aspects were you most happy with?</div>
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
@@ -502,7 +502,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="todaysession">
-                                <h6>What are the main things you would like to achieve by the end of today"s session?</h6>
+                                <div>What are the main things you would like to achieve by the end of today"s session?</div>
                             </label>
                         </div>
 
@@ -516,7 +516,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="stoppingyou">
-                                <h6>What is this problem you are here for stopping you from doing?</h6>
+                                <div>What is this problem you are here for stopping you from doing?</div>
                             </label>
                         </div>
 
@@ -529,7 +529,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="fixednow">
-                                <h6>Why is it important that you get this problem fixed NOW?</h6>
+                                <div>Why is it important that you get this problem fixed NOW?</div>
                             </label>
                         </div>
 
@@ -555,7 +555,7 @@ const PatientForm = () => {
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="contactperson">
-                                <h6>Contact Person:</h6>
+                                <div>Contact Person:</div>
                             </label>
                         </div>
 
@@ -564,7 +564,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="patientrelationship">
-                                <h6>Relationship to Patient:</h6>
+                                <div>Relationship to Patient:</div>
                             </label>
                         </div>
 
@@ -573,7 +573,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="prevmobileno">
-                                <h6>Mobile No:</h6>
+                                <div>Mobile No:</div>
                             </label>
                         </div>
 

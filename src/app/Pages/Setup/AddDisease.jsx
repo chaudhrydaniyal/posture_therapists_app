@@ -4,11 +4,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
-import { styled,  TableBody,
+import {
+  styled, TableBody,
   TableCell,
   TableHead,
   TablePagination,
-  TableRow,Table } from '@mui/material';
+  TableRow, Table
+} from '@mui/material';
 import { Span } from "app/components/Typography";
 
 import { Breadcrumb, SimpleCard } from 'app/components';
@@ -97,86 +99,86 @@ const AddDisease = () => {
 
   }, [update])
   return (
-    
-        <Container>
-        <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[ { name: 'Add Disease' }]} />
+
+    <Container>
+      <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[{ name: 'Add Disease' }]} />
       </Box>
-     
-              <div className='card'>
-                <div className='card_body'>
 
-                  {/* ***************Add Disease Modal************* */}
+      <div className='card'>
+        <div className='card_body'>
 
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button onClick={handleOpen} style={{marginTop:'2rem',marginBottom:'2rem'}} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Disease</Span></Button>
-                    <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Add New Disease
-                        </Typography>
-                        {/* <hr></hr> */}
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          <input placeholder='Enter Disease' value={disease} onChange={(e) => setDisease(e.target.value)} />
-                        </Typography>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          {/* ***************Add Disease Modal************* */}
 
-                          <Button onClick={handleClose}> <strong>Close</strong></Button>
-                          <Button onClick={() => { apiDisease(); handleClose(); setDisease(""); setUpdate(!update) }}> <strong>Add</strong></Button>
-                        </div>
-                      </Box>
-                    </Modal>
-                  </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button onClick={handleOpen} style={{ marginTop: '2rem', marginBottom: '2rem', marginLeft:"auto", marginRight:"30px" }} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Disease</Span></Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Add New Disease
+                </Typography>
+                {/* <hr></hr> */}
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <input placeholder='Enter Disease' value={disease} onChange={(e) => setDisease(e.target.value)} />
+                </Typography>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-                  
-                  {/******************Edit Disease Model*****************/}
+                  <Button onClick={handleClose}> <strong>Close</strong></Button>
+                  <Button onClick={() => { apiDisease(); handleClose(); setDisease(""); setUpdate(!update) }}> <strong>Add</strong></Button>
+                </div>
+              </Box>
+            </Modal>
+          </div>
 
-                  <Modal
-                    open={openEdit}
-                    onClose={handleCloseEdit}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Edit New Disease
-                      </Typography>
-                      {/* <hr></hr> */}
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <input placeholder='Enter Disease' value={editDisease.name} onChange={(e) => setEditDisease({ ...editDisease, name: e.target.value })} />
-                      </Typography>
-                      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-                        <Button onClick={handleCloseEdit}> <strong>Close</strong></Button>
-                        <Button onClick={() => {
-                          axios.put(`api/diseases/${editDisease.id}`, {
-                            // id:editDisease.id,
-                            name: editDisease.name
-                          })
-                          ; handleCloseEdit(); setUpdate(!update)
-                        }}> <strong>Add</strong></Button>
-                      </div>
-                    </Box>
-                  </Modal>
-                  {console.log("disease", editDisease)}
+          {/******************Edit Disease Model*****************/}
 
-                  {/* *************************Add Disease Table******************************* */}
+          <Modal
+            open={openEdit}
+            onClose={handleCloseEdit}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Edit New Disease
+              </Typography>
+              {/* <hr></hr> */}
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <input placeholder='Enter Disease' value={editDisease.name} onChange={(e) => setEditDisease({ ...editDisease, name: e.target.value })} />
+              </Typography>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-              
-               
-                    <StyledTable>
+                <Button onClick={handleCloseEdit}> <strong>Close</strong></Button>
+                <Button onClick={() => {
+                  axios.put(`api/diseases/${editDisease.id}`, {
+                    // id:editDisease.id,
+                    name: editDisease.name
+                  })
+                    ; handleCloseEdit(); setUpdate(!update)
+                }}> <strong>Add</strong></Button>
+              </div>
+            </Box>
+          </Modal>
+          {console.log("disease", editDisease)}
+
+          {/* *************************Add Disease Table******************************* */}
+
+
+
+          <StyledTable>
             <TableHead>
               <TableRow>
-                <TableCell align="center">Sr</TableCell>
-                <TableCell align="center">Diseases</TableCell>
-                <TableCell align="center">Delete</TableCell>
-                <TableCell align="center">Edit</TableCell>
-          
+                <TableCell align="center" width={20}>Sr</TableCell>
+                <TableCell align="left"  width={200}>Diseases</TableCell>
+                <TableCell align="center"  width={20}>Delete</TableCell>
+                <TableCell align="center"  width={20}>Edit</TableCell>
+
               </TableRow>
             </TableHead>
             <TableBody>
@@ -184,15 +186,15 @@ const AddDisease = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((items, id) => (
                   <TableRow key={id}>
-                    <TableCell align="center">{id}</TableCell>
-                    <TableCell align="center">{items.name}</TableCell>
-                    <TableCell align="center"><button onClick={async () => {
-                              await axios.delete(`api/diseases/${items.id}`); setUpdate(!update)
-                            }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
-                            
-                            >Delete</button></TableCell>
-                    <TableCell align="center"><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditDisease({ id: items.id, name: items.name }); handleOpenEdit() }}>Edit</button></TableCell>
-          
+                    <TableCell align="center" width={20}>{id}</TableCell>
+                    <TableCell align="left" width={200}>{items.name}</TableCell>
+                    <TableCell align="center" width={20}><button onClick={async () => {
+                      await axios.delete(`api/diseases/${items.id}`); setUpdate(!update)
+                    }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
+
+                    >Delete</button></TableCell>
+                    <TableCell align="center" width={20}><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditDisease({ id: items.id, name: items.name }); handleOpenEdit() }}>Edit</button></TableCell>
+
                   </TableRow>
                 ))}
             </TableBody>
@@ -209,11 +211,11 @@ const AddDisease = () => {
             nextIconButtonProps={{ "aria-label": "Next Page" }}
             backIconButtonProps={{ "aria-label": "Previous Page" }}
           />
-</div>
-                  </div>
-      </Container>
+        </div>
+      </div>
+    </Container>
 
-    
+
   )
 }
 

@@ -80,7 +80,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="personal_conditions">
                                 {" "}
-                                <h6>Personal Conditions:</h6>
+                                <div>Personal Conditions:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
@@ -90,7 +90,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="current_treatment">
                                 {" "}
-                                <h6>Current Treatment:</h6>
+                                <div>Current Treatment:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -105,7 +105,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="remarks">
                                 {" "}
-                                <h6>Remarks:</h6>
+                                <div>Remarks:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -128,7 +128,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="AssTrauma_diseases">
                                 {" "}
-                                <h6>Ass.trauma & Disease:</h6>
+                                <div>Ass.trauma & Disease:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
@@ -138,7 +138,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="ROMstatus">
                                 {" "}
-                                <h6>R.O.M status:</h6>
+                                <div>R.O.M status:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -154,7 +154,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="muscle_status">
                                 {" "}
-                                <h6>Muscle status:</h6>
+                                <div>Muscle status:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -171,7 +171,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="skin_soft_tissues_pain">
                                 {" "}
-                                <h6>Skin & Soft tissue/pain:</h6>
+                                <div>Skin & Soft tissue/pain:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -196,7 +196,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="cardio_vascular_status">
                                 {" "}
-                                <h6>Cardio vascular status:</h6>
+                                <div>Cardio vascular status:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -221,7 +221,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="general_mobility">
                                 {" "}
-                                <h6>General Mobility(gait):</h6>
+                                <div>General Mobility(gait):</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
@@ -231,7 +231,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="transfers">
                                 {" "}
-                                <h6>Transfers:</h6>
+                                <div>Transfers:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -247,7 +247,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="balance">
                                 {" "}
-                                <h6>Balance:</h6>
+                                <div>Balance:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -264,7 +264,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="upper_limb_functions">
                                 {" "}
-                                <h6>Upper Limb Functions :</h6>
+                                <div>Upper Limb Functions :</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -288,7 +288,7 @@ const PatientVisit = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="daily_life_activities">
                                 {" "}
-                                <h6>Daily Life Activities:</h6>
+                                <div>Daily Life Activities:</div>
                             </label>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
