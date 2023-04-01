@@ -69,6 +69,31 @@ const DoctorForm = () => {
         }
 
     })
+    function ageCalculator() {  
+        var userinput = values.date_of_birth;  
+        var dob = new Date(userinput);  
+        if(userinput==null || userinput=='') {  
+        //   document.getElementById("message").innerHTML = "**Choose a date please!";    
+          return false;   
+        } else {  
+          
+        //calculate month difference from current date in time  
+        var month_diff = Date.now() - dob.getTime();  
+          
+        //convert the calculated difference in date format  
+        var age_dt = new Date(month_diff);   
+          
+        //extract year from date      
+        var year = age_dt.getUTCFullYear();  
+          
+        //now calculate the age of the user  
+        var age = Math.abs(year - 1970);  
+          values.age=age
+        //display the calculated age  
+        return age=    
+                 "Age is: " + age + " years. ";  
+        }  
+    }  
     return (
         <Container>
 
@@ -133,7 +158,7 @@ const DoctorForm = () => {
                                     type="date"
                                     name="date_of_birth"
                                     value={values.date_of_birth}
-                                    onChange={handleChange} onBlur={handleBlur}
+                                    onChange={(e)=>{handleChange(e);ageCalculator()}} onBlur={handleBlur}
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">

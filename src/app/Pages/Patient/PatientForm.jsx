@@ -28,8 +28,8 @@ const initialValue = {
     physiotherapist_seen_before: "",
     patient_concerns_for_previous_physiotherapist: "",
     patient_satisfactions_for_previous_physiotherapist: "",
-    homephone: "",
-    workphone: "",
+    home_phone: null,
+    work_phone: null,
     nothappy: "",
     happywith: "",
     todaysession: "",
@@ -55,6 +55,7 @@ const Container = styled('div')(({ theme }) => ({
 const PatientForm = () => {
 
     const [diseases, setDiseases] = useState([])
+
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
         initialValues: initialValue,
@@ -74,6 +75,8 @@ const PatientForm = () => {
                     email: values.email,
                     occupation: values.occupation,
                     designation: values.designation,
+                    home_phone:values.home_phone,
+                    work_phone:values.work_phone,
                     cnic: values.cnic,
                     physiotherapist_seen_before: values.physiotherapist_seen_before,
                     patient_concerns_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
@@ -90,6 +93,32 @@ const PatientForm = () => {
 
     })
 
+    function ageCalculator() {  
+        var userinput = values.date_of_birth;  
+        var dob = new Date(userinput);  
+        if(userinput==null || userinput=='') {  
+        //   document.getElementById("message").innerHTML = "**Choose a date please!";    
+          return false;   
+        } else {  
+          
+        //calculate month difference from current date in time  
+        var month_diff = Date.now() - dob.getTime();  
+          
+        //convert the calculated difference in date format  
+        var age_dt = new Date(month_diff);   
+          
+        //extract year from date      
+        var year = age_dt.getUTCFullYear();  
+          
+        //now calculate the age of the user  
+        var age = Math.abs(year - 1970);  
+          values.age=age
+        //display the calculated age  
+        return age=    
+                 "Age is: " + age + " years. ";  
+        }  
+    }  
+    
     const test = () => {
         console.log("values", values)
     }
@@ -156,6 +185,7 @@ const PatientForm = () => {
                             <label htmlFor="date_of_birth">
                                 {" "}
                                 <div>Date of Birth:</div>
+                               
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -163,7 +193,8 @@ const PatientForm = () => {
                                 type="date"
                                 name="date_of_birth"
                                 value={values.date_of_birth}
-                                onChange={handleChange} onBlur={handleBlur}
+                                id="dob"
+                                onChange={(e)=>{handleChange(e);ageCalculator()}} onBlur={handleBlur}
                             />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -184,7 +215,9 @@ const PatientForm = () => {
                                         .toString()
                                         .slice(0, 3);
                                 }}
+                                // value={values.age}
                                 value={values.age}
+                                // defaultValue={ageCalculator()}
                                 onChange={handleChange} onBlur={handleBlur}
                             />
                             {errors.age && touched.age ? (<p style={{ color: "red" }}>{errors.age}</p>) : null}
@@ -228,22 +261,22 @@ const PatientForm = () => {
 
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                            <label htmlFor="homephone">
+                            <label htmlFor="home_phone">
                                 {" "}
                                 <div>Home Phone:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input className="input_border" type="text" name="homephone" placeholder="Home Phone..." value={values.homephone} onChange={handleChange} onBlur={handleBlur} />
+                            <input className="input_border" type="number" name="home_phone" placeholder="Home Phone..." value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="workphone">
+                            <label htmlFor="work_phone">
                                 {" "}
                                 <div>Work Phone:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input className="input_border" type="text" name="workphone" placeholder="Work Phone..." value={values.workphone} onChange={handleChange} onBlur={handleBlur} />
+                            <input className="input_border" type="text" name="work_phone" placeholder="Work Phone..." value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="mobile_no">
