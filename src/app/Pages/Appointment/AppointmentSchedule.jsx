@@ -75,8 +75,6 @@ export default class AppointmentSchedule extends React.Component {
 
 
 
-    console.log("doctors", doctors)
-
   }
 
 
