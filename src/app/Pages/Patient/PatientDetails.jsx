@@ -138,6 +138,36 @@ const PatientDetails = () => {
         }
       };
 
+      function ageCalculator(e) {  
+        var userinput = data.date_of_birth;  
+        var dob = new Date(userinput);  
+        if(userinput==null || userinput=='') {  
+        //   document.getElementById("message").innerHTML = "**Choose a date please!";    
+          return false;   
+        } else {  
+          
+        //calculate month difference from current date in time  
+        var month_diff = Date.now() - dob.getTime();  
+          
+        //convert the calculated difference in date format  
+        var age_dt = new Date(month_diff);   
+          
+        //extract year from date      
+        var year = age_dt.getUTCFullYear();  
+          
+        //now calculate the age of the user  
+        var age = Math.abs(year - 1970);  
+
+        // data.age= age
+
+          setData({...data,date_of_birth:e.target.value,age:age})
+        //display the calculated age  
+        return age=    
+                 "Age is: " + age + " years. ";  
+        }  
+    }  
+    
+
 
       useEffect(()=>{
         axios.get('api/diseases').then((res)=>setGetDiseases(res.data));
@@ -221,7 +251,7 @@ const PatientDetails = () => {
                                     type="date"
                                     name="date_of_birth"
                                     value={data.date_of_birth}
-                                    onChange={handleInput}
+                                    onChange={(e)=>{handleInput(e);ageCalculator(e)}}
                                     disabled={disableFields}
                                 />
                             </div>
