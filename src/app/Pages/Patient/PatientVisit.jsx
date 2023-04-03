@@ -5,6 +5,7 @@ import { Breadcrumb, SimpleCard } from 'app/components';
 import { useFormik } from 'formik';
 import { Await } from 'react-router-dom';
 import axios from 'axios';
+import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 
 const initialValue = {
     personal_conditions: "",
@@ -32,11 +33,11 @@ const Container = styled('div')(({ theme }) => ({
 }));
 
 const PatientVisit = () => {
-    const {values,errors,handleChange,handleBlur,handleSubmit} = useFormik({
-        initialValues:initialValue,
-        onSubmit:async(values,action)=>{
-            try{
-                const PatientVisit = await axios.post('/api/patientvisits/',{
+    const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
+        initialValues: initialValue,
+        onSubmit: async (values, action) => {
+            try {
+                const PatientVisit = await axios.post('/api/patientvisits/', {
                     personal_conditions: values.personal_conditions,
                     current_treatment: values.current_treatment,
                     remarks: values.remarks,
@@ -50,17 +51,38 @@ const PatientVisit = () => {
                     balance: values.balance,
                     upper_limb_functions: values.upper_limb_functions,
                     daily_life_activities: values.daily_life_activities,
-                    
+
                 })
 
-            } catch(error){
-                console.log("error",error)
+            } catch (error) {
+                console.log("error", error)
 
             }
             action.resetForm()
 
         }
     })
+
+
+
+
+
+    const recorderControls = useAudioRecorder()
+    const addAudioElement = (blob) => {
+        const url = URL.createObjectURL(blob);
+        const audio = document.createElement("audio");
+        audio.src = url;
+
+
+        
+
+        audio.controls = true;
+
+        document.getElementById('AudioRecorder').appendChild(audio);
+    };
+
+
+
     return (
         <Container>
 
@@ -85,7 +107,7 @@ const PatientVisit = () => {
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                             {" "}
-                            <input className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." value={values.personal_conditions} onChange={handleChange} onBlur={handleBlur}/>
+                            <input className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." value={values.personal_conditions} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="current_treatment">
@@ -95,7 +117,7 @@ const PatientVisit = () => {
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input className="input_width" type="text" name="current_treatment" placeholder="current treatment..." value={values.current_treatment} onChange={handleChange} onBlur={handleBlur}/>
+                            <input className="input_width" type="text" name="current_treatment" placeholder="current treatment..." value={values.current_treatment} onChange={handleChange} onBlur={handleBlur} />
 
                         </div>
 
@@ -133,7 +155,7 @@ const PatientVisit = () => {
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                             {" "}
-                            <input className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." value={values.AssTrauma_diseases} onChange={handleChange} onBlur={handleBlur}/>
+                            <input className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." value={values.AssTrauma_diseases} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="ROMstatus">
@@ -143,7 +165,7 @@ const PatientVisit = () => {
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input className="input_width" type="text" name="ROMstatus" placeholder="R.O.M status..." value={values.ROMstatus} onChange={handleChange} onBlur={handleBlur}/>
+                            <input className="input_width" type="text" name="ROMstatus" placeholder="R.O.M status..." value={values.ROMstatus} onChange={handleChange} onBlur={handleBlur} />
 
                         </div>
 
@@ -226,7 +248,7 @@ const PatientVisit = () => {
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                             {" "}
-                            <input className="input_width" type="text" name="general_mobility" placeholder="general mobility..." value={values.general_mobility} onChange={handleChange} onBlur={handleBlur}/>
+                            <input className="input_width" type="text" name="general_mobility" placeholder="general mobility..." value={values.general_mobility} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="transfers">
@@ -236,7 +258,7 @@ const PatientVisit = () => {
                         </div>
                         <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input className="input_width" type="text" name="transfers" placeholder="transfers..." value={values.transfers} onChange={handleChange} onBlur={handleBlur}/>
+                            <input className="input_width" type="text" name="transfers" placeholder="transfers..." value={values.transfers} onChange={handleChange} onBlur={handleBlur} />
 
                         </div>
 
@@ -307,14 +329,34 @@ const PatientVisit = () => {
 
 
                     </div>
-                    <div style={{display:'flex',justifyContent:'flex-end',marginTop:'1rem'}}>
 
-{/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
-<Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
-<Icon>send</Icon>
-<Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
-</Button>
-</div>
+
+
+
+
+
+                    <div id='AudioRecorder'> 
+                        <AudioRecorder
+                            onRecordingComplete={(blob) => addAudioElement(blob)}
+                            recorderControls={recorderControls}
+                        />
+                        <button onClick={recorderControls.stopRecording}>Stop recording</button>
+                    </div>
+
+
+
+
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+
+                        {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
+                        <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
+                            <Icon>send</Icon>
+                            <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
+                        </Button>
+                    </div>
+
+
+
 
 
                 </div>

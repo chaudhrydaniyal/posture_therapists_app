@@ -33,6 +33,12 @@ export const navigations = [
       { name: 'Table', path: '/material/table', iconText: 'T' }
     ]
   },
+
+
+  { name: 'Appointment Scheduling', path: '/appointmentSchedule', icon: 'favorite' },
+
+  { name: 'Patient Visit', path: '/patientVisit', icon: 'favorite' },
+
   { label: 'Patient Management', type: 'label' },
   {
     name: 'Patient Management',
@@ -41,7 +47,7 @@ export const navigations = [
     children: [
       { name: 'Patient Registration', path: '/patientForm', iconText: 'A' },
       { name: 'Patients Record', path: '/registeredPatient', iconText: 'B' },
-      {name:'Patient Visit', path:'/patientVisit',iconText:'B'}
+      // {name:'Patient Visit', path:'/patientVisit',iconText:'B'}
     ]
   },
   { label: 'Doctor Management', type: 'label' },
@@ -62,11 +68,7 @@ export const navigations = [
     name:'Setup',
     icon:'favorite',
   children:[
-  {
-    name: 'Appointment Scheduling',
-    path: '/appointmentSchedule',
-   
-  },
+ 
   {
     name: 'Add Diseases',
     path: '/addDiseases',
