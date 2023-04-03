@@ -17,6 +17,8 @@ import AddDisease from './Pages/Setup/AddDisease';
 import AddBranches from './Pages/Setup/AddBranches';
 import PatientVisit from './Pages/Patient/PatientVisit';
 import VisitDetails from './Pages/Patient/VisitDetails';
+import PatientStepper from './Pages/Patient/PatientStepper';
+import PatientPrescription from './Pages/Patient/PatientPrescription';
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
 const JwtLogin = Loadable(lazy(() => import('app/views/sessions/JwtLogin')));
@@ -64,7 +66,7 @@ const routes = [
       },
       {
         path:'/patientVisit',
-        element:<PatientVisit/>
+        element:<PatientPrescription/>
       },
       {
         path:'/visitDetails',
