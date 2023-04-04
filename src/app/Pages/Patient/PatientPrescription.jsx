@@ -18,6 +18,7 @@ const Container = styled('div')(({ theme }) => ({
 
 
 const PatientPrescription = ({nextStep, handleFormData,values,prevStep}) => {
+    const [audioFileBlob, setAudioFileBlob] = useState({})
     const [patientVisitData,setPatientVisitData] = useState({
         personal_conditions: values.personal_conditions,
             current_treatment: values.current_treatment,
@@ -54,14 +55,21 @@ const PatientPrescription = ({nextStep, handleFormData,values,prevStep}) => {
         SpecialInstructions: ""
     })
     const recorderControls = useAudioRecorder()
-    const addAudioElement = (blob) => {
-        const url = URL.createObjectURL(blob);
-        const audio = document.createElement("audio");
-        audio.src = url;
-        audio.controls = true;
+    const url = URL.createObjectURL(blob);
+    const audio = document.createElement("audio");
+    audio.src = url;
 
-        document.getElementById('AudioRecorder').appendChild(audio);
-    };
+
+    
+
+    audio.controls = true;
+
+    setAudioFileBlob(blob)
+
+    console.log("addaudioelement",blob)
+
+    document.getElementById('AudioRecorder').appendChild(audio);
+
     // const handleFormData = async (e) => {
     //     let name, value;
     
