@@ -65,7 +65,7 @@ const AddBranches = () => {
   
    <Container>
         <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[ { name: 'Add Disease' }]} />
+        <Breadcrumb routeSegments={[ { name: 'Add Branches' }]} />
       </Box>
 
                         <div className="card">

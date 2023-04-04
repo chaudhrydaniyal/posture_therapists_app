@@ -66,7 +66,7 @@ const routes = [
       },
       {
         path:'/patientVisit',
-        element:<PatientPrescription/>
+        element:<PatientStepper/>
       },
       {
         path:'/visitDetails',

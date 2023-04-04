@@ -4,6 +4,7 @@ import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import Accordion from 'react-bootstrap/Accordion';
 
 
 
@@ -53,10 +54,14 @@ const VisitDetails = () => {
     {/* <section className="content"> */}
 
     <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Patient Registration' }]} />
+        <Breadcrumb routeSegments={[{ name: 'Visit Details' }]} />
     </Box>
 
     {/* ************************Patient Visit**************** */}
+    <Accordion>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Patient Diagnosis</Accordion.Header>
+        <Accordion.Body>
 
     <div className='card'>
         <div className='card-body'>
@@ -305,6 +310,9 @@ const VisitDetails = () => {
 
         </div>
     </div>
+    </Accordion.Body>
+    </Accordion.Item>
+    </Accordion>
 </Container>
   )
 }
