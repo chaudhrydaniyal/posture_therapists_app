@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import { Await } from 'react-router-dom';
 import axios from 'axios';
 import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
+import { useState } from 'react';
 
 const initialValue = {
     personal_conditions: "",
@@ -32,32 +33,56 @@ const Container = styled('div')(({ theme }) => ({
     }
 }));
 
-const PatientVisit = () => {
-    const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
-        initialValues: initialValue,
-        onSubmit: async (values, action) => {
-            try {
-                const PatientVisit = await axios.post('/api/patientvisits/', {
-                    personal_conditions: values.personal_conditions,
-                    current_treatment: values.current_treatment,
-                    remarks: values.remarks,
-                    AssTrauma_diseases: values.AssTrauma_diseases,
-                    ROMstatus: values.ROMstatus,
-                    muscle_status: values.muscle_status,
-                    skin_soft_tissues_pain: values.skin_soft_tissues_pain,
-                    cardio_vascular_status: values.cardio_vascular_status,
-                    general_mobility: values.general_mobility,
-                    transfers: values.transfers,
-                    balance: values.balance,
-                    upper_limb_functions: values.upper_limb_functions,
-                    daily_life_activities: values.daily_life_activities,
 
-                })
+
+
+
+const PatientVisit = () => {
+
+
+
+
+    const [audioFileBlob, setAudioFileBlob] = useState({})
+
+
+    const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
+
+        initialValues: initialValue,
+
+        onSubmit: async (values, action) => {
+
+            let item = {
+                personal_conditions: values.personal_conditions,
+                current_treatment: values.current_treatment,
+                remarks: values.remarks,
+                AssTrauma_diseases: values.AssTrauma_diseases,
+                ROMstatus: values.ROMstatus,
+                muscle_status: values.muscle_status,
+                skin_soft_tissues_pain: values.skin_soft_tissues_pain,
+                cardio_vascular_status: values.cardio_vascular_status,
+                general_mobility: values.general_mobility,
+                transfers: values.transfers,
+                balance: values.balance,
+                upper_limb_functions: values.upper_limb_functions,
+                daily_life_activities: values.daily_life_activities,
+            }
+
+            let form_data = new FormData();
+
+            for (var key in item) {
+                form_data.append(key, item[key]);
+            }
+
+            form_data.append('audioFile', audioFileBlob)
+
+            try {
+                const PatientVisit = await axios.post('/api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
 
             } catch (error) {
                 console.log("error", error)
 
             }
+
             action.resetForm()
 
         }
@@ -77,6 +102,10 @@ const PatientVisit = () => {
         
 
         audio.controls = true;
+
+        setAudioFileBlob(blob)
+
+        console.log("addaudioelement",blob)
 
         document.getElementById('AudioRecorder').appendChild(audio);
     };

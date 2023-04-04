@@ -164,15 +164,26 @@ const DoctorDetails = () => {
       </Box>
  
 
-        <div style={{display:"flex"}}>
-        <button style={{border:"none"}} onClick={()=>{handleDoctorSlot();handleAvailableSlot()}}>Doctor Details</button>
-        <button style={{border:"none",marginLeft:'2rem'}} onClick={()=>{handleDoctorSlots();handleAvailableSlots()}}>Available Slots</button>
-        </div>
 
-<div style={{marginTop:'2rem'}}>
+      <div class="tab">
+                <input type="radio" name="css-tabs" id="tab-1" defaultChecked class="tab-switch" onClick={()=>{handleDoctorSlot();handleAvailableSlot()}} />
+                <label for="tab-1" class="tab-label" >Doctor Details</label>
+
+            </div>
+            <div class="tab">
+                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" onClick={()=>{handleDoctorSlots();handleAvailableSlots()}} />
+                <label for="tab-2" class="tab-label">Available Slots</label>
+            </div>
+
+            <br />
+            <br />
 
 
-        {doctorSlots ?  <div className="card">
+
+<div style={{marginTop:'0'}}>
+
+
+        {doctorSlots ?  <div className="card" style={{borderTopLeftRadius:"0"}}>
                     <div className="card-body" style={{ margin: "0px" }}>
                         <h4>DOCTOR INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -423,10 +434,10 @@ const DoctorDetails = () => {
   
         
           
-<div style={{marginTop:'2rem'}}>
+<div style={{marginTop:'0'}}>
 
 {availableSlots ?
-<div className='card'>
+<div className='card' style={{borderTopLeftRadius:"0"}}>
     <div className='card-body'>
         {/* <div>
             <div>Name:{doctorName.map((items)=>(
