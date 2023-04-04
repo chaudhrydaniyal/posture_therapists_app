@@ -1,78 +1,98 @@
-import React,{useState,useEffect} from 'react'
-import {Col, Row, Container} from "react-bootstrap";
+import React, { useState, useEffect } from 'react'
+import { Col, Row, } from "react-bootstrap";
+import { Box, styled, Button, Icon } from '@mui/material';
 import PatientVisit from './PatientVisit';
+import PatientPrescription from './PatientPrescription';
+const Container = styled('div')(({ theme }) => ({
+    margin: '30px',
+    [theme.breakpoints.down('sm')]: { margin: '16px' },
+    '& .breadcrumb': {
+        marginBottom: '30px',
+        [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+    }
+}));
 const PatientStepper = () => {
     const [step, setstep] = useState(1);
-    const [formData,setFormData] = useState({
-    personal_conditions: "",
-    current_treatment: "",
-    remarks: "",
-    AssTrauma_diseases: "",
-    ROMstatus: "",
-    muscle_status: "",
-    skin_soft_tissues_pain: "",
-    cardio_vascular_status: "",
-    general_mobility: "",
-    transfers: "",
-    balance: "",
-    upper_limb_functions: "",
-    daily_life_activities: "",
+    const [formData, setFormData] = useState({
+        personal_conditions: "",
+        current_treatment: "",
+        remarks: "",
+        AssTrauma_diseases: "",
+        ROMstatus: "",
+        muscle_status: "",
+        skin_soft_tissues_pain: "",
+        cardio_vascular_status: "",
+        general_mobility: "",
+        transfers: "",
+        balance: "",
+        upper_limb_functions: "",
+        daily_life_activities: "",
+        DiagnosisICD10code: "",
+        BriefMedicalHistory: "",
+        WeightBearingPrecautions: "",
+        ActivityRestrictions: "",
+        OtherMedicalConsiderations: "",
+        PhysicalTherapyEvaluationTreatment: "",
+        Other: "",
+        AnticipatedFrequencyDuration: "",
+        SpecialInstructions: ""
+
     })
 
     const nextStep = () => {
         setstep(step + 1);
         console.log("nextstep", nextStep);
-      };
-    
-      const prevStep = () => {
+    };
+
+    const prevStep = () => {
         setstep(step - 1);
-      };
-      const handleInputData = (input) => (e) => {
+    };
+    const handleInputData = (input) => (e) => {
         console.log("eee", e);
         // input value from the form
         const { value } = e.target;
-    
+
         //updating for data state taking previous state and then adding new value to create new object
         setFormData((prevState) => ({
-          ...prevState,
-          [input]: value,
+            ...prevState,
+            [input]: value,
         }));
-      };
-      switch (step) {
+    };
+    switch (step) {
         // case 1 to show stepOne form and passing nextStep, prevStep, and handleInputData as handleFormData method as prop and also formData as value to the fprm
         case 1:
-          return (
-            <div>
-              <Container>
-                <Row>
-                  <Col md={{ span: 8, offset: 3 }} className="custom-margin">
-                    <PatientVisit
-                      nextStep={nextStep}
-                      handleFormData={handleInputData}
-                      values={formData}
-                    />
-                  </Col>
-                </Row>
-              </Container>
-            </div>
-          );
-        // case 2:
-        //   return (
-        //     <div className="App">
-        //       <Container>
-        //         <Row>
-        //           <Col md={{ span: 8, offset: 3 }} className="custom-margin">
-        //             <StepTwo
-        //               nextStep={nextStep}
-        //               prevStep={prevStep}
-        //               handleFormData={handleInputData}
-        //               values={formData}
-        //             />
-        //           </Col>
-        //         </Row>
-        //       </Container>
-        //     </div>
-        //   );
+            return (
+                <div>
+                    <Container>
+                        {/* <Row> */}
+                            {/* <Col md={{ span: 8, offset: 3 }} className="custom-margin"> */}
+                            <PatientVisit
+                                nextStep={nextStep}
+                                handleFormData={handleInputData}
+                                values={formData}
+                            />
+                            {/* </Col> */}
+                        {/* </Row> */}
+                    </Container>
+                </div>
+            );
+        case 2:
+            return (
+                <div className="App">
+                    <Container>
+                        {/* <Row> */}
+                            {/* <Col md={{ span: 8, offset: 3 }} className="custom-margin"> */}
+                            <PatientPrescription
+                                nextStep={nextStep}
+                                prevStep={prevStep}
+                                handleFormData={handleInputData}
+                                values={formData}
+                            />
+                            {/* </Col> */}
+                        {/* </Row> */}
+                    </Container>
+                </div>
+            );
         // case 3:
         //   return (
         //     <div className="App">
@@ -90,12 +110,12 @@ const PatientStepper = () => {
         //       </Container>
         //     </div>
         //   );
-     
 
-         
+
+
         default:
-          return "unknown step";
-      }
+            return "unknown step";
+    }
 }
 
 export default PatientStepper
