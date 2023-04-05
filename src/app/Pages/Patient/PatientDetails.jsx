@@ -673,7 +673,7 @@ const PatientDetails = () => {
                             page={page}
                             component="div"
                             rowsPerPage={rowsPerPage}
-                            count={doctors.length}
+                            count={visitsHistory.length}
                             onPageChange={handleChangePage}
                             rowsPerPageOptions={[5, 10, 25]}
                             onRowsPerPageChange={handleChangeRowsPerPage}
