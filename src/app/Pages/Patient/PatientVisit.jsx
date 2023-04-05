@@ -36,6 +36,7 @@ const Container = styled('div')(({ theme }) => ({
 
 const PatientVisit = ({ nextStep, handleFormData, values }) => {
     const [error, setError] = useState(false);
+    const [audioFileBlob, setAudioFileBlob] = useState({})
 
     // const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
     //     initialValues: initialValue,
