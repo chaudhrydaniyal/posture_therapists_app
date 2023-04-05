@@ -7,7 +7,6 @@ import { useFormik } from 'formik';
 import { Await } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios';
-import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 
 
 // const initialValue = {
@@ -73,19 +72,19 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
         // checking if value of first name and last name is empty show error else take to step 2
         console.log("value", values);
         if (
-            validator.isEmpty(values.personal_conditions) ||
-            validator.isEmpty(values.current_treatment) ||
-            validator.isEmpty(values.remarks) ||
-            validator.isEmpty(values.AssTrauma_diseases) ||
-            validator.isEmpty(values.ROMstatus) ||
-            validator.isEmpty(values.muscle_status) ||
-            validator.isEmpty(values.skin_soft_tissues_pain) ||
-            validator.isEmpty(values.cardio_vascular_status) ||
-            validator.isEmpty(values.general_mobility) ||
-            validator.isEmpty(values.transfers) ||
-            validator.isEmpty(values.balance) ||
-            validator.isEmpty(values.upper_limb_functions) ||
-            validator.isEmpty(values.daily_life_activities)
+            validator.isEmpty(values.personal_conditions)
+            // validator.isEmpty(values.current_treatment) ||
+            // validator.isEmpty(values.remarks) ||
+            // validator.isEmpty(values.AssTrauma_diseases) ||
+            // validator.isEmpty(values.ROMstatus) ||
+            // validator.isEmpty(values.muscle_status) ||
+            // validator.isEmpty(values.skin_soft_tissues_pain) ||
+            // validator.isEmpty(values.cardio_vascular_status) ||
+            // validator.isEmpty(values.general_mobility) ||
+            // validator.isEmpty(values.transfers) ||
+            // validator.isEmpty(values.balance) ||
+            // validator.isEmpty(values.upper_limb_functions) ||
+            // validator.isEmpty(values.daily_life_activities)
         ) {
             setError(true);
             console.log("setError");
@@ -97,24 +96,6 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
 
 
-
-    const recorderControls = useAudioRecorder()
-    const addAudioElement = (blob) => {
-        const url = URL.createObjectURL(blob);
-        const audio = document.createElement("audio");
-        audio.src = url;
-
-
-
-
-        audio.controls = true;
-
-        setAudioFileBlob(blob)
-
-        console.log("addaudioelement",blob)
-
-        document.getElementById('AudioRecorder').appendChild(audio);
-    };
 
 
 
@@ -143,7 +124,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")}/>
+                                <input className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="current_treatment">
@@ -192,7 +173,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")}/>
+                                <input className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="ROMstatus">
@@ -287,7 +268,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input className="input_width" type="text" name="general_mobility" placeholder="general mobility..." defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")}/>
+                                <input className="input_width" type="text" name="general_mobility" placeholder="general mobility..." defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="transfers">
@@ -297,7 +278,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_width" type="text" name="transfers" placeholder="transfers..." defaultValue={values.transfers} onChange={handleFormData("transfers")}/>
+                                <input className="input_width" type="text" name="transfers" placeholder="transfers..." defaultValue={values.transfers} onChange={handleFormData("transfers")} />
 
                             </div>
 
@@ -373,6 +354,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
 
 
+                    
 
 
 
