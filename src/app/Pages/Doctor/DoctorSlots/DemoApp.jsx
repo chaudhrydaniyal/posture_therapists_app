@@ -29,10 +29,10 @@ export default class DemoApp extends React.Component {
 
     console.log("doctor time slots",this.props.data)
 
-    let events = await (await axios.get(`/api/doctortimeslots/${this.props.data}`)).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`)).data
 
     
-    let scheduledAppointments = await (await axios.get(`/api/scheduledappointments/${this.props.data}`)).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`)).data
 
 
     let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id }))
@@ -58,7 +58,7 @@ export default class DemoApp extends React.Component {
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
           <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
             console.log("iddddd", this.props)
-            await axios.post('http://192.168.5.21:8081/api/doctortimeslots',
+            await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
               this.state.currentEvents.map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
             )
             // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))

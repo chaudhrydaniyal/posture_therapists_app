@@ -41,7 +41,7 @@ const DoctorForm = () => {
         initialValues: initialValue,
         onSubmit:async(values,action)=>{
             try{
-                const doctorForm = await axios.post('/api/users',{
+                const doctorForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users',{
                     surname: values.surname,
                     first_name: values.first_name,
                     middle_name: values.middle_name,

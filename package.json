@@ -36,6 +36,7 @@
     "bootstrap": "^5.2.3",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
     "echarts": "^5.4.1",
     "echarts-for-react": "^3.0.2",
     "express-fileupload": "^1.4.0",
@@ -66,6 +67,5 @@
     "customize-cra": "^1.0.0",
     "gh-pages": "^5.0.0",
     "react-app-rewired": "^2.2.1"
-  },
-  "proxy": "http://192.168.5.21:8081/"
+  }
 }

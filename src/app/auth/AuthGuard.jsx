@@ -5,6 +5,9 @@ const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
 
+
+  console.log("isAuthenticated", isAuthenticated)
+
   if (isAuthenticated) return <>{children}</>;
     // if (true) return <>{children}</>;
 

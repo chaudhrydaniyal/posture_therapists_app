@@ -64,7 +64,7 @@ const VisitDetails = () => {
     };
 
     useEffect(()=>{
-        axios.get('/api/patientvisits/').then((res)=>{setPatientPrescription(res.data);console.log('resss',res)})
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/').then((res)=>{setPatientPrescription(res.data);console.log('resss',res)})
         console.log("patientPrescription",PatientPrescription)
 
     },[])

@@ -128,7 +128,7 @@ const AddBranches = () => {
                     <TableCell align="center">{id}</TableCell>
                     <TableCell align="center">{items.name}</TableCell>
                     <TableCell align="center"><button onClick={async () => {
-                              await axios.delete(`api/diseases/${items.id}`); setUpdate(!update)
+                              await axios.delete(process.env.REACT_APP_ORIGIN_URL + `api/diseases/${items.id}`); setUpdate(!update)
                             }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
                             //   title="Delete"
                             >Delete</button></TableCell>

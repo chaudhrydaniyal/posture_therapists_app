@@ -55,7 +55,7 @@ const RegisteredDoctors = () => {
   };
 
   useEffect(() => {
-    axios.get('/api/users/').then((res) => setDoctors(res.data))
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/').then((res) => setDoctors(res.data))
   }, [])
   return (
     <Container>

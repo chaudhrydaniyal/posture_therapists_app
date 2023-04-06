@@ -20,7 +20,7 @@ import useSettings from 'app/hooks/useSettings';
 import { topBarHeight } from 'app/utils/constant';
 
 import { Span } from '../../Typography';
-import NotificationBar from '../../NotificationBar/NotificationBar';
+// import NotificationBar from '../../NotificationBar/NotificationBar';
 import ShoppingCart from '../../ShoppingCart';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
@@ -129,7 +129,6 @@ const Layout1Topbar = () => {
           <MatxSearchBox />
 
           <NotificationProvider>
-            <NotificationBar />
           </NotificationProvider>
 
           <ShoppingCart />

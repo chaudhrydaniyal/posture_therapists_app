@@ -42,7 +42,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     //     initialValues: initialValue,
     //     onSubmit: async (values, action) => {
     //         try {
-    //             const PatientVisit = await axios.post('/api/patientvisits/', {
+    //             const PatientVisit = await axios.post('api/patientvisits/', {
     //                 personal_conditions: values.personal_conditions,
     //                 current_treatment: values.current_treatment,
     //                 remarks: values.remarks,

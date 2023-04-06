@@ -84,7 +84,7 @@ const DoctorDetails = () => {
 
         try {
           const updateUser = await axios
-            .put(`/api/users/${data.id}`, {
+            .put(process.env.REACT_APP_ORIGIN_URL + `api/users/${data.id}`, {
                 id: data.id,
                 first_name: data.first_name,
                 surname: data.surname,

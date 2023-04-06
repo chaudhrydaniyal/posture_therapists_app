@@ -4,7 +4,7 @@ import { MatxTheme } from './components';
 import { AuthProvider } from './contexts/JWTAuthContext';
 import { SettingsProvider } from './contexts/SettingsContext';
 import routes from './routes';
-import '../fake-db';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {

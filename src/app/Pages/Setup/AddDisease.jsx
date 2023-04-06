@@ -78,7 +78,7 @@ const AddDisease = () => {
   };
   const apiDisease = () => {
     return (
-      axios.post('api/diseases', {
+      axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/diseases', {
         name: disease
       })
 
@@ -95,7 +95,7 @@ const AddDisease = () => {
 
 
   useEffect(() => {
-    axios.get('api/diseases/').then((res) => { setGetDisease(res.data); console.log("res", res) })
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/diseases/').then((res) => { setGetDisease(res.data); console.log("res", res) })
 
   }, [update])
   return (
@@ -156,7 +156,7 @@ const AddDisease = () => {
 
                 <Button onClick={handleCloseEdit}> <strong>Close</strong></Button>
                 <Button onClick={() => {
-                  axios.put(`api/diseases/${editDisease.id}`, {
+                  axios.put(process.env.REACT_APP_ORIGIN_URL + `api/diseases/${editDisease.id}`, {
                     // id:editDisease.id,
                     name: editDisease.name
                   })
@@ -189,7 +189,7 @@ const AddDisease = () => {
                     <TableCell align="center" width={20}>{id}</TableCell>
                     <TableCell align="left" width={200}>{items.name}</TableCell>
                     <TableCell align="center" width={20}><button onClick={async () => {
-                      await axios.delete(`api/diseases/${items.id}`); setUpdate(!update)
+                      await axios.delete(process.env.REACT_APP_ORIGIN_URL + `api/diseases/${items.id}`); setUpdate(!update)
                     }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
 
                     >Delete</button></TableCell>

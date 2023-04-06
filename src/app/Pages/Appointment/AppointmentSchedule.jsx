@@ -46,9 +46,9 @@ export default class AppointmentSchedule extends React.Component {
 
   async componentDidMount() {
 
-    let events = await (await axios.get('/api/doctortimeslots/')).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/')).data
 
-    let scheduledAppointments = await (await axios.get('/api/scheduledappointments/')).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/')).data
 
 
 
@@ -63,13 +63,13 @@ export default class AppointmentSchedule extends React.Component {
 
 
 
-    let doctors = await (await axios.get('/api/users/')).data
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/')).data
 
     this.setState({ doctors: doctors })
 
 
 
-    let patients = await (await axios.get('/api/patients')).data
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients')).data
 
     this.setState({ patients: patients })
 
@@ -109,7 +109,7 @@ export default class AppointmentSchedule extends React.Component {
 
                 <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
                   console.log("iddddd", this.props)
-                  await axios.post('api/scheduledappointments',
+                  await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments',
                     this.state.currentEvents.filter((f) => f._def.extendedProps.scheduledAppointment).map(ce => ({
                       start_time: ce._instance.range.start, end_time: ce._instance.range.end, doctor: ce._def.extendedProps.doctor,
                       patient: ce._def.extendedProps.patient, title: ce._def.title, date: "2023-03-01T00:00:00.000Z"
@@ -275,7 +275,7 @@ export default class AppointmentSchedule extends React.Component {
 
 
 
-              // const doctorForm = await axios.post('/api/scheduledappointments/', [{
+              // const doctorForm = await axios.post('api/scheduledappointments/', [{
 
               //   date: this.state.appointmentDate,
               //   start_time: this.state.appointmentStartTime,

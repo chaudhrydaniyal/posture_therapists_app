@@ -115,7 +115,7 @@ const PatientDetails = () => {
     const updatePatient = async () => {
         try {
             const updateUser = await axios
-                .put(`/api/patients/${data.id}`, {
+                .put(process.env.REACT_APP_ORIGIN_URL + `api/patients/${data.id}`, {
                     id: data.id,
                     first_name: data.first_name,
                     surname: data.surname,
@@ -172,8 +172,8 @@ const PatientDetails = () => {
 
 
     useEffect(() => {
-        axios.get('api/diseases').then((res) => setGetDiseases(res.data));
-        axios.get('/api/patientvisits/').then((res) => { setVisitsHistory(res.data); console.log("res333", res) })
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/diseases').then((res) => setGetDiseases(res.data));
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/').then((res) => { setVisitsHistory(res.data); console.log("res333", res) })
 
     }, [])
 

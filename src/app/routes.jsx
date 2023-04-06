@@ -46,7 +46,7 @@ const routes = [
       {
         path: '/dashboard/default',
         element: <Analytics />,
-        auth: authRoles.admin
+        // auth: authRoles.admin
       },
 
       {

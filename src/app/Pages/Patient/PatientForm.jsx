@@ -63,7 +63,7 @@ const PatientForm = () => {
         onSubmit: async (values, action) => {
             console.log("error")
             try {
-                const patientForm = await axios.post('/api/patients', {
+                const patientForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patients', {
                     surname: values.surname,
                     first_name: values.first_name,
                     middle_name: values.middle_name,
@@ -124,7 +124,7 @@ const PatientForm = () => {
     }
 
     useEffect(()=>{
-        axios.get('api/diseases').then((res)=>{setDiseases(res.data);console.log("res",res)}
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/diseases').then((res)=>{setDiseases(res.data);console.log("res",res)}
         )
     },[])
 

@@ -65,7 +65,12 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/auth/login', { email, password });
+
+
+    console.log("login")
+    console.log("origin url", process.env.REACT_APP_ORIGIN_URL)
+
+    const response = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/auth/login', { email, password });
     // const { user } = response.data;
 
     // dispatch({ type: 'LOGIN', payload: { user } });
@@ -95,9 +100,25 @@ export const AuthProvider = ({ children }) => {
     (async () => {
       try {
         const { data } = await axios.get('/api/auth/profile');
+
+
+        console.log("authProfile", data.user)
+
+        if (data.user){
+
         dispatch({ type: 'INIT', payload: { isAuthenticated: true, user: data.user } });
-      } catch (err) {
-        console.error(err);
+
+        }
+
+        else{
+          dispatch({ type: 'INIT', payload: { isAuthenticated: false, user: null } });
+        }
+
+        console.log("dispatch called")
+      } catch ( err) {
+        
+        console.log("error called")
+        console.error("authprofile error",err);
         dispatch({ type: 'INIT', payload: { isAuthenticated: false, user: null } });
       }
     })();
