@@ -6,6 +6,8 @@ import { SettingsProvider } from './contexts/SettingsContext';
 import routes from './routes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-notifications/lib/notifications.css';
+
 
 const App = () => {
   const content = useRoutes(routes);

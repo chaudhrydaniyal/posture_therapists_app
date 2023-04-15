@@ -8,7 +8,6 @@ import { INITIAL_EVENTS, createEventId } from './event-utils'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios';
 
-// import './index.css'
 export default class DemoApp extends React.Component {
 
 
@@ -26,22 +25,17 @@ export default class DemoApp extends React.Component {
 
   async componentDidMount() {
 
-
     console.log("doctor time slots",this.props.data)
 
     let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`)).data
-
     
     let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`)).data
 
-
-    let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id }))
+    let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id, title:"event" }))
 
     let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id }))
 
-
     this.setState({ INITIAL_EVENTS:  array1.concat(array2)})
-
 
   }
 
@@ -176,7 +170,7 @@ function renderEventContent(eventInfo) {
   return (
     <>
       <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
+      {/* <i>{eventInfo.event.title}</i> */}
     </>
   )
 }

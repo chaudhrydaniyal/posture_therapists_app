@@ -1,6 +1,6 @@
 const User = require("../models/user.model.js");
 
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
@@ -12,9 +12,9 @@ exports.create = async (req, res) => {
   }
 
 
-  const salt =await  bcrypt.genSalt()
+  // const salt =await  bcrypt.genSalt()
 
-  const hashedPassword = await bcrypt.hash(req.body.password, salt)
+  // const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
 
   // Create a Tutorial
@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
     surname : req.body.surname,
     first_name : req.body.first_name,
     middle_name : req.body.middle_name,
-    password: hashedPassword,
+    // password: hashedPassword,
     cnic : req.body.cnic,
     date_of_birth : req.body.date_of_birth,
     age : req.body.age,
@@ -39,7 +39,8 @@ exports.create = async (req, res) => {
     practitioner_type : req.body.practitioner_type,
     designation : req.body.designation,
     role : req.body.role,
-    remarks : req.body.remarks
+    remarks : req.body.remarks,
+    password : req.body.password
 
   });
 

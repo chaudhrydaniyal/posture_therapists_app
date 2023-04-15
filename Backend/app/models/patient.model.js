@@ -1,7 +1,7 @@
 const sql = require("./db.js");
 
 // constructor
-const Patient = function(patient) {
+const Patient = function (patient) {
   this.first_name = patient.first_name;
   this.middle_name = patient.middle_name;
   this.surname = patient.surname;
@@ -9,7 +9,7 @@ const Patient = function(patient) {
   this.date_of_birth = patient.date_of_birth;
   this.age = patient.age;
   this.gender = patient.gender;
-  this.address =patient.address;
+  this.address = patient.address;
   this.mobile_no = patient.mobile_no;
   this.email = patient.email;
   this.cnic = patient.cnic;
@@ -19,9 +19,6 @@ const Patient = function(patient) {
   this.physiotherapist_seen_before = patient.physiotherapist_seen_before;
   this.patient_concerns_for_previous_physiotherapist = patient.patient_concerns_for_previous_physiotherapist;
   this.patient_satisfactions_for_previous_physiotherapist = patient.patient_satisfactions_for_previous_physiotherapist;
-
-
-
 
 
 
@@ -59,23 +56,27 @@ Patient.findById = (id, result) => {
   });
 };
 
-Patient.getAll = (title, result) => {
+Patient.getAll =  (title, result) => {
   let query = "SELECT * FROM patients";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
   }
+  const allp =  sql.query(query, (err, res) => {
 
-  sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("tutorials: ", res);
     result(null, res);
+
+
+
   });
+
+
 };
 
 Patient.getAllPublished = result => {
@@ -99,7 +100,7 @@ Patient.getAllPublished = result => {
 Patient.updateById = (id, patient, result) => {
   sql.query(
     "UPDATE patients SET first_name = ?, middle_name = ?, surname = ?, cnic = ?, date_of_birth = ?, age = ?, address = ?, email = ?, gender = ?, mobile_no = ?, date_registered = ?, occupation = ?, physiotherapist_seen_before = ?, patient_concerns_for_previous_physiotherapist = ?, patient_satisfactions_for_previous_physiotherapist = ? WHERE id = ?",
-    [patient.first_name, patient.middle_name, patient.surname, patient.cnic, patient.date_of_birth, patient.age, patient.address, patient.email, patient.gender, patient.mobile_no, patient.date_registered, patient.occupation, patient.physiotherapist_seen_before, patient.patient_concerns_for_previous_physiotherapist, patient.patient_satisfactions_for_previous_physiotherapist,  id],
+    [patient.first_name, patient.middle_name, patient.surname, patient.cnic, patient.date_of_birth, patient.age, patient.address, patient.email, patient.gender, patient.mobile_no, patient.date_registered, patient.occupation, patient.physiotherapist_seen_before, patient.patient_concerns_for_previous_physiotherapist, patient.patient_satisfactions_for_previous_physiotherapist, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

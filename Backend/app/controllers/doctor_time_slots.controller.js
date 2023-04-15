@@ -1,4 +1,4 @@
-const Doctor_time_slots = require("../models/Doctor_time_slots.model.js");
+const Doctor_time_slots = require("../models/doctor_time_slots.model.js");
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {

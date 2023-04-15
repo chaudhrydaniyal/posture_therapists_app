@@ -1,5 +1,23 @@
 const Patient = require("../models/patient.model.js");
 
+const Redis = require('redis')
+
+const redisClient = Redis.createClient()
+
+function getOrSetCache(key) {
+  return new Promise(async (resolve, reject) => {
+    redisClient.get(key, async (err, data) => {
+      if (err) return reject(err)
+      if (data != null) return resolve(JSON.parse(data))
+      // const freshData = await cb()
+      // redisClient.set(key , freshData)
+    })
+  })
+}
+
+
+
+
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
@@ -12,22 +30,22 @@ exports.create = (req, res) => {
   // Create a Tutorial
   const patient = new Patient({
 
-    surname : req.body.surname,
-    first_name : req.body.first_name,
-    middle_name : req.body.middle_name,
-    cnic : req.body.cnic,
-    date_of_birth : req.body.date_of_birth,
-    age : req.body.age,
-    gender : req.body.gender,
-    address : req.body.address,
-    mobile_no : req.body.mobile_no,
-    email : req.body.email,
-    date_registered : req.body.date_registered, 
-    occupation : req.body.occupation,
-    physiotherapist_seen_before : req.body.physiotherapist_seen_before,
-    patient_concerns_for_previous_physiotherapist : req.body.patient_concerns_for_previous_physiotherapist,
-    patient_satisfactions_for_previous_physiotherapist : req.body.patient_satisfactions_for_previous_physiotherapist, 
-   
+    surname: req.body.surname,
+    first_name: req.body.first_name,
+    middle_name: req.body.middle_name,
+    cnic: req.body.cnic,
+    date_of_birth: req.body.date_of_birth,
+    age: req.body.age,
+    gender: req.body.gender,
+    address: req.body.address,
+    mobile_no: req.body.mobile_no,
+    email: req.body.email,
+    date_registered: req.body.date_registered,
+    occupation: req.body.occupation,
+    physiotherapist_seen_before: req.body.physiotherapist_seen_before,
+    patient_concerns_for_previous_physiotherapist: req.body.patient_concerns_for_previous_physiotherapist,
+    patient_satisfactions_for_previous_physiotherapist: req.body.patient_satisfactions_for_previous_physiotherapist,
+
   });
 
   // Save Tutorial in the database
@@ -42,17 +60,30 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Tutorials from the database (with condition).
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
+
   const title = req.query.title;
 
-  Patient.getAll(title, (err, data) => {
+  // const cache = await getOrSetCache('patients')
+
+  Patient.getAll(title, async(err, data) => {
     if (err)
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving tutorials."
       });
-    else res.send(data);
+    else {
+      res.send(data)
+      // await redisClient.set('patients', data)
+    }
   });
+
+
+
+
+  //  const allPatients = await Patient.getAll(title)
+
+
 };
 
 // Find a single Tutorial by Id
