@@ -144,18 +144,20 @@ class AddItemsForm extends React.Component {
 
                     onChange={
                       (e) => {
-                        this.setState({ patientName: e.target.value })
+                        this.setState({ patientName:e.currentTarget.innerText })
 
-                        console.log("e.target", e)
-                        this.setState({ patient: e.target.key });
+                        console.log("e.target", e.currentTarget.innerText)
+                        this.setState({ patient: e.target.value });
 
                       }
                     }
+
+                    // onClick={(e)=>{console.log("click",e.currentTarget.innerText)}}
                     fullWidth={true}
                   >
                     {this.state.patients.map(patient => (
                       <MenuItem key={patient.id} name={patient.id}
-                        value={patient.first_name}
+                        value={patient.id}
                       // value={{patientId:patient.id, patientName: patient.first_name}}
 
                       >

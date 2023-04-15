@@ -62,6 +62,7 @@ export default class Calender extends Component {
       start: new Date(e.start_time).getTime(), end: new Date(e.end_time),
       title: e.patient,
       group: e.doctor,
+      scheduledAppointment:true,
       canMove: false,
       canResize: false,
       canChangeGroup: false
@@ -78,7 +79,7 @@ export default class Calender extends Component {
       title: e.first_name
     }))
 
-    console.log("doctors", doctorsArray)
+    console.log("items of state", this.state.items )
 
     this.setState({ groups: doctorsArray })
 
@@ -97,14 +98,32 @@ export default class Calender extends Component {
 
     if (item.doctor == '' || item.patient == '') {
       NotificationManager.error("Please input the required fields");
-
-
     }
 
     this.state.items.filter((i) => i.group == item.doctor).forEach((it) => {
 
       if (new Date(item.start) >= new Date(it.start) && new Date(item.end) <= new Date(it.end)) {
+
         console.log("it is withing the doctor slots")
+
+
+        let alreadyScheduledAppointment = false
+
+
+        this.state.items.filter((i) => i.group == item.doctor && i.scheduledAppointment ).forEach((ff) => {
+
+
+          console.log("within array", ff , item)
+
+          if (new Date(item.start) >= new Date(ff.start) && new Date(item.start) <= new Date(ff.end) ||
+          
+          new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start) ) { 
+            
+            alreadyScheduledAppointment = true
+            console.log("scheduled alredy")}else{console.log("inside else")}})
+
+
+if (!alreadyScheduledAppointment){
 
         const newItem = {
           id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
@@ -125,12 +144,14 @@ export default class Calender extends Component {
         }))
 
         NotificationManager.success("Successfully scheduled an appointment");
-        return;
+
+        return;        
+      }
+     
       }
       else {
-        console.log("it is outside the doctor slots")
+        // console.log("it is outside the doctor slots")
         NotificationManager.error("No Doctor available at this time slot");
-
       }
 
     })
@@ -196,14 +217,13 @@ export default class Calender extends Component {
             }
             catch{
               NotificationManager.error("Nothing to update");
-
             }
           }}
           >Update</button></div>
+
         <br />
 
         <Timeline
-
           style={{ width: "90vw" }}
           keys={keys}
           groups={groups}
