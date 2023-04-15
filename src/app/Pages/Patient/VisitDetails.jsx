@@ -49,9 +49,6 @@ const VisitDetails = () => {
     ActivityRestrictions:visitDetails.ActivityRestrictions,
     audioFile:visitDetails.audioFile
 
-
-
-
     })
     
     const handleInput = (e) => {
@@ -338,7 +335,7 @@ const VisitDetails = () => {
         <Accordion.Body>
         <div className='card'>
                 <div className='card-body'>
-                    <h4>Diagnosis</h4>
+                    <h4>Prescription</h4>
                     
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -399,8 +396,6 @@ const VisitDetails = () => {
                                 />
                             </div>
 
-
-
                         </div>
 
                         <div className="row">
@@ -436,7 +431,6 @@ const VisitDetails = () => {
                             
                                 />
                             </div>
-
 
 
                         </div>
@@ -479,16 +473,6 @@ const VisitDetails = () => {
                                 </div>
                             </Table>
                         </div>
-                        <div id='AudioRecorder'>
-                            {/* <AudioRecorder
-                                onRecordingComplete={(blob) => addAudioElement(blob)}
-                                recorderControls={recorderControls}
-                            /> */}
-                            <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button>
-                        </div>
-                    
-                    
-
                 </div>
             </div>
         </Accordion.Body>

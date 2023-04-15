@@ -67,6 +67,17 @@ const PatientDetails = () => {
         setPage(0);
     };
 
+    const Success=()=>{
+        alert("Successfully Updated")
+  
+    }
+    const Error=()=>{
+    
+        alert("Something went wrong")
+     
+
+    }
+
     const [data, setData] = useState({
         id: patientData.id,
         first_name: patientData.first_name,
@@ -133,9 +144,11 @@ const PatientDetails = () => {
                     patient_satisfactions_for_previous_physiotherapist: data.patient_satisfactions_for_previous_physiotherapist
                 })
 
-            updateUser && NotificationManager.success("Successfully Updated");
+            NotificationManager.success("Successfully Updated");
+            
 
         } catch (error) {
+        NotificationContainer.error("something went wrong")
 
         }
     };
@@ -179,6 +192,7 @@ const PatientDetails = () => {
 
     return (
         <Container>
+            <NotificationContainer/>
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Details' }]} />
             </Box>

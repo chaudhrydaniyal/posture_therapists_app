@@ -1,0 +1,50 @@
+import { ProductLine, Invoice } from './types'
+
+export const initialProductLine: ProductLine = {
+  description: '',
+  quantity: '1',
+  rate: '0.00',
+}
+
+export const initialInvoice: Invoice = {
+  logo: '',
+  logoWidth: 100,
+  title: 'INVOICE',
+  companyName: '',
+  name: '',
+  companyAddress: '',
+  companyAddress2: '',
+  companyCountry: 'United States',
+  billTo: 'Bill To:',
+  clientName: '',
+  clientAddress: '',
+  clientAddress2: '',
+  clientCountry: 'United States',
+  invoiceTitleLabel: 'Invoice#',
+  invoiceTitle: '',
+  invoiceDateLabel: 'Invoice Date',
+  invoiceDate: '',
+  invoiceDueDateLabel: 'Due Date',
+  invoiceDueDate: '',
+  productLineDescription: 'Item Description',
+  productLineQuantity: 'Qty',
+  productLineQuantityRate: 'Rate',
+  productLineQuantityAmount: 'Amount',
+  productLines: [
+    {
+      description: 'Doctor Fee',
+      quantity: '1',
+      rate: '2000',
+    },
+    { ...initialProductLine },
+    { ...initialProductLine },
+  ],
+  subTotalLabel: 'Sub Total',
+  taxLabel: 'Tax (10%)',
+  totalLabel: 'TOTAL',
+  currency: 'PKR',
+  notesLabel: 'Notes',
+  notes: 'Pleased to meet you.',
+  termLabel: 'Terms & Conditions',
+  term: 'Please make the payment by the due date.',
+}

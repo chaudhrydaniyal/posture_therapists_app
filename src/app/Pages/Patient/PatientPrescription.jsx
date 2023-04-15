@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import Table from 'react-bootstrap/Table';
-import { Box, styled, Button, Icon } from '@mui/material';
+// import Table from 'react-bootstrap/Table';
+import { Box, styled, Button, Icon, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, } from '@mui/material';
 import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import axios from 'axios';
 import { Form } from 'react-bootstrap';
 import { Span } from "app/components/Typography";
+import Typography from '@mui/material/Typography';
+import Select from 'react-select';
+import Modal from '@mui/material/Modal';
+
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -17,8 +21,38 @@ const Container = styled('div')(({ theme }) => ({
 }));
 
 
+const style = {
+    position: 'absolute',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
+
+const StyledTable = styled(Table)(() => ({
+    whiteSpace: "pre",
+    "& thead": {
+        "& tr": { "& th": { paddingLeft: 0, paddingRight: 0 } },
+    },
+    "& tbody": {
+        "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
+    },
+}));
+
+
 const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => {
     const [audioFileBlob, setAudioFileBlob] = useState({})
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [getService, setGetService] = useState([])
+    const [open, setOpen] = useState(false);
+    const [servicelist, setservicelist] = useState(null);
+    const [selectedService, setSelectedService] = useState([]);
     const [patientVisitData, setPatientVisitData] = useState({
         personal_conditions: values.personal_conditions,
         current_treatment: values.current_treatment,
@@ -54,21 +88,32 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         AnticipatedFrequencyDuration: "",
         SpecialInstructions: ""
     })
+
+
+    const handleChangePage = (_, newPage) => {
+        setPage(newPage);
+    };
+
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+
+    const handleOpen = () => setOpen(true);
+
+    const handleClose = () => setOpen(false);
+
+
     const recorderControls = useAudioRecorder()
     const addAudioElement = (blob) => {
         const url = URL.createObjectURL(blob);
         const audio = document.createElement("audio");
         audio.src = url;
-
-
-
-
         audio.controls = true;
-
         setAudioFileBlob(blob)
-
         console.log("addaudioelement", blob)
-
         document.getElementById('AudioRecorder').appendChild(audio);
     };
 
@@ -83,42 +128,58 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
     //       [name]: value,
     //     });
     //   };
+
     const handleInput = (e) => {
         setPrescriptionDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
+
 
     const submitFormData = (e) => {
         e.preventDefault();
     };
 
+
+
     const handleSubmit = async () => {
-
-
 
         let form_data = new FormData();
 
         for (var key in patientVisitData) {
             form_data.append(key, patientVisitData[key]);
         }
-
-
-        
         for (var key in prescriptionDetails) {
             form_data.append(key, prescriptionDetails[key]);
         }
-
         form_data.append('audioFile', audioFileBlob)
-
         try {
             const PatientVisit = await axios.post('/api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
-
         } catch (error) {
             console.log("error", error)
-
         }
+    }
 
+
+    const handlecharges = (e) => {
+        console.log("object value", e.target.value);
+        setservicelist(e.target.value)
+        setSelectedService([...selectedService, parseInt(e.target.value)])
 
     }
+    console.log(servicelist)
+    console.log("outside", selectedService);
+    const results = getService.filter((d) => {
+        return selectedService.includes(d.id)
+    })
+    console.log("results", results)
+
+
+    useEffect(() => {
+        axios.get('api/services/').then((res) => {
+            setGetService(res.data); console.log("services", res);
+        })
+        console.log("getService", getService);
+
+    }, [])
 
 
     return (
@@ -126,6 +187,81 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Prescription' }]} />
             </Box>
+
+
+
+            {/* /////////////////////////////Invoice Model Start//////////////////////////// */}
+
+
+            {/* <button onClick={handleOpen}> invoice </button> */}
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Create Invoice
+                    </Typography>
+                    {/* <hr></hr> */}
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        <div>
+                            <div>
+                                <label><strong>Select Services:</strong></label>
+                            </div>
+                            <div style={{ marginTop: '0.5rem' }}>
+
+                                <Form.Select value={servicelist} name="servicecharges" onChange={(e) => handlecharges(e)}>
+
+                                    <option value="none" selected disabled hidden>
+                                        Select Service...
+                                    </option>
+
+
+                                    {getService && getService.map((items, i) => (
+
+                                        <option value={`${items.id}`} key={items.id} >{`${items.service_name} ${items.charges}`}</option>
+
+                                    ))}
+                                </Form.Select>
+                            </div>
+                        </div>
+                    </Typography>
+                
+                    <StyledTable>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="left">Services</TableCell>
+                                <TableCell align="right">Charges</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {results
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((items, id) => (
+                                    <TableRow key={id}>
+                                        <TableCell align="left">{items.service_name}</TableCell>
+
+                                        <TableCell align="right">{items.charges}</TableCell>
+
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </StyledTable>
+
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+                        <Button onClick={handleClose}> <strong>Close</strong></Button>
+                        <Button onClick={() => { handleClose(); }}> <strong>Generate</strong></Button>
+                    </div>
+                </Box>
+            </Modal>
+
+
+            {/* /////////////////////Invoice modal end////////////////////// */}
+
+
             <div className='card'>
                 <div className='card-body'>
                     <h4>Diagnosis</h4>
@@ -237,7 +373,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                     <tr>
                                         <th style={{ width: '20%' }}>Precaution</th>
                                         {/* <th style={{width:'10%'}}>No/Yes</th> */}
-                                        <th>IF yes, Please describe/define </th>
+                                        <th>If yes, Please describe/define </th>
 
                                     </tr>
                                 </thead>
@@ -274,7 +410,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 Previous
                             </Button>
                             {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
-                            <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
+                            <Button color="primary" variant="contained" type="submit" onClick={()=>{handleSubmit();handleOpen()}}>
                                 <Icon>send</Icon>
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
                             </Button>

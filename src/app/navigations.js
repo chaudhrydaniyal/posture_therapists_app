@@ -77,7 +77,15 @@ export const navigations = [
     name: 'Add Branches',
     path: '/addBranches',
    
-  },]},
+  },{
+    name: 'Services',
+    path: '/services',
+   
+  },
+  {
+  name:'Invoice',
+  path:'/invoice'
+}]},
 
 
   {

@@ -30,7 +30,7 @@ const DoctorDetails = () => {
     const [availableSlots,setAvailableSlots] = useState(false)
     const [doctorSlots,setDoctorSlots] = useState(true)
     
-
+   
     
     const [data, setData] = useState({
         id: doctorDetails.id,
@@ -120,9 +120,11 @@ const DoctorDetails = () => {
               data.work_phone = user.data.updateData.work_phone
               data.remarks = user.data.updateData.remarks
             });
-            updateUser && NotificationManager.success("Successfully Updated");
+            NotificationManager.success("Successfully Updated");
+            
 
         } catch (error) {
+         NotificationManager.error("Something went wrong")
 
         }
       };
@@ -159,6 +161,7 @@ const DoctorDetails = () => {
 
     return (
         <Container>
+            <NotificationContainer/>
         <Box className="breadcrumb">
         <Breadcrumb routeSegments={[ { name: 'Doctor Details' }]} />
       </Box>

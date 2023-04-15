@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useFormik } from "formik"
-// import { registrationValidation } from "../../Components/Validation/validationSchema"
+// import  {registrationValidation} from 
 import axios from "axios"
 import {
     NotificationContainer,
@@ -55,6 +55,7 @@ const Container = styled('div')(({ theme }) => ({
 const PatientForm = () => {
 
     const [diseases, setDiseases] = useState([])
+   
 
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
@@ -83,9 +84,12 @@ const PatientForm = () => {
                     patient_satisfactions_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
 
                 })
-                patientForm && NotificationManager.success("Successfully Registered");
+                NotificationManager.success("Successfully Registered");
+                
             } catch (error) {
-                console.log("error", error)
+                console.log("error", error);
+                NotificationManager.error("Something went wrong ");
+                
             }
             action.resetForm()
         }
@@ -133,6 +137,7 @@ const PatientForm = () => {
         // <>
         <Container>
 
+<NotificationContainer/>
             {/* <section className="content"> */}
 
             <Box className="breadcrumb">
@@ -141,7 +146,6 @@ const PatientForm = () => {
             
 
             {/* ***********************Patient Information********************* */}
-
             <div className="card">
                 <div className="card-body" style={{ margin: "10px" }}>
                     <h4>PATIENT INFORMATION</h4>
@@ -323,7 +327,7 @@ const PatientForm = () => {
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="doctorname">
-                                <div>Your Doctor"s Name:</div>
+                                <div>Your Doctor's Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -599,7 +603,7 @@ const PatientForm = () => {
 
             
 
-
+           
     </Container>
 
 

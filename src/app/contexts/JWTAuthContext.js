@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }) => {
     (async () => {
       try {
         const { data } = await axios.get('/api/auth/profile');
+        console.log("authProfile",data)
         dispatch({ type: 'INIT', payload: { isAuthenticated: true, user: data.user } });
       } catch (err) {
         console.error(err);

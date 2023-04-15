@@ -1,29 +1,14 @@
 import React, { useState } from 'react'
-import { Box, styled, Button, Icon } from '@mui/material';
+import { Box, styled, Button, Icon, } from '@mui/material';
 import { Form } from 'react-bootstrap';
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
-import { useFormik } from 'formik';
-import { Await } from 'react-router-dom';
 import validator from 'validator';
-import axios from 'axios';
+import { PatternFormat } from "react-number-format";
+import { NotificationContainer, NotificationManager, } from "react-notifications";
 
 
-// const initialValue = {
-//     personal_conditions: "",
-//     current_treatment: "",
-//     remarks: "",
-//     AssTrauma_diseases: "",
-//     ROMstatus: "",
-//     muscle_status: "",
-//     skin_soft_tissues_pain: "",
-//     cardio_vascular_status: "",
-//     general_mobility: "",
-//     transfers: "",
-//     balance: "",
-//     upper_limb_functions: "",
-//     daily_life_activities: "",
-// }
+
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -34,75 +19,30 @@ const Container = styled('div')(({ theme }) => ({
     }
 }));
 
+
 const PatientVisit = ({ nextStep, handleFormData, values }) => {
-    const [error, setError] = useState(false);
-    const [audioFileBlob, setAudioFileBlob] = useState({})
+    const [checkPatient, setCheckPatient] = useState("")
 
-    // const { values, errors, handleChange, handleBlur, handleSubmit } = useFormik({
-    //     initialValues: initialValue,
-    //     onSubmit: async (values, action) => {
-    //         try {
-    //             const PatientVisit = await axios.post('/api/patientvisits/', {
-    //                 personal_conditions: values.personal_conditions,
-    //                 current_treatment: values.current_treatment,
-    //                 remarks: values.remarks,
-    //                 AssTrauma_diseases: values.AssTrauma_diseases,
-    //                 ROMstatus: values.ROMstatus,
-    //                 muscle_status: values.muscle_status,
-    //                 skin_soft_tissues_pain: values.skin_soft_tissues_pain,
-    //                 cardio_vascular_status: values.cardio_vascular_status,
-    //                 general_mobility: values.general_mobility,
-    //                 transfers: values.transfers,
-    //                 balance: values.balance,
-    //                 upper_limb_functions: values.upper_limb_functions,
-    //                 daily_life_activities: values.daily_life_activities,
-
-    //             })
-
-    //         } catch (error) {
-    //             console.log("error", error)
-
-    //         }
-    //         action.resetForm()
-
-    //     }
-    // })
     const submitFormData = (e) => {
         e.preventDefault();
+
 
         // checking if value of first name and last name is empty show error else take to step 2
         console.log("value", values);
         if (
             validator.isEmpty(values.personal_conditions)
-            // validator.isEmpty(values.current_treatment) ||
-            // validator.isEmpty(values.remarks) ||
-            // validator.isEmpty(values.AssTrauma_diseases) ||
-            // validator.isEmpty(values.ROMstatus) ||
-            // validator.isEmpty(values.muscle_status) ||
-            // validator.isEmpty(values.skin_soft_tissues_pain) ||
-            // validator.isEmpty(values.cardio_vascular_status) ||
-            // validator.isEmpty(values.general_mobility) ||
-            // validator.isEmpty(values.transfers) ||
-            // validator.isEmpty(values.balance) ||
-            // validator.isEmpty(values.upper_limb_functions) ||
-            // validator.isEmpty(values.daily_life_activities)
         ) {
-            setError(true);
-            console.log("setError");
+            NotificationManager.error("Something went wrong ");
+
         } else {
             nextStep();
             console.log("nextstep");
         }
     }
 
-
-
-
-
-
     return (
         <Container>
-
+            <NotificationContainer />
             {/* <section className="content"> */}
 
             <Box className="breadcrumb">
@@ -113,7 +53,43 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
             <div className='card'>
                 <div className='card-body'>
-                    <h4>Personal Factors</h4>
+
+                    <div>
+
+                        <div>
+                            <label>Patient CNIC:</label>
+                        </div>
+                        <div style={{ width: '10rem' }}>
+
+                            <PatternFormat
+                                className="input_border"
+                                style={{
+                                    width: "100%",
+                                    borderColor: "grey",
+                                }}
+                                required
+                                name="cnic"
+                                format="#####-#######-#"
+                                allowEmptyFormatting
+                                mask="x"
+                                value={checkPatient}
+                            // onChange={handleChange}
+                            // onBlur={handleBlur}
+                            />
+
+                            <div style={{ marginTop: '1rem' }}>
+                                <Button color="primary" variant="contained" type="submit">
+
+                                    <Span sx={{ textTransform: "capitalize" }}>Search</Span>
+                                </Button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <h4 style={{ marginTop: '1rem' }}>Personal Factors</h4>
+
+
                     <Form onSubmit={submitFormData}>
 
                         <div className="row" style={{ marginTop: "2rem" }}>
@@ -159,6 +135,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
 
                                 />
+
                             </div>
 
 
@@ -347,36 +324,13 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
                                 />
                             </div>
-
-
-
-
                         </div>
-
-
-
-                    
-
-
-
-
-
-
-
-
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
-
-                            {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
                             <Button color="primary" variant="contained" type="submit">
-                                {/* <Icon>send</Icon> */}
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Next</Span>
                             </Button>
                         </div>
                     </Form>
-
-
-
-
                 </div>
             </div>
         </Container>
