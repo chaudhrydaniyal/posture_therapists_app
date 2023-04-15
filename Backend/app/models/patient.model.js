@@ -6,7 +6,7 @@ const Patient = function (patient) {
   this.middle_name = patient.middle_name;
   this.surname = patient.surname;
 
-  this.date_of_birth = patient.date_of_birth;
+  this.date_of_birth = patient.date_of_birth ? patient.date_of_birth :null;
   this.age = patient.age;
   this.gender = patient.gender;
   this.address = patient.address;

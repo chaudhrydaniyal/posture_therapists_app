@@ -62,7 +62,7 @@ export default class Calender extends Component {
       start: new Date(e.start_time).getTime(), end: new Date(e.end_time),
       title: e.patient,
       group: e.doctor,
-      scheduledAppointment:true,
+      scheduledAppointment: true,
       canMove: false,
       canResize: false,
       canChangeGroup: false
@@ -79,7 +79,7 @@ export default class Calender extends Component {
       title: e.first_name
     }))
 
-    console.log("items of state", this.state.items )
+    console.log("items of state", this.state.items)
 
     this.setState({ groups: doctorsArray })
 
@@ -94,67 +94,80 @@ export default class Calender extends Component {
 
   addItemHandler = item => {
 
-    { console.log("item to add", item) }
+
+
+
 
     if (item.doctor == '' || item.patient == '') {
       NotificationManager.error("Please input the required fields");
     }
 
+
+    let doctorAvailable = false
+
     this.state.items.filter((i) => i.group == item.doctor).forEach((it) => {
 
       if (new Date(item.start) >= new Date(it.start) && new Date(item.end) <= new Date(it.end)) {
 
-        console.log("it is withing the doctor slots")
-
-
         let alreadyScheduledAppointment = false
 
-
-        this.state.items.filter((i) => i.group == item.doctor && i.scheduledAppointment ).forEach((ff) => {
-
-
-          console.log("within array", ff , item)
+        this.state.items.filter((i) => i.group == item.doctor && i.scheduledAppointment).forEach((ff) => {
 
           if (new Date(item.start) >= new Date(ff.start) && new Date(item.start) <= new Date(ff.end) ||
-          
-          new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start) ) { 
-            
+
+            new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
+
             alreadyScheduledAppointment = true
-            console.log("scheduled alredy")}else{console.log("inside else")}})
+            console.log("scheduled alredy")
+          } else { console.log("inside else") }
+        })
 
 
-if (!alreadyScheduledAppointment){
+        if (!alreadyScheduledAppointment) {
 
-        const newItem = {
-          id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
-          group: item.doctor,
-          title: item.patientName,
-          patient: item.patient,
-          className: "confirm",
-          start: new Date(item.start).getTime(),
-          end: new Date(item.end).getTime(),
-          canMove: false,
-          canResize: false,
-          canChangeGroup: false,
-          scheduledAppointment: true
+          const newItem = {
+            id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
+            group: item.doctor,
+            title: item.patientName,
+            patient: item.patient,
+            className: "confirm",
+            start: new Date(item.start).getTime(),
+            end: new Date(item.end).getTime(),
+            canMove: false,
+            canResize: false,
+            canChangeGroup: false,
+            scheduledAppointment: true
+          }
+
+          this.setState(state => ({
+            items: [...state.items, newItem]
+          }))
+
+          NotificationManager.success("Successfully scheduled an appointment");
+
+          return;
         }
 
-        this.setState(state => ({
-          items: [...state.items, newItem]
-        }))
+        if (alreadyScheduledAppointment){
 
-        NotificationManager.success("Successfully scheduled an appointment");
+          NotificationManager.error("Doctor has already an appointment");
 
-        return;        
-      }
-     
+
+        }
+
+        doctorAvailable = true
+
       }
       else {
         // console.log("it is outside the doctor slots")
-        NotificationManager.error("No Doctor available at this time slot");
       }
 
     })
+
+    if (!doctorAvailable){
+        NotificationManager.error("No Doctor available at this time slot");
+
+    }
 
 
   }
@@ -206,16 +219,16 @@ if (!alreadyScheduledAppointment){
           <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
 
             try {
-            console.log("iddddd", this.props)
-            await axios.post('http://192.168.5.21:8081/api/scheduledappointments',
-              this.state.items.filter((f) => f.scheduledAppointment).map(se => ({
-                start_time: new Date(se.start), end_time: new Date(se.end), doctor: se.group,
-                patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
-              }))
-            )
-            NotificationManager.success("Successfully updated appointment scheduling");
+              console.log("iddddd", this.props)
+              await axios.post('http://192.168.5.21:8081/api/scheduledappointments',
+                this.state.items.filter((f) => f.scheduledAppointment).map(se => ({
+                  start_time: new Date(se.start), end_time: new Date(se.end), doctor: se.group,
+                  patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
+                }))
+              )
+              NotificationManager.success("Successfully updated appointment scheduling");
             }
-            catch{
+            catch {
               NotificationManager.error("Nothing to update");
             }
           }}

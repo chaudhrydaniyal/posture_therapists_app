@@ -53,7 +53,7 @@ User.findById = (id, result) => {
 };
 
 User.getAll = (title, result) => {
-  let query = "SELECT * FROM users";
+  let query = "SELECT * FROM users where  isnull(role)";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;

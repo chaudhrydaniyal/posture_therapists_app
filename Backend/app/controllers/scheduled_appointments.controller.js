@@ -3,11 +3,13 @@ const Scheduled_appointments = require("../models/scheduled_appointments.model.j
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body) {
+  if (!req.body || !req.body.patient) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
   }
+
+  else{
 
   
 
@@ -20,6 +22,7 @@ exports.create = (req, res) => {
       });
     else res.send(data);
   });
+}
 };
 
 // Retrieve all Tutorials from the database (with condition).
