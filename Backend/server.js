@@ -39,6 +39,8 @@ require("./app/routes/auth.routes.js")(app);
 require("./app/routes/disease.routes.js")(app);
 require("./app/routes/doctor_time_slots.routes.js")(app);
 require("./app/routes/scheduled_appointments.routes.js")(app);
+require("./app/routes/services.routes.js")(app);
+
 
 
 // set port, listen for requests

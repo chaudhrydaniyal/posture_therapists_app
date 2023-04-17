@@ -12,7 +12,7 @@ import {
   TableRow, Table
 } from '@mui/material';
 import { Span } from "app/components/Typography";
-import { NotificationManager,NotificationContainer } from 'react-notifications';
+
 import { Breadcrumb, SimpleCard } from 'app/components';
 const style = {
   position: 'absolute',
@@ -47,14 +47,20 @@ const Container = styled('div')(({ theme }) => ({
   }
 }));
 
-const AddDisease = () => {
+const Services = () => {
   const [open, setOpen] = React.useState(false);
   const [openEdit, setOpenEdit] = useState(false)
-  const [disease, setDisease] = useState([])
-  const [getDisease, setGetDisease] = useState([])
-  const [editDisease, setEditDisease] = useState({
+  const [service, setService] = useState({
+    service: "",
+    price: null,
+    description:""
+  })
+  const [getService, setGetService] = useState([])
+  const [editService, setEditService] = useState({
     id: null,
-    name: ""
+    service: "",
+    price: null,
+    description:""
 
   })
 
@@ -63,7 +69,7 @@ const AddDisease = () => {
   const handleClose = () => setOpen(false);
   const handleOpenEdit = () => setOpenEdit(true)
   const handleCloseEdit = () => setOpenEdit(false)
-  const [patients, setPatients] = useState([])
+  const [services, setServices] = useState([])
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -76,50 +82,49 @@ const AddDisease = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const apiDisease = async () => {
-try{ 
-      axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/diseases', {
-        name: disease
+  const apiService = () => {
+    return (
+      axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/services', {
+        service_name: service.service,
+        charges: service.price,
+        description:service.description
+
       })
-      NotificationManager.succes("Something went wrong")
-    }
-    catch{
-      NotificationManager.error("Something went wrong")
 
-    }
-
-    
-    }
-  
+    )
+  }
   const handleInput = (e) => {
     let name, value;
 
     console.log(e);
     name = e.target.name;
     value = e.target.value;
-    setEditDisease({ ...editDisease, [name]: value });
+    setEditService({ ...editService, [name]: value });
+  }
+
+  const serviceHandler = (e) => {
+    setService((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/diseases/').then((res) => { setGetDisease(res.data); console.log("res", res) })
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => { setGetService(res.data); console.log("get", res) })
 
   }, [update])
   return (
 
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Add Disease' }]} />
+        <Breadcrumb routeSegments={[{ name: 'Services' }]} />
       </Box>
-      <NotificationContainer/>
 
       <div className='card'>
         <div className='card_body'>
 
-          {/* ***************Add Disease Modal************* */}
+          {/* ***************Add Service Modal************* */}
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button onClick={handleOpen} style={{ marginTop: '2rem', marginBottom: '2rem', marginLeft:"auto", marginRight:"30px" }} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Disease</Span></Button>
+            <Button onClick={handleOpen} style={{ marginTop: '2rem', marginBottom: '2rem', marginLeft: "auto", marginRight: "30px" }} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Service</Span></Button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -128,23 +133,40 @@ try{
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Add New Disease
+                  Add New Service
                 </Typography>
                 {/* <hr></hr> */}
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  <input placeholder='Enter Disease' value={disease} onChange={(e) => setDisease(e.target.value)} />
+                  <div>
+                    <label>Service Name:</label>
+                  </div>
+                  <div>
+                    <input placeholder='Enter Service' name="service" value={service.service} onChange={serviceHandler} />
+                  </div>
+                  <div>
+                    <label>Charges:</label>
+                  </div>
+                  <div>
+                    <input placeholder='PKR' name="price" value={service.price} onChange={serviceHandler} />
+                  </div>
+                  <div>
+                    <label>Description:</label>
+                  </div>
+                  <div>
+                    <input placeholder='description' name="description" value={service.description} onChange={serviceHandler} />
+                  </div>
                 </Typography>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                   <Button onClick={handleClose}> <strong>Close</strong></Button>
-                  <Button onClick={() => { apiDisease(); handleClose(); setDisease(""); setUpdate(!update) }}> <strong>Add</strong></Button>
+                  <Button onClick={() => { apiService(); handleClose(); setService(""); setUpdate(!update) }}> <strong>Add</strong></Button>
                 </div>
               </Box>
             </Modal>
           </div>
 
 
-          {/******************Edit Disease Model*****************/}
+          {/******************Edit Service Model*****************/}
 
           <Modal
             open={openEdit}
@@ -154,28 +176,36 @@ try{
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Edit New Disease
+                Edit Service
               </Typography>
               {/* <hr></hr> */}
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input placeholder='Enter Disease' value={editDisease.name} onChange={(e) => setEditDisease({ ...editDisease, name: e.target.value })} />
+                <input placeholder='Edit Service' value={editService.service} onChange={(e) => setEditService({ ...editService, service: e.target.value })} />
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <input placeholder='Edit charges' value={editService.price} onChange={(e) => setEditService({ ...editService, price: e.target.value })} />
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <input placeholder='description' value={editService.description} onChange={(e) => setEditService({ ...editService, description: e.target.value })} />
               </Typography>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                 <Button onClick={handleCloseEdit}> <strong>Close</strong></Button>
                 <Button onClick={() => {
-                  axios.put(process.env.REACT_APP_ORIGIN_URL + `api/diseases/${editDisease.id}`, {
-                    // id:editDisease.id,
-                    name: editDisease.name
+                  axios.put(process.env.REACT_APP_ORIGIN_URL + `api/Services/${editService.id}`, {
+                    // id:editService.id,
+                    service_name: editService.service,
+                    charges: editService.price,
+                    description:editService.description
                   })
                     ; handleCloseEdit(); setUpdate(!update)
                 }}> <strong>Add</strong></Button>
               </div>
             </Box>
           </Modal>
-          {console.log("disease", editDisease)}
+          {console.log("Service", editService)}
 
-          {/* *************************Add Disease Table******************************* */}
+          {/* *************************Add Service Table******************************* */}
 
 
 
@@ -183,25 +213,29 @@ try{
             <TableHead>
               <TableRow>
                 <TableCell align="center" width={20}>Sr</TableCell>
-                <TableCell align="left"  width={200}>Diseases</TableCell>
-                <TableCell align="center"  width={20}>Delete</TableCell>
-                <TableCell align="center"  width={20}>Edit</TableCell>
+                <TableCell align="left" width={100}>Services</TableCell>
+                <TableCell align="center" width={100}>Description</TableCell>
+                <TableCell align="center" width={20}>Charges</TableCell>
+                <TableCell align="center" width={20}>Delete</TableCell>
+                <TableCell align="center" width={20}>Edit</TableCell>
 
               </TableRow>
             </TableHead>
             <TableBody>
-              {getDisease
+              {getService
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((items, id) => (
                   <TableRow key={id}>
                     <TableCell align="center" width={20}>{id}</TableCell>
-                    <TableCell align="left" width={200}>{items.name}</TableCell>
+                    <TableCell align="left" width={100}>{items.service_name}</TableCell>
+                    <TableCell align="center" width={100}>{items.description}</TableCell>
+                    <TableCell align="center" width={20}>{items.charges}</TableCell>
                     <TableCell align="center" width={20}><button onClick={async () => {
-                      await axios.delete(process.env.REACT_APP_ORIGIN_URL + `api/diseases/${items.id}`); setUpdate(!update)
+                      await axios.delete( process.env.REACT_APP_ORIGIN_URL + `api/Services/${items.id}`); setUpdate(!update)
                     }} style={{ backgroundColor: "#365CAD", color: "white", padding: "2px", borderRadius: '4px', }}
 
                     >Delete</button></TableCell>
-                    <TableCell align="center" width={20}><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditDisease({ id: items.id, name: items.name }); handleOpenEdit() }}>Edit</button></TableCell>
+                    <TableCell align="center" width={20}><button style={{ padding: "2px", borderRadius: '4px' }} onClick={() => { setEditService({ id: items.id, service: items.service_name, price: items.charges, description: items.description }); handleOpenEdit() }}>Edit</button></TableCell>
 
                   </TableRow>
                 ))}
@@ -212,7 +246,7 @@ try{
             page={page}
             component="div"
             rowsPerPage={rowsPerPage}
-            count={patients.length}
+            count={services.length}
             onPageChange={handleChangePage}
             rowsPerPageOptions={[5, 10, 25]}
             onRowsPerPageChange={handleChangeRowsPerPage}
@@ -227,4 +261,4 @@ try{
   )
 }
 
-export default AddDisease
+export default Services;

@@ -7,6 +7,10 @@ import { useFormik } from 'formik';
 import { Await } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios';
+import {
+    NotificationContainer,
+    NotificationManager,
+} from "react-notifications";
 
 
 // const initialValue = {
@@ -87,7 +91,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             // validator.isEmpty(values.upper_limb_functions) ||
             // validator.isEmpty(values.daily_life_activities)
         ) {
-            setError(true);
+           NotificationManager.error("Something went wrong")
             console.log("setError");
         } else {
             nextStep();
@@ -108,7 +112,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
             </Box>
-
+<NotificationContainer/>
             {/* ************************Patient Visit**************** */}
 
             <div className='card'>

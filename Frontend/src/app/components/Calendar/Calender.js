@@ -14,6 +14,8 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import {  Button } from '@mui/material';
+
 
 
 export default class Calender extends Component {
@@ -47,8 +49,8 @@ export default class Calender extends Component {
     let array1 = events.map((e, i) => ({
       id: i,
       className: "htmlCss",
-      start: new Date(e.start_time).getTime(),
-      end: new Date(e.end_time).getTime(),
+      start: moment(new Date(e.start_time)).add(-4, 'hours'),
+      end: moment(new Date(e.end_time) ).add(-4, 'hours'),
       title: e.first_name,
       group: e.doctor,
       canMove: false,
@@ -59,7 +61,7 @@ export default class Calender extends Component {
     let array2 = scheduledAppointments.map((e, i) => ({
       id: array1.length + i,
       className: "confirm",
-      start: new Date(e.start_time).getTime(), end: new Date(e.end_time),
+      start: moment(new Date(e.start_time)).add(-4, 'hours'), end: moment(new Date(e.end_time)).add(-4, 'hours'),
       title: e.patient,
       group: e.doctor,
       scheduledAppointment: true,
@@ -98,8 +100,9 @@ export default class Calender extends Component {
 
 
 
-    if (item.doctor == '' || item.patient == '') {
-      NotificationManager.error("Please input the required fields");
+    if (item.doctor == '' || item.patient == '' || item.end <= item.start) {
+      NotificationManager.error("Please input the required fields correctly");
+      return;
     }
 
 
@@ -136,7 +139,8 @@ export default class Calender extends Component {
             canMove: false,
             canResize: false,
             canChangeGroup: false,
-            scheduledAppointment: true
+            scheduledAppointment: true,
+            currentlyAdded: true
           }
 
           this.setState(state => ({
@@ -166,10 +170,7 @@ export default class Calender extends Component {
 
     if (!doctorAvailable){
         NotificationManager.error("No Doctor available at this time slot");
-
     }
-
-
   }
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
     // const {items, groups} = this.state
@@ -215,8 +216,7 @@ export default class Calender extends Component {
       <>
 
         <div style={{ display: "flex", justifyContent: "end" }}>
-
-          <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
+        <Button color="primary" variant="contained" type="submit" onClick={async () => {
 
             try {
               console.log("iddddd", this.props)
@@ -232,7 +232,8 @@ export default class Calender extends Component {
               NotificationManager.error("Nothing to update");
             }
           }}
-          >Update</button></div>
+          >Update</Button></div>
+
 
         <br />
 
@@ -240,15 +241,27 @@ export default class Calender extends Component {
           style={{ width: "90vw" }}
           keys={keys}
           groups={groups}
-          // onItemClick={() => alert(1)}
+          onItemClick={(e) => {
+            console.log("all items", this.state.items)
+
+            console.log("item click", e)
+
+        }}
           items={items}
           // rightSidebarWidth={50}
           // rightSidebarContent="Skills"
+          
+
+
+
+          defaultTimeStart={moment().add(-1, 'day')}
+          defaultTimeEnd={moment().add(7, 'day')}
+
           sidebarContent="Doctors"
-          lineHeight={75}
+          lineHeight={50}
           itemRenderer={itemRender}
-          defaultTimeStart={moment(y19).add(0, 'day')}
-          defaultTimeEnd={moment(y19).add(1, 'day')}
+          // defaultTimeStart={moment(y19).add(0, 'day')}
+          // defaultTimeEnd={moment(y19).add(1, 'day')}
           maxZoom={1.5 * 365.24 * 86400 * 1000}
           minZoom={1.24 * 86400 * 1000 * 7 * 3}
           fullUpdate
@@ -261,12 +274,12 @@ export default class Calender extends Component {
           onItemMove={this.handleItemMove}
           onItemResize={this.handleItemResize}
         >
-          {/* <TimelineMarkers>
+          <TimelineMarkers>
               <TodayMarker>
                 {({ styles, date }) => <div style={{ ...styles, width: '0.5rem', backgroundColor: 'rgba(255,0,0,0.5)' }} />}
               </TodayMarker>
               <SundaysMarker />
-            </TimelineMarkers> */}
+            </TimelineMarkers>
         </Timeline>
         <AddItemsForm onAddItem={this.addItemHandler} />
         <NotificationContainer />

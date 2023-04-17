@@ -134,12 +134,11 @@ class AddItemsForm extends React.Component {
 
 
 
-
                   <TextField
                     select
                     label="Chose Patient"
                     className={classNames(classes.margin, classes.textField)}
-                    value={this.state.patientName}
+                    value={this.state.patient}
                     // onChange={this.handleChange('patientName')}
 
                     onChange={
@@ -195,16 +194,27 @@ class AddItemsForm extends React.Component {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{
+                          min: new Date().toISOString().slice(0, 16)
+                        }}   
                         onChange={this.handleChange('start')}
                         fullWidth={true}
                       />
                     </Grid>
                     {/*end*/}
+
+
+
+
+
                     <Grid item md={6}>
                       <TextField
                         id="date"
                         label="End"
                         type="datetime-local"
+                        inputProps={{
+                          min: new Date().toISOString().slice(0, 16)
+                        }}             
                         defaultValue={this.state.end}
                         className={classes.textField}
                         InputLabelProps={{

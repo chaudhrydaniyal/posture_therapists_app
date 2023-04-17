@@ -133,9 +133,10 @@ const PatientDetails = () => {
                     patient_satisfactions_for_previous_physiotherapist: data.patient_satisfactions_for_previous_physiotherapist
                 })
 
-            updateUser && NotificationManager.success("Successfully Updated");
+            NotificationManager.success("Successfully Updated");
 
         } catch (error) {
+            NotificationManager.error("Something went wrong")
 
         }
     };
@@ -182,7 +183,7 @@ const PatientDetails = () => {
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Details' }]} />
             </Box>
-
+            <NotificationContainer />
 
             <div class="tab" >
                 <input type="radio" name="css-tabs" id="tab-1" defaultChecked class="tab-switch" onClick={() => { openPatientInformation(); closePatientVisits() }} />
@@ -207,7 +208,7 @@ const PatientDetails = () => {
 
             {/* ************Patient Information*********** */}
             <div style={{ marginTop: '0' }}>
-                {patientInformation ? (<><div className="card" style={{borderTopLeftRadius:"0"}}>
+                {patientInformation ? (<><div className="card" style={{ borderTopLeftRadius: "0" }}>
                     <div className="card-body" style={{ margin: "10px" }}>
                         <h4>PATIENT INFORMATION</h4>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -624,7 +625,7 @@ const PatientDetails = () => {
                     </div></>) : null}
             </div>
             <div style={{ marginTop: '0' }}>
-                {patientVisits ? (<><div className="card" style={{borderTopLeftRadius:"0"}}>
+                {patientVisits ? (<><div className="card" style={{ borderTopLeftRadius: "0" }}>
                     <div className="card-body">
                         <div style={{ display: 'flex' }}>
                             <div>Name:</div>

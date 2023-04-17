@@ -83,9 +83,10 @@ const PatientForm = () => {
                     patient_satisfactions_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
 
                 })
-                patientForm && NotificationManager.success("Successfully Registered");
+                NotificationManager.success("Successfully Registered");
             } catch (error) {
                 console.log("error", error)
+                NotificationManager.error("Something went wrong")
             }
             action.resetForm()
         }
@@ -138,6 +139,7 @@ const PatientForm = () => {
             <Box className="breadcrumb">
         <Breadcrumb routeSegments={[ { name: 'Patient Registration' }]} />
       </Box>
+      <NotificationContainer/>
             
 
             {/* ***********************Patient Information********************* */}

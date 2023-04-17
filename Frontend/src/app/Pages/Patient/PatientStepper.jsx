@@ -3,6 +3,10 @@ import { Col, Row, } from "react-bootstrap";
 import { Box, styled, Button, Icon } from '@mui/material';
 import PatientVisit from './PatientVisit';
 import PatientPrescription from './PatientPrescription';
+import {
+    NotificationContainer,
+    NotificationManager,
+} from "react-notifications";
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
