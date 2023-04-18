@@ -50,6 +50,7 @@ const StyledTable = styled(Table)(() => ({
 
 const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => {
     const [audioFileBlob, setAudioFileBlob] = useState({})
+    const [update, setUpdate] = useState("")
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [getService, setGetService] = useState([])
@@ -169,14 +170,39 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         setSelectedService([...selectedService, parseInt(e.target.value)])
 
     }
+
+
     console.log(servicelist)
     console.log("outside", selectedService);
-    const results = getService.filter((d) => {
+    
+    var results = getService.filter((d) => {
         return selectedService.includes(d.id)
     })
-    console.log("results", results)
 
+    console.log("results")
 
+ 
+    // const deleteById = id => {
+    //     const service = getService.filter(d => {
+    //         return selectedService.splice(d.id)
+    //     })
+    //         console.log("delete",service)
+    // }
+    const deleteById = (id) => {
+        const index = getService.findIndex(service => service.id === id);
+        if (index !== -1) {
+            getService.splice(index, 1);
+        // setSelectedService()
+        console.log("getservice",selectedService)
+            
+            console.log("Service with id", id, "deleted");
+        } else {
+            console.log("Service with id", id, "not found");
+        }
+        console.log("index",index)
+    }
+     
+ 
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => {
             setGetService(res.data); console.log("services", res);
@@ -240,7 +266,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 </div>
                                 <div style={{marginTop:'0.5rem',marginLeft:'0.5rem'}}>
 
-                                <input type="number" style={{height:'2.2rem',width:'auto',border:'0.5px solid gray',borderRadius:'5px'}} value={discount} placeholder='%' onChange={(e)=>setDiscount(e.target.value)}/>
+                                <input type="number" style={{height:'2.2rem',width:'auto',border:'0.5px solid gray',borderRadius:'5px',paddingLeft:'0.5rem'}} value={discount} placeholder='%' onChange={(e)=>setDiscount(e.target.value)}/>
                                 </div>
                                 </div>
                                 </div>
@@ -250,17 +276,19 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                         <TableHead>
                             <TableRow>
                                 <TableCell align="left">Services</TableCell>
-                                <TableCell align="right">Charges</TableCell>
+                                <TableCell align="center">Charges</TableCell>
+                                <TableCell align="right">Remove</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {results
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((items, id) => (
+                                .map((items, id,index) => (
                                     <TableRow key={id}>
                                         <TableCell align="left">{items.service_name}</TableCell>
 
-                                        <TableCell align="right">{items.charges}</TableCell>
+                                        <TableCell align="center">{items.charges}</TableCell>
+                                        <TableCell align="right"><button onClick={() => deleteById(items.id)} style={{background:'none',border:'none',marginTop:'0.5rem'}}>&#x274C;</button></TableCell>
 
                                     </TableRow>
                                 ))}
