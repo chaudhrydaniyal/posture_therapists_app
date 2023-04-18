@@ -186,7 +186,7 @@ const DoctorDetails = () => {
 
                 {doctorSlots ? <div className="card" style={{ borderTopLeftRadius: "0" }}>
                     <div className="card-body" style={{ margin: "0px" }}>
-                        <h4>DOCTOR INFORMATION</h4>
+                        <h5>DOCTOR INFORMATION</h5>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                             <Button color='primary' variant="contained" onClick={() => {

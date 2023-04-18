@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, styled, Button, Icon } from '@mui/material';
 import { Form } from 'react-bootstrap';
 import { Span } from "app/components/Typography";
@@ -7,6 +7,12 @@ import { useFormik } from 'formik';
 import { Await } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios';
+import {
+
+    Select,
+    MenuItem
+
+  } from '@mui/material';
 import {
     NotificationContainer,
     NotificationManager,
@@ -71,13 +77,27 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
     //     }
     // })
+
+
+    const [patients, setPatients] = useState([])
+    const [selectedPatient, setSelectedPatient] = useState(null)
+
+
+
+    useEffect(() => {
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatients(res.data) }).catch(e => console.log("E", e))
+    }, [])
+
+
     const submitFormData = (e) => {
         e.preventDefault();
 
         // checking if value of first name and last name is empty show error else take to step 2
         console.log("value", values);
         if (
-            validator.isEmpty(values.personal_conditions)
+            validator.isEmpty(values.personal_conditions) ||
+
+            values.patient == null
             // validator.isEmpty(values.current_treatment) ||
             // validator.isEmpty(values.remarks) ||
             // validator.isEmpty(values.AssTrauma_diseases) ||
@@ -91,7 +111,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             // validator.isEmpty(values.upper_limb_functions) ||
             // validator.isEmpty(values.daily_life_activities)
         ) {
-           NotificationManager.error("Something went wrong")
+            NotificationManager.error("Please enter the required fields")
             console.log("setError");
         } else {
             nextStep();
@@ -112,12 +132,32 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
             </Box>
-<NotificationContainer/>
+            <NotificationContainer />
             {/* ************************Patient Visit**************** */}
 
             <div className='card'>
                 <div className='card-body'>
-                    <h4>Personal Factors</h4>
+
+                    <h5>Select the patient:</h5>
+
+                    <Select size="small" style={{width:600, margin:"30px"}} onChange={(e)=>{setSelectedPatient(e.target.value)
+
+                    values.patient = e.target.value
+                    
+                    
+                    console.log("selected patient", selectedPatient)
+                    }}>
+                        {patients.map((p)=>          <MenuItem value={p.id}>{p.first_name}</MenuItem>
+)}
+         
+        </Select>
+
+
+
+                    <h5>Personal Factors</h5>
+
+
+
                     <Form onSubmit={submitFormData}>
 
                         <div className="row" style={{ marginTop: "2rem" }}>
@@ -168,7 +208,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
 
                         </div>
-                        <h4 style={{ marginTop: '1rem' }}>Body Structure And Function Impairments   </h4>
+                        <h5 style={{ marginTop: '1rem' }}>Body Structure And Function Impairments   </h5>
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="AssTrauma_diseases">
@@ -359,7 +399,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
 
 
-                    
+
 
 
 

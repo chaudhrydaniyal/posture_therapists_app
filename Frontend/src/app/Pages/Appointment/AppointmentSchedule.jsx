@@ -101,6 +101,7 @@ export default class AppointmentSchedule extends React.Component {
         <div className='card'>
           <div className='card-body'>
         
+        <h5>Appointment scheduling</h5>
                 <Calender />
 
               </div>

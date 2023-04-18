@@ -79,7 +79,8 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         PhysicalTherapyEvaluationTreatment: values.PhysicalTherapyEvaluationTreatment,
         Other: values.Other,
         AnticipatedFrequencyDuration: values.AnticipatedFrequencyDuration,
-        SpecialInstructions: values.SpecialInstructions
+        SpecialInstructions: values.SpecialInstructions,
+        patient: values.patient
     })
     const [prescriptionDetails, setPrescriptionDetails] = useState({
         DiagnosisICD10code: "",
@@ -156,7 +157,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         }
         form_data.append('audioFile', audioFileBlob)
         try {
-            const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + '/api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
+            const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
         } catch (error) {
             console.log("error", error)
         }
@@ -181,7 +182,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => {
             setGetService(res.data); console.log("services", res);
         })
-        console.log("getService", getService);
+        console.log("getService", values.patient);
 
     }, [])
 

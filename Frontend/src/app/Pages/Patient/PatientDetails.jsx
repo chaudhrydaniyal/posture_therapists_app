@@ -174,7 +174,7 @@ const PatientDetails = () => {
 
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/diseases').then((res) => setGetDiseases(res.data));
-        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/').then((res) => { setVisitsHistory(res.data); console.log("res333", res) })
+        axios.get(process.env.REACT_APP_ORIGIN_URL + `api/patientvisits/${data.id}`).then((res) => { setVisitsHistory(res.data); console.log("res333", res) })
 
     }, [])
 
@@ -210,7 +210,7 @@ const PatientDetails = () => {
             <div style={{ marginTop: '0' }}>
                 {patientInformation ? (<><div className="card" style={{ borderTopLeftRadius: "0" }}>
                     <div className="card-body" style={{ margin: "10px" }}>
-                        <h4>PATIENT INFORMATION</h4>
+                        <h5>PATIENT INFORMATION</h5>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                             <Button color='primary' variant="contained"
@@ -468,7 +468,7 @@ const PatientDetails = () => {
 
                     <div className="card" style={{ marginTop: '2rem' }}>
                         <div className="card-body" style={{ margin: "10px" }}>
-                            <h4>In Case of Emergency</h4>
+                            <h5>In Case of Emergency</h5>
 
                             <div className="row" style={{ marginTop: "2rem" }}>
 
@@ -516,7 +516,7 @@ const PatientDetails = () => {
                     {/* ***********Previous Treatment*************** */}
                     <div className="card" style={{ marginTop: '2rem' }}>
                         <div className="card-body" style={{ margin: "10px" }}>
-                            <h4>PREVIOUS TREATMENT</h4>
+                            <h5>PREVIOUS TREATMENT</h5>
 
 
                             <div className="row" style={{ marginTop: "2rem" }}>

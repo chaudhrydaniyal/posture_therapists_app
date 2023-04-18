@@ -472,7 +472,7 @@ const VisitDetails = () => {
                                 </tbody>
                                 <div style={{marginTop:'2rem'}}>
                                 <audio controls>
-                                    <source src={`/${data.audioFile}`} type="audio/ogg"/>
+                                    <source src={process.env.REACT_APP_ORIGIN_URL + `${data.audioFile}`} type="audio/ogg"/>
                                     {console.log("audioFile",data.audioFile)}
 
                                 </audio>

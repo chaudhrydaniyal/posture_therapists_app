@@ -37,6 +37,7 @@ exports.create = async (req, res) => {
     // published: req.body.published || false
 
 
+    patient: req.body.patient,
     personal_conditions: req.body.personal_conditions,
     current_treatment: req.body.current_treatment,
     remarks: req.body.remarks,
@@ -117,7 +118,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Tutorial by Id
 exports.findOne = (req, res) => {
-  Patient.findById(req.params.id, (err, data) => {
+  Patient_visit.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
