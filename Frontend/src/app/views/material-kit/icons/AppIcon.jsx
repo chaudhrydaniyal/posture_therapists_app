@@ -943,6 +943,11 @@ const IconList = [
   "zoom_in",
   "zoom_out",
   "zoom_out_map",
+  "settings",
+  "airline_seat_flat",
+  "vaccines",
+  "edit_calendar",
+  "earbuds"
 ];
 
 const AppIcon = () => {

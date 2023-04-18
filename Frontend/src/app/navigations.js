@@ -1,3 +1,4 @@
+import SettingsIcon from '@mui/icons-material/Settings';
 export const navigations = [
   { name: 'Dashboard', path: '/dashboard/default', icon: 'dashboard' },
   { label: 'Appointment Management', type: 'label' },
@@ -35,14 +36,14 @@ export const navigations = [
   // },
 
 
-  { name: 'Appointment Scheduling', path: '/appointmentSchedule', icon: 'favorite' },
+  { name: 'Appointment Scheduling', path: '/appointmentSchedule', icon: 'edit_calendar' },
 
-  { name: 'Patient Visit', path: '/patientVisit', icon: 'favorite' },
+  { name: 'Patient Visit', path: '/patientVisit', icon: 'vaccines' },
 
   { label: 'Patient Management', type: 'label' },
   {
     name: 'Patient Management',
-    icon: 'favorite',
+    icon: 'airline_seat_flat',
     // badge: { value: '30+', color: 'secondary' },
     children: [
       { name: 'Patient Registration', path: '/patientForm', iconText: 'A' },
@@ -53,7 +54,7 @@ export const navigations = [
   { label: 'Doctor Management', type: 'label' },
   {
     name: 'Doctor Management',
-    icon: 'favorite',
+    icon: 'earbuds',
     // badge: { value: '30+', color: 'secondary' },
     children: [
       { name: 'Doctor Registration', path: '/doctorform', iconText: 'A' },
@@ -66,7 +67,7 @@ export const navigations = [
   { label: 'Setup', type: 'label' },
   {
     name:'Setup',
-    icon:'favorite',
+    icon: 'settings',
   children:[
  
   {
