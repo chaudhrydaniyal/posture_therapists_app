@@ -146,7 +146,7 @@ const PatientForm = () => {
 
             <div className="card">
                 <div className="card-body" style={{ margin: "10px" }}>
-                    <h4>PATIENT INFORMATION</h4>
+                    <h5>PATIENT INFORMATION</h5>
 
                     <div className="row" style={{ marginTop: "2rem" }}>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -410,7 +410,7 @@ const PatientForm = () => {
                 
     <div className="card" style={{marginTop:'2rem'}}>
                     <div className="card-body" style={{ margin: "10px" }}>
-                        <h4>In Case of Emergency</h4>
+                        <h5>In Case of Emergency</h5>
 
                         <div className="row" style={{ marginTop: "2rem" }}>
 
@@ -462,7 +462,7 @@ const PatientForm = () => {
 
             <div className="card" style={{ marginTop: '2rem' }}>
                 <div className="card-body" style={{ margin: "10px" }}>
-                    <h4>PREVIOUS TREATMENT</h4>
+                    <h5>PREVIOUS TREATMENT</h5>
 
 
                     <div className="row" style={{ marginTop: "2rem" }}>
@@ -584,11 +584,10 @@ const PatientForm = () => {
                         </Button>
 
                         &nbsp;
-
+{/* 
                         <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
-                            {/* <Icon>send</Icon> */}
                             <Span sx={{ pl: 1, textTransform: "capitalize" }}>Schedule appointment</Span>
-                        </Button>
+                        </Button> */}
 
                     </div>
                 </div>

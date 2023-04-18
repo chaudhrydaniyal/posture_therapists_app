@@ -111,7 +111,7 @@ const DoctorForm = () => {
 
             <div className="card">
                 <div className="card-body" style={{ margin: "10px" }}>
-                    <h4>DOCTOR INFORMATION</h4>
+                    <h5>DOCTOR INFORMATION</h5>
 
                     <div className="row" style={{ marginTop: "2rem" }}>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">

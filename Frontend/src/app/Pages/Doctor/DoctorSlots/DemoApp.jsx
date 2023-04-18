@@ -5,12 +5,13 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
-import { createRoot } from 'react-dom/client'
 import axios from 'axios';
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import {  Button } from '@mui/material';
+
 
 
 
@@ -58,25 +59,26 @@ export default class DemoApp extends React.Component {
 
         {/* <h6>Name:{this.props.data.first_name}</h6> */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
-          <button style={{ borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} onClick={async () => {
-            console.log("iddddd", this.props)
+         
+         
+        <Button color="primary" variant="contained" type="submit" onClick={async () => {
 
             try {
-            await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
+             const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
               this.state.currentEvents.map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
             )
 
-            NotificationManager.success("Successfully added time slots");
+            res && NotificationManager.success("Successfully added time slots");
 
             }
             catch{
 
-              NotificationManager.error("Please add time slot first")
+              NotificationManager.error("Something went wrong")
 
             }
             // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
           }}
-          >Update</button>
+          >Update</Button>
         </div>
         {/* {this.renderSidebar()} */}
         <div className='demo-app-main'>

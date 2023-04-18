@@ -3,6 +3,8 @@ const sql = require("./db.js");
 // constructor
 const Patient_visit = function(patient_visit) {
 
+  this.patient = patient_visit.patient;
+
   this.personal_conditions = patient_visit.personal_conditions;
   this.current_treatment = patient_visit.current_treatment;
   this.remarks = patient_visit.remarks;
@@ -61,8 +63,8 @@ Patient_visit.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found user: ", res[0]);
-      result(null, res[0]);
+      console.log("found user: ", res);
+      result(null, res);
       return;
     }
 
