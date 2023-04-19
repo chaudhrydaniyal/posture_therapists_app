@@ -947,7 +947,8 @@ const IconList = [
   "airline_seat_flat",
   "vaccines",
   "edit_calendar",
-  "earbuds"
+  "earbuds",
+  "location_city"
 ];
 
 const AppIcon = () => {
