@@ -64,11 +64,11 @@ const TopSellingTable = () => {
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>top selling products</Title>
-        <Select size="small" defaultValue="this_month">
+        <Title>Appointments</Title>
+        {/* <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>
-        </Select>
+        </Select> */}
       </CardHeader>
 
       <Box overflow="auto">
@@ -76,22 +76,22 @@ const TopSellingTable = () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ px: 3 }} colSpan={4}>
-                Name
+                Patient Name
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Revenue
+                Doctor Name
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Stock Status
+                Start Time
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={1}>
-                Action
+                End Time
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {productList.map((product, index) => (
+            {/* {productList.map((product, index) => (
               <TableRow key={index} hover>
                 <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   <Box display="flex" alignItems="center">
@@ -122,7 +122,7 @@ const TopSellingTable = () => {
                   </IconButton>
                 </TableCell>
               </TableRow>
-            ))}
+            ))} */}
           </TableBody>
         </ProductTable>
       </Box>

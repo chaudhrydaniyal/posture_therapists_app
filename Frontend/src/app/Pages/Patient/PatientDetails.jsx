@@ -233,7 +233,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_border" type="text" name="surname" placeholder="Surname..." value={data.surname} onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="surname" placeholder="Surname..." value={data.surname} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
@@ -243,7 +243,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_border" type="text" name="first_name" placeholder="First Name..." value={data.first_name} onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="first_name" placeholder="First Name..." value={data.first_name} onChange={handleInput} disabled={disableFields} />
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -254,7 +254,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={data.middle_name} onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={data.middle_name} onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
 
@@ -267,6 +267,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     type="date"
                                     name="date_of_birth"
                                     value={data.date_of_birth}
@@ -283,6 +284,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_border"
                                     name="age"
                                     type="text"
@@ -329,7 +331,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_width" type="text" name="address" placeholder="Address..." value={data.address} onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="address" placeholder="Address..." value={data.address} onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -343,7 +345,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="text" name="homephone" placeholder="Home Phone..." onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="homephone" placeholder="Home Phone..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
@@ -352,7 +354,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="text" name="workphone" placeholder="Work Phone..." onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="workphone" placeholder="Work Phone..." onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
@@ -360,7 +362,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." onInput={(e) => {
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -376,7 +378,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="email" name="email" placeholder="Email..." value={data.email} onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="email" name="email" placeholder="Email..." value={data.email} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
@@ -384,7 +386,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="text" name="occupation" placeholder="Occupation..." value={data.occupation} onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="occupation" placeholder="Occupation..." value={data.occupation} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
@@ -392,7 +394,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <input className="input_border" type="text" name="designation" placeholder="Designation..." onChange={handleInput} disabled={disableFields} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="designation" placeholder="Designation..." onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
 
@@ -418,6 +420,7 @@ const PatientDetails = () => {
                                     style={{
                                         width: "100%",
                                         borderColor: "grey",
+                                        paddingLeft:'0.3rem'
                                     }}
                                     className="input_border"
                                     required
@@ -479,7 +482,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_border" type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="patientrelationship">
@@ -488,7 +491,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_border" type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="prevmobileno">
@@ -497,7 +500,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_border" type="number" name="prevmobileno" onInput={(e) => {
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_border" type="number" name="prevmobileno" onInput={(e) => {
                                         e.target.value = Math.max(0, parseInt(e.target.value))
                                             .toString()
                                             .slice(0, 11);
@@ -557,7 +560,7 @@ const PatientDetails = () => {
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     {/* <input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                                    <input className="input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -571,7 +574,7 @@ const PatientDetails = () => {
                                     </label>
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -586,7 +589,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_width" type="text" name="todaysession" onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="todaysession" onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -600,7 +603,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_width" type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -613,7 +616,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <input className="input_width" type="text" name="fixednow" onChange={handleInput} disabled={disableFields} />
+                                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="fixednow" onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 

@@ -132,7 +132,7 @@ try{
                 </Typography>
                 {/* <hr></hr> */}
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  <input placeholder='Enter Disease' value={disease} onChange={(e) => setDisease(e.target.value)} />
+                  <input style={{paddingLeft:'0.3rem'}} placeholder='Enter Disease' value={disease} onChange={(e) => setDisease(e.target.value)} />
                 </Typography>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
@@ -158,7 +158,7 @@ try{
               </Typography>
               {/* <hr></hr> */}
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input placeholder='Enter Disease' value={editDisease.name} onChange={(e) => setEditDisease({ ...editDisease, name: e.target.value })} />
+                <input style={{paddingLeft:'0.3rem'}} placeholder='Enter Disease' value={editDisease.name} onChange={(e) => setEditDisease({ ...editDisease, name: e.target.value })} />
               </Typography>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 

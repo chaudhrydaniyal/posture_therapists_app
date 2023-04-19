@@ -169,7 +169,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="current_treatment">
@@ -179,7 +179,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_width" type="text" name="current_treatment" placeholder="current treatment..." defaultValue={values.current_treatment} onChange={handleFormData("current_treatment")} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="current_treatment" placeholder="current treatment..." defaultValue={values.current_treatment} onChange={handleFormData("current_treatment")} />
 
                             </div>
 
@@ -194,6 +194,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     type="text"
                                     name="remarks"
                                     placeholder="remarks..."
@@ -218,7 +219,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="ROMstatus">
@@ -228,7 +229,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_width" type="text" name="ROMstatus" placeholder="R.O.M status..." defaultValue={values.ROMstatus} onChange={handleFormData("ROMstatus")} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="ROMstatus" placeholder="R.O.M status..." defaultValue={values.ROMstatus} onChange={handleFormData("ROMstatus")} />
 
                             </div>
 
@@ -244,6 +245,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_width"
                                     type="text"
                                     name="muscle_status"
@@ -263,6 +265,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_width"
                                     name="skin_soft_tissues_pain"
                                     type="text"
@@ -287,6 +290,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_width"
                                     type="text"
                                     name="cardio_vascular_status"
@@ -313,7 +317,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input className="input_width" type="text" name="general_mobility" placeholder="general mobility..." defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="general_mobility" placeholder="general mobility..." defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="transfers">
@@ -323,7 +327,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input className="input_width" type="text" name="transfers" placeholder="transfers..." defaultValue={values.transfers} onChange={handleFormData("transfers")} />
+                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="transfers" placeholder="transfers..." defaultValue={values.transfers} onChange={handleFormData("transfers")} />
 
                             </div>
 
@@ -339,6 +343,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_width"
                                     type="text"
                                     name="balance"
@@ -358,6 +363,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_width"
                                     name="upper_limb_functions"
                                     type="text"
@@ -381,6 +387,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 <input
+                                style={{paddingLeft:'0.3rem'}}
                                     className="input_width"
                                     type="text"
                                     name="daily_life_activities"

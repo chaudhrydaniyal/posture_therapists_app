@@ -50,7 +50,8 @@ const RegisteredPatients = () => {
   };
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatients(res.data) }).catch(e => console.log("E", e))
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatients(res.data);console.log("res",res) }).catch(e => console.log("E", e))
+    console.log("patients",patients)
 
   }, [])
 

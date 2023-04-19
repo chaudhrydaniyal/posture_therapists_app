@@ -141,19 +141,19 @@ const Services = () => {
                     <label>Service Name:</label>
                   </div>
                   <div>
-                    <input placeholder='Enter Service' name="service" value={service.service} onChange={serviceHandler} />
+                    <input style={{paddingLeft:'0.3rem'}} placeholder='Enter Service' name="service" value={service.service} onChange={serviceHandler} />
                   </div>
                   <div>
                     <label>Charges:</label>
                   </div>
                   <div>
-                    <input placeholder='PKR' name="price" value={service.price} onChange={serviceHandler} />
+                    <input style={{paddingLeft:'0.3rem'}} placeholder='PKR' name="price" value={service.price} onChange={serviceHandler} />
                   </div>
                   <div>
                     <label>Description:</label>
                   </div>
                   <div>
-                    <input placeholder='description' name="description" value={service.description} onChange={serviceHandler} />
+                    <input style={{paddingLeft:'0.3rem'}} placeholder='description' name="description" value={service.description} onChange={serviceHandler} />
                   </div>
                 </Typography>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -180,13 +180,13 @@ const Services = () => {
               </Typography>
               {/* <hr></hr> */}
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input placeholder='Edit Service' value={editService.service} onChange={(e) => setEditService({ ...editService, service: e.target.value })} />
+                <input style={{paddingLeft:'0.3rem'}} placeholder='Edit Service' value={editService.service} onChange={(e) => setEditService({ ...editService, service: e.target.value })} />
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input placeholder='Edit charges' value={editService.price} onChange={(e) => setEditService({ ...editService, price: e.target.value })} />
+                <input style={{paddingLeft:'0.3rem'}} placeholder='Edit charges' value={editService.price} onChange={(e) => setEditService({ ...editService, price: e.target.value })} />
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input placeholder='description' value={editService.description} onChange={(e) => setEditService({ ...editService, description: e.target.value })} />
+                <input style={{paddingLeft:'0.3rem'}} placeholder='description' value={editService.description} onChange={(e) => setEditService({ ...editService, description: e.target.value })} />
               </Typography>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
