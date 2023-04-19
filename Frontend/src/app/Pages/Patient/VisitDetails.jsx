@@ -86,7 +86,7 @@ const VisitDetails = () => {
 
     <div className='card'>
         <div className='card-body'>
-            <h4>Personal Factors</h4>
+            <h5>Personal Factors</h5>
 
             <div className="row" style={{ marginTop: "2rem" }}>
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -135,7 +135,7 @@ const VisitDetails = () => {
 
 
             </div>
-            <h4 style={{ marginTop: '1rem' }}>Body Structure And Function Impairments   </h4>
+            <h5 style={{ marginTop: '1rem' }}>Body Structure And Function Impairments   </h5>
             <div className="row" style={{ marginTop: "2rem" }}>
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="AssTrauma_diseases">
@@ -228,7 +228,7 @@ const VisitDetails = () => {
 
             </div>
 
-            <h4 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h4>
+            <h5 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h5>
             <div className="row" style={{ marginTop: "2rem" }}>
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="general_mobility">
@@ -338,7 +338,7 @@ const VisitDetails = () => {
         <Accordion.Body>
         <div className='card'>
                 <div className='card-body'>
-                    <h4>Diagnosis</h4>
+                    <h5>Diagnosis</h5>
                     
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">

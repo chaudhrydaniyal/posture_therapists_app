@@ -232,7 +232,7 @@ class AddItemsForm extends React.Component {
                     this.onCloseModal()
 
 
-                    console.log("this state", this.state)
+                    console.log("itemAdded", this.state)
 
 
                     return this.props.onAddItem(this.state)

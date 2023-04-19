@@ -78,7 +78,15 @@ export const navigations = [
     name: 'Add Branches',
     path: '/addBranches',
    
-  },]},
+  },
+  {
+    name: 'Add Services',
+    path: '/services',
+   
+  },
+
+
+]},
 
 
   // {

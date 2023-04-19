@@ -303,7 +303,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
                         </div>
 
-                        <h4 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h4>
+                        <h5 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h5>
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="general_mobility">

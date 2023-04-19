@@ -57,7 +57,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
     const [open, setOpen] = useState(false);
     const [servicelist, setservicelist] = useState(null);
     const [selectedService, setSelectedService] = useState([]);
-    const [discount,setDiscount] = useState(null)
+    const [discount, setDiscount] = useState(null)
     const [patientVisitData, setPatientVisitData] = useState({
         personal_conditions: values.personal_conditions,
         current_treatment: values.current_treatment,
@@ -175,14 +175,14 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
     console.log(servicelist)
     console.log("outside", selectedService);
-    
+
     var results = getService.filter((d) => {
         return selectedService.includes(d.id)
     })
 
     console.log("results")
 
- 
+
     // const deleteById = id => {
     //     const service = getService.filter(d => {
     //         return selectedService.splice(d.id)
@@ -193,17 +193,17 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         const index = getService.findIndex(service => service.id === id);
         if (index !== -1) {
             getService.splice(index, 1);
-        // setSelectedService()
-        console.log("getservice",selectedService)
-            
+            // setSelectedService()
+            console.log("getservice", selectedService)
+
             console.log("Service with id", id, "deleted");
         } else {
             console.log("Service with id", id, "not found");
         }
-        console.log("index",index)
+        console.log("index", index)
     }
-     
- 
+
+
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => {
             setGetService(res.data); console.log("services", res);
@@ -237,42 +237,42 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                     </Typography>
                     {/* <hr></hr> */}
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <div style={{display:'flex'}}>
-                        <div>
+                        <div style={{ display: 'flex' }}>
                             <div>
-                                <label><strong>Select Services:</strong></label>
+                                <div>
+                                    <label><strong>Select Services:</strong></label>
+                                </div>
+                                <div style={{ marginTop: '0.5rem' }}>
+
+                                    <Form.Select value={servicelist} name="servicecharges" onChange={(e) => handlecharges(e)}>
+
+                                        <option value="none" selected disabled hidden>
+                                            Select Service...
+                                        </option>
+
+
+                                        {getService && getService.map((items, i) => (
+
+                                            <option value={`${items.id}`} key={items.id} >{`${items.service_name} PKR ${items.charges}`}</option>
+
+                                        ))}
+                                    </Form.Select>
+
+                                </div>
                             </div>
-                            <div style={{ marginTop: '0.5rem'}}>
-
-                                <Form.Select value={servicelist} name="servicecharges" onChange={(e) => handlecharges(e)}>
-
-                                    <option value="none" selected disabled hidden>
-                                        Select Service...
-                                    </option>
-
-
-                                    {getService && getService.map((items, i) => (
-
-                                        <option value={`${items.id}`} key={items.id} >{`${items.service_name} PKR ${items.charges}`}</option>
-
-                                    ))}
-                                </Form.Select>
-                                
-                            </div>
-                        </div>
-                        <div>
+                            <div>
                                 <div>
 
-                                <label><strong>Discount %:</strong></label>
+                                    <label><strong>Discount %:</strong></label>
                                 </div>
-                                <div style={{marginTop:'0.5rem',marginLeft:'0.5rem'}}>
+                                <div style={{ marginTop: '0.5rem', marginLeft: '0.5rem' }}>
 
-                                <input type="number" style={{height:'2.2rem',width:'auto',border:'0.5px solid gray',borderRadius:'5px',paddingLeft:'0.5rem'}} value={discount} placeholder='%' onChange={(e)=>setDiscount(e.target.value)}/>
+                                    <input type="number" style={{ height: '2.2rem', width: 'auto', border: '0.5px solid gray', borderRadius: '5px', paddingLeft: '0.5rem' }} value={discount} placeholder='%' onChange={(e) => setDiscount(e.target.value)} />
                                 </div>
-                                </div>
-                                </div>
+                            </div>
+                        </div>
                     </Typography>
-                    
+
                     <StyledTable>
                         <TableHead>
                             <TableRow>
@@ -284,12 +284,12 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                         <TableBody>
                             {results
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((items, id,index) => (
+                                .map((items, id, index) => (
                                     <TableRow key={id}>
                                         <TableCell align="left">{items.service_name}</TableCell>
 
                                         <TableCell align="center">{items.charges}</TableCell>
-                                        <TableCell align="right"><button onClick={() => deleteById(items.id)} style={{background:'none',border:'none',marginTop:'0.5rem'}}>&#x274C;</button></TableCell>
+                                        <TableCell align="right"><button onClick={() => deleteById(items.id)} style={{ background: 'none', border: 'none', marginTop: '0.5rem' }}>&#x274C;</button></TableCell>
 
                                     </TableRow>
                                 ))}
@@ -299,7 +299,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                         <Button onClick={handleClose}> <strong>Close</strong></Button>
-                        <Button onClick={() => { handleClose(); }}  ><Link to="/invoice" state={{results,discount}}> <strong>Generate</strong></Link></Button>
+                        <Button onClick={() => { handleClose(); }}  ><Link to="/invoice" state={{ results, discount }}> <strong>Generate</strong></Link></Button>
                     </div>
                 </Box>
             </Modal>
@@ -456,7 +456,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 Previous
                             </Button>
                             {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
-                            <Button color="primary" variant="contained" type="submit" onClick={()=>{handleSubmit();handleOpen()}}>
+                            <Button color="primary" variant="contained" type="submit" onClick={() => { handleSubmit(); handleOpen() }}>
                                 <Icon>send</Icon>
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
                             </Button>

@@ -2,10 +2,13 @@ const Scheduled_appointments = require("../models/scheduled_appointments.model.j
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
+
+
+  
   // Validate request
-  if (!req.body || !req.body.patient) {
+  if (!req.body ) {
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: "Content can not be empty! "
     });
   }
 

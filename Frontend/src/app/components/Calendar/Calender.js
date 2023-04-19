@@ -14,7 +14,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import {  Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 
 
@@ -24,11 +24,13 @@ export default class Calender extends Component {
     groups,
     items,
     y19: new Date('2023/04/12'),
-    patients: []
+    patients: [],
+
+    refresh: false,
+
   }
 
   // addItemHandler = newItems => {
-  //   console.log(newItems)
   //   this.setState(state => ({
   //     items: {...state.items, newItems}
   //   }))
@@ -38,19 +40,17 @@ export default class Calender extends Component {
 
   async componentDidMount() {
 
-    console.log("component mounted")
 
     let events = await (await axios.get('http://192.168.5.21:8081/api/doctortimeslots/')).data
 
     let scheduledAppointments = await (await axios.get('http://192.168.5.21:8081/api/scheduledappointments/')).data
 
-    console.log("time of app", events)
 
     let array1 = events.map((e, i) => ({
       id: i,
       className: "htmlCss",
-      start: moment(new Date(e.start_time)).add(-4, 'hours'),
-      end: moment(new Date(e.end_time) ).add(-4, 'hours'),
+      start: moment(new Date(e.start_time.split('.')[0])),
+      end: moment(new Date(e.end_time.split('.')[0])),
       title: e.first_name,
       group: e.doctor,
       canMove: false,
@@ -61,7 +61,7 @@ export default class Calender extends Component {
     let array2 = scheduledAppointments.map((e, i) => ({
       id: array1.length + i,
       className: "confirm",
-      start: moment(new Date(e.start_time)).add(-4, 'hours'), end: moment(new Date(e.end_time)).add(-4, 'hours'),
+      start: moment(new Date(e.start_time.split('.')[0])), end: moment(new Date(e.end_time.split('.')[0])),
       title: e.patient,
       group: e.doctor,
       scheduledAppointment: true,
@@ -72,7 +72,6 @@ export default class Calender extends Component {
 
     this.setState({ items: array1.concat(array2) })
 
-    console.log("array 1", array1)
 
     let doctors = await (await axios.get('http://192.168.5.21:8081/api/users/')).data
 
@@ -81,11 +80,60 @@ export default class Calender extends Component {
       title: e.first_name
     }))
 
-    console.log("items of state", this.state.items)
 
     this.setState({ groups: doctorsArray })
 
   }
+
+  // async componentDidUpdate(prevProps, prevState) {
+
+  //   if (this.state.refresh != prevState.refresh) {
+
+
+  //     let events = await (await axios.get('http://192.168.5.21:8081/api/doctortimeslots/')).data
+
+  //     let scheduledAppointments = await (await axios.get('http://192.168.5.21:8081/api/scheduledappointments/')).data
+
+
+  //     let array1 = events.map((e, i) => ({
+  //       id: i,
+  //       className: "htmlCss",
+  //       start: moment(new Date(e.start_time)).add(-4, 'hours'),
+  //       end: moment(new Date(e.end_time)).add(-4, 'hours'),
+  //       title: e.first_name,
+  //       group: e.doctor,
+  //       canMove: false,
+  //       canResize: false,
+  //       canChangeGroup: false,
+  //     }))
+
+  //     let array2 = scheduledAppointments.map((e, i) => ({
+  //       id: array1.length + i,
+  //       className: "confirm",
+  //       start: moment(new Date(e.start_time)).add(-4, 'hours'), end: moment(new Date(e.end_time)).add(-4, 'hours'),
+  //       title: e.patient,
+  //       group: e.doctor,
+  //       scheduledAppointment: true,
+  //       canMove: false,
+  //       canResize: false,
+  //       canChangeGroup: false
+  //     }))
+
+  //     this.setState({ items: array1.concat(array2) })
+
+
+  //     let doctors = await (await axios.get('http://192.168.5.21:8081/api/users/')).data
+
+  //     let doctorsArray = doctors.map((e, i) => ({
+  //       id: e.id,
+  //       title: e.first_name
+  //     }))
+
+
+  //     this.setState({ groups: doctorsArray })
+  //   }
+
+  // }
 
 
 
@@ -94,17 +142,24 @@ export default class Calender extends Component {
     return (Date.parse(d)) / 1000
   }
 
+
+  timzoneCorrection = date =>{
+
+   let x = new Date(date);
+let hoursDiff = x.getHours() - x.getTimezoneOffset() / 60;
+let minutesDiff = (x.getHours() - x.getTimezoneOffset()) % 60;
+x.setHours(hoursDiff);
+x.setMinutes(minutesDiff);
+
+return x
+  }
+
   addItemHandler = item => {
-
-
-
-
 
     if (item.doctor == '' || item.patient == '' || item.end <= item.start) {
       NotificationManager.error("Please input the required fields correctly");
       return;
     }
-
 
     let doctorAvailable = false
 
@@ -121,10 +176,8 @@ export default class Calender extends Component {
             new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
 
             alreadyScheduledAppointment = true
-            console.log("scheduled alredy")
           } else { console.log("inside else") }
         })
-
 
         if (!alreadyScheduledAppointment) {
 
@@ -134,8 +187,9 @@ export default class Calender extends Component {
             title: item.patientName,
             patient: item.patient,
             className: "confirm",
-            start: new Date(item.start).getTime(),
-            end: new Date(item.end).getTime(),
+            start: moment (item.start),
+            // start: JSON.stringify(this.timzoneCorrection( new Date(item.start))),
+            end: moment(item.end),
             canMove: false,
             canResize: false,
             canChangeGroup: false,
@@ -143,19 +197,23 @@ export default class Calender extends Component {
             currentlyAdded: true
           }
 
+
+       
+
           this.setState(state => ({
             items: [...state.items, newItem]
           }))
 
           NotificationManager.success("Successfully scheduled an appointment");
 
+          console.log("new state", this.state.items)
+
           return;
         }
 
-        if (alreadyScheduledAppointment){
+        if (alreadyScheduledAppointment) {
 
           NotificationManager.error("Doctor has already an appointment");
-
 
         }
 
@@ -168,8 +226,8 @@ export default class Calender extends Component {
 
     })
 
-    if (!doctorAvailable){
-        NotificationManager.error("No Doctor available at this time slot");
+    if (!doctorAvailable) {
+      NotificationManager.error("No Doctor available at this time slot");
     }
   }
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
@@ -189,7 +247,6 @@ export default class Calender extends Component {
     //   )
     // })
 
-    // console.log('Moved', itemId, dragTime, newGroupOrder)
   }
 
   handleItemResize = (itemId, time, edge) => {
@@ -206,7 +263,6 @@ export default class Calender extends Component {
       )
     })
 
-    console.log('Resized', itemId, time, edge)
   }
 
   render() {
@@ -215,11 +271,15 @@ export default class Calender extends Component {
 
       <>
 
-        <div style={{ display: "flex", justifyContent: "end" }}>
-        <Button color="primary" variant="contained" type="submit" onClick={async () => {
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h5>Appointment scheduling</h5>
+
+          <Button color="primary" variant="contained" type="submit" onClick={async () => {
 
             try {
-              console.log("iddddd", this.props)
+
+
+
               await axios.post('http://192.168.5.21:8081/api/scheduledappointments',
                 this.state.items.filter((f) => f.scheduledAppointment).map(se => ({
                   start_time: new Date(se.start), end_time: new Date(se.end), doctor: se.group,
@@ -242,21 +302,15 @@ export default class Calender extends Component {
           keys={keys}
           groups={groups}
           onItemClick={(e) => {
-            console.log("all items", this.state.items)
-
             console.log("item click", e)
-
-        }}
+            this.setState({ refresh: !this.state.refresh })
+          }}
           items={items}
           // rightSidebarWidth={50}
           // rightSidebarContent="Skills"
-          
-
-
 
           defaultTimeStart={moment().add(-1, 'day')}
           defaultTimeEnd={moment().add(7, 'day')}
-
           sidebarContent="Doctors"
           lineHeight={50}
           itemRenderer={itemRender}
@@ -274,12 +328,12 @@ export default class Calender extends Component {
           onItemMove={this.handleItemMove}
           onItemResize={this.handleItemResize}
         >
-          <TimelineMarkers>
+          {/* <TimelineMarkers>
               <TodayMarker>
                 {({ styles, date }) => <div style={{ ...styles, width: '0.5rem', backgroundColor: 'rgba(255,0,0,0.5)' }} />}
               </TodayMarker>
               <SundaysMarker />
-            </TimelineMarkers>
+            </TimelineMarkers> */}
         </Timeline>
         <AddItemsForm onAddItem={this.addItemHandler} />
         <NotificationContainer />
