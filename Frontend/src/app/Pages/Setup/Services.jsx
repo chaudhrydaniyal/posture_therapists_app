@@ -124,6 +124,8 @@ const Services = () => {
           {/* ***************Add Service Modal************* */}
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <h5 style={{margin:"20px"}}>Services</h5>
+
             <Button onClick={handleOpen} style={{ marginTop: '2rem', marginBottom: '2rem', marginLeft: "auto", marginRight: "30px" }} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Service</Span></Button>
             <Modal
               open={open}

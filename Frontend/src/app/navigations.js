@@ -71,16 +71,16 @@ export const navigations = [
   children:[
  
   {
-    name: 'Add Diseases',
+    name: 'Diseases',
     path: '/addDiseases',
    
   },{
-    name: 'Add Branches',
+    name: 'Branches',
     path: '/addBranches',
    
   },
   {
-    name: 'Add Services',
+    name: 'Services',
     path: '/services',
    
   },

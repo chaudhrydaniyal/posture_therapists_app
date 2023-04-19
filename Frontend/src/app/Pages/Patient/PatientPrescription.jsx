@@ -167,36 +167,35 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
     const handlecharges = (e) => {
         console.log("object value", e.target.value);
+
+        
         setservicelist(e.target.value)
-        setSelectedService([...selectedService, parseInt(e.target.value)])
+        setSelectedService([...selectedService, getService.filter((g)=>g.id == e.target.value)[0]])
 
     }
 
 
-    console.log(servicelist)
-    console.log("outside", selectedService);
-
-    var results = getService.filter((d) => {
-        return selectedService.includes(d.id)
-    })
-
-    console.log("results")
 
 
-    // const deleteById = id => {
-    //     const service = getService.filter(d => {
-    //         return selectedService.splice(d.id)
-    //     })
-    //         console.log("delete",service)
-    // }
+    // var results = getService.filter((d) => {
+
+    //     console.log("called the results filter")
+    //     return selectedService.includes(d.id)
+    // })
+
+
+
+
     const deleteById = (id) => {
-        const index = getService.findIndex(service => service.id === id);
+        const index = selectedService.findIndex(service => service.id === id);
         if (index !== -1) {
-            getService.splice(index, 1);
-            // setSelectedService()
-            console.log("getservice", selectedService)
+            const temp = selectedService
+            temp.splice(index, 1);
+            setSelectedService(temp)
+            console.log("selectedSERV", selectedService, temp)
 
-            console.log("Service with id", id, "deleted");
+            setSelectedService([...selectedService])
+  
         } else {
             console.log("Service with id", id, "not found");
         }
@@ -282,7 +281,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {results
+                            {selectedService
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((items, id, index) => (
                                     <TableRow key={id}>
@@ -299,7 +298,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                         <Button onClick={handleClose}> <strong>Close</strong></Button>
-                        <Button onClick={() => { handleClose(); }}  ><Link to="/invoice" state={{ results, discount }}> <strong>Generate</strong></Link></Button>
+                        <Button onClick={() => { handleClose(); }}  ><Link to="/invoice" state={{ selectedService, discount }}> <strong>Generate</strong></Link></Button>
                     </div>
                 </Box>
             </Modal>

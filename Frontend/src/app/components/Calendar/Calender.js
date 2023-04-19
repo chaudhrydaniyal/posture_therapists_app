@@ -219,6 +219,8 @@ return x
 
         doctorAvailable = true
 
+      
+
       }
       else {
         // console.log("it is outside the doctor slots")
@@ -229,6 +231,8 @@ return x
     if (!doctorAvailable) {
       NotificationManager.error("No Doctor available at this time slot");
     }
+
+
   }
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
     // const {items, groups} = this.state

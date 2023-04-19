@@ -119,6 +119,7 @@ try{
           {/* ***************Add Disease Modal************* */}
 
           <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <h5 style={{margin:"20px"}}>Diseases</h5>
             <Button onClick={handleOpen} style={{ marginTop: '2rem', marginBottom: '2rem', marginLeft:"auto", marginRight:"30px" }} color='primary' variant="contained"><Span sx={{ pl: 0, textTransform: "capitalize" }}>Add Disease</Span></Button>
             <Modal
               open={open}

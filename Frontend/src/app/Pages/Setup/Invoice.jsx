@@ -4,7 +4,7 @@ import './Invoice.css'
 import Box from '@mui/material/Box';
 import jsPDF from 'jspdf';
 import ReactToPrint from "react-to-print";
-import { styled, TableBody,TableCell,TableHead,TablePagination,TableRow, Table} from '@mui/material';
+import { styled, TableBody, TableCell, TableHead, TablePagination, TableRow, Table } from '@mui/material';
 import { Breadcrumb, SimpleCard } from 'app/components';
 // import numberToWords from 'number-to-words'
 
@@ -41,7 +41,7 @@ const Container = styled('div')(({ theme }) => ({
 
 const Invoice = () => {
   var invoiceDetails = useLocation();
-  var Invoice = invoiceDetails.state.results
+  var Invoice = invoiceDetails.state.selectedService
   console.log('resultssss', invoiceDetails)
   let componentRef = useRef();
   const [total, settotal] = useState(null);
@@ -109,100 +109,100 @@ const Invoice = () => {
 
 
   }
-///////////////Converting amount into words////////////////////////
+  ///////////////Converting amount into words////////////////////////
 
-function numberToEnglish(n) {
+  function numberToEnglish(n) {
 
-  var string = n.toString(),
+    var string = n.toString(),
       units, tens, scales, start, end, chunks, chunksLen, chunk, ints, i, word, words;
 
-  var and =  'and';
+    var and = 'and';
 
-  /* Is number zero? */
-  if (parseInt(string) === 0) {
+    /* Is number zero? */
+    if (parseInt(string) === 0) {
       return 'zero';
-  }
+    }
 
-  /* Array of units as words */
-  units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+    /* Array of units as words */
+    units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
 
-  /* Array of tens as words */
-  tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+    /* Array of tens as words */
+    tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
 
-  /* Array of scales as words */
-  scales = ['', 'Thousand', 'Million', 'Billion', 'Trillion', 'Quadrillion', 'Quintillion', 'Sextillion', 'Septillion', 'Octillion', 'Nonillion', 'Decillion', 'Undecillion', 'Duodecillion', 'Tredecillion', 'Quatttuor-decillion', 'Quindecillion', 'Sexdecillion', 'Septen-decillion', 'Octodecillion', 'Novemdecillion', 'Vigintillion', 'Centillion'];
+    /* Array of scales as words */
+    scales = ['', 'Thousand', 'Million', 'Billion', 'Trillion', 'Quadrillion', 'Quintillion', 'Sextillion', 'Septillion', 'Octillion', 'Nonillion', 'Decillion', 'Undecillion', 'Duodecillion', 'Tredecillion', 'Quatttuor-decillion', 'Quindecillion', 'Sexdecillion', 'Septen-decillion', 'Octodecillion', 'Novemdecillion', 'Vigintillion', 'Centillion'];
 
-  /* Split user arguemnt into 3 digit chunks from right to left */
-  start = string.length;
-  chunks = [];
-  while (start > 0) {
+    /* Split user arguemnt into 3 digit chunks from right to left */
+    start = string.length;
+    chunks = [];
+    while (start > 0) {
       end = start;
       chunks.push(string.slice((start = Math.max(0, start - 3)), end));
-  }
+    }
 
-  /* Check if function has enough scale words to be able to stringify the user argument */
-  chunksLen = chunks.length;
-  if (chunksLen > scales.length) {
+    /* Check if function has enough scale words to be able to stringify the user argument */
+    chunksLen = chunks.length;
+    if (chunksLen > scales.length) {
       return '';
-  }
+    }
 
-  /* Stringify each integer in each chunk */
-  words = [];
-  for (i = 0; i < chunksLen; i++) {
+    /* Stringify each integer in each chunk */
+    words = [];
+    for (i = 0; i < chunksLen; i++) {
 
       chunk = parseInt(chunks[i]);
 
       if (chunk) {
 
-          /* Split chunk into array of individual integers */
-          ints = chunks[i].split('').reverse().map(parseFloat);
+        /* Split chunk into array of individual integers */
+        ints = chunks[i].split('').reverse().map(parseFloat);
 
-          /* If tens integer is 1, i.e. 10, then add 10 to units integer */
-          if (ints[1] === 1) {
-              ints[0] += 10;
+        /* If tens integer is 1, i.e. 10, then add 10 to units integer */
+        if (ints[1] === 1) {
+          ints[0] += 10;
+        }
+
+        /* Add scale word if chunk is not zero and array item exists */
+        if ((word = scales[i])) {
+          words.push(word);
+        }
+
+        /* Add unit word if array item exists */
+        if ((word = units[ints[0]])) {
+          words.push(word);
+        }
+
+        /* Add tens word if array item exists */
+        if ((word = tens[ints[1]])) {
+          words.push(word);
+        }
+
+        /* Add 'and' string after units or tens integer if: */
+        if (ints[0] || ints[1]) {
+
+          /* Chunk has a hundreds integer or chunk is the first of multiple chunks */
+          if (ints[2] || !i && chunksLen) {
+            words.push(and);
           }
 
-          /* Add scale word if chunk is not zero and array item exists */
-          if ((word = scales[i])) {
-              words.push(word);
-          }
+        }
 
-          /* Add unit word if array item exists */
-          if ((word = units[ints[0]])) {
-              words.push(word);
-          }
-
-          /* Add tens word if array item exists */
-          if ((word = tens[ints[1]])) {
-              words.push(word);
-          }
-
-          /* Add 'and' string after units or tens integer if: */
-          if (ints[0] || ints[1]) {
-
-              /* Chunk has a hundreds integer or chunk is the first of multiple chunks */
-              if (ints[2] || !i && chunksLen) {
-                  words.push(and);
-              }
-
-          }
-
-          /* Add hundreds word if array item exists */
-          if ((word = units[ints[2]])) {
-              words.push(word + ' Hundred');
-          }
+        /* Add hundreds word if array item exists */
+        if ((word = units[ints[2]])) {
+          words.push(word + ' Hundred');
+        }
 
       }
 
+    }
+
+    return words.reverse().join(' ');
+
   }
-
-  return words.reverse().join(' ');
-
-}
 
   return (
     <Container>
-        <Box className="breadcrumb">
+      <Box className="breadcrumb">
         <Breadcrumb routeSegments={[{ name: 'Invoice' }]} />
       </Box>
       <div>
@@ -285,24 +285,24 @@ function numberToEnglish(n) {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <div className="bill-to">
                 <strong >Sub total:<span style={{ marginLeft: '0.5rem', alignItems: 'flex-end' }}>{`PKR ${subtotal}`}</span></strong><br></br><br></br>
-                
-                <strong style={{ marginLeft: '0' }}>{invoiceDetails.state.discount ? `Discount (${invoiceDetails.state.discount}%): PKR ${discount} `:"Discount (0%): PKR 0"}</strong><br></br><br></br>
-                
+
+                <strong style={{ marginLeft: '0' }}>{invoiceDetails.state.discount ? `Discount (${invoiceDetails.state.discount}%): PKR ${discount} ` : "Discount (0%): PKR 0"}</strong><br></br><br></br>
+
                 <strong>Total Amount:<span style={{ marginLeft: '0.5rem' }}>{total ? `PKR ${total}` : subtotal}</span></strong>
                 {/* <strong>{numberToWords.toWords(total)};</strong> */}
-                
+
               </div>
             </div>
-            <div style={{display:'flex',justifyContent:'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <strong>Amount In Words:</strong>
-            <strong style={{marginLeft:'0.5rem'}}> {total ? `${total && numberToEnglish(total)}`: `${subtotal && numberToEnglish(subtotal)}`}</strong>
+              <strong style={{ marginLeft: '0.5rem' }}> {total ? `${total && numberToEnglish(total)}` : `${subtotal && numberToEnglish(subtotal)}`}</strong>
             </div>
-            
+
           </div>
 
         </div>
       </div>
-     </Container>
+    </Container>
   )
 }
 
