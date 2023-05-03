@@ -10,6 +10,7 @@ import { Box, styled, Button, Icon } from '@mui/material';
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import '../Patient/Patient.css'
+import { doctorValidation } from 'app/components/Validation/ValidationSchema';
 const initialValue = {
     surname: "",
     first_name: "",
@@ -39,6 +40,7 @@ const DoctorForm = () => {
 
     const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
         initialValues: initialValue,
+        validationSchema: doctorValidation,
         onSubmit: async (values, action) => {
             try {
                 const doctorForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users', {
@@ -133,6 +135,7 @@ const DoctorForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
                             <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="first_name" placeholder="First Name..." value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                            {errors.first_name && touched.first_name ? (<p style={{color:"red"}}>{errors.first_name}</p>):null }
 
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -161,6 +164,7 @@ const DoctorForm = () => {
                                 value={values.date_of_birth}
                                 onChange={(e) => { handleChange(e); ageCalculator() }} onBlur={handleBlur}
                             />
+                            {errors.date_of_birth && touched.date_of_birth ?  (<p style={{color:"red"}}>{errors.date_of_birth}</p>):null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="age">
@@ -206,6 +210,7 @@ const DoctorForm = () => {
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
                             </select>
+                            {errors.gender && touched.gender ? (<p style={{color:"red"}}>{errors.gender}</p>):null}
 
                         </div>
                     </div>
@@ -253,6 +258,7 @@ const DoctorForm = () => {
                                     .toString()
                                     .slice(0, 11);
                             }} />
+                            {errors.mobile_no && touched.mobile_no ? (<p style={{color:"red"}}>{errors.mobile_no}</p>):null}
                         </div>
 
                     </div>
@@ -283,6 +289,7 @@ const DoctorForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            {errors.cnic && touched.cnic ?  (<p style={{color:"red"}}>{errors.cnic}</p>):null}
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -292,6 +299,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="email" name="email" placeholder="Email..." value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                        {errors.email && touched.email ?  (<p style={{color:"red"}}>{errors.first_name}</p>):null}
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">

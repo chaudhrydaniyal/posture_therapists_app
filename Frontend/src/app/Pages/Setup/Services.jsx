@@ -144,12 +144,14 @@ const Services = () => {
                   </div>
                   <div>
                     <input style={{paddingLeft:'0.3rem'}} placeholder='Enter Service' name="service" value={service.service} onChange={serviceHandler} />
+                    {service.service <=1 ? (<p style={{color:"red"}}>Enter Service Name</p>):null}
                   </div>
                   <div>
                     <label>Charges:</label>
                   </div>
                   <div>
                     <input style={{paddingLeft:'0.3rem'}} placeholder='PKR' name="price" value={service.price} onChange={serviceHandler} />
+                    {service.price <=1 ? (<p style={{color:"red"}}>Enter Price</p>):null}
                   </div>
                   <div>
                     <label>Description:</label>

@@ -134,11 +134,12 @@ try{
                 {/* <hr></hr> */}
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <input style={{paddingLeft:'0.3rem'}} placeholder='Enter Disease' value={disease} onChange={(e) => setDisease(e.target.value)} />
+                  {disease.length <=1 ? (<p style={{color:"red"}}>Enter Disease Name</p>):null}
                 </Typography>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                   <Button onClick={handleClose}> <strong>Close</strong></Button>
-                  <Button onClick={() => { apiDisease(); handleClose(); setDisease(""); setUpdate(!update) }}> <strong>Add</strong></Button>
+                  <Button onClick={() => { apiDisease(); handleClose() ; setDisease(""); setUpdate(!update) }}> <strong>Add</strong></Button>
                 </div>
               </Box>
             </Modal>
@@ -160,6 +161,8 @@ try{
               {/* <hr></hr> */}
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <input style={{paddingLeft:'0.3rem'}} placeholder='Enter Disease' value={editDisease.name} onChange={(e) => setEditDisease({ ...editDisease, name: e.target.value })} />
+                
+              
               </Typography>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 

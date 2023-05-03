@@ -11,6 +11,8 @@ import './Patient.css'
 import { Box, styled, Button, Icon } from '@mui/material';
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
+import { patientValidation } from "app/components/Validation/ValidationSchema";
+
 
 const initialValue = {
     surname: "",
@@ -59,7 +61,7 @@ const PatientForm = () => {
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
         initialValues: initialValue,
-        // validationSchema: registrationValidation,
+        validationSchema:patientValidation,
         onSubmit: async (values, action) => {
             console.log("error")
             try {
@@ -198,6 +200,7 @@ const PatientForm = () => {
                                 id="dob"
                                 onChange={(e)=>{handleChange(e);ageCalculator()}} onBlur={handleBlur}
                             />
+                            {errors.date_of_birth && touched.date_of_birth ? (<p style={{color:"red"}}>{errors.date_of_birth}</p>):null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="age">
@@ -223,7 +226,7 @@ const PatientForm = () => {
                                 // defaultValue={ageCalculator()}
                                 onChange={handleChange} onBlur={handleBlur}
                             />
-                            {errors.age && touched.age ? (<p style={{ color: "red" }}>{errors.age}</p>) : null}
+                            {/* {errors.age && touched.age ? (<p style={{ color: "red" }}>{errors.age}</p>) : null} */}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="gender">
@@ -292,8 +295,8 @@ const PatientForm = () => {
                                     .toString()
                                     .slice(0, 11);
                             }} />
-                        </div>
                         {errors.mobile_no && touched.mobile_no ? (<p style={{ color: "red" }}>{errors.mobile_no}</p>) : null}
+                        </div>
                     </div>
 
                     <div className="row">
@@ -357,6 +360,7 @@ const PatientForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
+                            {errors.cnic && touched.cnic ? (<p style={{color:"red"}}>{errors.cnic}</p>):null }
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -446,7 +450,7 @@ const PatientForm = () => {
                                         .toString()
                                         .slice(0, 11);
                                 }} />
-                                {errors.prevmobileno && touched.prevmobileno ? (<p style={{ color: "red" }}>{errors.prevmobileno}</p>) : null}
+                                {/* {errors.prevmobileno && touched.prevmobileno ? (<p style={{ color: "red" }}>{errors.prevmobileno}</p>) : null} */}
                             </div>
                         </div>
                     </div>

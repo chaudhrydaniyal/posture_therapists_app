@@ -151,6 +151,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 )}
          
         </Select>
+        {!selectedPatient ? (<p style={{color:"red"}}>Please Select Patient </p>):null}
 
 
 
@@ -170,6 +171,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
                                 <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")} />
+                            {values.personal_conditions.length <=1 ? (<p style={{color:"red"}}>Please enter personal condition</p>):null}
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="current_treatment">

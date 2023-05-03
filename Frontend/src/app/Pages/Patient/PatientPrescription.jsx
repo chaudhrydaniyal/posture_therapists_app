@@ -256,6 +256,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
                                         ))}
                                     </Form.Select>
+                                    {!servicelist ? (<p style={{color:"red"}}>Please select the service</p>):null}
 
                                 </div>
                             </div>
