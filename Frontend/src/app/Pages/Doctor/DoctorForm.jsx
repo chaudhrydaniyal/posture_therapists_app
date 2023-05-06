@@ -11,6 +11,8 @@ import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import '../Patient/Patient.css'
 import { doctorValidation } from 'app/components/Validation/ValidationSchema';
+import Input from 'app/components/UI Components/Input';
+
 const initialValue = {
     surname: "",
     first_name: "",
@@ -73,9 +75,9 @@ const DoctorForm = () => {
 
     })
     function ageCalculator() {
-        var userinput = values.date_of_birth;
-        var dob = new Date(userinput);
-        if (userinput == null || userinput == '') {
+        var userInput = values.date_of_birth;
+        var dob = new Date(userInput);
+        if (userInput == null || userInput == '') {
             //   document.getElementById("message").innerHTML = "**Choose a date please!";    
             return false;
         } else {
@@ -124,7 +126,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3 ">
                             {" "}
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="surname" placeholder="Surname..." value={values.surname} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="surname" label="Surname" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="first_name">
@@ -134,7 +136,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="first_name" placeholder="First Name..." value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="first_name" label="First Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
                             {errors.first_name && touched.first_name ? (<p style={{color:"red"}}>{errors.first_name}</p>):null }
 
                         </div>
@@ -146,7 +148,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="middle_name" label="Middle Name" value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                     </div>
 
@@ -158,7 +160,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input
+                            <Input
                                 type="date"
                                 name="date_of_birth"
                                 value={values.date_of_birth}
@@ -174,12 +176,12 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2  p-3">
                             {" "}
-                            <input
+                            <Input
                              style={{paddingLeft:'0.3rem'}} 
-                                className="input_border"
+                               
                                 name="age"
                                 type="text"
-                                placeholder="age..."
+                                label="Age"
                                 onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
@@ -222,7 +224,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_width" type="text" name="address" placeholder="Address..." value={values.address} onChange={handleChange} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="address" label="Address" value={values.address} onChange={handleChange} />
                         </div>
 
 
@@ -236,7 +238,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="home_phone" placeholder="Home Phone..." value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}   type="text" name="home_phone" label="Home Phone" value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="work_phone">
@@ -245,7 +247,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="work_phone" placeholder="Work Phone..." value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="work_phone" label="Work Phone" value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="mobile_no">
@@ -253,7 +255,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                            <Input style={{paddingLeft:'0.3rem'}}   type="number" name="mobile_no" label="Mobile No" value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
                                 e.target.value = Math.max(0, parseInt(e.target.value))
                                     .toString()
                                     .slice(0, 11);
@@ -262,7 +264,58 @@ const DoctorForm = () => {
                         </div>
 
                     </div>
+                    <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="Specialization">
+                                <div>Specialization:</div>
+                            </label>
+                        </div>
 
+
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+
+                            <Input
+                            type="text"
+                           name="specialization"
+                           label="Specialization"
+                                value={values.cnic}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+                         
+                        </div>
+
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="experience">
+                                <div>Experience:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Input style={{paddingLeft:'0.3rem'}}   type="text" name="experience" label="Experience" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                       
+                        </div>
+
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="Engagement Terms">
+                                <div>Engagement Terms:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <select name="engagement-terms:" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
+                                <option
+                                    value=""
+                                    selected="selected"
+                                    disabled="disabled"
+                                >
+                                    Select Engagement Terms:...
+                                </option>
+                                <option value="Male">Full Time</option>
+                                <option value="Female">Part Time</option>
+                                <option value="Other">Contract</option>
+                            </select>
+                        </div>
+
+                    </div>
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="cnic">
@@ -279,7 +332,7 @@ const DoctorForm = () => {
                                     borderColor: "grey",
                                     paddingLeft:'0.3rem'
                                 }}
-                                className="input_border"
+                           
                                 required
                                 name="cnic"
                                 format="#####-#######-#"
@@ -298,7 +351,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="email" name="email" placeholder="Email..." value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}   type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
                         {errors.email && touched.email ?  (<p style={{color:"red"}}>{errors.first_name}</p>):null}
                         </div>
 
@@ -308,10 +361,12 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_border" type="text" name="practitioner_type" placeholder="Practitioner Type..." value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="practitioner_type" label="Practitioner Type" value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
                     </div>
+                
+
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                             <label htmlFor="remarks">
@@ -320,7 +375,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}}  className="input_width" type="text" name="remarks" placeholder="remarks..." value={values.remarks} onChange={handleChange} />
+                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="remarks" label="Remarks" value={values.remarks} onChange={handleChange} />
                         </div>
 
 

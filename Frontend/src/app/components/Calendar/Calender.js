@@ -15,6 +15,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { Button } from '@mui/material';
+var momentTZ = require('moment-timezone');
 
 
 
@@ -41,9 +42,9 @@ export default class Calender extends Component {
   async componentDidMount() {
 
 
-    let events = await (await axios.get('http://192.168.5.21:8081/api/doctortimeslots/')).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/')).data
 
-    let scheduledAppointments = await (await axios.get('http://192.168.5.21:8081/api/scheduledappointments/')).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/')).data
 
 
     let array1 = events.map((e, i) => ({
@@ -73,7 +74,7 @@ export default class Calender extends Component {
     this.setState({ items: array1.concat(array2) })
 
 
-    let doctors = await (await axios.get('http://192.168.5.21:8081/api/users/')).data
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/')).data
 
     let doctorsArray = doctors.map((e, i) => ({
       id: e.id,
@@ -143,18 +144,21 @@ export default class Calender extends Component {
   }
 
 
-  timzoneCorrection = date =>{
+  timzoneCorrection = date => {
 
-   let x = new Date(date);
-let hoursDiff = x.getHours() - x.getTimezoneOffset() / 60;
-let minutesDiff = (x.getHours() - x.getTimezoneOffset()) % 60;
-x.setHours(hoursDiff);
-x.setMinutes(minutesDiff);
+    let x = new Date(date);
+    let hoursDiff = x.getHours() - x.getTimezoneOffset() / 60;
+    let minutesDiff = (x.getHours() - x.getTimezoneOffset()) % 60;
+    x.setHours(hoursDiff);
+    x.setMinutes(minutesDiff);
 
-return x
+    return x
   }
 
   addItemHandler = item => {
+
+
+    console.log("timezone corrected time", moment.utc(item.start).tz("Asia/Taipei").format())
 
     if (item.doctor == '' || item.patient == '' || item.end <= item.start) {
       NotificationManager.error("Please input the required fields correctly");
@@ -187,18 +191,18 @@ return x
             title: item.patientName,
             patient: item.patient,
             className: "confirm",
-            start: moment (item.start),
             // start: JSON.stringify(this.timzoneCorrection( new Date(item.start))),
+            // start: momentTZ.tz(item.start, "Karachi/Asia"),
+            // end: momentTZ.tz(item.end, "Karachi/Asia"),
+            start: moment(item.start),
             end: moment(item.end),
             canMove: false,
             canResize: false,
             canChangeGroup: false,
             scheduledAppointment: true,
-            currentlyAdded: true
+            currentlyAdded: true,
+            
           }
-
-
-       
 
           this.setState(state => ({
             items: [...state.items, newItem]
@@ -219,7 +223,7 @@ return x
 
         doctorAvailable = true
 
-      
+
 
       }
       else {
@@ -284,9 +288,9 @@ return x
 
 
 
-              await axios.post('http://192.168.5.21:8081/api/scheduledappointments',
-                this.state.items.filter((f) => f.scheduledAppointment).map(se => ({
-                  start_time: new Date(se.start), end_time: new Date(se.end), doctor: se.group,
+              await axios.post(`${process.env.REACT_APP_ORIGIN_URL}api/scheduledappointments`,
+                this.state.items.filter((f) => f.scheduledAppointment && f.currentlyAdded).map(se => ({
+                  start_time: moment.utc(se.start).tz("Asia/Taipei").format(), end_time: moment.utc(se.end).tz("Asia/Taipei").format(), doctor: se.group,
                   patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
                 }))
               )

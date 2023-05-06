@@ -1,11 +1,6 @@
 import {
-  Avatar,
   Box,
   Card,
-  Icon,
-  IconButton,
-  MenuItem,
-  Select,
   styled,
   Table,
   TableBody,
@@ -14,7 +9,11 @@ import {
   TableRow,
   useTheme,
 } from '@mui/material';
-import { Paragraph } from 'app/components/Typography';
+import moment from 'moment'
+
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+
 
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -61,10 +60,23 @@ const TopSellingTable = () => {
   const bgPrimary = palette.primary.main;
   const bgSecondary = palette.secondary.main;
 
+
+  const [scheduledappointments, setScheduledappointments] = useState([])
+
+
+
+
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/').then((res) => { setScheduledappointments(res.data); console.log("res", res) })
+
+  }, [])
+
+
+
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>Upcoming Appointments</Title>
+        <Title>Scheduled Appointments</Title>
         {/* <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>
@@ -75,37 +87,53 @@ const TopSellingTable = () => {
         <ProductTable>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ px: 3 }} colSpan={4}>
+
+              <TableCell sx={{ px: 3 }} colSpan={2}>
+                Date
+              </TableCell>
+
+              <TableCell sx={{ px: 0 }} colSpan={3}>
                 Patient Name
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
+              <TableCell sx={{ px: 0 }} colSpan={3}>
                 Doctor Name
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
                 Start Time
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={1}>
+              <TableCell sx={{ px: 0 }} colSpan={2}>
                 End Time
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {/* {productList.map((product, index) => (
+            {scheduledappointments.map((scheduledappointment, index) => (
               <TableRow key={index} hover>
-                <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
-                  <Box display="flex" alignItems="center">
+                <TableCell colSpan={2} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
+                  {/* <Box display="flex" alignItems="center">
                     <Avatar src={product.imgUrl} />
                     <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
-                  </Box>
+                  </Box> */}
+                  {moment(scheduledappointment.start_time).format('DD/MM/YYYY')}
+
+
                 </TableCell>
 
-                <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  ${product.price > 999 ? (product.price / 1000).toFixed(1) + 'k' : product.price}
+                <TableCell align="left" colSpan={3} sx={{ px: 0, textTransform: 'capitalize' }}>
+                  {scheduledappointment.patient}
+
+                </TableCell>
+
+                <TableCell align="left" colSpan={3} sx={{ px: 0, textTransform: 'capitalize' }}>
+                  {scheduledappointment.doctorName}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-                  {product.available ? (
+
+                  {moment(scheduledappointment.start_time).format('h:mm:ss a')}
+
+                  {/* {product.available ? (
                     product.available < 20 ? (
                       <Small bgcolor={bgSecondary}>{product.available} available</Small>
                     ) : (
@@ -113,16 +141,19 @@ const TopSellingTable = () => {
                     )
                   ) : (
                     <Small bgcolor={bgError}>out of stock</Small>
-                  )}
+                  )} */}
                 </TableCell>
 
-                <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton>
+                <TableCell sx={{ px: 0 }} colSpan={2}>
+
+                  {moment(scheduledappointment.end_time).format('h:mm:ss a')}
+
+                  {/* <IconButton>
                     <Icon color="primary">edit</Icon>
-                  </IconButton>
+                  </IconButton> */}
                 </TableCell>
               </TableRow>
-            ))} */}
+            ))}
           </TableBody>
         </ProductTable>
       </Box>

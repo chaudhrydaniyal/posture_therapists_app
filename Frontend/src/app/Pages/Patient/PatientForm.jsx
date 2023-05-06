@@ -12,7 +12,7 @@ import { Box, styled, Button, Icon } from '@mui/material';
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import { patientValidation } from "app/components/Validation/ValidationSchema";
-
+import Input from "app/components/UI Components/Input";
 
 const initialValue = {
     surname: "",
@@ -97,9 +97,9 @@ const PatientForm = () => {
     })
 
     function ageCalculator() {  
-        var userinput = values.date_of_birth;  
-        var dob = new Date(userinput);  
-        if(userinput==null || userinput=='') {  
+        var userInput = values.date_of_birth;  
+        var dob = new Date(userInput);  
+        if(userInput==null || userInput=='') {  
         //   document.getElementById("message").innerHTML = "**Choose a date please!";    
           return false;   
         } else {  
@@ -159,7 +159,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3" >
                             {" "}
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="surname" placeholder="Surname..." value={values.surname} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="surname" label="Surname" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="first_name">
@@ -169,7 +169,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="first_name" placeholder="First Name..." value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="first_name" label="First Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
                             {errors.first_name && touched.first_name ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -180,7 +180,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="middle_name" placeholder="Middle Name..." value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="middle_name" label="Middle Name" value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                     </div>
 
@@ -193,7 +193,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input
+                            <Input
                                 type="date"
                                 name="date_of_birth"
                                 value={values.date_of_birth}
@@ -210,12 +210,12 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <input
+                            <Input
                             style={{paddingLeft:'0.3rem'}}
-                                className="input_border"
+                                className="Input_border"
                                 name="age"
                                 type="text"
-                                placeholder="age..."
+                                label="Age"
                                 onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
@@ -259,7 +259,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="address" placeholder="Address..." value={values.address} onChange={handleChange} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_width" type="text" name="address" label="Address" value={values.address} onChange={handleChange} />
                         </div>
 
 
@@ -273,7 +273,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="number" name="home_phone" placeholder="Home Phone..." value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="number" name="home_phone" label="Home Phone" value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="work_phone">
@@ -282,7 +282,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="work_phone" placeholder="Work Phone..." value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="work_phone" label="Work Phone" value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="mobile_no">
@@ -290,7 +290,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="number" name="mobile_no" placeholder="Mobile No..." value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="number" name="mobile_no" label="Mobile No" value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
                                 e.target.value = Math.max(0, parseInt(e.target.value))
                                     .toString()
                                     .slice(0, 11);
@@ -306,7 +306,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="email" name="email" placeholder="Email..." value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="occupation">
@@ -314,7 +314,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="occupation" placeholder="Occupation..." value={values.occupation} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="occupation" label="Occupation" value={values.occupation} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="designation">
@@ -322,7 +322,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="designation" placeholder="Designation..." value={values.designation} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="designation" label="Designation" value={values.designation} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                     </div>
 
@@ -333,7 +333,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="doctorname" placeholder="Your Doctor Name..." />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="doctorname" label="Your Doctor Name" />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="cnic">
@@ -345,7 +345,7 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
                             <PatternFormat
-                                className="input_border"
+                                className="Input_border"
                                 style={{
                                     width: "100%",
                                     borderColor: "grey",
@@ -427,7 +427,7 @@ const PatientForm = () => {
                             </div>
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="contactperson" value={values.contactperson} onChange={handleChange} onBlur={handleBlur} />
+                                <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="contactperson" value={values.contactperson} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="patientrelationship">
@@ -436,7 +436,7 @@ const PatientForm = () => {
                             </div>
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="text" name="patientrelationship" value={values.patientrelationship} onChange={handleChange} onBlur={handleBlur} />
+                                <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="patientrelationship" value={values.patientrelationship} onChange={handleChange} onBlur={handleBlur} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="prevmobileno">
@@ -445,7 +445,7 @@ const PatientForm = () => {
                             </div>
 
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                                <input style={{paddingLeft:'0.3rem'}} className="input_border" type="number" name="prevmobileno" value={values.prevmobileno} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                                <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="number" name="prevmobileno" value={values.prevmobileno} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -479,13 +479,13 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
                             <div style={{ marginLeft: "4rem" }}>
-                                {/* <input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
+                                {/* <Input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
                                     <span>
                                         Yes
                                     </span>
 
                                     <span style={{ marginLeft: "3rem" }}>
-                                        <input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
+                                        <Input name="physiotherapist_seen_before" type="radio" onChange={handleChange} value={values.physiotherapist_seen_before} />
                                         <span>
                                             No
                                         </span>
@@ -518,8 +518,8 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            {/* <input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                            <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={values.patient_concerns_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} />
+                            {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={values.patient_concerns_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
 
@@ -533,7 +533,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={values.patient_satisfactions_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={values.patient_satisfactions_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
 
@@ -548,7 +548,7 @@ const PatientForm = () => {
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="todaysession" value={values.todaysession} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_width" type="text" name="todaysession" value={values.todaysession} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
 
@@ -562,7 +562,7 @@ const PatientForm = () => {
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="stoppingyou" value={values.stoppingyou} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_width" type="text" name="stoppingyou" value={values.stoppingyou} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
 
@@ -575,7 +575,7 @@ const PatientForm = () => {
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="fixednow" value={values.fixednow} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_width" type="text" name="fixednow" value={values.fixednow} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
 

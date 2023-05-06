@@ -1,4 +1,5 @@
 module.exports = app => {
+
   const disease = require("../controllers/disease.controller.js");
 
   var router = require("express").Router();
@@ -25,4 +26,5 @@ module.exports = app => {
   router.delete("/", disease.deleteAll);
 
   app.use('/api/diseases', router);
+  
 };

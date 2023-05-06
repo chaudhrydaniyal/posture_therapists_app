@@ -194,9 +194,9 @@ class AddItemsForm extends React.Component {
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        inputProps={{
-                          min: new Date().toISOString().slice(0, 16)
-                        }}   
+                        // inputProps={{
+                        //   min: new Date().toISOString().slice(0, 16)
+                        // }}   
                         onChange={this.handleChange('start')}
                         fullWidth={true}
                       />
@@ -212,9 +212,9 @@ class AddItemsForm extends React.Component {
                         id="date"
                         label="End"
                         type="datetime-local"
-                        inputProps={{
-                          min: new Date().toISOString().slice(0, 16)
-                        }}             
+                        // inputProps={{
+                        //   min: new Date().toISOString().slice(0, 16)
+                        // }}             
                         defaultValue={this.state.end}
                         className={classes.textField}
                         InputLabelProps={{

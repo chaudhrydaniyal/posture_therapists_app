@@ -12,10 +12,8 @@ Doctor_time_slots.create = (doctor_time_slots, result) => {
   console.log("first", doctor_time_slots)
   console.log("second", doctor_time_slots.map(ds => [ds.start_time, ds.end_time]))
 
-
   sql.query("INSERT IGNORE INTO doctor_time_slots (start_time, end_time, doctor) VALUES ?",
     [(doctor_time_slots.map(ds => [ds.start_time, ds.end_time, ds.doctor]))],
-
 
     //  [ ['02-02-2023',    '03-03-2023']],
     (err, res) => {
