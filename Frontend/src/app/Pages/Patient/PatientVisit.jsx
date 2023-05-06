@@ -17,7 +17,7 @@ import {
     NotificationContainer,
     NotificationManager,
 } from "react-notifications";
-
+import Input from 'app/components/UI Components/Input';
 
 // const initialValue = {
 //     personal_conditions: "",
@@ -170,7 +170,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")} />
+                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="personal_conditions" label="Personal conditions" defaultValue={values.personal_conditions} onChange={handleFormData("personal_conditions")} />
                             {values.personal_conditions.length <=1 ? (<p style={{color:"red"}}>Please enter personal condition</p>):null}
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -181,7 +181,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="current_treatment" placeholder="current treatment..." defaultValue={values.current_treatment} onChange={handleFormData("current_treatment")} />
+                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="current_treatment" label="Current treatment" defaultValue={values.current_treatment} onChange={handleFormData("current_treatment")} />
 
                             </div>
 
@@ -195,12 +195,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
                                     type="text"
                                     name="remarks"
-                                    placeholder="remarks..."
-                                    className="input_width"
+                                    label="Remarks"
+                                 
                                     defaultValue={values.remarks}
                                     onChange={handleFormData("remarks")}
 
@@ -221,7 +221,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")} />
+                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="AssTrauma_diseases" label="Ass.trauma & disease" defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="ROMstatus">
@@ -231,7 +231,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="ROMstatus" placeholder="R.O.M status..." defaultValue={values.ROMstatus} onChange={handleFormData("ROMstatus")} />
+                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="ROMstatus" label="R.O.M status" defaultValue={values.ROMstatus} onChange={handleFormData("ROMstatus")} />
 
                             </div>
 
@@ -246,12 +246,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
-                                    className="input_width"
+                                    className="Input_width"
                                     type="text"
                                     name="muscle_status"
-                                    placeholder="muscle status..."
+                                    label="Muscle status"
                                     defaultValue={values.muscle_status}
                                     onChange={handleFormData("muscle_status")}
 
@@ -266,12 +266,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
-                                    className="input_width"
+                                    
                                     name="skin_soft_tissues_pain"
                                     type="text"
-                                    placeholder="skin & soft tissue/pain..."
+                                    label="Skin & soft tissue/pain"
                                     defaultValue={values.skin_soft_tissues_pain}
                                     onChange={handleFormData("skin_soft_tissues_pain")}
 
@@ -291,12 +291,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
-                                    className="input_width"
+                                 
                                     type="text"
                                     name="cardio_vascular_status"
-                                    placeholder="cardio vascular status..."
+                                    label="Cardio vascular status"
                                     defaultValue={values.cardio_vascular_status}
                                     onChange={handleFormData("cardio_vascular_status")}
 
@@ -319,7 +319,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="general_mobility" placeholder="general mobility..." defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")} />
+                                <Input style={{paddingLeft:'0.3rem'}} type="text" name="general_mobility" label="General mobility" defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="transfers">
@@ -329,7 +329,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="transfers" placeholder="transfers..." defaultValue={values.transfers} onChange={handleFormData("transfers")} />
+                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="transfers" label="Transfers" defaultValue={values.transfers} onChange={handleFormData("transfers")} />
 
                             </div>
 
@@ -344,12 +344,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
-                                    className="input_width"
+                                  
                                     type="text"
                                     name="balance"
-                                    placeholder="balance..."
+                                    label="Balance"
                                     defaultValue={values.balance}
                                     onChange={handleFormData("balance")}
 
@@ -364,12 +364,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
-                                    className="input_width"
+                                   
                                     name="upper_limb_functions"
                                     type="text"
-                                    placeholder="upper limb functions..."
+                                    label="Upper limb functions"
                                     defaultValue={values.upper_limb_functions}
                                     onChange={handleFormData("upper_limb_functions")}
 
@@ -388,12 +388,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
-                                    className="input_width"
+                                   
                                     type="text"
                                     name="daily_life_activities"
-                                    placeholder="daily life activities..."
+                                    label="Daily life activities"
                                     defaultValue={values.daily_life_activities}
                                     onChange={handleFormData("daily_life_activities")}
 

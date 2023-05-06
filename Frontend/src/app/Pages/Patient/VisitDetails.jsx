@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
-
+import Input from 'app/components/UI Components/Input';
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -97,7 +97,7 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-4 col-sm-4 border p-3" >
                     {" "}
-                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="personal_conditions" placeholder="personal conditions..." defaultValue={data.personal_conditions} onChange={handleInput}/>
+                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="personal_conditions" label="Personal conditions" defaultValue={data.personal_conditions} onChange={handleInput}/>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="current_treatment">
@@ -107,7 +107,7 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                     {" "}
-                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="current_treatment" placeholder="current treatment..." value={data.current_treatment} onChange={handleInput}/>
+                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="current_treatment" label="Current treatment" value={data.current_treatment} onChange={handleInput}/>
 
                 </div>
 
@@ -121,12 +121,12 @@ const VisitDetails = () => {
                     </label>
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
                         type="text"
                         name="remarks"
-                        placeholder="remarks..."
-                        className="input_width"
+                        label="Remarks"
+                        className="Input_width"
                         value={data.remarks}
                         onChange={handleInput}
 
@@ -146,7 +146,7 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                     {" "}
-                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="AssTrauma_diseases" placeholder="Ass.trauma & disease..." value={data.AssTrauma_diseases} onChange={handleInput} />
+                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="AssTrauma_diseases" label="Ass.trauma & disease" value={data.AssTrauma_diseases} onChange={handleInput} />
                 </div>
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="ROMstatus">
@@ -156,7 +156,7 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                     {" "}
-                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="ROMstatus" placeholder="R.O.M status..." value={data.ROMstatus} onChange={handleInput}/>
+                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="ROMstatus" label="R.O.M status" value={data.ROMstatus} onChange={handleInput}/>
 
                 </div>
 
@@ -171,12 +171,12 @@ const VisitDetails = () => {
                     </label>
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
-                        className="input_width"
+                     
                         type="text"
                         name="muscle_status"
-                        placeholder="muscle status..."
+                        label="Muscle status"
                         value={data.muscle_status}
                         onChange={handleInput}
 
@@ -190,12 +190,12 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                     {" "}
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
-                        className="input_width"
+                        
                         name="skin_soft_tissues_pain"
                         type="text"
-                        placeholder="skin & soft tissue/pain..."
+                        label="Skin & soft tissue/pain"
                         value={data.skin_soft_tissues_pain}
                         onChange={handleInput}
 
@@ -215,12 +215,12 @@ const VisitDetails = () => {
                     </label>
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
-                        className="input_width"
+                      
                         type="text"
                         name="cardio_vascular_status"
-                        placeholder="cardio vascular status..."
+                        label="Cardio vascular status"
                         value={data.cardio_vascular_status}
                         onChange={handleInput}
 
@@ -242,7 +242,7 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                     {" "}
-                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="general_mobility" placeholder="general mobility..." value={data.general_mobility} onChange={handleInput}/>
+                    <Input style={{paddingLeft:'0.3rem'}}type="text" name="general_mobility" label="General mobility" value={data.general_mobility} onChange={handleInput}/>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="transfers">
@@ -252,7 +252,7 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                     {" "}
-                    <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="transfers" placeholder="transfers..." value={data.transfers} onChange={handleInput}/>
+                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="transfers" label="Transfers" value={data.transfers} onChange={handleInput}/>
 
                 </div>
 
@@ -267,12 +267,12 @@ const VisitDetails = () => {
                     </label>
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
-                        className="input_width"
+                        
                         type="text"
                         name="balance"
-                        placeholder="balance..."
+                        label="Balance"
                         value={data.balance}
                         onChange={handleInput}
 
@@ -286,12 +286,12 @@ const VisitDetails = () => {
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                     {" "}
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
-                        className="input_width"
+                    
                         name="upper_limb_functions"
                         type="text"
-                        placeholder="upper limb functions..."
+                        label="Upper limb functions"
                         value={data.upper_limb_functions}
                         onChange={handleInput}
 
@@ -310,12 +310,12 @@ const VisitDetails = () => {
                     </label>
                 </div>
                 <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    <input
+                    <Input
                     style={{paddingLeft:'0.3rem'}}
-                        className="input_width"
+                        
                         type="text"
                         name="daily_life_activities"
-                        placeholder="daily life activities..."
+                        label="Daily life activities"
                         value={data.daily_life_activities}
                         onChange={handleInput} 
 
@@ -356,7 +356,7 @@ const VisitDetails = () => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="DiagnosisICD10code" placeholder="Diagnosis-ICD-10-code..." value={data.DiagnosisICD10code}/>
+                                <Input style={{paddingLeft:'0.3rem'}} type="text" name="DiagnosisICD10code" label="Diagnosis-ICD-10-code" value={data.DiagnosisICD10code}/>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="BriefMedicalHistory">
@@ -366,7 +366,7 @@ const VisitDetails = () => {
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <input style={{paddingLeft:'0.3rem'}} className="input_width" type="text" name="BriefMedicalHistory" placeholder="Brief-Medical-History..." value={data.BriefMedicalHistory}/>
+                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="BriefMedicalHistory" label="Brief-Medical-History" value={data.BriefMedicalHistory}/>
 
                             </div>
 
@@ -380,12 +380,12 @@ const VisitDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
                                     type="text"
                                     name="PhysicalTherapyEvaluationTreatment"
-                                    placeholder="PhysicalTherapyEvaluationTreatment..."
-                                    className="input_width"
+                                    label="PhysicalTherapyEvaluationTreatment"
+                           
                                     value={data.PhysicalTherapyEvaluationTreatment}
             
                                 />
@@ -397,12 +397,12 @@ const VisitDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
                                     type="text"
                                     name="Other"
-                                    placeholder="Other..."
-                                    className="input_width"
+                                    label="Other"
+                                  
                                     // value={PatientPrescription.Other}
         
                                 />
@@ -420,12 +420,12 @@ const VisitDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
                                     type="text"
                                     name="AnticipatedFrequencyDuration"
-                                    placeholder="Anticipated-Frequency-Duration..."
-                                    className="input_width"
+                                    label="Anticipated-Frequency-Duration"
+                                 
                                     value={data.AnticipatedFrequencyDuration}
                                     
                                 />
@@ -437,12 +437,12 @@ const VisitDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
+                                <Input
                                 style={{paddingLeft:'0.3rem'}}
                                     type="text"
                                     name="SpecialInstructions"
-                                    placeholder="SpecialInstructions..."
-                                    className="input_width"
+                                    label="SpecialInstructions"
+                              
                                     value={data.SpecialInstructions}
                             
                                 />
@@ -465,20 +465,20 @@ const VisitDetails = () => {
                                 <tbody>
                                     <tr>
                                         <td>Weight bearing precaution?</td>
-                                        {/* <td><input className='input_border' style={{width:'3rem'}} /></td> */}
-                                        <td><input  className='input_border' style={{ width: '100%',paddingLeft:'0.3rem' }} name="WeightBearingPrecautions" value={data.WeightBearingPrecautions}/></td>
+                                        {/* <td><Input className='Input_border' style={{width:'3rem'}} /></td> */}
+                                        <td><Input  style={{ width: '100%',paddingLeft:'0.3rem' }} name="WeightBearingPrecautions" value={data.WeightBearingPrecautions}/></td>
 
                                     </tr>
                                     <tr>
                                         <td>Activity restrictions?</td>
-                                        {/* <td><input className='input_border' style={{width:'3rem'}}/></td> */}
-                                        <td><input  className='input_border' style={{ width: '100%',paddingLeft:'0.3rem' }} name="ActivityRestrictions" value={data.ActivityRestrictions}/></td>
+                                        {/* <td><Input className='Input_border' style={{width:'3rem'}}/></td> */}
+                                        <td><Input  style={{ width: '100%',paddingLeft:'0.3rem' }} name="ActivityRestrictions" value={data.ActivityRestrictions}/></td>
 
                                     </tr>
                                     <tr>
                                         <td>Other medical consideration?</td>
-                                        {/* <td><input className='input_border' style={{width:'3rem'}}/></td> */}
-                                        <td><input  className='input_border' style={{ width: '100%',paddingLeft:'0.3rem' }} name="OtherMedicalConsiderations" /></td>
+                                        {/* <td><Input className='Input_border' style={{width:'3rem'}}/></td> */}
+                                        <td><Input   style={{ width: '100%',paddingLeft:'0.3rem' }} name="OtherMedicalConsiderations" /></td>
                                     </tr>
                                 </tbody>
                                 <div style={{marginTop:'2rem'}}>
