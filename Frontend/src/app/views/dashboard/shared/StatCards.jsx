@@ -1,5 +1,6 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
+import { Link } from 'react-router-dom';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -29,10 +30,10 @@ const Heading = styled('h6')(({ theme }) => ({
 
 const StatCards = () => {
   const cardList = [
-    { name: 'Total Patients', amount: 5, icon: 'airline_seat_flat' },
-    { name: 'Available Doctors', amount: 6, icon: 'earbuds' },
-    { name: 'Total Appointments', amount: 4, icon: 'edit_calendar' },
-    { name: 'Total Branches', amount: 1, icon: 'location_city' },
+    { name: 'Total Patients', amount: 5, icon: 'airline_seat_flat', link:"/registeredPatient" },
+    { name: 'Available Doctors', amount: 6, icon: 'earbuds' , link:"/registeredDoctors" },
+    { name: 'Total Appointments', amount: 4, icon: 'edit_calendar' , link:""},
+    { name: 'Total Branches', amount: 1, icon: 'location_city' , link:""},
   ];
 
   return (
@@ -49,9 +50,11 @@ const StatCards = () => {
             </ContentBox>
 
             <Tooltip title="View Details" placement="top">
+              <Link to={item.link}>
               <IconButton>
                 <Icon>arrow_right_alt</Icon>
               </IconButton>
+              </Link>
             </Tooltip>
           </StyledCard>
         </Grid>

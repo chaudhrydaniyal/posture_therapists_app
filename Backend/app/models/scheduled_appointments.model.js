@@ -54,8 +54,11 @@ Scheduled_appointments.findById = (id, result) => {
   });
 };
 
+
+//INNER JOIN users on scheduled_appointments.doctor = users.id 
+
 Scheduled_appointments.getAll = (title, result) => {
-  let query = "SELECT scheduled_appointments.id, date, start_time,	end_time,	title,	doctor, first_name as patient  FROM scheduled_appointments INNER JOIN patients on scheduled_appointments.patient = patients.id";
+  let query = "SELECT scheduled_appointments.id, date, start_time,	end_time,	title,	doctor, users.first_name as doctorName, patients.first_name as patient  FROM scheduled_appointments INNER JOIN patients on scheduled_appointments.patient = patients.id INNER JOIN users on scheduled_appointments.doctor = users.id";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;

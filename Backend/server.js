@@ -1,7 +1,6 @@
 const express = require("express");
 const fileUpload = require('express-fileupload')
-
-
+const path = require('path')
 
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
@@ -14,11 +13,9 @@ var corsOptions = {
 
 app.use(cors());
 
+app.use(fileUpload());
 
-app.use(fileUpload())
-
-app.use(express.static('FileSystem'))
-
+app.use(express.static('FileSystem'));
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
@@ -31,7 +28,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
 });
 
-
 require("./app/routes/patient_visit.routes.js")(app);
 require("./app/routes/patient.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
@@ -40,8 +36,6 @@ require("./app/routes/disease.routes.js")(app);
 require("./app/routes/doctor_time_slots.routes.js")(app);
 require("./app/routes/scheduled_appointments.routes.js")(app);
 require("./app/routes/services.routes.js")(app);
-
-
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8081;
