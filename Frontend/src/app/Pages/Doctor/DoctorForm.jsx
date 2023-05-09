@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { PatternFormat } from "react-number-format";
@@ -12,6 +12,10 @@ import { Breadcrumb, SimpleCard } from 'app/components';
 import '../Patient/Patient.css'
 import { doctorValidation } from 'app/components/Validation/ValidationSchema';
 import Input from 'app/components/UI Components/Input';
+import { City, Country, State } from "country-state-city";
+import Select from "react-select";
+// import {Select,MenuItem } from '@mui/material';
+import Form from 'react-bootstrap/Form';
 
 const initialValue = {
     surname: "",
@@ -27,7 +31,13 @@ const initialValue = {
     practitioner_type: "",
     home_phone: "",
     work_phone: "",
-    remarks: ""
+    remarks: "",
+    specialization:"",
+    experience:"",
+    engagement_terms:"",
+
+    
+
 }
 
 const Container = styled('div')(({ theme }) => ({
@@ -38,7 +48,43 @@ const Container = styled('div')(({ theme }) => ({
         [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
     }
 }));
+
+
 const DoctorForm = () => {
+
+    let countryData = Country.getAllCountries();
+    const [stateData, setStateData] = useState();
+    const [cityData, setCityData] = useState();
+
+    const [country, setCountry] = useState(countryData[0]);
+    const [state, setState] = useState();
+    const [city, setCity] = useState();
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
+
+
+
+    useEffect(() => {
+        setStateData(State.getStatesOfCountry(country?.isoCode));
+        console.log("stateData", stateData)
+    }, [country]);
+
+    useEffect(() => {
+        setCityData(City.getCitiesOfState(country?.isoCode, state?.isoCode));
+        console.log("cityData", cityData)
+    }, [state]);
+
+    useEffect(() => {
+        stateData && setState(stateData[0]);
+        console.log("state")
+    }, [stateData]);
+
+    useEffect(() => {
+        cityData && setCity(cityData[0]);
+        console.log("city", city)
+    }, [cityData]);
+
 
     const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
         initialValues: initialValue,
@@ -59,7 +105,17 @@ const DoctorForm = () => {
                     cnic: values.cnic,
                     home_phone: values.home_phone,
                     work_phone: values.work_phone,
-                    remarks: values.remarks
+                    remarks: values.remarks,    
+                    specialization:values.specialization,
+                    experience:values.experience,
+                    engagement_terms:values.engagement_terms,
+                    country:selectedCountry,
+                    state:selectedState,
+                    city:selectedCity,
+
+               
+
+                  
 
                 })
                 NotificationManager.success("Successfully Registered");
@@ -70,10 +126,16 @@ const DoctorForm = () => {
 
             }
             action.resetForm()
+            setSelectedCountry(null)
+            setSelectedState(null)
+            setSelectedCity(null)
 
         }
 
     })
+
+
+
     function ageCalculator() {
         var userInput = values.date_of_birth;
         var dob = new Date(userInput);
@@ -99,6 +161,9 @@ const DoctorForm = () => {
                 "Age is: " + age + " years. ";
         }
     }
+
+
+
     return (
         <Container>
 
@@ -121,23 +186,23 @@ const DoctorForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="surname">
                                 {" "}
-                                <div>Surname:</div>
+                                <div>First Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3 ">
                             {" "}
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="surname" label="Surname" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="surname" label="First Name" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="first_name">
                                 {" "}
-                                <div>First Name:</div>
+                                <div>Last Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="first_name" label="First Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
-                            {errors.first_name && touched.first_name ? (<p style={{color:"red"}}>{errors.first_name}</p>):null }
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="first_name" label="Last Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                            {errors.first_name && touched.first_name ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
 
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -148,7 +213,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="middle_name" label="Middle Name" value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="middle_name" label="Middle Name" value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                     </div>
 
@@ -166,7 +231,7 @@ const DoctorForm = () => {
                                 value={values.date_of_birth}
                                 onChange={(e) => { handleChange(e); ageCalculator() }} onBlur={handleBlur}
                             />
-                            {errors.date_of_birth && touched.date_of_birth ?  (<p style={{color:"red"}}>{errors.date_of_birth}</p>):null}
+                            {errors.date_of_birth && touched.date_of_birth ? (<p style={{ color: "red" }}>{errors.date_of_birth}</p>) : null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="age">
@@ -177,8 +242,8 @@ const DoctorForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2  p-3">
                             {" "}
                             <Input
-                             style={{paddingLeft:'0.3rem'}} 
-                               
+                                style={{ paddingLeft: '0.3rem' }}
+
                                 name="age"
                                 type="text"
                                 label="Age"
@@ -200,7 +265,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <select name="gender" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
+                            {/* <select name="gender" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
                                 <option
                                     value=""
                                     selected="selected"
@@ -208,14 +273,21 @@ const DoctorForm = () => {
                                 >
                                     Select Gender...
                                 </option>
+                               
+                            </select> */}
+                            <Form.Select name="gender" value={values.gender} onChange={handleChange}>
+                                <option>Select gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
-                            </select>
-                            {errors.gender && touched.gender ? (<p style={{color:"red"}}>{errors.gender}</p>):null}
+                            </Form.Select>
+                            {errors.gender && touched.gender ? (<p style={{ color: "red" }}>{errors.gender}</p>) : null}
 
                         </div>
                     </div>
+
+
+
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                             <label htmlFor="address">
@@ -224,7 +296,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="address" label="Address" value={values.address} onChange={handleChange} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="address" label="Address" value={values.address} onChange={handleChange} />
                         </div>
 
 
@@ -238,7 +310,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}   type="text" name="home_phone" label="Home Phone" value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="home_phone" label="Home Phone" value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="work_phone">
@@ -247,7 +319,7 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="work_phone" label="Work Phone" value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="work_phone" label="Work Phone" value={values.work_phone} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="mobile_no">
@@ -255,12 +327,12 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}   type="number" name="mobile_no" label="Mobile No" value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                            <Input style={{ paddingLeft: '0.3rem' }} type="number" name="mobile_no" label="Mobile No" value={values.mobile_no} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
                                 e.target.value = Math.max(0, parseInt(e.target.value))
                                     .toString()
                                     .slice(0, 11);
                             }} />
-                            {errors.mobile_no && touched.mobile_no ? (<p style={{color:"red"}}>{errors.mobile_no}</p>):null}
+                            {errors.mobile_no && touched.mobile_no ? (<p style={{ color: "red" }}>{errors.mobile_no}</p>) : null}
                         </div>
 
                     </div>
@@ -275,14 +347,14 @@ const DoctorForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
                             <Input
-                            type="text"
-                           name="specialization"
-                           label="Specialization"
-                                value={values.cnic}
+                                type="text"
+                                name="specialization"
+                                label="Specialization"
+                                value={values.specialization}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
-                         
+
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -291,17 +363,17 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}   type="text" name="experience" label="Experience" value={values.email} onChange={handleChange} onBlur={handleBlur} />
-                       
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="experience" label="Experience" value={values.experience} onChange={handleChange} onBlur={handleBlur} />
+
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="Engagement Terms">
+                            <label htmlFor="engagement_terms">
                                 <div>Engagement Terms:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                        <select name="engagement-terms:" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
+                            <Form.Select name="engagement_terms" class="form-control dropdown" onChange={handleChange} value={values.engagement_terms} onBlur={handleBlur}>
                                 <option
                                     value=""
                                     selected="selected"
@@ -309,10 +381,11 @@ const DoctorForm = () => {
                                 >
                                     Select Engagement Terms:...
                                 </option>
-                                <option value="Male">Full Time</option>
-                                <option value="Female">Part Time</option>
-                                <option value="Other">Contract</option>
-                            </select>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
+                                <option value="Contract">Contract</option>
+                            </Form.Select>
+
                         </div>
 
                     </div>
@@ -330,9 +403,9 @@ const DoctorForm = () => {
                                 style={{
                                     width: "100%",
                                     borderColor: "grey",
-                                    paddingLeft:'0.3rem'
+                                    paddingLeft: '0.3rem'
                                 }}
-                           
+
                                 required
                                 name="cnic"
                                 format="#####-#######-#"
@@ -342,7 +415,7 @@ const DoctorForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
-                            {errors.cnic && touched.cnic ?  (<p style={{color:"red"}}>{errors.cnic}</p>):null}
+                            {errors.cnic && touched.cnic ? (<p style={{ color: "red" }}>{errors.cnic}</p>) : null}
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -351,8 +424,8 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}   type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
-                        {errors.email && touched.email ?  (<p style={{color:"red"}}>{errors.first_name}</p>):null}
+                            <Input style={{ paddingLeft: '0.3rem' }} type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                            {errors.email && touched.email ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -361,11 +434,79 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="practitioner_type" label="Practitioner Type" value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="practitioner_type" label="Practitioner Type" value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
                         </div>
 
                     </div>
-                
+                    <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="country">
+                                <div>Country:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={Country.getAllCountries()}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedCountry}
+                                onChange={(item) => {
+                                    setSelectedCountry(item);
+                                }}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="state">
+                                <div>State:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={State?.getStatesOfCountry(
+                                    selectedCountry?.isoCode
+                                )}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedState}
+                                onChange={(item) => {
+                                    setSelectedState(item);
+                                }}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="city">
+                                <div>City:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={City.getCitiesOfState(
+                                    selectedState?.countryCode,
+                                    selectedState?.isoCode
+                                )}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedCity}
+                                onChange={(item) => {
+                                    setSelectedCity(item);
+                                }}
+                            />
+                        </div>
+                    </div>
 
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
@@ -375,8 +516,9 @@ const DoctorForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}  type="text" name="remarks" label="Remarks" value={values.remarks} onChange={handleChange} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="remarks" label="Remarks" value={values.remarks} onChange={handleChange} />
                         </div>
+
 
 
                     </div>
@@ -389,6 +531,7 @@ const DoctorForm = () => {
                             <Span sx={{ pl: 1, textTransform: "capitalize" }} >Submit</Span>
                         </Button>
                     </div>
+
 
 
                 </div>

@@ -13,6 +13,10 @@ import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
 import { patientValidation } from "app/components/Validation/ValidationSchema";
 import Input from "app/components/UI Components/Input";
+import BloodtypeIcon from '@mui/icons-material/Bloodtype';
+import { Country, City, State } from "country-state-city";
+import Select from "react-select";
+import Form from 'react-bootstrap/Form';
 
 const initialValue = {
     surname: "",
@@ -41,6 +45,8 @@ const initialValue = {
     prevmobileno: "",
     contactperson: "",
     doctorname: "",
+    blood_group:"",
+    medical_status:"",
 }
 
 
@@ -57,6 +63,11 @@ const Container = styled('div')(({ theme }) => ({
 const PatientForm = () => {
 
     const [diseases, setDiseases] = useState([])
+    const [diseaseList,setDiseaseList] = useState(null)
+    const [selectedDisease,setSelectedDisease] = useState([])
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
 
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
@@ -83,6 +94,11 @@ const PatientForm = () => {
                     physiotherapist_seen_before: values.physiotherapist_seen_before,
                     patient_concerns_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
                     patient_satisfactions_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
+                    blood_group:values.blood_group,
+                    medical_status:values.medical_status,
+                    country:selectedCountry,
+                    state:selectedState,
+                    city:selectedCity
 
                 })
                 NotificationManager.success("Successfully Registered");
@@ -91,6 +107,9 @@ const PatientForm = () => {
                 NotificationManager.error("Something went wrong")
             }
             action.resetForm()
+            setSelectedCountry(null)
+            setSelectedState(null)
+            setSelectedCity(null)
         }
 
 
@@ -130,6 +149,30 @@ const PatientForm = () => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/diseases').then((res)=>{setDiseases(res.data);console.log("res",res)}
         )
     },[])
+ 
+
+    const handleChanges = (e) =>{
+        setDiseaseList(e.target.value)
+        setSelectedDisease([...selectedDisease, diseases.filter((g)=>g.id == e.target.value)[0]])
+
+    }
+
+    
+    const deleteById = (id) => {
+        const index = selectedDisease.findIndex(disease => disease.id === id);
+        if (index !== -1) {
+            const temp = selectedDisease
+            temp.splice(index, 1);
+            setSelectedDisease(temp)
+            console.log("selectedDisease", selectedDisease, temp)
+
+            setSelectedDisease([...selectedDisease])
+  
+        } else {
+            console.log("Service with id", id, "not found");
+        }
+        console.log("index", index)
+    }
 
     
     return (
@@ -154,33 +197,49 @@ const PatientForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="surname">
                                 {" "}
-                                <div>Surname:</div>
+                                <div>First Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3" >
                             {" "}
-                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="surname" label="Surname" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="surname" label="First Name" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="first_name">
                                 {" "}
-                                <div>First Name:</div>
+                                <div>Last Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="first_name" label="First Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="first_name" label="Last Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
                             {errors.first_name && touched.first_name ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="middle_name">
                                 {" "}
-                                <div>Middle Name:</div>
+                                <div>Blood Group <BloodtypeIcon/> :</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="middle_name" label="Middle Name" value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Form.Select name="blood_group" class="form-control dropdown" value={values.blood_group} onChange={handleChange} onBlur={handleBlur}>
+                                <option
+                                    value=""
+                                    selected="selected"
+                                    disabled="disabled"
+                                >
+                                    Select Blood Group...
+                                </option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </Form.Select>
                         </div>
                     </div>
 
@@ -236,7 +295,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
                             {" "}
-                            <select name="gender" class="form-control dropdown" onChange={handleChange} value={values.gender}>
+                            <Form.Select name="gender" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
                                 <option
                                     value=""
                                     selected="selected"
@@ -247,7 +306,7 @@ const PatientForm = () => {
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
-                            </select>
+                            </Form.Select>
                             {errors.gender && touched.gender ? (<p style={{ color: "red" }}>{errors.gender}</p>) : null}
                         </div>
                     </div>
@@ -264,16 +323,16 @@ const PatientForm = () => {
 
 
                     </div>
-
+                 
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                            <label htmlFor="home_phone">
+                            <label htmlFor="medical_status">
                                 {" "}
-                                <div>Home Phone:</div>
+                                <div>Medical Status:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="number" name="home_phone" label="Home Phone" value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="medical_status" label="Medical Status" value={values.medical_status}  onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="work_phone">
@@ -383,7 +442,9 @@ const PatientForm = () => {
 
                                     </select> */}
 
-                            <select class="form-control dropdown"
+                            <Form.Select class="form-control dropdown"
+                            value={diseaseList}
+                            onChange={(e)=>handleChanges(e)}
                             //   onClick={(e) => {
                             //     setSelectDepartment(e.target.value);
                             //     setUpdate(!update);
@@ -400,14 +461,94 @@ const PatientForm = () => {
                                             {d.name}
                                         </option>
                                     ))}
-                            </select>
+                            </Form.Select>
+
+                            {selectedDisease.map((i)=>(
+                                <p key={i.id}>{i.name}
+                                <button onClick={() => deleteById(i.id)}
+                                 style={{ background: 'none', border: 'none', marginTop: '2px',marginLeft:'1rem' }}>
+                                    &#x274C;</button>
+                                    </p>
+                            ))}
+
+                            {console.log("selectedDisease",selectedDisease)}
 
 
                         </div>
 
+                        
+
 
                     </div>
+                    <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="country">
+                                <div>Country:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <Select
+                              options={Country.getAllCountries()}
+                              getOptionLabel={(options) => {
+                                return options["name"];
+                              }}
+                              getOptionValue={(options) => {
+                                return options["name"];
+                              }}
+                              value={selectedCountry}
+                              onChange={(item) => {
+                                setSelectedCountry(item);
+                              }}
+                            />
 
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="state">
+                                <div>State:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <Select
+                              options={State?.getStatesOfCountry(
+                                selectedCountry?.isoCode
+                              )}
+                              getOptionLabel={(options) => {
+                                return options["name"];
+                              }}
+                              getOptionValue={(options) => {
+                                return options["name"];
+                              }}
+                              value={selectedState}
+                              onChange={(item) => {
+                                setSelectedState(item);
+                              }}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="city">
+                                <div>City:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <Select
+                              options={City.getCitiesOfState(
+                                selectedState?.countryCode,
+                                selectedState?.isoCode
+                              )}
+                              getOptionLabel={(options) => {
+                                return options["name"];
+                              }}
+                              getOptionValue={(options) => {
+                                return options["name"];
+                              }}
+                              value={selectedCity}
+                              onChange={(item) => {
+                                setSelectedCity(item);
+                              }}
+                            />
+                        </div>
+                    </div>
 
                     </div>
                 </div>
@@ -492,7 +633,7 @@ const PatientForm = () => {
                                     </span> */}
 
                                 {" "}
-                                <select name="physiotherapist_seen_before" class="form-control dropdown" onChange={handleChange} value={values.physiotherapist_seen_before}>
+                                <Form.Select name="physiotherapist_seen_before" class="form-control dropdown" onChange={handleChange} value={values.physiotherapist_seen_before}>
                                     <option
                                         value=""
                                         selected="selected"
@@ -503,7 +644,7 @@ const PatientForm = () => {
                                     <option>Yes</option>
                                     <option>No</option>
 
-                                </select>
+                                </Form.Select>
 
 
 
@@ -594,6 +735,10 @@ const PatientForm = () => {
                         <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
                             <Span sx={{ pl: 1, textTransform: "capitalize" }}>Schedule appointment</Span>
                         </Button> */}
+    
+
+
+
 
                     </div>
                 </div>

@@ -22,7 +22,10 @@ import { Breadcrumb, SimpleCard } from 'app/components';
 import './Patient.css'
 import PatientVisit from './PatientVisit';
 import Input from 'app/components/UI Components/Input';
-
+import { Country, City, State } from "country-state-city";
+import Select from "react-select";
+import Form from 'react-bootstrap/Form';
+import BloodtypeIcon from '@mui/icons-material/Bloodtype';
 const StyledTable = styled(Table)(() => ({
     whiteSpace: "pre",
     "& thead": {
@@ -54,7 +57,9 @@ const PatientDetails = () => {
     const [getDiseases, setGetDiseases] = useState([])
     const [doctors, setDoctors] = useState([])
     const [visitsHistory, setVisitsHistory] = useState([])
-
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -228,7 +233,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="surname">
                                     {" "}
-                                    <div>Surname:</div>
+                                    <div>First Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -238,7 +243,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
                                     {" "}
-                                    <div>First Name:</div>
+                                    <div>Last Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -247,14 +252,30 @@ const PatientDetails = () => {
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="middle_name">
-                                    {" "}
-                                    <div>Middle Name:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="middle_name">
                                 {" "}
-                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="middle_name" value={data.middle_name} onChange={handleInput} disabled={disableFields} />
+                                <div>Blood Group <BloodtypeIcon/> :</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            {" "}
+                            <Form.Select name="gender" class="form-control dropdown" >
+                                <option
+                                    value=""
+                                    selected="selected"
+                                    disabled="disabled"
+                                >
+                                    Select Blood Group...
+                                </option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </Form.Select>
                             </div>
                         </div>
 
@@ -308,7 +329,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields}>
+                                <Form.Select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields}>
                                     <option
                                         value=""
                                         selected="selected"
@@ -319,7 +340,7 @@ const PatientDetails = () => {
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
-                                </select>
+                                </Form.Select>
 
                             </div>
                         </div>
@@ -339,14 +360,14 @@ const PatientDetails = () => {
 
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                                <label htmlFor="homephone">
-                                    {" "}
-                                    <div>Home Phone:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="homephone"  onChange={handleInput} disabled={disableFields} />
-                            </div>
+                            <label htmlFor="medical_status">
+                                {" "}
+                                <div>Medical Status:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="medical_status" label="Medical Status" disabled={disableFields}/>
+                        </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="workphone">
                                     {" "}
@@ -442,7 +463,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
 
-                                <select class="form-control dropdown"
+                                <Form.Select class="form-control dropdown"
                                     disabled={disableFields}
                                 >
                                     <option value="none" selected disabled hidden>
@@ -455,14 +476,85 @@ const PatientDetails = () => {
                                                 {d.name}
                                             </option>
                                         ))}
-                                </select>
+                                </Form.Select>
 
 
                             </div>
 
 
                         </div>
+                        <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="country">
+                                <div>Country:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <Select
+                              options={Country.getAllCountries()}
+                              getOptionLabel={(options) => {
+                                return options["name"];
+                              }}
+                              getOptionValue={(options) => {
+                                return options["name"];
+                              }}
+                              value={selectedCountry}
+                              onChange={(item) => {
+                                setSelectedCountry(item);
+                              }}
+                              disabled={disableFields}
+                            />
 
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="state">
+                                <div>State:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <Select
+                              options={State?.getStatesOfCountry(
+                                selectedCountry?.isoCode
+                              )}
+                              getOptionLabel={(options) => {
+                                return options["name"];
+                              }}
+                              getOptionValue={(options) => {
+                                return options["name"];
+                              }}
+                              value={selectedState}
+                              onChange={(item) => {
+                                setSelectedState(item);
+                              }}
+                              disabled={disableFields}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="city">
+                                <div>City:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                        <Select
+                              options={City.getCitiesOfState(
+                                selectedState?.countryCode,
+                                selectedState?.isoCode
+                              )}
+                              getOptionLabel={(options) => {
+                                return options["name"];
+                              }}
+                              getOptionValue={(options) => {
+                                return options["name"];
+                              }}
+                              value={selectedCity}
+                              onChange={(item) => {
+                                setSelectedCity(item);
+                              }}
+                              disabled={disableFields}
+                            />
+                        </div>
+                    </div>
 
                     </div>
                 </div>
@@ -533,7 +625,7 @@ const PatientDetails = () => {
 
 
                                         {" "}
-                                        <select name="physiotherapist_seen_before" class="form-control dropdown" value={data.physiotherapist_seen_before} onChange={handleInput} disabled={disableFields}>
+                                        <Form.Select name="physiotherapist_seen_before" class="form-control dropdown" value={data.physiotherapist_seen_before} onChange={handleInput} disabled={disableFields}>
                                             <option
                                                 value=""
                                                 selected="selected"
@@ -544,7 +636,7 @@ const PatientDetails = () => {
                                             <option>Yes</option>
                                             <option>No</option>
 
-                                        </select>
+                                        </Form.Select>
 
 
 

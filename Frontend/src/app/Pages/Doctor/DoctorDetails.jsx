@@ -16,6 +16,10 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../Pages/Patient/Patient.css'
 import Input from 'app/components/UI Components/Input';
+import { City, Country, State } from "country-state-city";
+import Select from "react-select";
+// import {Select,MenuItem } from '@mui/material';
+import Form from 'react-bootstrap/Form';
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -31,9 +35,11 @@ const DoctorDetails = () => {
     const [disableFields, setDisableFields] = useState(true);
     const [availableSlots, setAvailableSlots] = useState(false)
     const [doctorSlots, setDoctorSlots] = useState(true)
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
 
-
-
+   
     const [data, setData] = useState({
         id: doctorDetails.id,
         first_name: doctorDetails.first_name,
@@ -205,7 +211,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="surname">
                                     {" "}
-                                    <div>Surname:</div>
+                                    <div>First Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -215,7 +221,7 @@ const DoctorDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
                                     {" "}
-                                    <div>First Name:</div>
+                                    <div>Last Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -283,7 +289,7 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
                                 {" "}
-                                <select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields}>
+                                <Form.Select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields}>
                                     <option
                                         value=""
                                         selected="selected"
@@ -294,7 +300,7 @@ const DoctorDetails = () => {
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
-                                </select>
+                                </Form.Select>
 
                             </div>
                         </div>
@@ -345,7 +351,57 @@ const DoctorDetails = () => {
                             </div>
 
                         </div>
+                        <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="Specialization">
+                                <div>Specialization:</div>
+                            </label>
+                        </div>
 
+
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+
+                            <Input
+                                type="text"
+                                name="specialization"
+                                label="Specialization"
+                              
+                            />
+
+                        </div>
+
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="experience">
+                                <div>Experience:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="experience" label="Experience" />
+
+                        </div>
+
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="Engagement Terms">
+                                <div>Engagement Terms:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Form.Select name="engagement-terms:" class="form-control dropdown" >
+                                <option
+                                    value=""
+                                    selected="selected"
+                                    disabled="disabled"
+                                >
+                                    Select Engagement Terms:...
+                                </option>
+                                <option value="Male">Full Time</option>
+                                <option value="Female">Part Time</option>
+                                <option value="Other">Contract</option>
+                            </Form.Select>
+
+                        </div>
+
+                    </div>
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
@@ -372,56 +428,7 @@ const DoctorDetails = () => {
                                 <Input className="Input_border" type="text" name="designation"  onChange={handleInput} disabled={disableFields} />
                             </div>
                         </div>
-                        <div className="row">
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="Specialization">
-                                <div>Specialization:</div>
-                            </label>
-                        </div>
-
-
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-
-                            <Input
-                            type="text"
-                           name="specialization"
-                           label="Specialization"
-                               
-                            />
-                         
-                        </div>
-
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="experience">
-                                <div>Experience:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}}   type="text" name="experience" label="Experience" />
-                       
-                        </div>
-
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="Engagement Terms">
-                                <div>Engagement Terms:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                        <select name="engagement-terms:" class="form-control dropdown" >
-                                <option
-                                    value=""
-                                    selected="selected"
-                                    disabled="disabled"
-                                >
-                                    Select Engagement Terms:...
-                                </option>
-                                <option value="Male">Full Time</option>
-                                <option value="Female">Part Time</option>
-                                <option value="Other">Contract</option>
-                            </select>
-                        </div>
-
-                    </div>
+                    
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="doctorname">
@@ -467,6 +474,76 @@ const DoctorDetails = () => {
 
 
                         </div>
+                        <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="country">
+                                <div>Country:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={Country.getAllCountries()}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedCountry}
+                                onChange={(item) => {
+                                    setSelectedCountry(item);
+                                }}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="state">
+                                <div>State:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={State?.getStatesOfCountry(
+                                    selectedCountry?.isoCode
+                                )}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedState}
+                                onChange={(item) => {
+                                    setSelectedState(item);
+                                }}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="city">
+                                <div>City:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={City.getCitiesOfState(
+                                    selectedState?.countryCode,
+                                    selectedState?.isoCode
+                                )}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedCity}
+                                onChange={(item) => {
+                                    setSelectedCity(item);
+                                }}
+                            />
+                        </div>
+                    </div>
+
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="remarks">
