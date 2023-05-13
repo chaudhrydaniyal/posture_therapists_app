@@ -98,6 +98,37 @@ Scheduled_appointments.getAllForDoctor = (id, result) => {
 };
 
 
+
+
+// Get all today's scheduled appointments 
+
+Scheduled_appointments.getAllScheduledToday = ( result) => {
+  let query = "SELECT scheduled_appointments.id, date, start_time,	end_time,	title,	users.first_name as doctor, patients.first_name as patient, users.id as doctorId, patients.id as patientId  FROM scheduled_appointments INNER JOIN patients on scheduled_appointments.patient = patients.id INNER JOIN users on scheduled_appointments.doctor = users.id";
+
+
+    query += ` WHERE DATE(start_time) = CURDATE();`;
+
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("diseases: ", res);
+    result(null, res);
+  });
+};
+
+
+
+
+
+
+
+
+
 Scheduled_appointments.getAllPublished = result => {
   sql.query("SELECT * FROM scheduled_appointments WHERE published=true", (err, res) => {
     if (err) {

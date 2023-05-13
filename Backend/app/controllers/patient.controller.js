@@ -46,10 +46,17 @@ exports.create = (req, res) => {
     patient_concerns_for_previous_physiotherapist: req.body.patient_concerns_for_previous_physiotherapist,
     patient_satisfactions_for_previous_physiotherapist: req.body.patient_satisfactions_for_previous_physiotherapist,
 
+
+    blood_group : req.body.blood_group,
+    medical_status : req.body.medical_status,
+    country : req.body.country,
+    state : req.body.state,
+    city : req.body.city
+
   });
 
   // Save Tutorial in the database
-  Patient.create(patient, (err, data) => {
+  Patient.create(patient,req.body.diseases, (err, data) => {
     if (err)
       res.status(500).send({
         message:

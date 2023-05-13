@@ -62,6 +62,23 @@ exports.findAllForDoctor = (req, res) => {
 
 
 
+// Retrieve all appointments scheduled today
+exports.findAllScheduledToday = (req, res) => {
+
+
+  Scheduled_appointments.getAllScheduledToday((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Diseases."
+      });
+    else res.send(data);
+  });
+
+};
+
+
+
 
 
 

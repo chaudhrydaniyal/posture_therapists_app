@@ -27,8 +27,8 @@ const Container = styled('div')(({ theme }) => ({
     [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
   }
 }));
-export default class AppointmentSchedule extends React.Component {
 
+export default class AppointmentSchedule extends React.Component {
 
   state = {
 
@@ -45,9 +45,7 @@ export default class AppointmentSchedule extends React.Component {
     patients: [],
     selectedPatient: ''
 
-
   }
-
 
   async componentDidMount() {
 

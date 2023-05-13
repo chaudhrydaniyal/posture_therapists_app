@@ -40,7 +40,15 @@ exports.create = async (req, res) => {
     designation : req.body.designation,
     role : req.body.role,
     remarks : req.body.remarks,
-    password : req.body.password
+    password : req.body.password,
+
+
+
+    specialization : req.body.specialization,
+    engagement_terms : req.body.engagement_terms,
+    country : req.body.country,
+    state : req.body.state,
+    city : req.body.city
 
   });
 

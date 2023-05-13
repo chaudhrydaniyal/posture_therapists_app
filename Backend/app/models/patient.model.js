@@ -21,16 +21,30 @@ const Patient = function (patient) {
   this.patient_satisfactions_for_previous_physiotherapist = patient.patient_satisfactions_for_previous_physiotherapist;
 
 
+  
+
+  this.blood_group = patient.blood_group;
+  this.medical_status = patient.medical_status;
+  this.country = patient.country;
+  this.state = patient.state;
+  this.city = patient.city;
+  
+
+
 
 };
 
-Patient.create = (newPatient, result) => {
+Patient.create = (newPatient, diseases, result) => {
   sql.query("INSERT INTO patients SET ?", newPatient, (err, res) => {
     if (err) {
       console.log("error:", err);
       result(err, null);
       return;
     }
+
+    sql.query("INSERT INTO patient_diseases SET ?", [diseases[0], res.insertId], (err, res) => {
+      console.log("patient_diseases inserted", err)
+    })
 
     console.log("created Patient: ", { id: res.insertId, ...newPatient });
     result(null, { id: res.insertId, ...newPatient });

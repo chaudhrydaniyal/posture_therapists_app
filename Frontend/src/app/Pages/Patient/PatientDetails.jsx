@@ -647,7 +647,7 @@ const PatientDetails = () => {
                             <div className="row">
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="patient_concerns_for_previous_physiotherapist">
-                                        <div>If Yes, was there anything yu were not happy about?</div>
+                                        <div>If Yes, was there anything you were not happy about?</div>
                                     </label>
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">

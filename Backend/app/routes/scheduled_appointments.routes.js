@@ -12,6 +12,10 @@ module.exports = app => {
   // Retrieve all published Tutorials
   router.get("/published", scheduled_appointments.findAllPublished);
 
+  
+  // Retrieve all appointments scheduled today
+  router.get("/current", scheduled_appointments.findAllScheduledToday);
+
   // Retrieve a single Tutorial with id
   router.get("/:id", scheduled_appointments.findAllForDoctor);
 

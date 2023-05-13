@@ -18,6 +18,19 @@ const User = function(user) {
   this.cnic = user.cnic;
   this.role = user.role;  
   this.remarks = user.remarks;
+
+
+
+
+  this.specialization = user.specialization;
+  this.engagement_terms = user.engagement_terms;
+  this.country = user.country;
+  this.state = user.state;
+  this.city = user.city;
+
+
+
+
 };
 
 User.create = (newUser, result) => {

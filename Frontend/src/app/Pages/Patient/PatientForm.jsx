@@ -98,7 +98,8 @@ const PatientForm = () => {
                     medical_status:values.medical_status,
                     country:selectedCountry,
                     state:selectedState,
-                    city:selectedCity
+                    city:selectedCity,
+                    diseases: selectedDisease.map((sd)=>sd.id)
 
                 })
                 NotificationManager.success("Successfully Registered");
