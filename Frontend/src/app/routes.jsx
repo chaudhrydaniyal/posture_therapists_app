@@ -20,7 +20,7 @@ import VisitDetails from './Pages/Patient/VisitDetails';
 import PatientStepper from './Pages/Patient/PatientStepper';
 import PatientPrescription from './Pages/Patient/PatientPrescription';
 import Services from './Pages/Setup/Services';
-import Invoice from './Pages/Setup/Invoice';
+import Invoice from './components/invoice/Invoice';
 
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
@@ -84,7 +84,11 @@ const routes = [
         element: <DoctorForm />,
         // auth: authRoles.admin
       },
-
+      {
+        path: '/createInvoice',
+        element: <Invoice/>,
+        // auth: authRoles.admin
+      },
       {
         path: '/registeredDoctors',
         element: <RegisteredDoctors />,
