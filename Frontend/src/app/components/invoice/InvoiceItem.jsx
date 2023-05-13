@@ -12,7 +12,7 @@ class InvoiceItem extends React.Component {
     var rowDel = this.props.onRowDel;
     var itemTable = this.props.items.map(function(item) {
       return (
-        <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id} currency={currency}/>
+        <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id}/>
       )
     });
     return (
