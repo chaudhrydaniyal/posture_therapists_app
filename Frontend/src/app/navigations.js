@@ -63,6 +63,18 @@ export const navigations = [
 
     ]
   },
+  { label: 'Invoice Management', type: 'label' },
+  {
+    name: 'Invoice  Management',
+    icon: 'earbuds',
+    // badge: { value: '30+', color: 'secondary' },
+    children: [
+      { name: 'createInvoice', path: '/createInvoice', iconText: 'A' },
+     
+      
+
+    ]
+  },
 
   { label: 'Setup', type: 'label' },
   {

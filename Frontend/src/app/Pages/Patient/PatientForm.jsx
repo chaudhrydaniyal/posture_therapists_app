@@ -111,6 +111,7 @@ const PatientForm = () => {
             setSelectedCountry(null)
             setSelectedState(null)
             setSelectedCity(null)
+            
         }
 
 
