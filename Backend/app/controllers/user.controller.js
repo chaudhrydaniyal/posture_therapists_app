@@ -4,6 +4,7 @@ const User = require("../models/user.model.js");
 
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
+
   // Validate request
   if (!req.body) {
     res.status(400).send({
@@ -11,46 +12,53 @@ exports.create = async (req, res) => {
     });
   }
 
+  const uniqueFileName = (new Date()).getTime()
 
   // const salt =await  bcrypt.genSalt()
 
   // const hashedPassword = await bcrypt.hash(req.body.password, salt)
-
 
   // Create a Tutorial
   const user = new User({
     // title: req.body.title,
     // description: req.body.description,
     // published: req.body.published || false
-
-    surname : req.body.surname,
-    first_name : req.body.first_name,
-    middle_name : req.body.middle_name,
+    surname: req.body.surname,
+    first_name: req.body.first_name,
+    middle_name: req.body.middle_name,
     // password: hashedPassword,
-    cnic : req.body.cnic,
-    date_of_birth : req.body.date_of_birth,
-    age : req.body.age,
-    gender : req.body.gender,
-    address : req.body.address,
-    home_phone : req.body.home_phone,
-    work_phone : req.body.work_phone,
-    mobile_no : req.body.mobile_no,
-    email : req.body.email,
-    practitioner_type : req.body.practitioner_type,
-    designation : req.body.designation,
-    role : req.body.role,
-    remarks : req.body.remarks,
-    password : req.body.password,
-
-
-
-    specialization : req.body.specialization,
-    engagement_terms : req.body.engagement_terms,
-    country : req.body.country,
-    state : req.body.state,
-    city : req.body.city
-
+    cnic: req.body.cnic,
+    date_of_birth: req.body.date_of_birth,
+    age: req.body.age,
+    gender: req.body.gender,
+    address: req.body.address,
+    home_phone: req.body.home_phone,
+    work_phone: req.body.work_phone,
+    mobile_no: req.body.mobile_no,
+    email: req.body.email,
+    practitioner_type: req.body.practitioner_type,
+    designation: req.body.designation,
+    role: req.body.role,
+    remarks: req.body.remarks,
+    password: req.body.password,
+    specialization: req.body.specialization,
+    engagement_terms: req.body.engagement_terms,
+    country: req.body.country,
+    state: req.body.state,
+    city: req.body.city,
+    picture: req.files && `${uniqueFileName}.jpg`
   });
+
+  // Saving the audio file of doctor prescription
+
+  if (req.files) {
+    let filePath = __dirname + '/../../FileSystem2/' + uniqueFileName + '.jpg';
+    let fileUpload = req.files.picture;
+    await fileUpload.mv(filePath, function (err) {
+      if (err) { console.log("Error while uploading file.", err) }
+      else { console.log("File uploaded successfully!") }
+    })
+  }
 
   // Save Tutorial in the database
   User.create(user, (err, data) => {
@@ -65,6 +73,7 @@ exports.create = async (req, res) => {
 
 // Retrieve all Tutorials from the database (with condition).
 exports.findAll = (req, res) => {
+
   const title = req.query.title;
 
   User.getAll(title, (err, data) => {
@@ -114,8 +123,6 @@ exports.update = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-
-  console.log(req.body);
 
   User.updateById(
     req.params.id,

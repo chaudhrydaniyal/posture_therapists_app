@@ -34,7 +34,6 @@ const Patient_visit = function(patient_visit) {
   this.SpecialInstructions = patient_visit.SpecialInstructions,
   this.audioFile = patient_visit.audioFile
 
-
   
 };
 

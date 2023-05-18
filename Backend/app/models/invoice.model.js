@@ -1,57 +1,40 @@
 const sql = require("./db.js");
 
 // constructor
-const Patient = function (patient) {
-  this.first_name = patient.first_name;
-  this.middle_name = patient.middle_name;
-  this.surname = patient.surname;
-
-  this.date_of_birth = patient.date_of_birth ? patient.date_of_birth :null;
-  this.age = patient.age;
-  this.gender = patient.gender;
-  this.address = patient.address;
-  this.mobile_no = patient.mobile_no;
-  this.email = patient.email;
-  this.cnic = patient.cnic;
-
-  this.date_registered = patient.date_registered;
-  this.occupation = patient.occupation;
-  this.physiotherapist_seen_before = patient.physiotherapist_seen_before;
-  this.patient_concerns_for_previous_physiotherapist = patient.patient_concerns_for_previous_physiotherapist;
-  this.patient_satisfactions_for_previous_physiotherapist = patient.patient_satisfactions_for_previous_physiotherapist;
-
-  this.blood_group = patient.blood_group;
-  this.medical_status = patient.medical_status;
-  this.country = patient.country;
-  this.state = patient.state;
-  this.city = patient.city;
-  
-
-
-
+const Invoice = function (invoice) {
+  this.date = invoice.date;
+  this.sub_total = invoice.sub_total;
+  this.patient = invoice.patient;
+  this.doctor = invoice.doctor;
+  this.discount = invoice.discount;
+  this.tax_rate = invoice.tax_rate;
+  this.items = invoice.items;
+  // this.invoice = invoice.invoice;
+  // this.price = invoice.price;
 };
 
-Patient.create = (newPatient, diseases, result) => {
-  sql.query("INSERT INTO patients SET ?", newPatient, (err, res) => {
+Invoice.create = (invoice,  result) => {
+
+  const invoiceItems = invoice.items;
+
+  delete invoice.items;
+
+  sql.query("INSERT INTO invoice SET ?", invoice, (err, res) => {
     if (err) {
       console.log("error:", err);
       result(err, null);
       return;
     }
 
-
-    console.log("array to be inserted", [diseases.map((d)=>[d , res.insertId])])
-
-    sql.query("INSERT INTO patient_diseases (diseaseID, patientID) VALUES ?", [diseases.map((d)=>[parseInt(d) , res.insertId])], (err, res) => {
+    sql.query("INSERT INTO invoice_items (item , description, qty , price, invoice ) VALUES ?", [invoiceItems.map((d)=>[d.title, d.description, d.qty, d.price, res.insertId])], (err, res) => {
       console.log("patient_diseases inserted", err)
     })
 
-    console.log("created Patient: ", { id: res.insertId, ...newPatient });
-    result(null, { id: res.insertId, ...newPatient });
+    result(null, { id: res.insertId });
   });
 };
 
-Patient.findById = (id, result) => {
+Invoice.findById = (id, result) => {
   sql.query(`SELECT * FROM patients WHERE id = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -60,7 +43,7 @@ Patient.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found patient: ", res[0]);
+      console.log("found invoice: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -70,7 +53,7 @@ Patient.findById = (id, result) => {
   });
 };
 
-Patient.getAll =  (title, result) => {
+Invoice.getAll =  (title, result) => {
   let query = "SELECT * FROM patients";
 
   if (title) {
@@ -93,7 +76,7 @@ Patient.getAll =  (title, result) => {
 
 };
 
-Patient.getAllPublished = result => {
+Invoice.getAllPublished = result => {
 
   sql.query("SELECT * FROM patients WHERE published=true", (err, res) => {
 
@@ -103,7 +86,7 @@ Patient.getAllPublished = result => {
       return;
     }
 
-    console.log("patient: ", res);
+    console.log("invoice: ", res);
     result(null, res);
 
   });
@@ -111,10 +94,10 @@ Patient.getAllPublished = result => {
 
 
 
-Patient.updateById = (id, patient, result) => {
+Invoice.updateById = (id, invoice, result) => {
   sql.query(
     "UPDATE patients SET first_name = ?, middle_name = ?, surname = ?, cnic = ?, date_of_birth = ?, age = ?, address = ?, email = ?, gender = ?, mobile_no = ?, date_registered = ?, occupation = ?, physiotherapist_seen_before = ?, patient_concerns_for_previous_physiotherapist = ?, patient_satisfactions_for_previous_physiotherapist = ? WHERE id = ?",
-    [patient.first_name, patient.middle_name, patient.surname, patient.cnic, patient.date_of_birth, patient.age, patient.address, patient.email, patient.gender, patient.mobile_no, patient.date_registered, patient.occupation, patient.physiotherapist_seen_before, patient.patient_concerns_for_previous_physiotherapist, patient.patient_satisfactions_for_previous_physiotherapist, id],
+    [invoice.first_name, invoice.middle_name, invoice.surname, invoice.cnic, invoice.date_of_birth, invoice.age, invoice.address, invoice.email, invoice.gender, invoice.mobile_no, invoice.date_registered, invoice.occupation, invoice.physiotherapist_seen_before, invoice.patient_concerns_for_previous_physiotherapist, invoice.patient_satisfactions_for_previous_physiotherapist, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -128,13 +111,13 @@ Patient.updateById = (id, patient, result) => {
         return;
       }
 
-      console.log("updated patient: ", { id: id, ...patient });
-      result(null, { id: id, ...patient });
+      console.log("updated invoice: ", { id: id, ...invoice });
+      result(null, { id: id, ...invoice });
     }
   );
 };
 
-Patient.remove = (id, result) => {
+Invoice.remove = (id, result) => {
   sql.query("DELETE FROM patients WHERE id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -153,7 +136,7 @@ Patient.remove = (id, result) => {
   });
 };
 
-Patient.removeAll = result => {
+Invoice.removeAll = result => {
   sql.query("DELETE FROM patients", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -166,4 +149,4 @@ Patient.removeAll = result => {
   });
 };
 
-module.exports = Patient;
+module.exports = Invoice;

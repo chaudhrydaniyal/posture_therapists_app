@@ -66,10 +66,10 @@ export const navigations = [
   { label: 'Invoice Management', type: 'label' },
   {
     name: 'Invoice  Management',
-    icon: 'earbuds',
+    icon: 'edit_calendar',
     // badge: { value: '30+', color: 'secondary' },
     children: [
-      { name: 'createInvoice', path: '/createInvoice', iconText: 'A' },
+      { name: 'Create Invoice', path: '/createInvoice', iconText: 'A' },
      
       
 

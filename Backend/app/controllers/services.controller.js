@@ -1,7 +1,6 @@
 const services = require('../models/services.model');
 
 exports.create = async(req,res) =>{
-    console.log("i am in ")
     if (!req.body) {
         res.status(400).send({
           message: "Content can not be empty!"

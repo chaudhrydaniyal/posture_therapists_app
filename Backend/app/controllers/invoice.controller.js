@@ -1,13 +1,25 @@
-const Patient_visit = require("../models/patient_visit.model.js");
+const Invoice = require("../models/invoice.model.js");
 
+const Redis = require('redis')
 
+const redisClient = Redis.createClient()
 
+function getOrSetCache(key) {
+  return new Promise(async (resolve, reject) => {
+    redisClient.get(key, async (err, data) => {
+      if (err) return reject(err)
+      if (data != null) return resolve(JSON.parse(data))
+      // const freshData = await cb()
+      // redisClient.set(key , freshData)
+    })
+  })
+}
 
 
 
 
 // Create and Save a new Tutorial
-exports.create = async (req, res) => {
+exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
     res.status(400).send({
@@ -15,109 +27,64 @@ exports.create = async (req, res) => {
     });
   }
 
-
-
-  // console.log("audio file", req.files.audioFile.mv(__dirname + '/../../FileSystem/test.mp4'))
-
-
-
-
-  const uniqueFileName = (new Date()).getTime()
-
-
-
-
-
-
   // Create a Tutorial
-  const patient_visit = new Patient_visit({
-    // title: req.body.title,
-    // description: req.body.description,
-    // published: req.body.published || false
+  const invoice = new Invoice({
 
 
-    patient: req.body.patient,
-    personal_conditions: req.body.personal_conditions,
-    current_treatment: req.body.current_treatment,
-    remarks: req.body.remarks,
-    AssTrauma_diseases: req.body.AssTrauma_diseases,
-    ROMstatus: req.body.ROMstatus,
-    muscle_status: req.body.muscle_status,
-    skin_soft_tissues_pain: req.body.skin_soft_tissues_pain,
-    cardio_vascular_status: req.body.cardio_vascular_status,
-    general_mobility: req.body.general_mobility,
-    transfers: req.body.transfers,
-    balance: req.body.balance,
-    upper_limb_functions: req.body.upper_limb_functions,
-    daily_life_activities: req.body.daily_life_activities,
-
-
-    // Fields for doctor prescription
-    DiagnosisICD10code: req.body.DiagnosisICD10code,
-    BriefMedicalHistory: req.body.BriefMedicalHistory,
-    WeightBearingPrecautions: req.body.WeightBearingPrecautions,
-    ActivityRestrictions: req.body.ActivityRestrictions,
-    OtherMedicalConsiderations: req.body.OtherMedicalConsiderations,
-    PhysicalTherapyEvaluationTreatment: req.body.PhysicalTherapyEvaluationTreatment,
-    Other: req.body.Other,
-    AnticipatedFrequencyDuration: req.body.AnticipatedFrequencyDuration,
-    SpecialInstructions: req.body.SpecialInstructions,
-    audioFile: req.files && `${uniqueFileName}.mp4`
-
+    date : req.body.date,
+    sub_total : req.body.sub_total,
+    patient : req.body.patient,
+    doctor : req.body.doctor,
+    discount : req.body.discount,
+    tax_rate : req.body.tax_rate,
+    items : req.body.items,
+    // invoice : req.body.invoice,
+    price : req.body.price,
 
 
   });
 
   // Save Tutorial in the database
-  Patient_visit.create(patient_visit, (err, data) => {
-
+  Invoice.create(invoice, (err, data) => {
     if (err)
       res.status(500).send({
         message:
           err.message || "Some error occurred while creating the Tutorial."
       });
-
     else res.send(data);
   });
-
-
-  // Saving the audio file of doctor prescription
-
-  if (req.files) {
-
-    let filePath = __dirname + '/../../FileSystem/' + uniqueFileName + '.mp4';
-    let fileUpload = req.files.audioFile;
-
-    await fileUpload.mv(filePath, function (err) {
-
-      if (err) { console.log("Error while uploading file.", err) }
-      else { console.log("File uploaded successfully!") }
-
-    })
-
-  }
-
-
 };
 
 // Retrieve all Tutorials from the database (with condition).
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
 
   const title = req.query.title;
 
-  Patient_visit.getAll(title, (err, data) => {
+  // const cache = await getOrSetCache('patients')
+
+  Patient.getAll(title, async(err, data) => {
     if (err)
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving tutorials."
       });
-    else res.send(data);
+    else {
+      res.send(data)
+      // await redisClient.set('patients', data)
+    }
   });
+
+
+
+
+  //  const allPatients = await Patient.getAll(title)
+
+
 };
 
 // Find a single Tutorial by Id
 exports.findOne = (req, res) => {
-  Patient_visit.findById(req.params.id, (err, data) => {
+  Patient.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

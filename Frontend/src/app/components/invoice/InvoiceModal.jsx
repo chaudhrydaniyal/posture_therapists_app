@@ -8,6 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 import { BiPaperPlane, BiCloudDownload } from "react-icons/bi";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'
+import { MatxLogo } from 'app/components';
+
+
 
 function GenerateInvoice() {
   html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
@@ -37,7 +40,10 @@ class InvoiceModal extends React.Component {
           <div id="invoiceCapture">
             <div className="d-flex flex-row justify-content-between align-items-start bg-light w-100 p-4">
               <div className="w-100">
-                <h4 className="fw-bold my-2">{this.props.info.billFrom||'John Uberbacher'}</h4>
+              <MatxLogo />
+&nbsp;
+                <span className="fw-bold">{this.props.info.billFrom||' Therapists'}</span>
+
                 <h6 className="fw-bold text-secondary mb-1">
                   Invoice #: {this.props.info.invoiceNumber||''}
                 </h6>

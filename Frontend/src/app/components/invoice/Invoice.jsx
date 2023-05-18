@@ -14,7 +14,7 @@ class Invoice extends React.Component {
         super(props);
         this.state = {
             isOpen: false,
-            currency: 'PKR',
+            currency: 'Rs',
             currentDate: '',
             invoiceNumber: 1,
             dateOfIssue: '',
@@ -169,22 +169,22 @@ class Invoice extends React.Component {
                                 <div className="d-flex flex-row align-items-start justify-content-between">
                                     <span className="fw-bold">Subtotal:
                                     </span>
-                                    <span>{this.state.currency}
+                                    <span>{this.state.currency} &nbsp;
                                         {this.state.subTotal}</span>
                                 </div>
                                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
-                                    <span className="fw-bold">Discount:</span>
+                                    <span className="fw-bold">Discount: </span>
                                     <span>
-                                        <span className="small ">({this.state.discountRate || 0}%)</span>
-                                        {this.state.currency}
+                                        <span className="small ">({this.state.discountRate || 0}%) &nbsp;</span>
+                                        {this.state.currency} &nbsp;
                                         {this.state.discountAmmount || 0}</span>
                                 </div>
                                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
                                     <span className="fw-bold">Tax:
                                     </span>
                                     <span>
-                                        <span className="small ">({this.state.taxRate || 0}%)</span>
-                                        {this.state.currency}
+                                        <span className="small ">({this.state.taxRate || 0}%) &nbsp;</span>
+                                        {this.state.currency} &nbsp;
                                         {this.state.taxAmmount || 0}</span>
                                 </div>
                                 <hr />
@@ -193,7 +193,7 @@ class Invoice extends React.Component {
                                 }}>
                                     <span className="fw-bold">Total:
                                     </span>
-                                    <span className="fw-bold">{this.state.currency}
+                                    <span className="fw-bold">{this.state.currency} &nbsp;
                                         {this.state.total || 0}</span>
                                 </div>
                             </Col>

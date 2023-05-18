@@ -85,15 +85,16 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
 
     useEffect(() => {
-        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatients(res.data) }).catch(e => console.log("E", e))
-    }, [])
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/current/').then((res) => { 
+                       
+            setPatients(res.data.map((d)=>({id:d.patientId, first_name: d.patient}))).catch(e => console.log("E", e));
+    })}, [])
 
 
     const submitFormData = (e) => {
         e.preventDefault();
 
         // checking if value of first name and last name is empty show error else take to step 2
-        console.log("value", values);
         if (
             validator.isEmpty(values.personal_conditions) ||
 

@@ -15,6 +15,8 @@ import Input from 'app/components/UI Components/Input';
 import { City, Country, State } from "country-state-city";
 import Select from "react-select";
 // import {Select,MenuItem } from '@mui/material';
+import pp from "./avatar.png";
+
 import Form from 'react-bootstrap/Form';
 
 const initialValue = {
@@ -32,12 +34,9 @@ const initialValue = {
     home_phone: "",
     work_phone: "",
     remarks: "",
-    specialization:"",
-    experience:"",
-    engagement_terms:"",
-
-    
-
+    specialization: "",
+    experience: "",
+    engagement_terms: "",
 }
 
 const Container = styled('div')(({ theme }) => ({
@@ -55,16 +54,16 @@ const DoctorForm = () => {
     let countryData = Country.getAllCountries();
     const [stateData, setStateData] = useState();
     const [cityData, setCityData] = useState();
-
     const [country, setCountry] = useState(countryData[0]);
     const [state, setState] = useState();
     const [city, setCity] = useState();
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
+    const [file, setfile] = useState();
 
 
-
+    
     useEffect(() => {
         setStateData(State.getStatesOfCountry(country?.isoCode));
         console.log("stateData", stateData)
@@ -105,17 +104,14 @@ const DoctorForm = () => {
                     cnic: values.cnic,
                     home_phone: values.home_phone,
                     work_phone: values.work_phone,
-                    remarks: values.remarks,    
-                    specialization:values.specialization,
-                    experience:values.experience,
-                    engagement_terms:values.engagement_terms,
-                    country:selectedCountry,
-                    state:selectedState,
-                    city:selectedCity,
+                    remarks: values.remarks,
+                    specialization: values.specialization,
+                    experience: values.experience,
+                    engagement_terms: values.engagement_terms,
+                    country: selectedCountry,
+                    state: selectedState,
+                    city: selectedCity,
 
-               
-
-                  
 
                 })
                 NotificationManager.success("Successfully Registered");
@@ -162,6 +158,42 @@ const DoctorForm = () => {
         }
     }
 
+    function convertBase64(file) {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    }
+
+    async function uploadImage(event) {
+        const file = event.target.files[0];
+        const base64 = await convertBase64(file);
+        setfile(base64);
+        const object = {
+            target: {
+                value: base64,
+            },
+        };
+
+
+        // handleFormData("profilepic")(object);
+
+
+        console.log("base64", base64);
+        // document.getElementById("avatar").src = `${base64}`;
+
+        return base64;
+        // avatar.src = base64;
+        // textArea.innerText = base64;
+    }
 
 
     return (
@@ -181,6 +213,46 @@ const DoctorForm = () => {
             <div className="card">
                 <div className="card-body" style={{ margin: "10px" }}>
                     <h5>DOCTOR INFORMATION</h5>
+
+                    <Form className="mb-3 d-flex jutify-content-" controlId="formGridProfilePic">
+                        <Form.Label htmlFor="uploadpic">
+                            {file ? (
+                                <>
+                                    {/* {console.log("picinsrc",URL.createObjectURL(file))} */}
+
+                                    <img
+                                        className="rounded-circle"
+                                        style={{ width: "130px", height: "130px" }}
+                                        src={file}
+                                        alt=""
+                                    />
+                                </>
+                            ) : (
+                                <img
+                                    className="rounded-circle"
+                                    src={pp}
+                                    alt=""
+                                    style={{ width: "130px", height: "130px" }}
+                                />
+                            )}
+                        </Form.Label>
+
+                        <Form.Control
+                            type="file"
+                            name="file"
+                            // value={emp.profilepic}
+                            defaultValue={values.profilepic}
+                            style={{ display: "none" }}
+                            id="uploadpic"
+                            onChange={async (e) => {
+                                await uploadImage(e);
+                            }}
+                        />
+
+                        <div className="w-100 text-center">
+                            <label>Upload Picture</label>
+                        </div>
+                    </Form>
 
                     <div className="row" style={{ marginTop: "2rem" }}>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -436,7 +508,6 @@ const DoctorForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <Input style={{ paddingLeft: '0.3rem' }} type="text" name="practitioner_type" label="Practitioner Type" value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
                         </div>
-
                     </div>
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
