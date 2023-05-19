@@ -22,6 +22,29 @@ exports.create = (req, res) => {
   });
 };
 
+
+
+exports.weeklySchedule = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  
+
+  // Save Tutorial in the database
+  Doctor_time_slots.weeklySchedule(req.body, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Diseases."
+      });
+    else res.send(data);
+  });
+};
+
 // Retrieve all Tutorials from the database (with condition).
 exports.findAll = (req, res) => {
   const title = req.query.title;
