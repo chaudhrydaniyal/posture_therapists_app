@@ -20,9 +20,8 @@ import pp from "./avatar.png";
 import Form from 'react-bootstrap/Form';
 
 const initialValue = {
-    surname: "",
     first_name: "",
-    middle_name: "",
+    last_name: "",
     date_of_birth: "",
     age: "",
     gender: "",
@@ -37,6 +36,8 @@ const initialValue = {
     specialization: "",
     experience: "",
     engagement_terms: "",
+    financial_information:"",
+    salary:"",
 }
 
 const Container = styled('div')(({ theme }) => ({
@@ -61,6 +62,7 @@ const DoctorForm = () => {
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [file, setfile] = useState();
+    const [doctorPicture, setDoctorPicture] = useState("")
 
 
     
@@ -90,31 +92,57 @@ const DoctorForm = () => {
         validationSchema: doctorValidation,
         onSubmit: async (values, action) => {
             try {
-                const doctorForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users', {
-                    surname: values.surname,
-                    first_name: values.first_name,
-                    middle_name: values.middle_name,
-                    date_of_birth: values.date_of_birth,
-                    age: values.age,
-                    gender: values.gender,
-                    address: values.address,
-                    mobile_no: values.mobile_no,
-                    email: values.email,
-                    practitioner_type: values.practitioner_type,
-                    cnic: values.cnic,
-                    home_phone: values.home_phone,
-                    work_phone: values.work_phone,
-                    remarks: values.remarks,
-                    specialization: values.specialization,
-                    experience: values.experience,
-                    engagement_terms: values.engagement_terms,
-                    country: selectedCountry,
-                    state: selectedState,
-                    city: selectedCity,
+                const data = new FormData();
+                data.append('picture',doctorPicture)
+                data.append('first_name', values.first_name);
+                data.append('last_name', values.last_name);
+                data.append('date_of_birth', values.date_of_birth);
+                data.append('age', values.age);
+                data.append('gender', values.gender);
+                data.append('address', values.address);
+                data.append('mobile_no', values.mobile_no);
+                data.append('email', values.email);
+                data.append('practitioner_type', values.practitioner_type);
+                data.append('cnic', values.cnic);
+                data.append('home_phone', values.home_phone);
+                data.append('work_phone', values.work_phone);
+                data.append('remarks', values.remarks);
+                data.append('specialization', values.specialization);
+                data.append('experience', values.experience);
+                data.append('engagement_terms', values.engagement_terms);
+                data.append('financial_information', values.financial_information);
+                data.append('salary', values.salary)
+                data.append('country', selectedCountry.name);
+                data.append('state', selectedState.name);
+                data.append('city', selectedCity.name);
+
+                const addDoctor = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users',data)
+
+                // const doctorForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users', {
+                //     surname: values.surname,
+                //     first_name: values.first_name,
+                //     middle_name: values.middle_name,
+                //     date_of_birth: values.date_of_birth,
+                //     age: values.age,
+                //     gender: values.gender,
+                //     address: values.address,
+                //     mobile_no: values.mobile_no,
+                //     email: values.email,
+                //     practitioner_type: values.practitioner_type,
+                //     cnic: values.cnic,
+                //     home_phone: values.home_phone,
+                //     work_phone: values.work_phone,
+                //     remarks: values.remarks,
+                //     specialization: values.specialization,
+                //     experience: values.experience,
+                //     engagement_terms: values.engagement_terms,
+                //     country: selectedCountry,
+                //     state: selectedState,
+                //     city: selectedCity,
 
 
-                })
-                NotificationManager.success("Successfully Registered");
+                // })
+               addDoctor && NotificationManager.success("Successfully Registered");
 
             } catch (error) {
                 NotificationManager.error("Something went wrong")
@@ -125,6 +153,7 @@ const DoctorForm = () => {
             setSelectedCountry(null)
             setSelectedState(null)
             setSelectedCity(null)
+            setfile("")
 
         }
 
@@ -174,14 +203,15 @@ const DoctorForm = () => {
     }
 
     async function uploadImage(event) {
-        const file = event.target.files[0];
-        const base64 = await convertBase64(file);
-        setfile(base64);
+        const pictureFile = event.target.files[0];
+        const base64 = await convertBase64(pictureFile);
         const object = {
             target: {
                 value: base64,
             },
         };
+        setfile(base64);
+        setDoctorPicture(pictureFile)
 
 
         // handleFormData("profilepic")(object);
@@ -214,7 +244,9 @@ const DoctorForm = () => {
                 <div className="card-body" style={{ margin: "10px" }}>
                     <h5>DOCTOR INFORMATION</h5>
 
-                    <Form className="mb-3 d-flex jutify-content-" controlId="formGridProfilePic">
+                    <Form className="mb-3 d-flex mt-3 " controlId="formGridProfilePic">
+                    <div>
+                            <div>
                         <Form.Label htmlFor="uploadpic">
                             {file ? (
                                 <>
@@ -249,43 +281,44 @@ const DoctorForm = () => {
                             }}
                         />
 
-                        <div className="w-100 text-center">
-                            <label>Upload Picture</label>
+</div>
+                            <label style={{marginTop:'1rem'}}><strong>Upload Picture</strong></label>
+                       
                         </div>
                     </Form>
 
                     <div className="row" style={{ marginTop: "2rem" }}>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="surname">
+                            <label htmlFor="first_name">
                                 {" "}
                                 <div>First Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3 ">
                             {" "}
-                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="surname" label="First Name" value={values.surname} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="first_name" label="First Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
+                            {errors.first_name && touched.first_name ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="first_name">
+                            <label htmlFor="last_name">
                                 {" "}
                                 <div>Last Name:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="first_name" label="Last Name" value={values.first_name} onChange={handleChange} onBlur={handleBlur} />
-                            {errors.first_name && touched.first_name ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
+                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="last_name" label="Last Name" value={values.last_name} onChange={handleChange} onBlur={handleBlur} />
+                            
 
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="middle_name">
-                                {" "}
-                                <div>Middle Name:</div>
+                            <label htmlFor="email">
+                                <div>Email:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            {" "}
-                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="middle_name" label="Middle Name" value={values.middle_name} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                            {errors.email && touched.email ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
                         </div>
                     </div>
 
@@ -375,19 +408,37 @@ const DoctorForm = () => {
                     </div>
 
                     <div className="row">
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                            <label htmlFor="home_phone">
-                                {" "}
-                                <div>Home Phone:</div>
+                    <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="cnic">
+                                <div>CNIC:</div>
                             </label>
                         </div>
+
+
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} type="text" name="home_phone" label="Home Phone" value={values.home_phone} onChange={handleChange} onBlur={handleBlur} />
+
+                            <PatternFormat
+                                style={{
+                                    width: "100%",
+                                    borderColor: "grey",
+                                    paddingLeft: '0.3rem'
+                                }}
+
+                                required
+                                name="cnic"
+                                format="#####-#######-#"
+                                allowEmptyFormatting
+                                mask="x"
+                                value={values.cnic}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+                            {errors.cnic && touched.cnic ? (<p style={{ color: "red" }}>{errors.cnic}</p>) : null}
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="work_phone">
                                 {" "}
-                                <div>Work Phone:</div>
+                                <div>Work Phone No:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -407,6 +458,78 @@ const DoctorForm = () => {
                             {errors.mobile_no && touched.mobile_no ? (<p style={{ color: "red" }}>{errors.mobile_no}</p>) : null}
                         </div>
 
+                    </div>
+                    <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="country">
+                                <div>Country:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={Country.getAllCountries()}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedCountry}
+                                onChange={(item) => {
+                                    setSelectedCountry(item);
+                                    console.log("country",item)
+                                }}
+                            />
+                           
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="state">
+                                <div>State:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={State?.getStatesOfCountry(
+                                    selectedCountry?.isoCode
+                                )}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedState}
+                                onChange={(item) => {
+                                    setSelectedState(item);
+                                    console.log("state",item)
+                                }}
+                            />
+
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="city">
+                                <div>City:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Select
+                                options={City.getCitiesOfState(
+                                    selectedState?.countryCode,
+                                    selectedState?.isoCode
+                                )}
+                                getOptionLabel={(options) => {
+                                    return options["name"];
+                                }}
+                                getOptionValue={(options) => {
+                                    return options["name"];
+                                }}
+                                value={selectedCity}
+                                onChange={(item) => {
+                                    setSelectedCity(item);
+                                }}
+                            />
+                        </div>
                     </div>
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -463,44 +586,6 @@ const DoctorForm = () => {
                     </div>
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="cnic">
-                                <div>CNIC:</div>
-                            </label>
-                        </div>
-
-
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-
-                            <PatternFormat
-                                style={{
-                                    width: "100%",
-                                    borderColor: "grey",
-                                    paddingLeft: '0.3rem'
-                                }}
-
-                                required
-                                name="cnic"
-                                format="#####-#######-#"
-                                allowEmptyFormatting
-                                mask="x"
-                                value={values.cnic}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                            {errors.cnic && touched.cnic ? (<p style={{ color: "red" }}>{errors.cnic}</p>) : null}
-                        </div>
-
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="email">
-                                <div>Email:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
-                            {errors.email && touched.email ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
-                        </div>
-
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="practitioner_type">
                                 <div>Practitioner Type:</div>
                             </label>
@@ -508,78 +593,29 @@ const DoctorForm = () => {
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <Input style={{ paddingLeft: '0.3rem' }} type="text" name="practitioner_type" label="Practitioner Type" value={values.practitioner_type} onChange={handleChange} onBlur={handleBlur} />
                         </div>
-                    </div>
-                    <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="country">
-                                <div>Country:</div>
+                            <label htmlFor="financial_information">
+                                <div>Financial Information:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Select
-                                options={Country.getAllCountries()}
-                                getOptionLabel={(options) => {
-                                    return options["name"];
-                                }}
-                                getOptionValue={(options) => {
-                                    return options["name"];
-                                }}
-                                value={selectedCountry}
-                                onChange={(item) => {
-                                    setSelectedCountry(item);
-                                }}
-                            />
+                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="financial_information" label="Financial Information" value={values.financial_information} onChange={handleChange} onBlur={handleBlur} />
 
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="state">
-                                <div>State:</div>
+                            <label htmlFor="salary">
+                                <div>Salary:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Select
-                                options={State?.getStatesOfCountry(
-                                    selectedCountry?.isoCode
-                                )}
-                                getOptionLabel={(options) => {
-                                    return options["name"];
-                                }}
-                                getOptionValue={(options) => {
-                                    return options["name"];
-                                }}
-                                value={selectedState}
-                                onChange={(item) => {
-                                    setSelectedState(item);
-                                }}
-                            />
+                            <Input style={{ paddingLeft: '0.3rem' }} type="number" name="salary" label="salary" value={values.salary} onChange={handleChange} onBlur={handleBlur} />
 
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="city">
-                                <div>City:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Select
-                                options={City.getCitiesOfState(
-                                    selectedState?.countryCode,
-                                    selectedState?.isoCode
-                                )}
-                                getOptionLabel={(options) => {
-                                    return options["name"];
-                                }}
-                                getOptionValue={(options) => {
-                                    return options["name"];
-                                }}
-                                value={selectedCity}
-                                onChange={(item) => {
-                                    setSelectedCity(item);
-                                }}
-                            />
                         </div>
                     </div>
+                  
 
                     <div className="row">
+                   
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                             <label htmlFor="remarks">
                                 {" "}

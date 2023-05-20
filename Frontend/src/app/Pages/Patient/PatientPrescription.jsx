@@ -123,18 +123,6 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         document.getElementById('AudioRecorder').appendChild(audio);
     };
 
-    // const handleFormData = async (e) => {
-    //     let name, value;
-
-    //     name = e.target.name;
-    //     value = e.target.value;
-
-    //     await setPrescriptionDetails({
-    //       ...prescriptionDetails,
-    //       [name]: value,
-    //     });
-    //   };
-
     const handleInput = (e) => {
         setPrescriptionDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
@@ -168,20 +156,13 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
     const handlecharges = (e) => {
         console.log("object value", e.target.value);
 
-        
+
         setservicelist(e.target.value)
-        setSelectedService([...selectedService, getService.filter((g)=>g.id == e.target.value)[0]])
+        setSelectedService([...selectedService, getService.filter((g) => g.id == e.target.value)[0]])
 
     }
 
 
-
-
-    // var results = getService.filter((d) => {
-
-    //     console.log("called the results filter")
-    //     return selectedService.includes(d.id)
-    // })
 
 
 
@@ -195,7 +176,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             console.log("selectedSERV", selectedService, temp)
 
             setSelectedService([...selectedService])
-  
+
         } else {
             console.log("Service with id", id, "not found");
         }
@@ -256,7 +237,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
                                         ))}
                                     </Form.Select>
-                                    {!servicelist ? (<p style={{color:"red"}}>Please select the service</p>):null}
+                                    {!servicelist ? (<p style={{ color: "red" }}>Please select the service</p>) : null}
 
                                 </div>
                             </div>
@@ -418,7 +399,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 <thead>
                                     <tr>
                                         <th style={{ width: '20%' }}>Precaution</th>
-                                        {/* <th style={{width:'10%'}}>No/Yes</th> */}
+                                       
                                         <th>If yes, Please describe/define </th>
 
                                     </tr>
@@ -426,19 +407,19 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 <tbody>
                                     <tr>
                                         <td>Weight bearing precaution?</td>
-                                        {/* <td><input className='input_border' style={{width:'3rem'}} /></td> */}
+                                     
                                         <td><input className='input_border' style={{ width: '100%' }} name="WeightBearingPrecautions" value={prescriptionDetails.WeightBearingPrecautions} onChange={handleInput} /></td>
 
                                     </tr>
                                     <tr>
                                         <td>Activity restrictions?</td>
-                                        {/* <td><input className='input_border' style={{width:'3rem'}}/></td> */}
+                                       
                                         <td><input className='input_border' style={{ width: '100%' }} name="ActivityRestrictions" value={prescriptionDetails.ActivityRestrictions} onChange={handleInput} /></td>
 
                                     </tr>
                                     <tr>
                                         <td>Other medical consideration?</td>
-                                        {/* <td><input className='input_border' style={{width:'3rem'}}/></td> */}
+                                       
                                         <td><input className='input_border' style={{ width: '100%' }} name="OtherMedicalConsiderations" onChange={handleInput} /></td>
                                     </tr>
                                 </tbody>
@@ -455,7 +436,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                             <Button color="primary" variant="contained" onClick={prevStep} style={{ marginRight: '2rem' }}>
                                 Previous
                             </Button>
-                            {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
+                          
                             <Button color="primary" variant="contained" type="submit" onClick={() => { handleSubmit(); handleOpen() }}>
                                 <Icon>send</Icon>
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>

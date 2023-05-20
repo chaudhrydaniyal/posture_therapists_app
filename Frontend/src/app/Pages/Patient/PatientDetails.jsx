@@ -75,8 +75,7 @@ const PatientDetails = () => {
     const [data, setData] = useState({
         id: patientData.id,
         first_name: patientData.first_name,
-        surname: patientData.surname,
-        middle_name: patientData.middle_name,
+        last_name: patientData.last_name,
         date_of_birth: patientData.date_of_birth,
         age: patientData.age,
         gender: patientData.gender,
@@ -123,8 +122,7 @@ const PatientDetails = () => {
                 .put(process.env.REACT_APP_ORIGIN_URL + `api/patients/${data.id}`, {
                     id: data.id,
                     first_name: data.first_name,
-                    surname: data.surname,
-                    middle_name: data.middle_name,
+                    last_name: data.last_name,
                     date_of_birth: data.date_of_birth,
                     age: data.age,
                     gender: data.gender,
@@ -202,12 +200,7 @@ const PatientDetails = () => {
 
             <br />
             <br />
-            {/* <div style={{display:"flex"}}>
-        <button style={{border:"none"}} onClick={()=>{openPatientInformation();closePatientVisits()}}>Patient Information</button>
-        <button style={{border:"none",marginLeft:'2rem'}} onClick={()=>{closePatientInformation();openPatientVisits()}}>Patient Visits</button>
-        </div> */}
-
-
+           
 
 
 
@@ -231,51 +224,51 @@ const PatientDetails = () => {
                         </div>
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="surname">
+                                <label htmlFor="first_name">
                                     {" "}
                                     <div>First Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="surname" value={data.surname} onChange={handleInput} disabled={disableFields} />
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="first_name" value={data.first_name} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="first_name">
+                                <label htmlFor="last_name">
                                     {" "}
                                     <div>Last Name:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <Input style={{paddingLeft:'0.3rem'}} type="text" name="first_name" value={data.first_name} onChange={handleInput} disabled={disableFields} />
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="last_name" value={data.last_name} onChange={handleInput} disabled={disableFields} />
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="middle_name">
+                                <label htmlFor="middle_name">
+                                    {" "}
+                                    <div>Blood Group <BloodtypeIcon /> :</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <div>Blood Group <BloodtypeIcon/> :</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            {" "}
-                            <Form.Select name="gender" class="form-control dropdown" >
-                                <option
-                                    value=""
-                                    selected="selected"
-                                    disabled="disabled"
-                                >
-                                    Select Blood Group...
-                                </option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                            </Form.Select>
+                                <Form.Select name="gender" class="form-control dropdown" >
+                                    <option
+                                        value=""
+                                        selected="selected"
+                                        disabled="disabled"
+                                    >
+                                        Select Blood Group...
+                                    </option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </Form.Select>
                             </div>
                         </div>
 
@@ -288,7 +281,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <Input
-                                style={{paddingLeft:'0.3rem'}}
+                                    style={{ paddingLeft: '0.3rem' }}
                                     type="date"
                                     name="date_of_birth"
                                     value={data.date_of_birth}
@@ -305,11 +298,11 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <Input
-                                style={{paddingLeft:'0.3rem'}}
-                                   
+                                    style={{ paddingLeft: '0.3rem' }}
+
                                     name="age"
                                     type="text"
-                                  
+
                                     onInput={(e) => {
                                         e.target.value = Math.max(0, parseInt(e.target.value))
                                             .toString()
@@ -345,6 +338,78 @@ const PatientDetails = () => {
                             </div>
                         </div>
                         <div className="row">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="country">
+                                    <div>Country:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Select
+                                    options={Country.getAllCountries()}
+                                    getOptionLabel={(options) => {
+                                        return options["name"];
+                                    }}
+                                    getOptionValue={(options) => {
+                                        return options["name"];
+                                    }}
+                                    value={selectedCountry}
+                                    onChange={(item) => {
+                                        setSelectedCountry(item);
+                                    }}
+                                    disabled={disableFields}
+                                />
+
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="state">
+                                    <div>State:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Select
+                                    options={State?.getStatesOfCountry(
+                                        selectedCountry?.isoCode
+                                    )}
+                                    getOptionLabel={(options) => {
+                                        return options["name"];
+                                    }}
+                                    getOptionValue={(options) => {
+                                        return options["name"];
+                                    }}
+                                    value={selectedState}
+                                    onChange={(item) => {
+                                        setSelectedState(item);
+                                    }}
+                                    disabled={disableFields}
+                                />
+
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="city">
+                                    <div>City:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Select
+                                    options={City.getCitiesOfState(
+                                        selectedState?.countryCode,
+                                        selectedState?.isoCode
+                                    )}
+                                    getOptionLabel={(options) => {
+                                        return options["name"];
+                                    }}
+                                    getOptionValue={(options) => {
+                                        return options["name"];
+                                    }}
+                                    value={selectedCity}
+                                    onChange={(item) => {
+                                        setSelectedCity(item);
+                                    }}
+                                    disabled={disableFields}
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="address">
                                     {" "}
@@ -352,7 +417,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}} type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} />
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} />
                             </div>
 
 
@@ -360,22 +425,21 @@ const PatientDetails = () => {
 
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                            <label htmlFor="medical_status">
-                                {" "}
-                                <div>Medical Status:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{paddingLeft:'0.3rem'}} className="Input_border" type="text" name="medical_status" label="Medical Status" disabled={disableFields}/>
-                        </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="workphone">
+                                <label htmlFor="medical_status">
                                     {" "}
-                                    <div>Work Phone:</div>
+                                    <div>Medical Status:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="workphone" onChange={handleInput} disabled={disableFields} />
+                                <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="medical_status" label="Medical Status" disabled={disableFields} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="email">
+                                    <div>Email:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="email" name="email" value={data.email} onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
@@ -383,7 +447,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}}  type="number" name="mobile_no"  onInput={(e) => {
+                                <Input style={{ paddingLeft: '0.3rem' }} type="number" name="mobile_no" onInput={(e) => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
@@ -392,32 +456,7 @@ const PatientDetails = () => {
 
                         </div>
 
-                        <div className="row">
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="email">
-                                    <div>Email:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}}  type="email" name="email" value={data.email} onChange={handleInput} disabled={disableFields} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="occupation">
-                                    <div>Occupation:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="occupation"  value={data.occupation} onChange={handleInput} disabled={disableFields} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="designation">
-                                    <div>Designation:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{paddingLeft:'0.3rem'}}  type="text" name="designation"  onChange={handleInput} disabled={disableFields} />
-                            </div>
-                        </div>
+
 
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -426,7 +465,7 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input  type="text" name="doctorname"  onChange={handleInput} disabled={disableFields} />
+                                <Input type="text" name="doctorname" onChange={handleInput} disabled={disableFields} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
@@ -441,7 +480,7 @@ const PatientDetails = () => {
                                     style={{
                                         width: "100%",
                                         borderColor: "grey",
-                                        paddingLeft:'0.3rem'
+                                        paddingLeft: '0.3rem'
                                     }}
                                     className="Input_border"
                                     required
@@ -484,77 +523,24 @@ const PatientDetails = () => {
 
                         </div>
                         <div className="row">
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="country">
-                                <div>Country:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                        <Select
-                              options={Country.getAllCountries()}
-                              getOptionLabel={(options) => {
-                                return options["name"];
-                              }}
-                              getOptionValue={(options) => {
-                                return options["name"];
-                              }}
-                              value={selectedCountry}
-                              onChange={(item) => {
-                                setSelectedCountry(item);
-                              }}
-                              disabled={disableFields}
-                            />
 
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="occupation">
+                                    <div>Occupation:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="occupation" value={data.occupation} onChange={handleInput} disabled={disableFields} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="designation">
+                                    <div>Designation:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="designation" onChange={handleInput} disabled={disableFields} />
+                            </div>
                         </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="state">
-                                <div>State:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                        <Select
-                              options={State?.getStatesOfCountry(
-                                selectedCountry?.isoCode
-                              )}
-                              getOptionLabel={(options) => {
-                                return options["name"];
-                              }}
-                              getOptionValue={(options) => {
-                                return options["name"];
-                              }}
-                              value={selectedState}
-                              onChange={(item) => {
-                                setSelectedState(item);
-                              }}
-                              disabled={disableFields}
-                            />
-
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="city">
-                                <div>City:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                        <Select
-                              options={City.getCitiesOfState(
-                                selectedState?.countryCode,
-                                selectedState?.isoCode
-                              )}
-                              getOptionLabel={(options) => {
-                                return options["name"];
-                              }}
-                              getOptionValue={(options) => {
-                                return options["name"];
-                              }}
-                              value={selectedCity}
-                              onChange={(item) => {
-                                setSelectedCity(item);
-                              }}
-                              disabled={disableFields}
-                            />
-                        </div>
-                    </div>
 
                     </div>
                 </div>
@@ -574,7 +560,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="contactperson" onChange={handleInput} disabled={disableFields} />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="patientrelationship">
@@ -583,7 +569,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}} type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="prevmobileno">
@@ -592,7 +578,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}}  type="number" name="prevmobileno" onInput={(e) => {
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="number" name="prevmobileno" onInput={(e) => {
                                         e.target.value = Math.max(0, parseInt(e.target.value))
                                             .toString()
                                             .slice(0, 11);
@@ -652,7 +638,7 @@ const PatientDetails = () => {
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -666,7 +652,7 @@ const PatientDetails = () => {
                                     </label>
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}} type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -681,7 +667,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="todaysession" onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="todaysession" onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -695,7 +681,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
@@ -708,7 +694,7 @@ const PatientDetails = () => {
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{paddingLeft:'0.3rem'}}  type="text" name="fixednow" onChange={handleInput} disabled={disableFields} />
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="fixednow" onChange={handleInput} disabled={disableFields} />
                                 </div>
 
 
