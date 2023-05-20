@@ -5,6 +5,8 @@ import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
 import './style.css'
 import itemRender from './itemRender'
+import { withStyles } from '@material-ui/core/styles'
+
 import SundaysMarker from './SundaysMarker'
 import groups from './groups'
 import items from './items'
@@ -15,21 +17,89 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { Button } from '@mui/material';
+
+
+
+
+
+
+
+import Grid from '@material-ui/core/Grid'
+import AddIcon from '@material-ui/icons/Add'
+import TextField from '@material-ui/core/TextField'
+import classNames from 'classnames'
+import MenuItem from '@material-ui/core/MenuItem'
+import Modal from 'react-responsive-modal'
+
+
+
+
 var momentTZ = require('moment-timezone');
 
 
 
-export default class Calender extends Component {
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    margin: '1rem 5rem',
+    [theme.breakpoints.down('sm')]: {
+      margin: '1rem 1rem',
+    },
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    color: theme.palette.text.secondary,
+  },
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  withoutLabel: {
+    marginTop: theme.spacing.unit * 3,
+  },
+  textField: {
+    flexBasis: 200,
+  },
+  mt1: {
+    marginTop: '1rem'
+  },
+  floatingBtn: {
+    position: 'absolute',
+    right: '2rem',
+    bottom: '2rem',
+    zIndex: 9
+  }
+})
+
+ class Calender extends Component {
   state = {
     keys,
     groups,
     items,
     y19: new Date('2023/04/12'),
     patients: [],
-
     refresh: false,
 
+
+
+      doctor: '',
+      status: '',
+      start: '2019-01-01',
+      end: '2019-01-01',
+      open: false,
+      mentorsList: [],
+      patients: [],
+      patient: '',
+      patientName: ''
+    
+  
+
+
+
+
+
   }
+
+
 
   // addItemHandler = newItems => {
   //   this.setState(state => ({
@@ -138,6 +208,18 @@ export default class Calender extends Component {
 
 
 
+
+
+  onOpenModal = () => this.setState({ open: true })
+
+  onCloseModal = () => this.setState({ open: false })
+
+  handleChange = prop => event => this.setState({ [prop]: event.target.value })
+
+
+
+
+
   toTimestamp = strDate => {
     const d = new Date(strDate)
     return (Date.parse(d)) / 1000
@@ -180,7 +262,11 @@ export default class Calender extends Component {
             new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
 
             alreadyScheduledAppointment = true
-          } else { console.log("inside else") }
+
+
+          } else {
+            console.log("inside else")
+          }
         })
 
         if (!alreadyScheduledAppointment) {
@@ -201,7 +287,7 @@ export default class Calender extends Component {
             canChangeGroup: false,
             scheduledAppointment: true,
             currentlyAdded: true,
-            
+
           }
 
           this.setState(state => ({
@@ -275,6 +361,8 @@ export default class Calender extends Component {
 
   render() {
     const { keys, groups, items, y19 } = this.state
+    const { classes } = this.props
+
     return (
 
       <>
@@ -311,8 +399,16 @@ export default class Calender extends Component {
           groups={groups}
           onItemClick={(e) => {
             console.log("item click", e)
-            this.setState({ refresh: !this.state.refresh })
+            // this.setState({ refresh: !this.state.refresh })
+
+            this.setState({open:true})
+
           }}
+          // onItemSelect={ this.setState({open:true})}
+          
+          // onCanvasClick={(e)=>{console.log("canvas click", e)}}
+       
+
           items={items}
           // rightSidebarWidth={50}
           // rightSidebarContent="Skills"
@@ -345,7 +441,165 @@ export default class Calender extends Component {
         </Timeline>
         <AddItemsForm onAddItem={this.addItemHandler} />
         <NotificationContainer />
+
+
+
+        <Modal  open={this.state.open} onClose={this.onCloseModal} center>
+          <div 
+          className={classes.root}
+          >
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                <form onSubmit={this.formSubmitHandler}>
+                  {/*Mentors list*/}
+                  <TextField
+                    select
+                    label="Chose Doctor"
+                    className={classNames(classes.margin, classes.textField)}
+                    value={this.state.doctor}
+                    onChange={this.handleChange('doctor')}
+                    fullWidth={true}
+                  >
+                    {this.state.mentorsList.map(option => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.title}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <br />
+
+
+
+                  <TextField
+                    select
+                    label="Chose Patient"
+                    className={classNames(classes.margin, classes.textField)}
+                    wid
+                    value={this.state.patient}
+                    // onChange={this.handleChange('patientName')}
+
+                    onChange={
+                      (e) => {
+                        this.setState({ patientName:e.currentTarget.innerText })
+
+                        console.log("e.target", e.currentTarget.innerText)
+                        this.setState({ patient: e.target.value });
+
+                      }
+                    }
+
+                    // onClick={(e)=>{console.log("click",e.currentTarget.innerText)}}
+                    fullWidth={true}
+                  >
+                    {this.state.patients.map(patient => (
+                      <MenuItem key={patient.id} name={patient.id}
+                        value={patient.id}
+                      // value={{patientId:patient.id, patientName: patient.first_name}}
+
+                      >
+                        {patient.first_name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+
+
+
+
+                  {/*status*/}
+
+                  {/* <TextField
+                    id="standard-name"
+                    label="status"
+                    className={classes.textField}
+                    value={this.state.name}
+                    onChange={this.handleChange('status')}
+                    margin="normal"
+                    fullWidth={true}
+                  /> */}
+                  {/*Date*/}
+                  <Grid container spacing={24}>
+                    {/*start*/}
+                    <Grid item md={6}>
+                      {/* <TextField
+                        id="date"
+                        label="Start"
+                        // <input type="datetime-local" id="birthdaytime" name="birthdaytime"></input>
+                        type="time"
+                        min="00:00:00" 
+                        max="01:30:00"
+                        defaultValue={this.state.start}
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        inputProps={{
+                     
+                          // min:"00:00:00", 
+                          max:"01:30:00",
+                     
+                          min: new Date().toISOString().slice(0, 16)
+                        }}   
+                        onChange={this.handleChange('start')}
+                        fullWidth={true}
+                      /> */}
+
+<input type="time"/>
+
+
+
+                    </Grid>
+                    {/*end*/}
+
+
+
+
+
+                    <Grid item md={6}>
+                      <TextField
+                        id="date"
+                        label="End"
+                        type="time"
+                        // inputProps={{
+                        //   min: new Date().toISOString().slice(0, 16)
+                        // }}             
+                        defaultValue={this.state.end}
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={this.handleChange('end')}
+                        fullWidth={true}
+                      />
+                    </Grid>
+                  </Grid>
+
+                  {/*Submit*/}
+                  <Button onClick={() => {
+
+                    this.onCloseModal()
+
+
+                    console.log("itemAdded", this.state)
+
+
+                    return this.props.onAddItem(this.state)
+
+                  }}
+                  //  className={classes.mt1} 
+                   variant="contained" color="primary">
+                    <AddIcon /> add
+                  </Button>
+                </form>
+              </Grid>
+            </Grid>
+          </div>
+        </Modal>
       </>
     )
   }
 }
+
+
+export default withStyles(styles)(Calender)
