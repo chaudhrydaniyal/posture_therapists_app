@@ -8,7 +8,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Icon,Button
+  Icon, Button
 } from '@mui/material';
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from 'app/components';
@@ -50,8 +50,8 @@ const RegisteredPatients = () => {
   };
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatients(res.data);console.log("res",res) }).catch(e => console.log("E", e))
-    console.log("patients",patients)
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatients(res.data); console.log("res", res) }).catch(e => console.log("E", e))
+    console.log("patients", patients)
 
   }, [])
 
@@ -60,7 +60,7 @@ const RegisteredPatients = () => {
       <Box className="breadcrumb">
         <Breadcrumb routeSegments={[{ name: 'Registered Patients' }]} />
       </Box>
- 
+
       <div className='card'>
         <div className='card-body'>
 
@@ -100,10 +100,7 @@ const RegisteredPatients = () => {
                       >
                         Details
                       </button>
-                                 {/* <Button color="primary" variant="contained">
-          {/* <Icon>send</Icon> */}
-          {/* <Span sx={{ pl: 1, textTransform: "capitalize" }}>Details</Span> */}
-        {/* </Button>  */}
+             
                     </Link>
 
                     </TableCell>

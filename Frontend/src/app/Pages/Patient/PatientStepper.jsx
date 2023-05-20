@@ -68,15 +68,13 @@ const PatientStepper = () => {
             return (
                 <div>
                     <Container>
-                        {/* <Row> */}
-                            {/* <Col md={{ span: 8, offset: 3 }} className="custom-margin"> */}
-                            <PatientVisit
-                                nextStep={nextStep}
-                                handleFormData={handleInputData}
-                                values={formData}
-                            />
-                            {/* </Col> */}
-                        {/* </Row> */}
+                    
+                        <PatientVisit
+                            nextStep={nextStep}
+                            handleFormData={handleInputData}
+                            values={formData}
+                        />
+                     
                     </Container>
                 </div>
             );
@@ -84,37 +82,18 @@ const PatientStepper = () => {
             return (
                 <div className="App">
                     <Container>
-                        {/* <Row> */}
-                            {/* <Col md={{ span: 8, offset: 3 }} className="custom-margin"> */}
-                            <PatientPrescription
-                                nextStep={nextStep}
-                                prevStep={prevStep}
-                                handleFormData={handleInputData}
-                                values={formData}
-                            />
-                            {/* </Col> */}
-                        {/* </Row> */}
+                    
+                        <PatientPrescription
+                            nextStep={nextStep}
+                            prevStep={prevStep}
+                            handleFormData={handleInputData}
+                            values={formData}
+                        />
+                  
                     </Container>
                 </div>
             );
-        // case 3:
-        //   return (
-        //     <div className="App">
-        //       <Container>
-        //         <Row>
-        //           <Col md={{ span: 8, offset: 3 }} className="custom-margin">
-        //             <StepThree
-        //               nextStep={nextStep}
-        //               prevStep={prevStep}
-        //               handleFormData={handleInputData}
-        //               values={formData}
-        //             />
-        //           </Col>
-        //         </Row>
-        //       </Container>
-        //     </div>
-        //   );
-
+   
 
 
         default:
