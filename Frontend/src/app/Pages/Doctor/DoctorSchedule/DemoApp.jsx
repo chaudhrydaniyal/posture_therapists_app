@@ -10,29 +10,20 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import {  Button } from '@mui/material';
-
+import { Button } from '@mui/material';
 
 
 
 export default class DemoApp extends React.Component {
 
-
-
-
-
   state = {
     weekendsVisible: true,
     currentEvents: [],
-    INITIAL_EVENTS: []
+    INITIAL_EVENTS: [],
+    schedulingPeriod: null
   }
 
-
-
-
   async componentDidMount() {
-
-    console.log("doctor time slots", this.props.data)
 
     let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`)).data
 
@@ -46,32 +37,47 @@ export default class DemoApp extends React.Component {
 
   }
 
-
-
   render() {
-
-    console.log("this props", this.props)
-
-
     return (
       <div className='demo-app'>
         <NotificationContainer />
-
         {/* <h6>Name:{this.props.data.first_name}</h6> */}
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
-         
-         
-        <Button color="primary" variant="contained" type="submit" onClick={async () => {
+          <span style={{ marginRight: "auto", paddingRight: "30px" }}>
+              Select the doctor's weekly time schedule from the calendar below:
+          </span>
+          <span className='me-3'>
+            <label for="schedulingPeriod">Scheduling Period:</label>
+            &nbsp;
+            <select name="schedulingPeriod" id="schedulingPeriod" onClick={(e) => { this.setState({ schedulingPeriod: e.target.value }) }}>
+              <option value={1}>1 months</option>
+              <option value={2}>2 months</option>
+              <option value={3}>3 months</option>
+            </select>
+          </span>
 
-            try {
-             const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
-              this.state.currentEvents.map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
-            )
 
-            res && NotificationManager.success("Successfully added time slots");
+          <Button color="primary" variant="contained" type="submit" onClick={async () => {
+
+            const postObject = {
+
+              date_started: new Date(this.state.currentEvents[0]._instance.range.start),
+              doctor: this.props.data,
+              slots: this.state.currentEvents.map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end) })),
+              validity_months: this.state.schedulingPeriod
 
             }
-            catch{
+
+            try {
+
+              const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/weeklyschedule',
+                postObject
+              )
+              res && NotificationManager.success("Successfully added time slots");
+
+            }
+
+            catch {
 
               NotificationManager.error("Something went wrong")
 
@@ -82,20 +88,26 @@ export default class DemoApp extends React.Component {
         </div>
         {/* {this.renderSidebar()} */}
         <div className='demo-app-main'>
+
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-
             // headerToolbar={{
             //   left: 'prev,next today',
             //   center: 'title',
             //   right: 'dayGridMonth,timeGridWeek,timeGridDay'
             // }}
-
+            headerToolbar={{
+              left: '',
+              center: '',
+              right: ''
+            }}
+            allDaySlot={false}
             timeZone='America/New_York'
             firstDay={new Date().getDay()}
             // start = {new Date()}
             // startStr = '2023-04-17T12:30:00-05:00'
             initialView='timeGridWeek'
+            
             editable={true}
             selectable={true}
             selectMirror={true}
@@ -141,9 +153,6 @@ export default class DemoApp extends React.Component {
         </div>
         <div className='demo-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
-
-          {console.log("events", this.state.currentEvents)}
-
           <ul>
             {this.state.currentEvents.map(renderSidebarEvent)}
           </ul>
@@ -161,9 +170,7 @@ export default class DemoApp extends React.Component {
   handleDateSelect = (selectInfo) => {
     // let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
-
     calendarApi.unselect() // clear date selection
-
     if (true) {
       calendarApi.addEvent({
         id: createEventId(),
@@ -186,7 +193,6 @@ export default class DemoApp extends React.Component {
       currentEvents: events
     })
   }
-
 }
 
 function renderEventContent(eventInfo) {
@@ -200,7 +206,6 @@ function renderEventContent(eventInfo) {
 
 function renderSidebarEvent(event) {
   return (
-
     <li key={event.id}>
       <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
       <i>{event.title}</i>

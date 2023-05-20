@@ -62,7 +62,7 @@ exports.create = async (req, res) => {
     Other: req.body.Other,
     AnticipatedFrequencyDuration: req.body.AnticipatedFrequencyDuration,
     SpecialInstructions: req.body.SpecialInstructions,
-    audioFile: req.files && `${uniqueFileName}.mp4`
+    audioFile: req.files && `${uniqueFileName}.mp3`
 
 
 

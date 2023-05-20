@@ -1,5 +1,8 @@
 const sql = require("./db.js");
 
+var moment = require('moment'); // require
+
+
 constructor
 const Doctor_time_slots = function(doctor_time_slots) {
   // this.start_time = doctor_time_slots.start_time;
@@ -26,6 +29,53 @@ Doctor_time_slots.create = (doctor_time_slots, result) => {
       console.log("created doctor_time_slots: ", { id: res.insertId, ...doctor_time_slots });
       result(null, { id: res.insertId, ...doctor_time_slots });
     });
+};
+
+
+Doctor_time_slots.weeklySchedule = (doctor_time_slots, result) => {
+
+  console.log("req Object", doctor_time_slots)
+
+  // Generating the doctor availability time slots 
+
+  const noOfWeeks = Math.trunc(doctor_time_slots.validity_months * 30 / 7);
+
+  console.log(noOfWeeks)
+
+  var generatedSlots = []
+
+  for (let i = 0; i < noOfWeeks; i++) {
+
+    generatedSlots =  generatedSlots.concat(doctor_time_slots.slots.map((ds) => ({ start_time: moment(new Date(ds.start_time)).add(i * 7, 'days').toDate(), end_time: moment(new Date(ds.end_time)).add(i * 7, 'days').toDate() , doctor: doctor_time_slots.doctor })))
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+  sql.query("INSERT IGNORE INTO doctor_time_slots (start_time, end_time, doctor) VALUES ?",
+
+    [(generatedSlots.map(gs => [gs.start_time, gs.end_time, gs.doctor]))],
+
+    (err, res) => {
+
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      
+      result(null, { id: res.insertId, ...doctor_time_slots });
+
+    });
+
 };
 
 Doctor_time_slots.findById = (id, result) => {

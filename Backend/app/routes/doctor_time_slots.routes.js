@@ -6,6 +6,10 @@ module.exports = app => {
   // Create a new Tutorial
   router.post("/", doctor_time_slots.create);
 
+
+  router.post("/weeklyschedule", doctor_time_slots.weeklySchedule);
+
+
   // Retrieve all Tutorials
   router.get("/", doctor_time_slots.findAll);
 
