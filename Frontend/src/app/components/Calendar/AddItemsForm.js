@@ -243,7 +243,7 @@ class AddItemsForm extends React.Component {
                     console.log("itemAdded", this.state)
 
 
-                    return this.props.onAddItem(this.state)
+                    // return this.props.onAddItem(this.state)
 
                   }} className={classes.mt1} variant="contained" color="primary">
                     <AddIcon /> add

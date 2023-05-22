@@ -948,7 +948,8 @@ const IconList = [
   "vaccines",
   "edit_calendar",
   "earbuds",
-  "location_city"
+  "location_city",
+  "receipt_icon"
 ];
 
 const AppIcon = () => {

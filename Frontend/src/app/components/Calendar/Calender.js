@@ -70,7 +70,7 @@ const styles = theme => ({
   }
 })
 
- class Calender extends Component {
+class Calender extends Component {
   state = {
     keys,
     groups,
@@ -81,17 +81,22 @@ const styles = theme => ({
 
 
 
-      doctor: '',
-      status: '',
-      start: '2019-01-01',
-      end: '2019-01-01',
-      open: false,
-      mentorsList: [],
-      patients: [],
-      patient: '',
-      patientName: ''
-    
-  
+    doctor: '',
+    status: '',
+    start: '2019-01-01',
+    end: '2019-01-01',
+    open: false,
+    mentorsList: [],
+    patients: [],
+    patient: '',
+    patientName: '',
+
+
+
+
+    selectedSlot: {}
+
+
 
 
 
@@ -153,6 +158,12 @@ const styles = theme => ({
 
 
     this.setState({ groups: doctorsArray })
+
+
+    let patients = await (await axios.get('http://192.168.5.21:8081/api/patients')).data
+
+    this.setState({ patients: patients })
+
 
   }
 
@@ -401,13 +412,19 @@ const styles = theme => ({
             console.log("item click", e)
             // this.setState({ refresh: !this.state.refresh })
 
-            this.setState({open:true})
+
+            console.log("object to add", items)
+
+            this.setState({ selectedSlot: { id: items[e].group, name: items[e].title, start: items[e].start, end: items[e].end } })
+
+            this.setState({ open: true })
+
 
           }}
           // onItemSelect={ this.setState({open:true})}
-          
+
           // onCanvasClick={(e)=>{console.log("canvas click", e)}}
-       
+
 
           items={items}
           // rightSidebarWidth={50}
@@ -444,15 +461,27 @@ const styles = theme => ({
 
 
 
-        <Modal  open={this.state.open} onClose={this.onCloseModal} center>
-          <div 
-          className={classes.root}
+        <Modal open={this.state.open} onClose={this.onCloseModal} center>
+          <div
+            className={classes.root}
           >
             <Grid container spacing={24}>
               <Grid item xs={12}>
+
+
+                <h4>Schedule an appointment</h4>
+
                 <form onSubmit={this.formSubmitHandler}>
                   {/*Mentors list*/}
-                  <TextField
+
+                  <span style={{ fontWeight: 600 }}>Doctor:</span> <span> {this.state.selectedSlot.name}</span>
+                  <br />
+                  <span style={{ fontWeight: 600 }}>Date:</span> <span> {this.state.selectedSlot.start && this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')}</span>
+
+                  <br />
+                  <span style={{ fontWeight: 600 }}>Availability time:</span> <span> {this.state.selectedSlot.start && this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LT')}</span>
+                  <span style={{ fontWeight: 600 }}> to </span> <span> {this.state.selectedSlot.end && this.state.selectedSlot.end.utc().tz("Asia/Karachi").format('LT')}</span>
+                  {/* <TextField
                     select
                     label="Chose Doctor"
                     className={classNames(classes.margin, classes.textField)}
@@ -465,11 +494,8 @@ const styles = theme => ({
                         {option.title}
                       </MenuItem>
                     ))}
-                  </TextField>
-
+                  </TextField> */}
                   <br />
-
-
 
                   <TextField
                     select
@@ -481,7 +507,7 @@ const styles = theme => ({
 
                     onChange={
                       (e) => {
-                        this.setState({ patientName:e.currentTarget.innerText })
+                        this.setState({ patientName: e.currentTarget.innerText })
 
                         console.log("e.target", e.currentTarget.innerText)
                         this.setState({ patient: e.target.value });
@@ -505,6 +531,10 @@ const styles = theme => ({
 
 
 
+                  <br />
+
+                  <br />
+
 
 
                   {/*status*/}
@@ -521,7 +551,7 @@ const styles = theme => ({
                   {/*Date*/}
                   <Grid container spacing={24}>
                     {/*start*/}
-                    <Grid item md={6}>
+                    <Grid item md={8}>
                       {/* <TextField
                         id="date"
                         label="Start"
@@ -545,7 +575,7 @@ const styles = theme => ({
                         fullWidth={true}
                       /> */}
 
-<input type="time"/>
+                     Start time: &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start}  onChange={(e)=>{this.setState({start:e.target.value})}} />
 
 
 
@@ -556,8 +586,8 @@ const styles = theme => ({
 
 
 
-                    <Grid item md={6}>
-                      <TextField
+                    <Grid item md={8}>
+                      {/* <TextField
                         id="date"
                         label="End"
                         type="time"
@@ -571,24 +601,46 @@ const styles = theme => ({
                         }}
                         onChange={this.handleChange('end')}
                         fullWidth={true}
-                      />
+                      /> */}
+
+End time: &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e)=>{this.setState({end:e.target.value})}}/>
+
+
+
+
+
                     </Grid>
                   </Grid>
+
+                  <br />
 
                   {/*Submit*/}
                   <Button onClick={() => {
 
                     this.onCloseModal()
 
-
                     console.log("itemAdded", this.state)
 
+                    const addAppointment = {
+                      doctor: this.state.selectedSlot.id,
+                      patient: this.state.patient,
+                                       
+                      start: this.state.start,
+                      end: this.state.end,
+                   
+                      patientName: this.state.patientName
+                    }
 
-                    return this.props.onAddItem(this.state)
+                    console.log("itemAddedForaddAppointment", addAppointment)
+
+
+                    this.addItemHandler(addAppointment)
+
+                    // return this.props.onAddItem(this.state)
 
                   }}
-                  //  className={classes.mt1} 
-                   variant="contained" color="primary">
+                    //  className={classes.mt1} 
+                    variant="contained" color="primary">
                     <AddIcon /> add
                   </Button>
                 </form>

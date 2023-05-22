@@ -66,7 +66,8 @@ export const navigations = [
   { label: 'Invoice Management', type: 'label' },
   {
     name: 'Invoice  Management',
-    icon: 'edit_calendar',
+     
+        icon: 'receipt_icon',
     // badge: { value: '30+', color: 'secondary' },
     children: [
       { name: 'Create Invoice', path: '/createInvoice', iconText: 'A' },
