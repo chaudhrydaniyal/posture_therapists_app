@@ -67,6 +67,7 @@ const PatientForm = () => {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
+    const [cnic,setCnic] = useState("")
 
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
@@ -99,16 +100,23 @@ const PatientForm = () => {
                     city: selectedCity,
                     diseases: selectedDisease.map((sd) => sd.id)
 
+
                 })
                 NotificationManager.success("Successfully Registered");
+              
+                // setSelectedDisease(null)
+             
             } catch (error) {
                 console.log("error", error)
                 NotificationManager.error("Something went wrong")
             }
+        
             action.resetForm()
             setSelectedCountry(null)
             setSelectedState(null)
             setSelectedCity(null)
+            // action.resetForm({ values: { ...values, cnic: '' } });
+
 
         }
 
@@ -460,7 +468,7 @@ const PatientForm = () => {
                                 format="#####-#######-#"
                                 allowEmptyFormatting
                                 mask="x"
-                                defaultValue={values.cnic}
+                                defaultValue={values.cnic} 
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
