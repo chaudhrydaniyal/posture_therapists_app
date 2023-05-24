@@ -95,9 +95,9 @@ const [disabled,setDisabled] = useState(false)
                     patient_satisfactions_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
                     blood_group: values.blood_group,
                     medical_status: values.medical_status,
-                    country: selectedCountry,
-                    state: selectedState,
-                    city: selectedCity,
+                    country: selectedCountry.name,
+                    state: selectedState.name,
+                    city: selectedCity.name,
                     diseases: selectedDisease.map((sd) => sd.id)
 
 

@@ -85,6 +85,9 @@ const PatientDetails = () => {
         occupation: patientData.occupation,
         cnic: patientData.cnic,
         blood_group:patientData.blood_group,
+        country:patientData.country,
+        state:patientData.state,
+        city:patientData.city,
         physiotherapist_seen_before: patientData.physiotherapist_seen_before,
         patient_concerns_for_previous_physiotherapist: patientData.patient_concerns_for_previous_physiotherapist,
         patient_satisfactions_for_previous_physiotherapist: patientData.patient_satisfactions_for_previous_physiotherapist,
@@ -353,7 +356,7 @@ const PatientDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={selectedCountry}
+                                    value={Country.getAllCountries()}
                                     onChange={(item) => {
                                         setSelectedCountry(item);
                                     }}
@@ -377,7 +380,7 @@ const PatientDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={selectedState}
+                                    value={State?.getStatesOfCountry( selectedCountry?.isoCode)}
                                     onChange={(item) => {
                                         setSelectedState(item);
                                     }}
@@ -402,7 +405,7 @@ const PatientDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={selectedCity}
+                                    value={data.city}
                                     onChange={(item) => {
                                         setSelectedCity(item);
                                     }}

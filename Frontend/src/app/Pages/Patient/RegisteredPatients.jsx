@@ -82,6 +82,7 @@ const RegisteredPatients = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((items, id) => (
                   <TableRow key={id}>
+                    {console.log("items",items)}
                     <TableCell align="left">{id}</TableCell>
                     <TableCell align="left">{items.first_name}</TableCell>
                     <TableCell align="left">{items.surname}</TableCell>
