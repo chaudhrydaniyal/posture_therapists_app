@@ -31,21 +31,16 @@ const initialValue = {
     designation: "",
     cnic: "",
     physiotherapist_seen_before: "",
-    patient_concerns_for_previous_physiotherapist: "",
-    patient_satisfactions_for_previous_physiotherapist: "",
-    home_phone: null,
-    work_phone: null,
-    nothappy: "",
-    happywith: "",
-    todaysession: "",
-    stoppingyou: "",
-    fixednow: "",
-    patientrelationship: "",
-    prevmobileno: "",
-    contactperson: "",
-    doctorname: "",
+    not_happy:"",
+    most_happy:"",
+    today_session:"",
+    stopping_you:"",
+    fixed_now:"",
     blood_group: "",
     medical_status: "",
+    emergency_contact_person:"",
+    emergency_person_relation:"",
+    emergency_person_mobile:""
 }
 
 
@@ -91,8 +86,14 @@ const [disabled,setDisabled] = useState(false)
                     work_phone: values.work_phone,
                     cnic: values.cnic,
                     physiotherapist_seen_before: values.physiotherapist_seen_before,
-                    patient_concerns_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
-                    patient_satisfactions_for_previous_physiotherapist: values.patient_satisfactions_for_previous_physiotherapist,
+                    not_happy:values.not_happy,
+                    most_happy:values.most_happy,
+                    today_session:values.today_session,
+                    stopping_you:values.stopping_you,
+                    fixed_now:values.fixed_now,
+                    emergency_contact_person:values.emergency_contact_person,
+                    emergency_person_relation:values.emergency_person_relation,
+                    emergency_person_mobile:values.emergency_person_mobile,
                     blood_group: values.blood_group,
                     medical_status: values.medical_status,
                     country: selectedCountry.name,
@@ -415,20 +416,7 @@ const [disabled,setDisabled] = useState(false)
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                            <label htmlFor="address">
-                                {" "}
-                                <div>Address:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="address" label="Address" value={values.address} onChange={handleChange} />
-                        </div>
-
-
-                    </div>
-
+                   
                     <div className="row">
                         <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                             <label htmlFor="medical_status">
@@ -462,17 +450,39 @@ const [disabled,setDisabled] = useState(false)
                         </div>
                     </div>
 
-
-
                     <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
+                            <label htmlFor="address">
+                                {" "}
+                                <div>Address:</div>
+                            </label>
+                        </div>
+                        <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="address" label="Address" value={values.address} onChange={handleChange} />
+                        </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="doctorname">
-                                <div>Your Doctor"s Name:</div>
+                            <label htmlFor="occupation">
+                                <div>Occupation:</div>
                             </label>
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="doctorname" label="Your Doctor Name" />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="occupation" label="Occupation" value={values.occupation} onChange={handleChange} onBlur={handleBlur} />
                         </div>
+
+                    </div>
+
+
+                    <div className="row">
+                    <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <label htmlFor="designation">
+                                <div>Designation:</div>
+                            </label>
+                            
+                        </div>
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="designation" label="Designation" value={values.designation} onChange={handleChange} onBlur={handleBlur} />
+                        </div>
+                       
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <label htmlFor="cnic">
                                 <div>CNIC:</div>
@@ -546,22 +556,9 @@ const [disabled,setDisabled] = useState(false)
                     </div>
                     <div className="row">
 
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="occupation">
-                                <div>Occupation:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="occupation" label="Occupation" value={values.occupation} onChange={handleChange} onBlur={handleBlur} />
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="designation">
-                                <div>Designation:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="designation" label="Designation" value={values.designation} onChange={handleChange} onBlur={handleBlur} />
-                        </div>
+                       
+                        
+                       
                     </div>
                 </div>
             </div>
@@ -575,31 +572,31 @@ const [disabled,setDisabled] = useState(false)
                     <div className="row" style={{ marginTop: "2rem" }}>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="contactperson">
+                            <label htmlFor="emergency_contact_person">
                                 <div>Contact Person:</div>
                             </label>
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="contactperson" value={values.contactperson} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="emergency_contact_person" value={values.emergency_contact_person} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="patientrelationship">
+                            <label htmlFor="emergency_person_relation">
                                 <div>Relationship to Patient:</div>
                             </label>
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="patientrelationship" value={values.patientrelationship} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="emergency_person_relation" value={values.emergency_person_relation} onChange={handleChange} onBlur={handleBlur} />
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="prevmobileno">
+                            <label htmlFor="emergency_person_mobile">
                                 <div>Mobile No:</div>
                             </label>
                         </div>
 
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="number" name="prevmobileno" value={values.prevmobileno} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="number" name="emergency_person_mobile" value={values.emergency_person_mobile} onChange={handleChange} onBlur={handleBlur} onInput={(e) => {
                                 e.target.value = Math.max(0, parseInt(e.target.value))
                                     .toString()
                                     .slice(0, 11);
@@ -661,13 +658,13 @@ const [disabled,setDisabled] = useState(false)
                     </div>
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="patient_concerns_for_previous_physiotherapist">
+                            <label htmlFor="not_happy">
                                 <div>If Yes, was there anything you were not happy about?</div>
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
                             {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={values.patient_concerns_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="not_happy" value={values.not_happy} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
                         </div>
 
 
@@ -676,12 +673,12 @@ const [disabled,setDisabled] = useState(false)
 
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="patient_satisfactions_for_previous_physiotherapist">
+                            <label htmlFor="most_happy">
                                 <div>What aspects were you most happy with?</div>
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={values.patient_satisfactions_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="most_happy" value={values.most_happy} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
                         </div>
 
 
@@ -690,13 +687,13 @@ const [disabled,setDisabled] = useState(false)
 
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="todaysession">
+                            <label htmlFor="today_session">
                                 <div>What are the main things you would like to achieve by the end of today"s session?</div>
                             </label>
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="todaysession" value={values.todaysession} onChange={handleChange} onBlur={handleBlur} disabled={disabled} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="today_session" value={values.today_session} onChange={handleChange} onBlur={handleBlur} disabled={disabled} />
                         </div>
 
 
@@ -704,26 +701,26 @@ const [disabled,setDisabled] = useState(false)
 
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="stoppingyou">
+                            <label htmlFor="stopping_you">
                                 <div>What is this problem you are here for stopping you from doing?</div>
                             </label>
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="stoppingyou" value={values.stoppingyou} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="stopping_you" value={values.stopping_you} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
                         </div>
 
 
                     </div>
                     <div className="row">
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="fixednow">
+                            <label htmlFor="fixed_now">
                                 <div>Why is it important that you get this problem fixed NOW?</div>
                             </label>
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="fixednow" value={values.fixednow} onChange={handleChange} onBlur={handleBlur} disabled={disabled} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="fixed_now" value={values.fixed_now} onChange={handleChange} onBlur={handleBlur} disabled={disabled} />
                         </div>
 
 
