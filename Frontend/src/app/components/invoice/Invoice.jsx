@@ -131,6 +131,7 @@ class Invoice extends React.Component {
     render() {
         return (<Form onSubmit={this.openModal}>
             <Row>
+                {console.log("modelItem",this.props)}
                 <Col md={8} lg={9}>
                     <Card className="p-4 p-xl-5 my-3 my-xl-4">
                         <div className="d-flex flex-row align-items-start justify-content-between mb-3">
@@ -160,17 +161,18 @@ class Invoice extends React.Component {
                             <Col>
                                 <Form.Label className="fw-bold">Bill to:</Form.Label>
                                
-                                    
+                                    <br></br>
                                 {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
                                  className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
                                     <p></p>{d.first_name}
                                  ))}</Form.Control>
                                 */}
-                                 <select class="form-control dropdown"
+                                 <select
+                                 style={{width:"50%",height:"2.5rem",borderRadius:"6px",marginTop:"0.5rem"}}
                                 // value={this.state.patientName}
                                 // onChange={(e) => this.editField(e)}
                                 onChange={(e)=>{this.setState({selectedPatient:this.state.patientName.filter((g) => g.id == e.target.value)[0]})}}
-                                style={{width:"50%"}}
+                               
                                 name="patientName"
                          
                             >
@@ -185,11 +187,13 @@ class Invoice extends React.Component {
                                         </option>
                                     ))}
                             </select>
+                            <br></br>
                             {console.log("selectedPatient",this.state.selectedPatient
                             )}
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
-                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",marginTop:"0.5rem",borderRadius:"6px",}} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled}/><br></br>
-                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",marginTop:"0.5rem",borderRadius:"6px",}} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled}/>
+                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",marginTop:"1.5rem",borderRadius:"6px",}} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled}/><br></br>
+                                <br></br>
+                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",}} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled}/>
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" /> */}
                             </Col>
                             {/* <Col>

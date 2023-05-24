@@ -36,6 +36,7 @@ class InvoiceModal extends React.Component {
   render() {
     return(
       <div>
+        {console.log("review",this.props)}
         <Modal show={this.props.showModal} onHide={this.props.closeModal} size="lg" centered>
           <div id="invoiceCapture">
             <div className="d-flex flex-row justify-content-between align-items-start bg-light w-100 p-4">
@@ -57,9 +58,9 @@ class InvoiceModal extends React.Component {
               <Row className="mb-4">
                 <Col md={4}>
                   <div className="fw-bold">Billed to:</div>
-                  <div>{this.props.info.billTo||''}</div>
-                  <div>{this.props.info.billToAddress||''}</div>
-                  <div>{this.props.info.billToEmail||''}</div>
+                  <div>{this.props.info.selectedPatient.first_name}</div>
+                  <div>{this.props.info.selectedPatient.email}</div>
+                  <div>{this.props.info.selectedPatient.address}</div>
                 </Col>
                 {/* <Col md={4}>
                   <div className="fw-bold">Billed From:</div>
@@ -85,11 +86,12 @@ class InvoiceModal extends React.Component {
                   {this.props.items.map((item, i) => {
                     return (
                       <tr id={i} key={i}>
-                        <td style={{width: '70px'}}>
+                        {/* <td style={{width: '70px'}}>
                           {item.quantity}
-                        </td>
+                        </td> */}
+                        {console.log("serviceItem",item)}
                         <td>
-                          {item.name} - {item.description}
+                          {/* {item.selectedService.service_name}  */}
                         </td>
                         <td className="text-end" style={{width: '100px'}}>{this.props.currency} {item.price}</td>
                         <td className="text-end" style={{width: '100px'}}>{this.props.currency} {item.price * item.quantity}</td>
