@@ -35,21 +35,23 @@ const Container = styled('div')(({ theme }) => ({
 const DoctorDetails = () => {
     var doctor = useLocation()
     var doctorDetails = doctor.state.doctors
-    console.log("doctor Details",doctorDetails)
+    console.log("doctor Details", doctorDetails)
     const [disableFields, setDisableFields] = useState(true);
     const [availableSlots, setAvailableSlots] = useState(false)
     const [doctorSlots, setDoctorSlots] = useState(true)
     const [doctorWeeklySchedule, setDoctorWeeklySchedule] = useState(false)
 
-    
+
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedTab, setSelectedTab] = useState(1);
+
     const [file, setfile] = useState();
 
     const [data, setData] = useState({
         id: doctorDetails.id,
-        picture:doctorDetails.picture,
+        picture: doctorDetails.picture,
         first_name: doctorDetails.first_name,
         last_name: doctorDetails.last_name,
         date_of_birth: doctorDetails.date_of_birth,
@@ -123,8 +125,8 @@ const DoctorDetails = () => {
                     // work_phone: data.work_phone,
                     // practitioner_type: data.practitioner_type,
                     // remarks: data.remarks
-                    id:data.id,
-                    picture:data.picture,
+                    id: data.id,
+                    picture: data.picture,
                     first_name: data.first_name,
                     last_name: data.last_name,
                     date_of_birth: data.date_of_birth,
@@ -149,8 +151,8 @@ const DoctorDetails = () => {
 
                 })
                 .then((user) => {
-                   
-                    data.picture =user.data.picture;
+
+                    data.picture = user.data.picture;
                     data.first_name = user.data.first_name;
                     data.last_name = user.data.last_name;
                     data.date_of_birth = user.data.date_of_birth;
@@ -221,21 +223,21 @@ const DoctorDetails = () => {
             <NotificationContainer />
 
             <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-1" defaultChecked class="tab-switch" onClick={() => { handleDoctorSlot(); handleAvailableSlot() }} />
+                <input type="radio" name="css-tabs" id="tab-1" defaultChecked class="tab-switch" onClick={() => { handleDoctorSlot(); handleAvailableSlot(); setSelectedTab(1); }} />
                 <label for="tab-1" class="tab-label" >Doctor Details</label>
             </div>
             <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" onClick={() => { handleDoctorSlots(); handleAvailableSlots() }} />
+                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" onClick={() => { handleDoctorSlots(); handleAvailableSlots(); setSelectedTab(2); }} />
                 <label for="tab-2" class="tab-label">Available Slots</label>
             </div>
             <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" onClick={() => { setDoctorWeeklySchedule(true) }} />
-                <label for="tab-2" class="tab-label">Weekly Schedule</label>
+                <input type="radio" name="css-tabs" id="tab-3" class="tab-switch" onClick={() => {  setSelectedTab(3); setDoctorWeeklySchedule(true); ; }} />
+                <label for="tab-3" class="tab-label">Weekly Schedule</label>
             </div>
             <br />
             <br />
             <div style={{ marginTop: '0' }}>
-                {doctorSlots ? <div className="card" style={{ borderTopLeftRadius: "0" }}>
+                {selectedTab == 1 ? <div className="card" style={{ borderTopLeftRadius: "0" }}>
                     <div className="card-body" style={{ margin: "0px" }}>
                         <h5>DOCTOR INFORMATION</h5>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -247,48 +249,54 @@ const DoctorDetails = () => {
                             }} ><Span sx={{ pl: 0, textTransform: "capitalize" }}>Save</Span></Button>
                         </div>
                         <Form className="mb-3 d-flex mt-1 " controlId="formGridProfilePic">
-                    <div>
                             <div>
-                        <Form.Label htmlFor="uploadpic">
-                            {data.picture ? (
-                                <>
-                                    {/* {console.log("picinsrc",URL.createObjectURL(file))} */}
+                                <div>
+                                    <Form.Label htmlFor="uploadpic">
+                                        {data.picture ? (
+                                            <>
+                                                {/* {console.log("picinsrc",URL.createObjectURL(file))} */}
 
-                                    <img
-                                        className="rounded-circle"
-                                        style={{ width: "130px", height: "130px" }}
-                                        src={process.env.REACT_APP_ORIGIN_URL + `${data.picture}`}
-                                        alt=""
+                                                <img
+                                                    className="rounded-circle"
+                                                    style={{ width: "130px", height: "130px" }}
+                                                    src={process.env.REACT_APP_ORIGIN_URL + `${data.picture}`}
+                                                    alt=""
+                                                />
+                                            </>
+                                        ) : (
+                                            <img
+                                                className="rounded-circle"
+                                                src={pp}
+                                                alt=""
+                                                style={{ width: "130px", height: "130px" }}
+                                            />
+                                        )}
+                                    </Form.Label>
+
+                                    <Form.Control
+                                        type="file"
+                                        name="file"
+                                        // value={emp.profilepic}
+                                        // defaultValue={data.picture}
+                                        style={{ display: "none" }}
+                                        id="uploadpic"
+                                        // onChange={async (e) => {
+                                        //     await uploadImage(e);
+                                        // }}
+
+                                    
+                                        disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                     />
-                                </>
-                            ) : (
-                                <img
-                                    className="rounded-circle"
-                                    src={pp}
-                                    alt=""
-                                    style={{ width: "130px", height: "130px" }}
-                                />
-                            )}
-                        </Form.Label>
 
-                        <Form.Control
-                            type="file"
-                            name="file"
-                            // value={emp.profilepic}
-                            // defaultValue={data.picture}
-                            style={{ display: "none" }}
-                            id="uploadpic"
-                            // onChange={async (e) => {
-                            //     await uploadImage(e);
-                            // }}
-                            disabled={disableFields}
-                        />
+                                </div>
+                                <label style={{ marginTop: '1rem' }}><strong>Upload Picture</strong></label>
 
-</div>
-                            <label style={{marginTop:'1rem'}}><strong>Upload Picture</strong></label>
-                       
-                        </div>
-                    </Form>
+                            </div>
+                        </Form>
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="first_name">
@@ -298,7 +306,11 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <Input className="Input_border" type="text" name="first_name" value={data.first_name} onChange={handleInput} disabled={disableFields} />
+                                <Input className="Input_border" type="text" name="first_name" value={data.first_name} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}    />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="last_name">
@@ -308,7 +320,11 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <Input className="Input_border" type="text" name="last_name" value={data.last_name} onChange={handleInput} disabled={disableFields} />
+                                <Input className="Input_border" type="text" name="last_name" value={data.last_name} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
@@ -316,7 +332,11 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input className="Input_border" type="email" name="email" value={data.email} onChange={handleInput} disabled={disableFields} />
+                                <Input className="Input_border" type="email" name="email" value={data.email} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  />
                             </div>
                         </div>
                         <div className="row">
@@ -332,7 +352,11 @@ const DoctorDetails = () => {
                                     name="date_of_birth"
                                     value={data.date_of_birth}
                                     onChange={(e) => { handleInput(e); ageCalculator(e) }}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -355,7 +379,11 @@ const DoctorDetails = () => {
                                     }}
                                     value={data.age}
                                     onChange={handleInput}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -366,7 +394,11 @@ const DoctorDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-1">
                                 {" "}
-                                <Form.Select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields}>
+                                <Form.Select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  >
                                     <option
                                         value=""
                                         selected="selected"
@@ -388,11 +420,15 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                                <Input className="Input_width" type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} />
+                                <Input className="Input_width" type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                         </div>
                         <div className="row">
-                         
+
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
                                     <div>CNIC:</div>
@@ -415,7 +451,11 @@ const DoctorDetails = () => {
                                     mask="x"
                                     value={data.cnic}
                                     onChange={handleInput}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -428,7 +468,11 @@ const DoctorDetails = () => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
-                                }} value={data.work_phone} onChange={handleInput} disabled={disableFields} />
+                                }} value={data.work_phone} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
@@ -440,7 +484,11 @@ const DoctorDetails = () => {
                                     e.target.value = Math.max(0, parseInt(e.target.value))
                                         .toString()
                                         .slice(0, 11);
-                                }} value={data.mobile_no} onChange={handleInput} disabled={disableFields} />
+                                }} value={data.mobile_no} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                         </div>
                         <div className="row">
@@ -462,7 +510,11 @@ const DoctorDetails = () => {
                                     onChange={(item) => {
                                         setSelectedCountry(item);
                                     }}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
 
                             </div>
@@ -486,7 +538,11 @@ const DoctorDetails = () => {
                                     onChange={(item) => {
                                         setSelectedState(item);
                                     }}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
 
                             </div>
@@ -511,7 +567,11 @@ const DoctorDetails = () => {
                                     onChange={(item) => {
                                         setSelectedCity(item);
                                     }}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
                             </div>
                         </div>
@@ -528,7 +588,11 @@ const DoctorDetails = () => {
                                     label="Specialization"
                                     value={data.specialization}
                                     onChange={handleInput}
-                                    disabled={disableFields}
+                                    disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}  
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -537,7 +601,11 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="experience" label="Experience" value={data.experience} onChange={handleInput} disabled={disableFields} />
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="experience" label="Experience" value={data.experience} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="Engagement Terms">
@@ -545,7 +613,11 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Form.Select name="engagement-terms:" class="form-control dropdown" value={data.engagement_terms} onChange={handleInput} disabled={disableFields} >
+                                <Form.Select name="engagement-terms:" class="form-control dropdown" value={data.engagement_terms} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   >
                                     <option
                                         value=""
                                         selected="selected"
@@ -560,39 +632,50 @@ const DoctorDetails = () => {
                             </div>
                         </div>
                         <div className="row">
-                       
+
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="practitioner_type">
                                     <div>Practitioner Type:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input className="Input_border" type="text" name="practitioner_type" value={data.practitioner_type} onChange={handleInput} disabled={disableFields} />
+                                <Input className="Input_border" type="text" name="practitioner_type" value={data.practitioner_type} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="financial_information">
-                                <div>Financial Information:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="financial_information" label="Financial Information" value={data.financial_information} onChange={handleInput} disabled={disableFields} />
+                                <label htmlFor="financial_information">
+                                    <div>Financial Information:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="financial_information" label="Financial Information" value={data.financial_information} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
 
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <label htmlFor="salary">
-                                <div>Salary:</div>
-                            </label>
-                        </div>
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                            <Input style={{ paddingLeft: '0.3rem' }} type="number" name="salary" label="salary" value={data.salary} onChange={handleInput} disabled={disableFields} />
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="salary">
+                                    <div>Salary:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="number" name="salary" label="salary" value={data.salary} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
 
+                            </div>
                         </div>
-                      </div>
-                
-                       
+
 
                         <div className="row">
-                        
+
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="remarks">
                                     {" "}
@@ -600,7 +683,11 @@ const DoctorDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                                <Input className="Input_width" type="text" name="remarks" value={data.remarks} onChange={handleInput} disabled={disableFields} />
+                                <Input className="Input_width" type="text" name="remarks" value={data.remarks} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
                             </div>
                         </div>
 
@@ -610,31 +697,27 @@ const DoctorDetails = () => {
             </div>
 
 
-{/* 
+
             <div style={{ marginTop: '0' }}>
 
-                {availableSlots ?
+{selectedTab == 2 ?
+    <div className='card' style={{ borderTopLeftRadius: "0" }}>
+        <div className='card-body'>
+            <div style={{ display: 'flex' }}>
+                <div>Doctor Name:</div> &nbsp;
+                <div style={{ color: 'green' }}>{data.first_name}</div>
+            </div>
+            <DemoApp data={data.id} />
+        </div>
+    </div>
+    : null}
+</div>
+
+            <div style={{ marginTop: '0' }}>
+
+                {selectedTab == 3 ?
                     <div className='card' style={{ borderTopLeftRadius: "0" }}>
                         <div className='card-body'>
-                            
-                            <div style={{ display: 'flex' }}>
-                                <div>Doctor Name:</div> &nbsp;
-                                <div style={{ color: 'green' }}>{data.first_name}</div>
-                            </div>
-                            <DemoApp data={data.id} />
-
-                        </div>
-                    </div>
-                    : null}
-            </div> */}
-
-
-            
-            <div style={{ marginTop: '0' }}>
-
-                {availableSlots ?
-                    <div className='card' style={{ borderTopLeftRadius: "0" }}>
-                        <div className='card-body'>                         
                             <div style={{ display: 'flex' }}>
                                 <div>Doctor Name:</div> &nbsp;
                                 <div style={{ color: 'green' }}>{data.first_name}</div>
@@ -644,7 +727,6 @@ const DoctorDetails = () => {
                     </div>
                     : null}
             </div>
-
 
         </Container>
 

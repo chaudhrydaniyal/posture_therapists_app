@@ -456,7 +456,7 @@ class Calender extends Component {
               <SundaysMarker />
             </TimelineMarkers> */}
         </Timeline>
-        <AddItemsForm onAddItem={this.addItemHandler} />
+        {/* <AddItemsForm onAddItem={this.addItemHandler} /> */}
         <NotificationContainer />
 
 
@@ -575,7 +575,22 @@ class Calender extends Component {
                         fullWidth={true}
                       /> */}
 
-                     Start time: &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start}  onChange={(e)=>{this.setState({start:e.target.value})}} />
+                      Start time: &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start} onChange={(e) => {
+
+                        console.log("timeinput", new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')))
+
+
+                        let startDateTime = new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL'))
+
+                        startDateTime.setHours(e.target.value.split(":")[0])
+                        startDateTime.setMinutes(e.target.value.split(":")[1])
+
+
+                        this.setState({ start: startDateTime })
+                      }}
+
+
+                      />
 
 
 
@@ -603,7 +618,20 @@ class Calender extends Component {
                         fullWidth={true}
                       /> */}
 
-End time: &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e)=>{this.setState({end:e.target.value})}}/>
+                      End time: &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e) => {
+
+
+
+                        let endDateTime = new Date(this.state.selectedSlot.end.utc().tz("Asia/Karachi").format('LL'))
+
+                        endDateTime.setHours(e.target.value.split(":")[0])
+                        endDateTime.setMinutes(e.target.value.split(":")[1])
+
+
+                        this.setState({ end: endDateTime })
+
+
+                      }} />
 
 
 
@@ -624,10 +652,10 @@ End time: &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot
                     const addAppointment = {
                       doctor: this.state.selectedSlot.id,
                       patient: this.state.patient,
-                                       
+
                       start: this.state.start,
                       end: this.state.end,
-                   
+
                       patientName: this.state.patientName
                     }
 

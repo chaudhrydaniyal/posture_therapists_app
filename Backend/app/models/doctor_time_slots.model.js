@@ -98,7 +98,7 @@ Doctor_time_slots.findById = (id, result) => {
 };
 
 Doctor_time_slots.getAll = (title, result) => {
-  let query = "SELECT first_name, surname, start_time, end_time, doctor FROM postureapp.doctor_time_slots inner join users where doctor = users.id;";
+  let query = "SELECT first_name, surname, start_time, end_time, doctor FROM doctor_time_slots inner join users where doctor = users.id;";
 
   // if (title) {
   //   query += ` WHERE title LIKE '%${title}%'`;
