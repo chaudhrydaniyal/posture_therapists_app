@@ -84,6 +84,7 @@ const PatientDetails = () => {
         email: patientData.email,
         occupation: patientData.occupation,
         cnic: patientData.cnic,
+        blood_group:patientData.blood_group,
         physiotherapist_seen_before: patientData.physiotherapist_seen_before,
         patient_concerns_for_previous_physiotherapist: patientData.patient_concerns_for_previous_physiotherapist,
         patient_satisfactions_for_previous_physiotherapist: patientData.patient_satisfactions_for_previous_physiotherapist,
@@ -252,7 +253,7 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
-                                <Form.Select name="gender" class="form-control dropdown" >
+                                <Form.Select name="gender" class="form-control dropdown" value={data.blood_group} onChange={handleInput} disabled={disableFields}>
                                     <option
                                         value=""
                                         selected="selected"

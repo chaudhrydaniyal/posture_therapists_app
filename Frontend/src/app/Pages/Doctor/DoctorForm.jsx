@@ -318,7 +318,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             <Input style={{ paddingLeft: '0.3rem' }} type="email" name="email" label="Email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
-                            {errors.email && touched.email ? (<p style={{ color: "red" }}>{errors.first_name}</p>) : null}
+                            {errors.email && touched.email ? (<p style={{ color: "red" }}>{errors.email}</p>) : null}
                         </div>
                     </div>
 

@@ -6,7 +6,7 @@ const Input = (props) => {
   return (
     <>
      <TextField fullWidth id="outlined-basic" label={props.label} variant="outlined" sx={props.sx}
-     value={props.value} onChange={props.onChange} name={props.name} type={props.type} size="small"/>
+     value={props.value} onChange={props.onChange} name={props.name} type={props.type} size="small" disabled={props.disabled}/>
     </>
 
   )

@@ -4,15 +4,32 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { BiTrash } from "react-icons/bi";
 import EditableField from './EditableFields';
-
+import axios from 'axios';
+import { Form } from 'react-bootstrap';
 class InvoiceItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedService:[],
+      service:[],
+     
+    }
+  }
+  
+   componentDidMount() {
+       axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => {
+            this.setState({service:res.data});
+            
+        })
+    }
   render() {
     var onItemizedItemEdit = this.props.onItemizedItemEdit;
     var currency = this.props.currency;
     var rowDel = this.props.onRowDel;
+    var service = this.state.service
     var itemTable = this.props.items.map(function(item) {
       return (
-        <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id}/>
+        <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id} service={service}/>
       )
     });
     return (
@@ -31,6 +48,7 @@ class InvoiceItem extends React.Component {
           </tbody>
         </Table>
         <Button className="fw-bold" onClick={this.props.onRowAdd}>Add Item</Button>
+        
       </div>
     );
 
@@ -38,14 +56,24 @@ class InvoiceItem extends React.Component {
 
 }
 class ItemRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedService:[],
+      disabled:(true)
+     
+    }
+  }
+  
   onDelEvent() {
     this.props.onDelEvent(this.props.item);
   }
   render() {
     return (
       <tr>
+        {console.log("props",this.props)}
         <td style={{width: '100%'}}>
-          <EditableField
+          {/* <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
             type: "text",
@@ -53,8 +81,27 @@ class ItemRow extends React.Component {
             placeholder: "Item name",
             value: this.props.item.name,
             id: this.props.item.id,
-          }}/>
-          <EditableField
+          }}/> */}
+          <div style={{display:"flex"}}>
+          <select style={{height:"2.5rem",borderRadius:"6px",width:"50%"}}  name="servicecharges" onChange={(e)=>{this.setState({selectedService:this.props.service.filter((g) => g.id == e.target.value)[0]})}}>
+
+<option value="none" selected disabled hidden>
+    Select Service...
+</option>
+{/* {console.log("services", this.state.service)}; */}
+
+{this.props.service && this.props.service.map((items, i) => (
+
+    <option value={`${items.id}`} key={items.id} >{items.service_name} </option>
+    
+
+)
+)}
+</select>
+{console.log("description",this.state.selectedService)}
+<input style={{height:'2.5rem',marginLeft:'1rem',width:'50%',borderRadius:"6px"}} placeholder='Discription' value={this.state.selectedService.description} disabled={this.state.disabled}/>
+          {/* <EditableField
+          style={{height:'2rem',marginLeft:'1rem'}}
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
             type: "text",
@@ -62,10 +109,11 @@ class ItemRow extends React.Component {
             placeholder: "Item description",
             value: this.props.item.description,
             id: this.props.item.id
-          }}/>
+          }}/> */}
+          </div>
         </td>
         <td style={{minWidth: '70px'}}>
-          <EditableField
+          {/* <EditableField
           onItemizedItemEdit={this.props.onItemizedItemEdit}
           cellData={{
             type: "number",
@@ -74,10 +122,12 @@ class ItemRow extends React.Component {
             step: "1",
             value: this.props.item.quantity,
             id: this.props.item.id,
-          }}/>
+          }}/> */}
+          <p style={{width:"70%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",display:"flex",justifyContent:"center",paddingTop:"5px"}}>1</p>
         </td>
         <td style={{minWidth: '130px'}}>
-          <EditableField
+          <p style={{width:"70%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",display:"flex",justifyContent:"center",paddingTop:"5px"}}>{this.state.selectedService.charges}</p>
+          {/* <EditableField
             onItemizedItemEdit={this.props.onItemizedItemEdit}
             cellData={{
             leading: this.props.currency,
@@ -89,16 +139,17 @@ class ItemRow extends React.Component {
             textAlign: "text-end",
             value: this.props.item.price,
             id: this.props.item.id,
-          }}/>
+          }}/> */}
+          {/* <p>{this.state.serviceList.charges}</p> */}
         </td>
         <td className="text-center" style={{minWidth: '50px'}}>
-          <BiTrash onClick={this.onDelEvent.bind(this)} style={{height: '33px', width: '33px', padding: '7.5px'}} className="text-white mt-1 btn btn-danger"/>
+          <BiTrash onClick={this.onDelEvent.bind(this)} style={{height: '33px', width: '33px', padding: '7.5px',}} className="text-white mt-1 btn btn-danger"/>
         </td>
       </tr>
     );
 
-  }
-
+  
+}
 }
 
 export default InvoiceItem;

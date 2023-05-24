@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 import InvoiceItem from './InvoiceItem';
 import InvoiceModal from './InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
+import axios from 'axios';
 
 class Invoice extends React.Component {
     constructor(props) {
@@ -30,7 +31,10 @@ class Invoice extends React.Component {
             taxRate: '',
             taxAmmount: '0.00',
             discountRate: '',
-            discountAmmount: '0.00'
+            discountAmmount: '0.00',
+            patientName:[],
+            selectedPatient:[],
+            disabled:(true)
         };
         this.state.items = [
             {
@@ -45,6 +49,9 @@ class Invoice extends React.Component {
     }
     componentDidMount(prevProps) {
         this.handleCalculateTotal()
+    }
+    componentDidMount() {
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res)=>{this.setState({patientName:res.data},console.log("res",res))})
     }
     handleRowDel(items) {
         var index = this.state.items.indexOf(items);
@@ -152,9 +159,38 @@ class Invoice extends React.Component {
                         <Row className="mb-5">
                             <Col>
                                 <Form.Label className="fw-bold">Bill to:</Form.Label>
-                                <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={this.state.billTo} type="text" name="billTo" className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" />
-                                <Form.Control placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" />
-                                <Form.Control placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" />
+                               
+                                    
+                                {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
+                                 className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
+                                    <p></p>{d.first_name}
+                                 ))}</Form.Control>
+                                */}
+                                 <select class="form-control dropdown"
+                                // value={this.state.patientName}
+                                // onChange={(e) => this.editField(e)}
+                                onChange={(e)=>{this.setState({selectedPatient:this.state.patientName.filter((g) => g.id == e.target.value)[0]})}}
+                                style={{width:"50%"}}
+                                name="patientName"
+                         
+                            >
+                                <option value="none" selected disabled hidden>
+                                    Select Patient Name...
+                                </option>
+
+                                {this.state.patientName &&
+                                    this.state.patientName.map((d) => (
+                                        <option value={`${d.id}`} key={d.id}>
+                                            {d.first_name}
+                                        </option>
+                                    ))}
+                            </select>
+                            {console.log("selectedPatient",this.state.selectedPatient
+                            )}
+                                {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
+                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",marginTop:"0.5rem",borderRadius:"6px",}} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled}/><br></br>
+                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",marginTop:"0.5rem",borderRadius:"6px",}} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled}/>
+                                {/* <Form.Control style={{width:"50%"}} placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" /> */}
                             </Col>
                             {/* <Col>
                                 <Form.Label className="fw-bold">Bill from:</Form.Label>

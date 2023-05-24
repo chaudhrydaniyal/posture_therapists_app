@@ -68,7 +68,7 @@ const PatientForm = () => {
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [cnic,setCnic] = useState("")
-
+const [disabled,setDisabled] = useState(false)
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
         initialValues: initialValue,
@@ -102,7 +102,33 @@ const PatientForm = () => {
 
 
                 })
-                NotificationManager.success("Successfully Registered");
+                // const data =new FormData();
+                // data.append('first_name', values.first_name);
+                // data.append('last_name', values.last_name);
+                // data.append('date_of_birth', values.date_of_birth);
+                // data.append('age', values.age);
+                // data.append('gender', values.gender);
+                // data.append('address', values.address);
+                // data.append('mobile_no', values.mobile_no);
+                // data.append('email', values.email);
+                // data.append('occupation', values.occupation);
+                // data.append('designation', values.designation);
+                // data.append('home_phone', values.home_phone);
+                // data.append('work_phone', values.work_phone);
+                // data.append('cnic', values.cnic);
+                // data.append('physiotherapist_seen_before', values.physiotherapist_seen_before);
+                // data.append('patient_concerns_for_previous_physiotherapist', values.patient_satisfactions_for_previous_physiotherapist);
+                // data.append('patient_satisfactions_for_previous_physiotherapist', values.patient_satisfactions_for_previous_physiotherapist);
+                // data.append('blood_group', values.blood_group);
+                // data.append('medical_status', values.medical_status);
+
+                // data.append('country', selectedCountry.name);
+                // data.append('state', selectedState.name);
+                // data.append('city', selectedCity.name);
+                // data.append('diseases', selectedDisease.map((sd) => sd.id))
+
+                // const patientForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patients',data)
+               NotificationManager.success("Successfully Registered");
               
                 // setSelectedDisease(null)
              
@@ -609,7 +635,12 @@ const PatientForm = () => {
                             <div style={{ marginLeft: "4rem" }}>
                          
                                 {" "}
-                                <Form.Select name="physiotherapist_seen_before" class="form-control dropdown" onChange={handleChange} value={values.physiotherapist_seen_before}>
+                                <Form.Select name="physiotherapist_seen_before" class="form-control dropdown" onChange={(e)=>{handleChange(e);if(e.target.value == "No"){
+    setDisabled(true)
+
+}else{
+    setDisabled(false)
+}}} value={values.physiotherapist_seen_before}>
                                     <option
                                         value=""
                                         selected="selected"
@@ -617,8 +648,8 @@ const PatientForm = () => {
                                     >
                                         Select ...
                                     </option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
 
                                 </Form.Select>
 
@@ -636,7 +667,7 @@ const PatientForm = () => {
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
                             {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={values.patient_concerns_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="patient_concerns_for_previous_physiotherapist" value={values.patient_concerns_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
                         </div>
 
 
@@ -650,7 +681,7 @@ const PatientForm = () => {
                             </label>
                         </div>
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={values.patient_satisfactions_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="patient_satisfactions_for_previous_physiotherapist" value={values.patient_satisfactions_for_previous_physiotherapist} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
                         </div>
 
 
@@ -665,7 +696,7 @@ const PatientForm = () => {
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="todaysession" value={values.todaysession} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="todaysession" value={values.todaysession} onChange={handleChange} onBlur={handleBlur} disabled={disabled} />
                         </div>
 
 
@@ -679,7 +710,7 @@ const PatientForm = () => {
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="stoppingyou" value={values.stoppingyou} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="stoppingyou" value={values.stoppingyou} onChange={handleChange} onBlur={handleBlur} disabled={disabled}/>
                         </div>
 
 
@@ -692,7 +723,7 @@ const PatientForm = () => {
                         </div>
 
                         <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
-                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="fixednow" value={values.fixednow} onChange={handleChange} onBlur={handleBlur} />
+                            <Input style={{ paddingLeft: '0.3rem' }} className="Input_width" type="text" name="fixednow" value={values.fixednow} onChange={handleChange} onBlur={handleBlur} disabled={disabled} />
                         </div>
 
 

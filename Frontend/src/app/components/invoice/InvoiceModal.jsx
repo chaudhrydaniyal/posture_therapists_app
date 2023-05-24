@@ -160,3 +160,4 @@ class InvoiceModal extends React.Component {
 }
 
 export default InvoiceModal;
+
