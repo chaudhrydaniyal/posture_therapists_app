@@ -38,7 +38,7 @@ class InvoiceItem extends React.Component {
           <thead>
             <tr>
               <th>ITEM</th>
-              <th>QTY</th>
+              {/* <th>QTY</th> */}
               <th>PRICE/RATE</th>
               <th className="text-center">ACTION</th>
             </tr>
@@ -112,7 +112,7 @@ class ItemRow extends React.Component {
           }}/> */}
           </div>
         </td>
-        <td style={{minWidth: '70px'}}>
+        {/* <td style={{minWidth: '70px'}}>git up */}
           {/* <EditableField
           onItemizedItemEdit={this.props.onItemizedItemEdit}
           cellData={{
@@ -123,8 +123,8 @@ class ItemRow extends React.Component {
             value: this.props.item.quantity,
             id: this.props.item.id,
           }}/> */}
-          <p style={{width:"70%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",display:"flex",justifyContent:"center",paddingTop:"5px"}}>1</p>
-        </td>
+          {/* <p style={{width:"70%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",display:"flex",justifyContent:"center",paddingTop:"5px"}}>1</p> */}
+        {/* </td> */}
         <td style={{minWidth: '130px'}}>
           <p style={{width:"70%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",display:"flex",justifyContent:"center",paddingTop:"5px"}}>{this.state.selectedService.charges}</p>
           {/* <EditableField

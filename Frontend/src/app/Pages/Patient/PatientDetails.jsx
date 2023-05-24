@@ -83,15 +83,23 @@ const PatientDetails = () => {
         mobile_no: patientData.mobile_no,
         email: patientData.email,
         occupation: patientData.occupation,
+        designation:patientData.designation,
         cnic: patientData.cnic,
+        physiotherapist_seen_before: patientData.physiotherapist_seen_before,
+        not_happy:patientData.not_happy,
+        most_happy:patientData.most_happy,
+        today_session:patientData.today_session,
+        stopping_you:patientData.stopping_you,
+        fixed_now:patientData.fixed_now,
         blood_group:patientData.blood_group,
+        medical_status:patientData.medical_status,
+        emergency_contact_person:patientData.emergency_contact_person,
+        emergency_person_relation:patientData.emergency_person_relation,
+        emergency_person_mobile:patientData.emergency_person_mobile,
         country:patientData.country,
         state:patientData.state,
         city:patientData.city,
-        physiotherapist_seen_before: patientData.physiotherapist_seen_before,
-        patient_concerns_for_previous_physiotherapist: patientData.patient_concerns_for_previous_physiotherapist,
-        patient_satisfactions_for_previous_physiotherapist: patientData.patient_satisfactions_for_previous_physiotherapist,
-
+        
     });
     const openPatientInformation = () => {
         setPatientInformation(true)
@@ -134,10 +142,22 @@ const PatientDetails = () => {
                     mobile_no: data.mobile_no,
                     email: data.email,
                     occupation: data.occupation,
+                    designation:data.designation,
                     cnic: data.cnic,
                     physiotherapist_seen_before: data.physiotherapist_seen_before,
-                    patient_concerns_for_previous_physiotherapist: data.patient_concerns_for_previous_physiotherapist,
-                    patient_satisfactions_for_previous_physiotherapist: data.patient_satisfactions_for_previous_physiotherapist
+                    not_happy:data.not_happy,
+                    most_happy:data.most_happy,
+                    today_session:data.today_session,
+                    stopping_you:data.stopping_you,
+                    fixed_now:data.fixed_now,
+                    blood_group:data.blood_group,
+                    medical_status:data.medical_status,
+                    emergency_contact_person:data.emergency_contact_person,
+                    emergency_person_relation:data.emergency_person_relation,
+                    emergency_person_mobile:data.emergency_person_mobile,
+                    country:data.country,
+                    state:data.state,
+                    city:data.city,
                 })
 
             NotificationManager.success("Successfully Updated");
@@ -470,31 +490,13 @@ const PatientDetails = () => {
                         </div>
                         <div className="row">
                             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
-                                <label htmlFor="address">
-                                    {" "}
-                                    <div>Address:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-10 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
-                            </div>
-
-
-                        </div>
-
-                        <div className="row">
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                                 <label htmlFor="medical_status">
                                     {" "}
                                     <div>Medical Status:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{ paddingLeft: '0.3rem' }} className="Input_border" type="text" name="medical_status" label="Medical Status" disabled={disableFields} sx={{
+                                <Input style={{ paddingLeft: '0.3rem' }}  type="text" name="medical_status" value={data.medical_status} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
@@ -531,16 +533,46 @@ const PatientDetails = () => {
 
                         </div>
 
-
-
                         <div className="row">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
+                                <label htmlFor="address">
+                                    {" "}
+                                    <div>Address:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
+                            </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="doctorname">
-                                    <div>Your Doctor"s Name:</div>
+                                <label htmlFor="occupation">
+                                    <div>Occupation:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input type="text" name="doctorname" onChange={handleInput} disabled={disableFields} sx={{
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="occupation" value={data.occupation} onChange={handleInput} disabled={disableFields} sx={{
+    "& .MuiInputBase-input.Mui-disabled": {
+      WebkitTextFillColor: "#000000",
+    },
+  }}   />
+                            </div>
+
+                        </div>
+
+                     
+
+
+                        <div className="row">
+                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <label htmlFor="designation">
+                                    <div>Designation:</div>
+                                </label>
+                            </div>
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="designation" value={data.designation} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
@@ -611,77 +643,55 @@ const PatientDetails = () => {
                         </div>
                         <div className="row">
 
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="occupation">
-                                    <div>Occupation:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="occupation" value={data.occupation} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="designation">
-                                    <div>Designation:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="designation" onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
-                            </div>
+                           
+                            
                         </div>
 
                     </div>
                 </div>
 
-                    {/* ************In Case of Emergency*********** */}
+                    {/* ************In Case of emergencygency*********** */}
 
                     <div className="card" style={{ marginTop: '2rem' }}>
                         <div className="card-body" style={{ margin: "10px" }}>
-                            <h5>In Case of Emergency</h5>
+                            <h5>In Case of emergencygency</h5>
 
                             <div className="row" style={{ marginTop: "2rem" }}>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="contactperson">
+                                    <label htmlFor="emergency_contact_person">
                                         <div>Contact Person:</div>
                                     </label>
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="contactperson" onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="emergency_contact_person" value={data.emergency_contact_person} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
   }}   />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="patientrelationship">
+                                    <label htmlFor="emergency_person_relation">
                                         <div>Relationship to Patient:</div>
                                     </label>
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="patientrelationship" onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="emergency_person_relation" value={data.emergency_person_relation} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
   }}   />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="prevmobileno">
+                                    <label htmlFor="emergency_person_mobile">
                                         <div>Mobile No:</div>
                                     </label>
                                 </div>
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="number" name="prevmobileno" onInput={(e) => {
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="number" name="emergency_person_mobile" value={data.emergency_person_mobile} onInput={(e) => {
                                         e.target.value = Math.max(0, parseInt(e.target.value))
                                             .toString()
                                             .slice(0, 11);
@@ -743,13 +753,13 @@ const PatientDetails = () => {
                             </div>
                             <div className="row">
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="patient_concerns_for_previous_physiotherapist">
+                                    <label htmlFor="not_happy">
                                         <div>If Yes, was there anything you were not happy about?</div>
                                     </label>
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="patient_concerns_for_previous_physiotherapist" value={data.patient_concerns_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="not_happy" value={data.not_happy} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
@@ -762,12 +772,12 @@ const PatientDetails = () => {
 
                             <div className="row">
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="patient_satisfactions_for_previous_physiotherapist">
+                                    <label htmlFor="most_happy">
                                         <div>What aspects were you most happy with?</div>
                                     </label>
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="patient_satisfactions_for_previous_physiotherapist" value={data.patient_satisfactions_for_previous_physiotherapist} onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="most_happy" value={data.most_happy} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
@@ -780,13 +790,13 @@ const PatientDetails = () => {
 
                             <div className="row">
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="todaysession">
+                                    <label htmlFor="today_session">
                                         <div>What are the main things you would like to achieve by the end of today"s session?</div>
                                     </label>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="todaysession" onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="today_session" value={data.today_session} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
@@ -798,13 +808,13 @@ const PatientDetails = () => {
 
                             <div className="row">
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="stoppingyou">
+                                    <label htmlFor="stopping_you">
                                         <div>What is this problem you are here for stopping you from doing?</div>
                                     </label>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="stoppingyou" onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="stopping_you" value={data.stopping_you} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },
@@ -815,13 +825,13 @@ const PatientDetails = () => {
                             </div>
                             <div className="row">
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <label htmlFor="fixednow">
+                                    <label htmlFor="fixed_now">
                                         <div>Why is it important that you get this problem fixed NOW?</div>
                                     </label>
                                 </div>
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="fixednow" onChange={handleInput} disabled={disableFields} sx={{
+                                    <Input style={{ paddingLeft: '0.3rem' }} type="text" name="fixed_now" value={data.fixed_now} onChange={handleInput} disabled={disableFields} sx={{
     "& .MuiInputBase-input.Mui-disabled": {
       WebkitTextFillColor: "#000000",
     },

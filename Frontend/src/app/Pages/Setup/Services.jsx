@@ -12,7 +12,10 @@ import {
   TableRow, Table
 } from '@mui/material';
 import { Span } from "app/components/Typography";
-
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 import { Breadcrumb, SimpleCard } from 'app/components';
 const style = {
   position: 'absolute',
@@ -117,7 +120,7 @@ const Services = () => {
       <Box className="breadcrumb">
         <Breadcrumb routeSegments={[{ name: 'Services' }]} />
       </Box>
-
+      <NotificationContainer />
       <div className='card'>
         <div className='card_body'>
 
@@ -195,14 +198,19 @@ const Services = () => {
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                 <Button onClick={handleCloseEdit}> <strong>Close</strong></Button>
-                <Button onClick={() => {
-                  axios.put(process.env.REACT_APP_ORIGIN_URL + `api/Services/${editService.id}`, {
+                <Button onClick={async() => {
+                  try{
+                  const service = await axios.put(process.env.REACT_APP_ORIGIN_URL + `api/Services/${editService.id}`, {
                     // id:editService.id,
                     service_name: editService.service,
                     charges: editService.price,
                     description:editService.description
                   })
-                    ; handleCloseEdit(); setUpdate(!update)
+                  NotificationManager.success("Successfully Updated");
+                }catch(error){
+                  NotificationManager.error("Something went wrong")
+                }
+                 handleCloseEdit(); setUpdate(!update)
                 }}> <strong>Add</strong></Button>
               </div>
             </Box>
