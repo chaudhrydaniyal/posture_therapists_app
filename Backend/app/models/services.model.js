@@ -71,7 +71,7 @@ services.create = (newService, result) => {
   services.updateById = (id, service, result) => {
     sql.query(
       "UPDATE services SET service_name = ?, charges = ? , description = ?  WHERE id = ?",
-      [service.service_name,service.charges,id],
+      [service.service_name,service.charges, service.description, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

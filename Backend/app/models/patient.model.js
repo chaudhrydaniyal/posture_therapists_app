@@ -25,6 +25,11 @@ const Patient = function (patient) {
   this.country = patient.country;
   this.state = patient.state;
   this.city = patient.city;
+
+
+  this.emergency_contact_person = patient.emergency_contact_person;
+  this.emergency_contact_person_relation = patient.emergency_contact_person_relation;
+  this.emergency_contact_person_mobile = patient.emergency_contact_person_mobile;
   
 
 

@@ -51,7 +51,11 @@ exports.create = (req, res) => {
     medical_status : req.body.medical_status,
     country : req.body.country,
     state : req.body.state,
-    city : req.body.city
+    city : req.body.city,
+
+    emergency_contact_person: req.body.emergency_contact_person,
+    emergency_contact_person_relation: req.body.emergency_contact_person_relation,
+    emergency_contact_person_mobile: req.body.emergency_contact_person_mobile
 
   });
 
