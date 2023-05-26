@@ -203,7 +203,7 @@ class Calender extends Component {
   addItemHandler = item => {
 
 
-    console.log("timezone corrected time", moment.utc(item.start).tz("Asia/Taipei").format())
+    console.log("timezone corrected time", moment.utc(new Date(item.start)).tz("Asia/Taipei").format())
 
     if (item.doctor == '' || item.patient == '' || item.end <= item.start) {
       NotificationManager.error("Please input the required fields correctly");
@@ -532,7 +532,7 @@ class Calender extends Component {
                         console.log("timeinput", new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')))
 
 
-                        let startDateTime = new Date(this.state.selectedSlot)
+                        let startDateTime = new Date(this.state.selectedSlot.start)
 
                         startDateTime.setHours(e.target.value.split(":")[0])
                         startDateTime.setMinutes(e.target.value.split(":")[1])
@@ -605,15 +605,12 @@ class Calender extends Component {
                     const addAppointment = {
                       doctor: this.state.selectedSlot.id,
                       patient: this.state.patient,
-
                       start: this.state.start,
                       end: this.state.end,
-
                       patientName: this.state.patientName
                     }
 
                     console.log("itemAddedForaddAppointment", addAppointment)
-
 
                     this.addItemHandler(addAppointment)
 

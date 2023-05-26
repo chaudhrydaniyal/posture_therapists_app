@@ -159,7 +159,7 @@ class Invoice extends React.Component {
     closeModal = (event) => this.setState({ isOpen: false });
     render() {
         return (<Form onSubmit={this.openModal}>
-            <Row>
+            <Row style={{marginLeft:"5px"}}>
                 <Col md={8} lg={9}>
                     <Card className="p-4 p-xl-5 my-3 my-xl-4">
                         <div className="d-flex flex-row align-items-start justify-content-between mb-3">

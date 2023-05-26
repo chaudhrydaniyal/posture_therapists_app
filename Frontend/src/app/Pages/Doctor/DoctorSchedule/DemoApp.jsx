@@ -96,6 +96,7 @@ export default class DemoApp extends React.Component {
             //   center: 'title',
             //   right: 'dayGridMonth,timeGridWeek,timeGridDay'
             // }}
+
             headerToolbar={{
               left: '',
               center: '',

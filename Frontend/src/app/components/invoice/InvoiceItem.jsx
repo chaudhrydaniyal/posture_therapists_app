@@ -113,9 +113,9 @@ class ItemRow extends React.Component {
 
 
 
+{console.log("selected service", this.state.selectedService)}
 
-
-            <input style={{ height: '2.5rem', marginLeft: '1rem', width: '50%', borderRadius: "6px" }} placeholder='Discription' value={this.state.selectedService.description} disabled={this.state.disabled} />
+            <input style={{ height: '2.5rem', marginLeft: '1rem', width: '50%', borderRadius: "6px" }} placeholder='Discription' value={this.state.selectedService.description ? this.state.selectedService.description : ""} disabled={this.state.disabled} />
 
 
 

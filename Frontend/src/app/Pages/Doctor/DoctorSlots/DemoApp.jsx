@@ -15,6 +15,7 @@ import {  Button } from '@mui/material';
 
 
 
+
 export default class DemoApp extends React.Component {
 
 
@@ -58,7 +59,7 @@ export default class DemoApp extends React.Component {
         <NotificationContainer />
 
         {/* <h6>Name:{this.props.data.first_name}</h6> */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem'}}>
          
          
         <Button color="primary" variant="contained" type="submit" onClick={async () => {
@@ -83,6 +84,8 @@ export default class DemoApp extends React.Component {
         {/* {this.renderSidebar()} */}
         <div className='demo-app-main'>
           <FullCalendar
+
+
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
 
             headerToolbar={{
