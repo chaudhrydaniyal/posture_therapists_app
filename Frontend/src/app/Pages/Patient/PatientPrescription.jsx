@@ -155,16 +155,10 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
     const handlecharges = (e) => {
         console.log("object value", e.target.value);
-
-
         setservicelist(e.target.value)
         setSelectedService([...selectedService, getService.filter((g) => g.id == e.target.value)[0]])
 
     }
-
-
-
-
 
 
     const deleteById = (id) => {
@@ -183,6 +177,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         console.log("index", index)
     }
 
+    
 
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => {

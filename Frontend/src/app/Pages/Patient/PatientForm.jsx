@@ -64,13 +64,12 @@ const PatientForm = () => {
     const [selectedCity, setSelectedCity] = useState(null);
     const [cnic,setCnic] = useState("")
 const [disabled,setDisabled] = useState(false)
+
     const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
 
         initialValues: initialValue,
         validationSchema: patientValidation,
         onSubmit: async (values, action) => {
-
-
 
             console.log("error")
             try {
