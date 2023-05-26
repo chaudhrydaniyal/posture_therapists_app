@@ -118,30 +118,6 @@ const DoctorForm = () => {
 
                 const addDoctor = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users',data)
 
-                // const doctorForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/users', {
-                //     surname: values.surname,
-                //     first_name: values.first_name,
-                //     middle_name: values.middle_name,
-                //     date_of_birth: values.date_of_birth,
-                //     age: values.age,
-                //     gender: values.gender,
-                //     address: values.address,
-                //     mobile_no: values.mobile_no,
-                //     email: values.email,
-                //     practitioner_type: values.practitioner_type,
-                //     cnic: values.cnic,
-                //     home_phone: values.home_phone,
-                //     work_phone: values.work_phone,
-                //     remarks: values.remarks,
-                //     specialization: values.specialization,
-                //     experience: values.experience,
-                //     engagement_terms: values.engagement_terms,
-                //     country: selectedCountry,
-                //     state: selectedState,
-                //     city: selectedCity,
-
-
-                // })
                addDoctor && NotificationManager.success("Successfully Registered");
 
             } catch (error) {
@@ -370,16 +346,7 @@ const DoctorForm = () => {
                         </div>
                         <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                             {" "}
-                            {/* <select name="gender" class="form-control dropdown" onChange={handleChange} value={values.gender} onBlur={handleBlur}>
-                                <option
-                                    value=""
-                                    selected="selected"
-                                    disabled="disabled"
-                                >
-                                    Select Gender...
-                                </option>
-                               
-                            </select> */}
+                           
                             <Form.Select name="gender" value={values.gender} onChange={handleChange}>
                                 <option>Select gender</option>
                                 <option value="Male">Male</option>

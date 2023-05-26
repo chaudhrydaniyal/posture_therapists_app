@@ -42,9 +42,9 @@ const DoctorDetails = () => {
     const [doctorWeeklySchedule, setDoctorWeeklySchedule] = useState(false)
 
 
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const [selectedState, setSelectedState] = useState(null);
-    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(doctorDetails.country);
+    const [selectedState, setSelectedState] = useState(doctorDetails.state);
+    const [selectedCity, setSelectedCity] = useState(doctorDetails.city);
     const [selectedTab, setSelectedTab] = useState(1);
 
     const [file, setfile] = useState();
@@ -110,21 +110,7 @@ const DoctorDetails = () => {
         try {
             const updateUser = await axios
                 .put(process.env.REACT_APP_ORIGIN_URL + `api/users/${data.id}`, {
-                    // id: data.id,
-                    // first_name: data.first_name,
-                    // surname: data.surname,
-                    // middle_name: data.middle_name,
-                    // date_of_birth: data.date_of_birth,
-                    // age: data.age,
-                    // gender: data.gender,
-                    // address: data.address,
-                    // mobile_no: data.mobile_no,
-                    // email: data.email,
-                    // cnic: data.cnic,
-                    // home_phone: data.home_phone,
-                    // work_phone: data.work_phone,
-                    // practitioner_type: data.practitioner_type,
-                    // remarks: data.remarks
+              
                     id: data.id,
                     picture: data.picture,
                     first_name: data.first_name,
@@ -276,7 +262,7 @@ const DoctorDetails = () => {
                                     <Form.Control
                                         type="file"
                                         name="file"
-                                        // value={emp.profilepic}
+                                        value={file}
                                         // defaultValue={data.picture}
                                         style={{ display: "none" }}
                                         id="uploadpic"
@@ -506,7 +492,7 @@ const DoctorDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={data.country}
+                                    value={Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]}
                                     onChange={(item) => {
                                         setSelectedCountry(item);
                                     }}
@@ -534,7 +520,9 @@ const DoctorDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={data.state}
+                                    value={State?.getStatesOfCountry(
+                                        Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
+                                    ).filter((f)=>f.name == selectedState)}
                                     onChange={(item) => {
                                         setSelectedState(item);
                                     }}
@@ -563,7 +551,14 @@ const DoctorDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={data.city}
+                                    value={City.getCitiesOfState(
+                                        State?.getStatesOfCountry(
+                                            Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
+                                        ).filter((f)=>f.name == selectedState)[0]?.countryCode,
+                                        State?.getStatesOfCountry(
+                                            Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
+                                        ).filter((f)=>f.name == selectedState)[0]?.isoCode
+                                    )}
                                     onChange={(item) => {
                                         setSelectedCity(item);
                                     }}

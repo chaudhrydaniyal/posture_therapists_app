@@ -167,12 +167,17 @@ try{
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
                 <Button onClick={handleCloseEdit}> <strong>Close</strong></Button>
-                <Button onClick={() => {
+                <Button onClick={async() => {
+                  try{
                   axios.put(process.env.REACT_APP_ORIGIN_URL + `api/diseases/${editDisease.id}`, {
                     // id:editDisease.id,
                     name: editDisease.name
                   })
-                    ; handleCloseEdit(); setUpdate(!update)
+                  NotificationManager.success("Successfully Updated");
+                }catch(error){
+                  NotificationManager.error("Something went wrong")
+                }
+                     handleCloseEdit(); setUpdate(!update)
                 }}> <strong>Add</strong></Button>
               </div>
             </Box>

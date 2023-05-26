@@ -14,7 +14,7 @@ const Dashboard = () => {
             </li>
             <li className="breadcrumb-item bcrumb-1">
               <a href="index.html">
-                <i className="fas fa-home" /> Home</a>
+                <i className="fas fa-home"/> Home</a>
             </li>
             <li className="breadcrumb-item active">Dashboard</li>
           </ul>
@@ -73,7 +73,9 @@ const Dashboard = () => {
       <div className="col-xl-3 col-lg-6">
         <div className="card l-bg-green-dark">
           <div className="info-box-5 p-4">
-            <div className="card-icon card-icon-large"><i className="fas fa-tasks" /></div>
+            <div className="card-icon card-icon-large"> 
+            <i className="fas fa-tasks" />
+            </div>
             <div className="mb-4">
               <h5 className="font-20 mb-0">Running Tasks</h5>
             </div>
@@ -124,7 +126,9 @@ const Dashboard = () => {
         <div className="card">
           <div className="header">
             <h2>
-              <strong>Products</strong> Chart</h2>
+              <strong>Products</strong> 
+              Chart
+              </h2>
           </div>
           <div className="body">
             <div className="recent-report__chart">

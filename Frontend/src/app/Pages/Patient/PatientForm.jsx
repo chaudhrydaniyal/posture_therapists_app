@@ -103,35 +103,9 @@ const [disabled,setDisabled] = useState(false)
 
 
                 })
-                // const data =new FormData();
-                // data.append('first_name', values.first_name);
-                // data.append('last_name', values.last_name);
-                // data.append('date_of_birth', values.date_of_birth);
-                // data.append('age', values.age);
-                // data.append('gender', values.gender);
-                // data.append('address', values.address);
-                // data.append('mobile_no', values.mobile_no);
-                // data.append('email', values.email);
-                // data.append('occupation', values.occupation);
-                // data.append('designation', values.designation);
-                // data.append('home_phone', values.home_phone);
-                // data.append('work_phone', values.work_phone);
-                // data.append('cnic', values.cnic);
-                // data.append('physiotherapist_seen_before', values.physiotherapist_seen_before);
-                // data.append('patient_concerns_for_previous_physiotherapist', values.patient_satisfactions_for_previous_physiotherapist);
-                // data.append('patient_satisfactions_for_previous_physiotherapist', values.patient_satisfactions_for_previous_physiotherapist);
-                // data.append('blood_group', values.blood_group);
-                // data.append('medical_status', values.medical_status);
-
-                // data.append('country', selectedCountry.name);
-                // data.append('state', selectedState.name);
-                // data.append('city', selectedCity.name);
-                // data.append('diseases', selectedDisease.map((sd) => sd.id))
-
-                // const patientForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patients',data)
+        
                NotificationManager.success("Successfully Registered");
               
-                // setSelectedDisease(null)
              
             } catch (error) {
                 console.log("error", error)
@@ -142,7 +116,6 @@ const [disabled,setDisabled] = useState(false)
             setSelectedCountry(null)
             setSelectedState(null)
             setSelectedCity(null)
-            // action.resetForm({ values: { ...values, cnic: '' } });
 
 
         }

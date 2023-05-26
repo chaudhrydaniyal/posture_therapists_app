@@ -1,7 +1,8 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
 import { Link } from 'react-router-dom';
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
@@ -29,10 +30,20 @@ const Heading = styled('h6')(({ theme }) => ({
 }));
 
 const StatCards = () => {
+  const [patientCount,setPatientCount] = useState([])
+  const [doctorCount,setDoctorCount] = useState([])
+  const [scheduledAppointment,setScheduledAppointment] = useState([])
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatientCount(res.data.length)})
+    console.log("patientCount",patientCount)
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/').then((res) => setDoctorCount(res.data.length))
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/').then((res)=>{setScheduledAppointment(res.data.length)})
+  
+  }, [])
   const cardList = [
-    { name: 'Total Patients', amount: 5, icon: 'airline_seat_flat', link:"/registeredPatient" },
-    { name: 'Available Doctors', amount: 6, icon: 'earbuds' , link:"/registeredDoctors" },
-    { name: 'Total Appointments', amount: 4, icon: 'edit_calendar' , link:""},
+    { name: 'Total Patients', amount: patientCount, icon: 'airline_seat_flat', link:"/registeredPatient" },
+    { name: 'Available Doctors', amount: doctorCount, icon: 'earbuds' , link:"/registeredDoctors" },
+    { name: 'Total Appointments', amount: scheduledAppointment, icon: 'edit_calendar' , link:""},
     { name: 'Total Branches', amount: 1, icon: 'location_city' , link:""},
   ];
 

@@ -360,36 +360,17 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
                                 />
                             </div>
-
-
-
-
                         </div>
-
-
-
-
-
-
-
-
-
-
-
 
                         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
 
-                            
+
                             <Button color="primary" variant="contained" type="submit">
                                 {/* <Icon>send</Icon> */}
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Next</Span>
                             </Button>
                         </div>
                     </Form>
-
-
-
-
                 </div>
             </div>
         </Container>
