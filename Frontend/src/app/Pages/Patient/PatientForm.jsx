@@ -69,6 +69,9 @@ const [disabled,setDisabled] = useState(false)
         initialValues: initialValue,
         validationSchema: patientValidation,
         onSubmit: async (values, action) => {
+
+
+
             console.log("error")
             try {
                 const patientForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patients', {
@@ -96,9 +99,9 @@ const [disabled,setDisabled] = useState(false)
                     emergency_person_mobile:values.emergency_person_mobile,
                     blood_group: values.blood_group,
                     medical_status: values.medical_status,
-                    country: selectedCountry.name,
-                    state: selectedState.name,
-                    city: selectedCity.name,
+                    country: selectedCountry && selectedCountry.name,
+                    state: selectedState && selectedState.name,
+                    city: selectedCity && selectedCity.name,
                     diseases: selectedDisease.map((sd) => sd.id)
 
 
@@ -729,7 +732,7 @@ const [disabled,setDisabled] = useState(false)
                         <div>
 
                             {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
-                            <Button color="primary" variant="contained" type="submit" onClick={handleSubmit}>
+                            <Button color="primary" variant="contained" type="submit" onClick={(e)=>{ e.preventDefault();handleSubmit();}}>
                                 <Icon>send</Icon>
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
                             </Button>

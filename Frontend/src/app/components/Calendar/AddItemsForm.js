@@ -83,7 +83,7 @@ class AddItemsForm extends React.Component {
 
   async componentDidMount() {
 
-    let doctors = await (await axios.get('http://192.168.5.21:8081/api/users/')).data
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/')).data
 
     let array2 = doctors.map((e, i) => ({
       id: e.id,
@@ -92,7 +92,7 @@ class AddItemsForm extends React.Component {
 
     this.setState({ mentorsList: array2 })
 
-    let patients = await (await axios.get('http://192.168.5.21:8081/api/patients')).data
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients')).data
 
     this.setState({ patients: patients })
 

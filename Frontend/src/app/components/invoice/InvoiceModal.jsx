@@ -35,8 +35,13 @@ class InvoiceModal extends React.Component {
   }
   render() {
     return(
+
+      
       <div>
-        {console.log("review",this.props)}
+
+
+{console.log("modal props",this.props)}
+
         <Modal show={this.props.showModal} onHide={this.props.closeModal} size="lg" centered>
           <div id="invoiceCapture">
             <div className="d-flex flex-row justify-content-between align-items-start bg-light w-100 p-4">
@@ -89,7 +94,6 @@ class InvoiceModal extends React.Component {
                         {/* <td style={{width: '70px'}}>
                           {item.quantity}
                         </td> */}
-                        {console.log("serviceItem",item)}
                         <td>
                           {/* {item.selectedService.service_name}  */}
                         </td>

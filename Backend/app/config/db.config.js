@@ -8,7 +8,7 @@
 
 
 module.exports = {
-  HOST: "192.168.5.21",
+  HOST: "localhost",
   USER: "root",
   PASSWORD: "password",
   DB: "postureapp"
