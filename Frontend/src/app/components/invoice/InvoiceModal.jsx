@@ -13,6 +13,7 @@ import { MatxLogo } from 'app/components';
 
 
 function GenerateInvoice() {
+
   html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
     const imgData = canvas.toDataURL('image/png', 1.0);
     const pdf = new jsPDF({
@@ -33,10 +34,11 @@ class InvoiceModal extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
+
     return(
 
-      
       <div>
 
 
@@ -78,10 +80,11 @@ class InvoiceModal extends React.Component {
                   <div>{this.props.info.dateOfIssue||''}</div>
                 </Col>
               </Row>
+              
               <Table className="mb-0">
                 <thead>
                   <tr>
-                    <th>QTY</th>
+                    <th>ITEM</th>
                     <th>DESCRIPTION</th>
                     <th className="text-end">PRICE</th>
                     <th className="text-end">AMOUNT</th>
@@ -95,8 +98,9 @@ class InvoiceModal extends React.Component {
                           {item.quantity}
                         </td> */}
                         <td>
-                          {/* {item.selectedService.service_name}  */}
+                          {item.name} 
                         </td>
+                        <td>{item.description}</td>
                         <td className="text-end" style={{width: '100px'}}>{this.props.currency} {item.price}</td>
                         <td className="text-end" style={{width: '100px'}}>{this.props.currency} {item.price * item.quantity}</td>
                       </tr>
@@ -104,6 +108,7 @@ class InvoiceModal extends React.Component {
                   })}
                 </tbody>
               </Table>
+
               <Table>
                 <tbody>
                   <tr>

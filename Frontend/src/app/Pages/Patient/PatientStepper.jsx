@@ -16,6 +16,7 @@ const Container = styled('div')(({ theme }) => ({
     }
 }));
 const PatientStepper = () => {
+
     const [step, setstep] = useState(1);
     const [formData, setFormData] = useState({
         personal_conditions: "",
@@ -51,6 +52,7 @@ const PatientStepper = () => {
     const prevStep = () => {
         setstep(step - 1);
     };
+
     const handleInputData = (input) => (e) => {
         console.log("eee", e);
         // input value from the form
@@ -62,6 +64,7 @@ const PatientStepper = () => {
             [input]: value,
         }));
     };
+    
     switch (step) {
         // case 1 to show stepOne form and passing nextStep, prevStep, and handleInputData as handleFormData method as prop and also formData as value to the fprm
         case 1:

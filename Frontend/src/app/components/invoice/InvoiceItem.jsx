@@ -34,6 +34,7 @@ class InvoiceItem extends React.Component {
         <ItemRow onItemizedItemEdit={onItemizedItemEdit} item={item} onDelEvent={rowDel.bind(this)} key={item.id} service={service} />
       )
     });
+
     return (
       <div>
         <Table>
@@ -57,6 +58,7 @@ class InvoiceItem extends React.Component {
   }
 
 }
+
 class ItemRow extends React.Component {
   constructor(props) {
     super(props);
@@ -67,9 +69,11 @@ class ItemRow extends React.Component {
     }
   }
 
+
   onDelEvent() {
     this.props.onDelEvent(this.props.item);
   }
+
   render() {
     return (
       <tr>
@@ -111,15 +115,7 @@ class ItemRow extends React.Component {
               ))}
             </select>
 
-
-
-
-
             <input style={{ height: '2.5rem', marginLeft: '1rem', width: '50%', borderRadius: "6px" }} placeholder='Discription' value={this.state.selectedService.description} disabled={this.state.disabled} />
-
-
-
-
 
             {/* <EditableField
           style={{height:'2rem',marginLeft:'1rem'}}
@@ -148,14 +144,7 @@ class ItemRow extends React.Component {
         {/* </td> */}
         <td style={{ minWidth: '130px' }}>
 
-
-
-
-
           <p style={{ width: "70%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", display: "flex", justifyContent: "center", paddingTop: "5px" }}>{this.state.selectedService.charges}</p>
-
-
-
 
 
           {/* <EditableField

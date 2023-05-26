@@ -47,18 +47,22 @@ class Invoice extends React.Component {
         ];
         this.editField = this.editField.bind(this);
     }
+
     componentDidMount(prevProps) {
         this.handleCalculateTotal()
     }
+
     componentDidMount() {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { this.setState({ patientName: res.data }) })
     }
+
     handleRowDel(items) {
         var index = this.state.items.indexOf(items);
         this.state.items.splice(index, 1);
         this.setState(this.state.items);
         this.handleCalculateTotal() 
     };
+
     handleAddEvent(evt) {
         var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
         var items = {
@@ -69,16 +73,10 @@ class Invoice extends React.Component {
             quantity: 1
         }
         this.state.items.push(items);
-
-
-
         console.log("invoice ITEMS to add react", this.state.items)
-
-
-
-
         this.setState(this.state.items);
     }
+
     handleCalculateTotal() {
         var items = this.state.items;
         var subTotal = 0;
@@ -104,6 +102,8 @@ class Invoice extends React.Component {
         });
 
     };
+
+
     onItemizedItemEdit(evt) {
 
         const InvoiceItem = JSON.parse(evt.target.value)
@@ -131,7 +131,7 @@ class Invoice extends React.Component {
             if (items.id == item.id) {
                 items.name = item.name;
                 items.price = item.price;
-                item.description = item.description;
+                items.description = item.description;
             }
 
             return items;
@@ -142,23 +142,30 @@ class Invoice extends React.Component {
         this.setState({ items: newItems });
         this.handleCalculateTotal();
     };
+
     editField = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         });
         this.handleCalculateTotal();
     };
+
     onCurrencyChange = (selectedOption) => {
         this.setState(selectedOption);
     };
+
     openModal = (event) => {
         event.preventDefault()
         this.handleCalculateTotal()
         this.setState({ isOpen: true })
     };
+
     closeModal = (event) => this.setState({ isOpen: false });
+
     render() {
-        return (<Form onSubmit={this.openModal}>
+
+        return (
+        <Form onSubmit={this.openModal}>
             <Row>
                 <Col md={8} lg={9}>
                     <Card className="p-4 p-xl-5 my-3 my-xl-4">
@@ -169,7 +176,8 @@ class Invoice extends React.Component {
                                         <span className="fw-bold">Current&nbsp;Date:&nbsp;</span>
                                         <span className="current-date">{new Date().toLocaleDateString()}</span>
                                     </div>
-                                </div>
+                                </div>       
+
                                 <div className="d-flex flex-row align-items-center">
                                     <span className="fw-bold d-block me-2">Due&nbsp;Date:</span>
                                     <Form.Control type="date" value={this.state.dateOfIssue} name={"dateOfIssue"} onChange={(event) => this.editField(event)} style={{

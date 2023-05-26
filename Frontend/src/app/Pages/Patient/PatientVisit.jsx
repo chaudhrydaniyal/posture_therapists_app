@@ -92,6 +92,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                 <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
             </Box>
             <NotificationContainer />
+            
             {/* ************************Patient Visit**************** */}
 
             <div className='card'>
