@@ -160,62 +160,14 @@ class Calender extends Component {
     this.setState({ groups: doctorsArray })
 
 
-    let patients = await (await axios.get('http://192.168.5.21:8081/api/patients')).data
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients')).data
 
     this.setState({ patients: patients })
 
 
   }
 
-  // async componentDidUpdate(prevProps, prevState) {
 
-  //   if (this.state.refresh != prevState.refresh) {
-
-
-  //     let events = await (await axios.get('http://192.168.5.21:8081/api/doctortimeslots/')).data
-
-  //     let scheduledAppointments = await (await axios.get('http://192.168.5.21:8081/api/scheduledappointments/')).data
-
-
-  //     let array1 = events.map((e, i) => ({
-  //       id: i,
-  //       className: "htmlCss",
-  //       start: moment(new Date(e.start_time)).add(-4, 'hours'),
-  //       end: moment(new Date(e.end_time)).add(-4, 'hours'),
-  //       title: e.first_name,
-  //       group: e.doctor,
-  //       canMove: false,
-  //       canResize: false,
-  //       canChangeGroup: false,
-  //     }))
-
-  //     let array2 = scheduledAppointments.map((e, i) => ({
-  //       id: array1.length + i,
-  //       className: "confirm",
-  //       start: moment(new Date(e.start_time)).add(-4, 'hours'), end: moment(new Date(e.end_time)).add(-4, 'hours'),
-  //       title: e.patient,
-  //       group: e.doctor,
-  //       scheduledAppointment: true,
-  //       canMove: false,
-  //       canResize: false,
-  //       canChangeGroup: false
-  //     }))
-
-  //     this.setState({ items: array1.concat(array2) })
-
-
-  //     let doctors = await (await axios.get('http://192.168.5.21:8081/api/users/')).data
-
-  //     let doctorsArray = doctors.map((e, i) => ({
-  //       id: e.id,
-  //       title: e.first_name
-  //     }))
-
-
-  //     this.setState({ groups: doctorsArray })
-  //   }
-
-  // }
 
 
 
@@ -580,7 +532,7 @@ class Calender extends Component {
                         console.log("timeinput", new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')))
 
 
-                        let startDateTime = new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL'))
+                        let startDateTime = new Date(this.state.selectedSlot)
 
                         startDateTime.setHours(e.target.value.split(":")[0])
                         startDateTime.setMinutes(e.target.value.split(":")[1])
@@ -622,7 +574,8 @@ class Calender extends Component {
 
 
 
-                        let endDateTime = new Date(this.state.selectedSlot.end.utc().tz("Asia/Karachi").format('LL'))
+                        let endDateTime = new Date(this.state.selectedSlot.end)
+                        
 
                         endDateTime.setHours(e.target.value.split(":")[0])
                         endDateTime.setMinutes(e.target.value.split(":")[1])

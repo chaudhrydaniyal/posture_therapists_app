@@ -32,9 +32,9 @@ class Invoice extends React.Component {
             taxAmmount: '0.00',
             discountRate: '',
             discountAmmount: '0.00',
-            patientName:[],
-            selectedPatient:[],
-            disabled:(true)
+            patientName: [],
+            selectedPatient: [],
+            disabled: (true)
         };
         this.state.items = [
             {
@@ -51,12 +51,13 @@ class Invoice extends React.Component {
         this.handleCalculateTotal()
     }
     componentDidMount() {
-        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res)=>{this.setState({patientName:res.data},console.log("res",res))})
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { this.setState({ patientName: res.data }) })
     }
     handleRowDel(items) {
         var index = this.state.items.indexOf(items);
         this.state.items.splice(index, 1);
         this.setState(this.state.items);
+        this.handleCalculateTotal() 
     };
     handleAddEvent(evt) {
         var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
@@ -68,6 +69,14 @@ class Invoice extends React.Component {
             quantity: 1
         }
         this.state.items.push(items);
+
+
+
+        console.log("invoice ITEMS to add react", this.state.items)
+
+
+
+
         this.setState(this.state.items);
     }
     handleCalculateTotal() {
@@ -75,7 +84,7 @@ class Invoice extends React.Component {
         var subTotal = 0;
 
         items.map(function (items) {
-            subTotal = parseFloat(subTotal + (parseFloat(items.price).toFixed(2) * parseInt(items.quantity))).toFixed(2)
+            subTotal = parseFloat(parseFloat(subTotal + (parseFloat(parseFloat(items.price).toFixed(2)) * parseInt(items.quantity))).toFixed(2));
         });
 
         this.setState({
@@ -96,20 +105,40 @@ class Invoice extends React.Component {
 
     };
     onItemizedItemEdit(evt) {
+
+        const InvoiceItem = JSON.parse(evt.target.value)
+
+        console.log("onItemizedItemEdit", InvoiceItem)
+
         var item = {
-            id: evt.target.id,
-            name: evt.target.name,
-            value: evt.target.value
+            id: InvoiceItem.key,
+            name: InvoiceItem.service_name,
+            // value: InvoiceItem.value,
+            price: InvoiceItem.charges,
+            description: InvoiceItem.description,
         };
+
+        console.log("item to edit", item)
+
         var items = this.state.items.slice();
+
+        console.log("all items", items)
+
         var newItems = items.map(function (items) {
-            for (var key in items) {
-                if (key == item.name && items.id == item.id) {
-                    items[key] = item.value;
-                }
+
+            console.log("items in map", items)
+
+            if (items.id == item.id) {
+                items.name = item.name;
+                items.price = item.price;
+                item.description = item.description;
             }
+
             return items;
         });
+
+
+
         this.setState({ items: newItems });
         this.handleCalculateTotal();
     };
@@ -131,7 +160,6 @@ class Invoice extends React.Component {
     render() {
         return (<Form onSubmit={this.openModal}>
             <Row>
-                {console.log("modelItem",this.props)}
                 <Col md={8} lg={9}>
                     <Card className="p-4 p-xl-5 my-3 my-xl-4">
                         <div className="d-flex flex-row align-items-start justify-content-between mb-3">
@@ -160,41 +188,39 @@ class Invoice extends React.Component {
                         <Row className="mb-5">
                             <Col>
                                 <Form.Label className="fw-bold">Bill to:</Form.Label>
-                               
-                                    <br></br>
+
+                                <br></br>
                                 {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
                                  className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
                                     <p></p>{d.first_name}
                                  ))}</Form.Control>
                                 */}
-                                 <select
-                                 style={{width:"50%",height:"2.5rem",borderRadius:"6px",marginTop:"0.5rem"}}
-                                // value={this.state.patientName}
-                                // onChange={(e) => this.editField(e)}
-                                onChange={(e)=>{this.setState({selectedPatient:this.state.patientName.filter((g) => g.id == e.target.value)[0]})}}
-                               
-                                name="patientName"
-                         
-                            >
-                                <option value="none" selected disabled hidden>
-                                    Select Patient Name...
-                                </option>
+                                <select
+                                    style={{ width: "50%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
+                                    // value={this.state.patientName}
+                                    // onChange={(e) => this.editField(e)}
+                                    onChange={(e) => { this.setState({ selectedPatient: this.state.patientName.filter((g) => g.id == e.target.value)[0] }) }}
+                                    name="patientName"
+                                >
+                                    <option value="none" selected disabled hidden>
+                                        Select Patient Name...
+                                    </option>
 
-                                {this.state.patientName &&
-                                    this.state.patientName.map((d) => (
-                                        <option value={`${d.id}`} key={d.id}>
-                                            {d.first_name}
-                                        </option>
-                                    ))}
-                            </select>
-                            <br></br>
-                            {console.log("selectedPatient",this.state.selectedPatient
-                            )}
-                                {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
-                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",marginTop:"1.5rem",borderRadius:"6px",}} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled}/><br></br>
+                                    {this.state.patientName &&
+                                        this.state.patientName.map((d) => (
+                                            <option value={`${d.id}`} key={d.id}>
+                                                {d.first_name}
+                                            </option>
+                                        ))}
+                                </select>
                                 <br></br>
-                                <input style={{width:"50%",height:"2.5rem",border:"0.5px solid grey",borderRadius:"6px",}} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled}/>
+
+                                {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
+                                <input style={{ width: "50%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled} /><br></br>
+                                <br></br>
+                                <input style={{ width: "50%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled} />
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" /> */}
+
                             </Col>
                             {/* <Col>
                                 <Form.Label className="fw-bold">Bill from:</Form.Label>
@@ -203,7 +229,9 @@ class Invoice extends React.Component {
                                 <Form.Control placeholder={"Billing address"} value={this.state.billFromAddress} type="text" name="billFromAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" />
                             </Col> */}
                         </Row>
+
                         <InvoiceItem onItemizedItemEdit={this.onItemizedItemEdit.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} currency={this.state.currency} items={this.state.items} />
+
                         <Row className="mt-4 justify-content-end">
                             <Col lg={6}>
                                 <div className="d-flex flex-row align-items-start justify-content-between">

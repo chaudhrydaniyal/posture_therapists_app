@@ -52,7 +52,7 @@ exports.create = async (req, res) => {
   // Saving the audio file of doctor prescription
 
   if (req.files) {
-    let filePath = __dirname + '/../../FileSystem2/' + uniqueFileName + '.jpg';
+    let filePath = __dirname + '/../../FileSystem/' + uniqueFileName + '.jpg';
     let fileUpload = req.files.picture;
     await fileUpload.mv(filePath, function (err) {
       if (err) { console.log("Error while uploading file.", err) }

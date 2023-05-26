@@ -29,7 +29,7 @@ export default class DemoApp extends React.Component {
 
     let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`)).data
 
-    let array1 = events.map((e) => ({ start: new Date(e.start_time), end: new Date(e.end_time), title: e.first_name, color: "green", id: e.id, title: "event" }))
+    let array1 = events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green", id: e.id, title: "event" }))
 
     let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id }))
 
@@ -102,7 +102,7 @@ export default class DemoApp extends React.Component {
               right: ''
             }}
             allDaySlot={false}
-            timeZone='America/New_York'
+            timeZone='Asia/Karachi'
             firstDay={new Date().getDay()}
             // start = {new Date()}
             // startStr = '2023-04-17T12:30:00-05:00'
