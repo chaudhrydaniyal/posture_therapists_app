@@ -9,6 +9,25 @@ import InvoiceItem from './InvoiceItem';
 import InvoiceModal from './InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
+import { useLocation, useNavigate } from "react-router-dom";
+
+
+
+
+const withRouter = WrappedComponent => props => {
+    const location = useLocation();
+   
+    return (
+      <WrappedComponent
+        {...props}
+        params={location}
+      />
+    );
+  };
+
+
+
+
 
 class Invoice extends React.Component {
     constructor(props) {
@@ -50,6 +69,11 @@ class Invoice extends React.Component {
         this.editField = this.editField.bind(this);
     }
 
+
+
+
+
+
     componentDidMount(prevProps) {
         this.handleCalculateTotal()
     }
@@ -76,7 +100,6 @@ class Invoice extends React.Component {
             quantity: 1
         }
         this.state.items.push(items);
-        console.log("invoice ITEMS to add react", this.state.items)
         this.setState(this.state.items);
     }
 
@@ -111,28 +134,26 @@ class Invoice extends React.Component {
 
         const InvoiceItem = JSON.parse(evt.target.value)
 
-        console.log("onItemizedItemEdit", InvoiceItem)
 
         var item = {
             id: InvoiceItem.key,
+            serviceID : InvoiceItem.id,
             name: InvoiceItem.service_name,
             // value: InvoiceItem.value,
             price: InvoiceItem.charges,
             description: InvoiceItem.description,
         };
 
-        console.log("item to edit", item)
 
         var items = this.state.items.slice();
 
-        console.log("all items", items)
 
         var newItems = items.map(function (items) {
 
-            console.log("items in map", items)
 
             if (items.id == item.id) {
                 items.name = item.name;
+                items.serviceID = item.serviceID
                 items.price = item.price;
                 items.description = item.description;
             }
@@ -166,6 +187,9 @@ class Invoice extends React.Component {
     closeModal = (event) => this.setState({ isOpen: false });
 
     render() {
+
+        console.log("received props", this)
+
         return (<Form onSubmit={this.openModal}>
             <Row style={{marginLeft:"5px"}}>
                 <Col md={8} lg={9}>
@@ -347,4 +371,4 @@ class Invoice extends React.Component {
     }
 }
 
-export default Invoice;
+export default withRouter(Invoice);

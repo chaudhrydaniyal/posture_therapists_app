@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 // import Select from 'react-select';
 import Modal from '@mui/material/Modal';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router";
+
 
 
 
@@ -49,6 +51,10 @@ const StyledTable = styled(Table)(() => ({
 
 
 const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => {
+
+    const navigate = useNavigate();
+
+
     const [audioFileBlob, setAudioFileBlob] = useState({})
     const [update, setUpdate] = useState("")
     const [page, setPage] = useState(0);
@@ -150,6 +156,20 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         } catch (error) {
             console.log("error", error)
         }
+
+
+//    history.push({
+        // pathname:  "/invoice",
+        // state: {
+        //   response: messageFromServer 
+        // } 
+    //  });
+
+    navigate('/invoice',{state:{patient:'kamran ali'}});
+
+
+
+
     }
 
 
@@ -432,7 +452,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 Previous
                             </Button>
                           
-                            <Button color="primary" variant="contained" type="submit" onClick={() => { handleSubmit(); handleOpen() }}>
+                            <Button color="primary" variant="contained" type="submit" onClick={() => { handleSubmit(); }}>
                                 <Icon>send</Icon>
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
                             </Button>

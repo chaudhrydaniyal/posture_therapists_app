@@ -70,6 +70,7 @@ class InvoiceModal extends React.Component {
                   <div>{this.props.info.selectedPatient.email}</div>
                   <div>{this.props.info.selectedPatient.address}</div>
                 </Col>
+
                 {/* <Col md={4}>
                   <div className="fw-bold">Billed From:</div>
                   <div>{this.props.info.billFrom||''}</div>
