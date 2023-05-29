@@ -34,6 +34,8 @@ class Invoice extends React.Component {
             discountAmmount: '0.00',
             patientName: [],
             selectedPatient: [],
+            doctorName:[],
+            selectedDoctor:[],
             disabled: (true)
         };
         this.state.items = [
@@ -54,6 +56,7 @@ class Invoice extends React.Component {
 
     componentDidMount() {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { this.setState({ patientName: res.data }) })
+        axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/').then((res) => { this.setState({ doctorName: res.data }) })
     }
 
     handleRowDel(items) {
@@ -191,6 +194,7 @@ class Invoice extends React.Component {
                             </div>
                         </div>
                         <hr className="my-4" />
+                        <div style={{display:"flex",justifyContent:"space-between"}}>
                         <Row className="mb-5">
                             <Col>
                                 <Form.Label className="fw-bold">Bill to:</Form.Label>
@@ -202,7 +206,7 @@ class Invoice extends React.Component {
                                  ))}</Form.Control>
                                 */}
                                 <select
-                                    style={{ width: "50%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
+                                    style={{ width: "100%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
                                     // value={this.state.patientName}
                                     // onChange={(e) => this.editField(e)}
                                     onChange={(e) => { this.setState({ selectedPatient: this.state.patientName.filter((g) => g.id == e.target.value)[0] }) }}
@@ -222,9 +226,9 @@ class Invoice extends React.Component {
                                 <br></br>
 
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
-                                <input style={{ width: "50%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled} /><br></br>
+                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled} /><br></br>
                                 <br></br>
-                                <input style={{ width: "50%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled} />
+                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled} />
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" /> */}
 
                             </Col>
@@ -235,7 +239,37 @@ class Invoice extends React.Component {
                                 <Form.Control placeholder={"Billing address"} value={this.state.billFromAddress} type="text" name="billFromAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" />
                             </Col> */}
                         </Row>
+                        <Row className="mb-5">
+                            <Col>
+                                <Form.Label className="fw-bold">Doctor name:</Form.Label>
 
+                                <br></br>
+                                {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
+                                 className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
+                                    <p></p>{d.first_name}
+                                 ))}</Form.Control>
+                                */}
+                                <select
+                                    style={{ width: "100%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
+                                    // value={this.state.patientName}
+                                    // onChange={(e) => this.editField(e)}
+                                    onChange={(e) => { this.setState({ selectedDoctor: this.state.doctorName.filter((g) => g.id == e.target.value)[0] }) }}
+                                    name="doctorName"
+                                >
+                                    <option value="none" selected disabled hidden>
+                                        Select Doctor Name...
+                                    </option>
+
+                                    {this.state.doctorName &&
+                                        this.state.doctorName.map((d) => (
+                                            <option value={`${d.id}`} key={d.id}>
+                                                {d.first_name}
+                                            </option>
+                                        ))}
+                                </select>
+                                </Col>
+                        </Row>
+                        </div>
                         <InvoiceItem onItemizedItemEdit={this.onItemizedItemEdit.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} currency={this.state.currency} items={this.state.items} />
 
                         <Row className="mt-4 justify-content-end">

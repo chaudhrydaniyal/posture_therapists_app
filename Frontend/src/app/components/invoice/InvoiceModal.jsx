@@ -62,8 +62,9 @@ class InvoiceModal extends React.Component {
               </div>
             </div>
             <div className="p-4">
+              <div style={{display:"flex",justifyContent:"space-between"}}>
               <Row className="mb-4">
-                <Col md={4}>
+                <Col md={8}>
                   <div className="fw-bold">Billed to:</div>
                   <div>{this.props.info.selectedPatient.first_name}</div>
                   <div>{this.props.info.selectedPatient.email}</div>
@@ -75,12 +76,20 @@ class InvoiceModal extends React.Component {
                   <div>{this.props.info.billFromAddress||''}</div>
                   <div>{this.props.info.billFromEmail||''}</div>
                 </Col> */}
-                <Col md={4}>
+                <Col md={6}>
                   <div className="fw-bold mt-2">Date Of Issue:</div>
                   <div>{this.props.info.dateOfIssue||''}</div>
                 </Col>
               </Row>
+              <Row className="mb-4" style={{width:"40%"}} >
+                <Col md={6}>
+                  <div className="fw-bold" >Doctor Name:</div>
+                  <div>{this.props.info.selectedDoctor.first_name}</div>
+                 
+                </Col>
               
+              </Row>
+              </div>
               <Table className="mb-0">
                 <thead>
                   <tr>

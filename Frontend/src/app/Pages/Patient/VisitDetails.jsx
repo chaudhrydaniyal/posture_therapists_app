@@ -48,15 +48,10 @@ const VisitDetails = () => {
         WeightBearingPrecautions: visitDetails.WeightBearingPrecautions,
         ActivityRestrictions: visitDetails.ActivityRestrictions,
         audioFile: visitDetails.audioFile
-
-
-
-
     })
 
     const handleInput = (e) => {
         let name, value;
-
         console.log(e);
         name = e.target.name;
         value = e.target.value;
@@ -108,9 +103,7 @@ const VisitDetails = () => {
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         {" "}
                                         <Input style={{ paddingLeft: '0.3rem' }} type="text" name="current_treatment" label="Current treatment" value={data.current_treatment} onChange={handleInput} />
-
                                     </div>
-
                                 </div>
 
                                 <div className="row">
@@ -129,11 +122,8 @@ const VisitDetails = () => {
                                             className="Input_width"
                                             value={data.remarks}
                                             onChange={handleInput}
-
                                         />
                                     </div>
-
-
 
                                 </div>
                                 <h5 style={{ marginTop: '1rem' }}>Body Structure And Function Impairments   </h5>
@@ -159,8 +149,6 @@ const VisitDetails = () => {
                                         <Input style={{ paddingLeft: '0.3rem' }} type="text" name="ROMstatus" label="R.O.M status" value={data.ROMstatus} onChange={handleInput} />
 
                                     </div>
-
-
                                 </div>
 
                                 <div className="row">
@@ -179,7 +167,6 @@ const VisitDetails = () => {
                                             label="Muscle status"
                                             value={data.muscle_status}
                                             onChange={handleInput}
-
                                         />
                                     </div>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -198,13 +185,8 @@ const VisitDetails = () => {
                                             label="Skin & soft tissue/pain"
                                             value={data.skin_soft_tissues_pain}
                                             onChange={handleInput}
-
-
                                         />
-
                                     </div>
-
-
                                 </div>
 
                                 <div className="row">
@@ -217,7 +199,6 @@ const VisitDetails = () => {
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         <Input
                                             style={{ paddingLeft: '0.3rem' }}
-
                                             type="text"
                                             name="cardio_vascular_status"
                                             label="Cardio vascular status"
@@ -226,10 +207,6 @@ const VisitDetails = () => {
 
                                         />
                                     </div>
-
-
-
-
                                 </div>
 
                                 <h5 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h5>
@@ -253,10 +230,7 @@ const VisitDetails = () => {
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         {" "}
                                         <Input style={{ paddingLeft: '0.3rem' }} type="text" name="transfers" label="Transfers" value={data.transfers} onChange={handleInput} />
-
                                     </div>
-
-
                                 </div>
 
                                 <div className="row">
@@ -275,7 +249,6 @@ const VisitDetails = () => {
                                             label="Balance"
                                             value={data.balance}
                                             onChange={handleInput}
-
                                         />
                                     </div>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -435,38 +408,29 @@ const VisitDetails = () => {
                                             type="text"
                                             name="SpecialInstructions"
                                             label="SpecialInstructions"
-
                                             value={data.SpecialInstructions}
-
                                         />
                                     </div>
-
-
-
                                 </div>
+
                                 <div style={{ marginTop: '2rem' }}>
 
                                     <Table bordered >
                                         <thead>
                                             <tr>
                                                 <th style={{ width: '20%' }}>Precaution</th>
-                                               
                                                 <th>IF yes, Please describe/define </th>
-
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             <tr>
-                                                <td>Weight bearing precaution?</td>
-                                              
+                                                <td>Weight bearing precaution?</td>      
                                                 <td><Input style={{ width: '100%', paddingLeft: '0.3rem' }} name="WeightBearingPrecautions" value={data.WeightBearingPrecautions} /></td>
-
                                             </tr>
                                             <tr>
                                                 <td>Activity restrictions?</td>
-                                             
                                                 <td><Input style={{ width: '100%', paddingLeft: '0.3rem' }} name="ActivityRestrictions" value={data.ActivityRestrictions} /></td>
-
                                             </tr>
                                             <tr>
                                                 <td>Other medical consideration?</td>
@@ -486,9 +450,6 @@ const VisitDetails = () => {
                                 <div id='AudioRecorder'>
                                   <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button>
                                 </div>
-
-
-
                             </div>
                         </div>
                     </Accordion.Body>
