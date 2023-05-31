@@ -18,7 +18,7 @@ import {
     NotificationManager,
 } from "react-notifications";
 import Input from 'app/components/UI Components/Input';
-
+import Body from 'app/components/UI Components/Body_image';
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -362,6 +362,10 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 />
                             </div>
                         </div>
+                        <div style={{width:"35%",height:"40%"}}>
+
+<Body/>
+</div>
 
                         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
 

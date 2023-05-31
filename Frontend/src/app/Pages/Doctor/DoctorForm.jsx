@@ -18,7 +18,7 @@ import Select from "react-select";
 import pp from "./avatar.png";
 
 import Form from 'react-bootstrap/Form';
-
+import Body from 'app/components/UI Components/Body_image';
 const initialValue = {
     first_name: "",
     last_name: "",
@@ -605,6 +605,7 @@ const DoctorForm = () => {
                             <Span sx={{ pl: 1, textTransform: "capitalize" }} >Submit</Span>
                         </Button>
                     </div>
+                   
 
 
 
