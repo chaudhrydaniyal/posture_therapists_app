@@ -38,7 +38,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
     const [patients, setPatients] = useState([])
     const [selectedPatient, setSelectedPatient] = useState(null)
-
+    const [markers, setMarkers] = useState([]);
 
 
     useEffect(() => {
@@ -362,10 +362,10 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                                 />
                             </div>
                         </div>
-                        <div style={{width:"35%",height:"40%"}}>
+                        {/* <div style={{width:"35%",height:"40%"}}>
 
-<Body/>
-</div>
+<Body markers={markers} setMarkers={setMarkers} />
+</div> */}
 
                         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
 

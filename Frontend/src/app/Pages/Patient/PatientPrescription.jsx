@@ -12,8 +12,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
-
-
+// import Body from 'app/components/UI Components/Body_image';
+import ImageMarker, { Marker } from 'react-image-marker';
+import complete_body from './complete_body.jpg'
+// import Button from '@mui/material/Button';
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -100,7 +102,44 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         AnticipatedFrequencyDuration: "",
         SpecialInstructions: ""
     })
-
+    const [markers, setMarkers] = useState([]);
+  
+    const [addMarkerEnabled, setAddMarkerEnabled] = useState(false);
+  
+    const handleAddMarker = (marker) => {
+  
+      if (addMarkerEnabled) {
+      setMarkers([...markers, marker]);
+      console.log("markers",markers)
+      }
+  
+    };
+  
+    
+    const handleResetMarker =()=>{
+      setMarkers([])
+    }
+  
+   
+    const handleToggleAddMarker = () => {
+      setAddMarkerEnabled(!addMarkerEnabled);
+    };
+   
+  
+    // const handleSubmitImage=async()=>{
+    //   const imageData={
+    //     image:{complete_body},
+    //     marker:markers
+    //   }
+    //   try{
+  
+    //     const body_data = await axios.post(process.env.REACT_APP_ORIGIN_URL + '',imageData)
+    //   }catch(error){
+    //     console.log("image_data_error",error)
+  
+    //   }
+  
+    // }
 
     const handleChangePage = (_, newPage) => {
         setPage(newPage);
@@ -151,6 +190,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             form_data.append(key, prescriptionDetails[key]);
         }
         form_data.append('audioFile', audioFileBlob)
+        form_data.append('physical_assesment',JSON.stringify(markers))
         try {
             const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
         } catch (error) {
@@ -213,9 +253,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Prescription' }]} />
             </Box>
-
-
-
+        
             {/* /////////////////////////////Invoice Model Start//////////////////////////// */}
 
 
@@ -307,6 +345,30 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             <div className='card'>
                 <div className='card-body'>
                     <h4>Diagnosis</h4>
+                    <div style={{width:"35%",height:"40%"}}>
+<div style={{display:"flex",justifyContent:"center",marginTop:"1rem",marginBottom:"1rem"}}>
+
+<h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
+
+</div>
+
+<ImageMarker
+src={complete_body}
+markers={markers}
+onAddMarker={handleAddMarker}
+/>
+
+<div style={{display:"flex",marginTop:"1rem",justifyContent:"center"}}>
+
+<Button style={{color:"white",background:"#ED2B2A",border:"none"}} onClick={handleResetMarker} >Reset</Button>
+
+<Button style={{marginLeft:"1rem"}} variant="contained" onClick={handleToggleAddMarker}>
+  {addMarkerEnabled ? 'Disable' : 'Enable'}
+</Button>
+
+</div>
+
+</div>
                     <Form onSubmit={submitFormData}>
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">

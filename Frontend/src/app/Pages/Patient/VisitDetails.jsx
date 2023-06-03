@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
 import Input from 'app/components/UI Components/Input';
-
+import complete_body from './complete_body.jpg'
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -449,6 +449,11 @@ const VisitDetails = () => {
                                 </div>
                                 <div id='AudioRecorder'>
                                   <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button>
+                                </div>
+                                <div style={{width:"35%",height:"40%",marginTop:"2rem"}}>
+                                <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
+                                    <img src={complete_body}
+                                     />
                                 </div>
                             </div>
                         </div>
