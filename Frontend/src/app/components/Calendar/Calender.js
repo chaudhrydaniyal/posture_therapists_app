@@ -222,10 +222,9 @@ class Calender extends Component {
 
           if (new Date(item.start) >= new Date(ff.start) && new Date(item.start) <= new Date(ff.end) ||
 
-            new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
+           new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
 
-            alreadyScheduledAppointment = true
-
+           alreadyScheduledAppointment = true
 
           } else {
             console.log("inside else")

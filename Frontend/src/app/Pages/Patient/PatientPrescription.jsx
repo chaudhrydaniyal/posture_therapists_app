@@ -190,7 +190,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             form_data.append(key, prescriptionDetails[key]);
         }
         form_data.append('audioFile', audioFileBlob)
-        form_data.append('physical_assesment',JSON.stringify(markers))
+        form_data.append('physical_assessment',JSON.stringify(markers))
         try {
             const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
         } catch (error) {
