@@ -251,7 +251,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
     return (
         <Container>
             <Box className="breadcrumb">
-                <Breadcrumb routeSegments={[{ name: 'Patient Prescription' }]} />
+                <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
             </Box>
         
             {/* /////////////////////////////Invoice Model Start//////////////////////////// */}
@@ -345,7 +345,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             <div className='card'>
                 <div className='card-body'>
                     <h4>Diagnosis</h4>
-                    <div style={{width:"35%",height:"40%"}}>
+                    <div style={{width: "4in", height: "5in",}}>
 <div style={{display:"flex",justifyContent:"center",marginTop:"1rem",marginBottom:"1rem"}}>
 
 <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>

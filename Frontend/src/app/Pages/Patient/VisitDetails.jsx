@@ -8,6 +8,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
 import Input from 'app/components/UI Components/Input';
 import complete_body from './complete_body.jpg'
+import ImageMarker, { Marker } from 'react-image-marker';
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -47,9 +48,11 @@ const VisitDetails = () => {
         SpecialInstructions: visitDetails.SpecialInstructions,
         WeightBearingPrecautions: visitDetails.WeightBearingPrecautions,
         ActivityRestrictions: visitDetails.ActivityRestrictions,
+        physicalAssessment:visitDetails.physical_assessment,
+
         audioFile: visitDetails.audioFile
     })
-
+{console.log("map",data.physicalAssessment)}
     const handleInput = (e) => {
         let name, value;
         console.log(e);
@@ -92,7 +95,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-4 col-sm-4 border p-3" >
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="personal_conditions" label="Personal conditions" defaultValue={data.personal_conditions} onChange={handleInput} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="personal_conditions" value={data.personal_conditions} onChange={handleInput} />
                                     </div>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                         <label htmlFor="current_treatment">
@@ -102,7 +105,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="current_treatment" label="Current treatment" value={data.current_treatment} onChange={handleInput} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="current_treatment" value={data.current_treatment} onChange={handleInput} />
                                     </div>
                                 </div>
 
@@ -136,7 +139,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="AssTrauma_diseases" label="Ass.trauma & disease" value={data.AssTrauma_diseases} onChange={handleInput} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="AssTrauma_diseases" value={data.AssTrauma_diseases} onChange={handleInput} />
                                     </div>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                         <label htmlFor="ROMstatus">
@@ -146,7 +149,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="ROMstatus" label="R.O.M status" value={data.ROMstatus} onChange={handleInput} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="ROMstatus" value={data.ROMstatus} onChange={handleInput} />
 
                                     </div>
                                 </div>
@@ -164,7 +167,7 @@ const VisitDetails = () => {
 
                                             type="text"
                                             name="muscle_status"
-                                            label="Muscle status"
+
                                             value={data.muscle_status}
                                             onChange={handleInput}
                                         />
@@ -182,7 +185,7 @@ const VisitDetails = () => {
 
                                             name="skin_soft_tissues_pain"
                                             type="text"
-                                            label="Skin & soft tissue/pain"
+
                                             value={data.skin_soft_tissues_pain}
                                             onChange={handleInput}
                                         />
@@ -201,8 +204,8 @@ const VisitDetails = () => {
                                             style={{ paddingLeft: '0.3rem' }}
                                             type="text"
                                             name="cardio_vascular_status"
-                                            label="Cardio vascular status"
-                                            value={data.cardio_vascular_status}
+
+                                            value={visitDetails.cardio_vascular_status}
                                             onChange={handleInput}
 
                                         />
@@ -219,7 +222,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="general_mobility" label="General mobility" value={data.general_mobility} onChange={handleInput} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="general_mobility" value={data.general_mobility} onChange={handleInput} />
                                     </div>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                         <label htmlFor="transfers">
@@ -229,7 +232,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="transfers" label="Transfers" value={data.transfers} onChange={handleInput} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="transfers" value={data.transfers} onChange={handleInput} />
                                     </div>
                                 </div>
 
@@ -246,7 +249,7 @@ const VisitDetails = () => {
 
                                             type="text"
                                             name="balance"
-                                            label="Balance"
+
                                             value={data.balance}
                                             onChange={handleInput}
                                         />
@@ -264,7 +267,7 @@ const VisitDetails = () => {
 
                                             name="upper_limb_functions"
                                             type="text"
-                                            label="Upper limb functions"
+
                                             value={data.upper_limb_functions}
                                             onChange={handleInput}
 
@@ -288,7 +291,7 @@ const VisitDetails = () => {
 
                                             type="text"
                                             name="daily_life_activities"
-                                            label="Daily life activities"
+
                                             value={data.daily_life_activities}
                                             onChange={handleInput}
 
@@ -299,7 +302,7 @@ const VisitDetails = () => {
 
 
                                 </div>
-           
+
 
 
                             </div>
@@ -322,7 +325,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="DiagnosisICD10code" label="Diagnosis-ICD-10-code" value={data.DiagnosisICD10code} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="DiagnosisICD10code" value={data.DiagnosisICD10code} />
                                     </div>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                         <label htmlFor="BriefMedicalHistory">
@@ -332,7 +335,7 @@ const VisitDetails = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         {" "}
-                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="BriefMedicalHistory" label="Brief-Medical-History" value={data.BriefMedicalHistory} />
+                                        <Input style={{ paddingLeft: '0.3rem' }} type="text" name="BriefMedicalHistory" value={data.BriefMedicalHistory} />
 
                                     </div>
 
@@ -350,7 +353,7 @@ const VisitDetails = () => {
                                             style={{ paddingLeft: '0.3rem' }}
                                             type="text"
                                             name="PhysicalTherapyEvaluationTreatment"
-                                            label="PhysicalTherapyEvaluationTreatment"
+
 
                                             value={data.PhysicalTherapyEvaluationTreatment}
 
@@ -367,7 +370,7 @@ const VisitDetails = () => {
                                             style={{ paddingLeft: '0.3rem' }}
                                             type="text"
                                             name="Other"
-                                            label="Other"
+
 
                                         // value={PatientPrescription.Other}
 
@@ -390,7 +393,7 @@ const VisitDetails = () => {
                                             style={{ paddingLeft: '0.3rem' }}
                                             type="text"
                                             name="AnticipatedFrequencyDuration"
-                                            label="Anticipated-Frequency-Duration"
+
 
                                             value={data.AnticipatedFrequencyDuration}
 
@@ -407,7 +410,7 @@ const VisitDetails = () => {
                                             style={{ paddingLeft: '0.3rem' }}
                                             type="text"
                                             name="SpecialInstructions"
-                                            label="SpecialInstructions"
+
                                             value={data.SpecialInstructions}
                                         />
                                     </div>
@@ -425,7 +428,7 @@ const VisitDetails = () => {
 
                                         <tbody>
                                             <tr>
-                                                <td>Weight bearing precaution?</td>      
+                                                <td>Weight bearing precaution?</td>
                                                 <td><Input style={{ width: '100%', paddingLeft: '0.3rem' }} name="WeightBearingPrecautions" value={data.WeightBearingPrecautions} /></td>
                                             </tr>
                                             <tr>
@@ -434,7 +437,7 @@ const VisitDetails = () => {
                                             </tr>
                                             <tr>
                                                 <td>Other medical consideration?</td>
-                                              
+
                                                 <td><Input style={{ width: '100%', paddingLeft: '0.3rem' }} name="OtherMedicalConsiderations" /></td>
                                             </tr>
                                         </tbody>
@@ -448,12 +451,20 @@ const VisitDetails = () => {
                                     </Table>
                                 </div>
                                 <div id='AudioRecorder'>
-                                  <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button>
+                                    <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button>
                                 </div>
-                                <div style={{width:"35%",height:"40%",marginTop:"2rem"}}>
-                                <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
-                                    <img src={complete_body}
-                                     />
+                                    <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
+                                <div style={{ width: "4in", height: "5in", marginTop: "2rem" }}>
+                                    <ImageMarker
+                                  
+                                        src={complete_body}
+                                        markers={data.physicalAssessment.map(item => ({
+                                            top: item.x_coordinate,
+                                            left: item.y_coordinate,
+                                            id: item.id
+                                          }))}
+
+                                    />
                                 </div>
                             </div>
                         </div>
