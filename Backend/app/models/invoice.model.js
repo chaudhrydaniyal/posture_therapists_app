@@ -1,5 +1,11 @@
 const sql = require("./db.js");
 
+const util = require('util');
+
+const query = util.promisify(sql.query).bind(sql);
+
+
+
 // constructor
 const Invoice = function (invoice) {
   this.date = invoice.date;
@@ -35,7 +41,27 @@ Invoice.create = (invoice,  result) => {
 };
 
 Invoice.findById = (id, result) => {
-  sql.query(`SELECT * FROM patients WHERE id = ${id}`, (err, res) => {
+  // sql.query(`SELECT * FROM patients WHERE id = ${id}`, (err, res) => {
+  //   if (err) {
+  //     console.log("error: ", err);
+  //     result(err, null);
+  //     return;
+  //   }
+
+  //   if (res.length) {
+  //     console.log("found invoice: ", res[0]);
+  //     result(null, res[0]);
+  //     return;
+  //   }
+
+  //   // not found Tutorial with the id
+  //   result({ kind: "not_found" }, null);
+  // });
+
+
+  
+  sql.query(`SELECT * FROM invoice WHERE patient = ${id}`, async (err, res) => {
+
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -43,14 +69,34 @@ Invoice.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found invoice: ", res[0]);
-      result(null, res[0]);
+
+        const finalResult = await Promise.all(res.map(async (r)=> {
+        
+        const  invoice_items =  await query(`SELECT * FROM invoice_items WHERE invoice = ${r.id}`)
+
+        return ({ ...r, invoice_items: invoice_items})
+            
+      }))
+
+      console.log("final result test", finalResult)
+    
+      result(null, finalResult);
+
       return;
     }
-
     // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
+
+
+
+
+
+
+
+
+
+
 };
 
 Invoice.getAll =  (title, result) => {

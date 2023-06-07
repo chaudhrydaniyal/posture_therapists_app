@@ -84,7 +84,7 @@ exports.findAll = async (req, res) => {
 
 // Find a single Tutorial by Id
 exports.findOne = (req, res) => {
-  Patient.findById(req.params.id, (err, data) => {
+  Invoice.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

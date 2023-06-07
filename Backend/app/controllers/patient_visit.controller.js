@@ -69,7 +69,7 @@ exports.create = async (req, res) => {
   });
 
   // Save Tutorial in the database
-  Patient_visit.create(patient_visit, (err, data) => {
+  Patient_visit.create(patient_visit, req.body.physical_assessment, (err, data) => {
 
     if (err)
       res.status(500).send({
