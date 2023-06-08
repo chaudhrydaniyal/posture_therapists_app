@@ -59,6 +59,7 @@ export const navigations = [
     children: [
       { name: 'Doctor Registration', path: '/doctorform', iconText: 'A' },
       { name: 'Available Doctors', path: '/registeredDoctors', iconText: 'B' },
+      { name: 'Doctor Leave Form', path: '/leaveform', iconText: 'B' },
       
 
     ]

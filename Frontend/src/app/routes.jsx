@@ -21,7 +21,7 @@ import PatientStepper from './Pages/Patient/PatientStepper';
 import PatientPrescription from './Pages/Patient/PatientPrescription';
 import Services from './Pages/Setup/Services';
 import Invoice from './components/invoice/Invoice';
-
+import LeaveForm from './Pages/Doctor/LeaveForm';
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
 const JwtLogin = Loadable(lazy(() => import('app/views/sessions/JwtLogin')));
@@ -82,6 +82,11 @@ const routes = [
       {
         path: '/doctorform',
         element: <DoctorForm />,
+        // auth: authRoles.admin
+      },
+      {
+        path: '/leaveform',
+        element: <LeaveForm />,
         // auth: authRoles.admin
       },
       {
