@@ -4,7 +4,7 @@ const sql = require("./db.js");
 const Patient = function (patient) {
   this.first_name = patient.first_name;
   this.middle_name = patient.middle_name;
-  this.surname = patient.surname;
+  this.last_name = patient.last_name;
 
   this.date_of_birth = patient.date_of_birth ? patient.date_of_birth :null;
   this.age = patient.age;
@@ -118,8 +118,8 @@ Patient.getAllPublished = result => {
 
 Patient.updateById = (id, patient, result) => {
   sql.query(
-    "UPDATE patients SET first_name = ?, middle_name = ?, surname = ?, cnic = ?, date_of_birth = ?, age = ?, address = ?, email = ?, gender = ?, mobile_no = ?, date_registered = ?, occupation = ?, physiotherapist_seen_before = ?, patient_concerns_for_previous_physiotherapist = ?, patient_satisfactions_for_previous_physiotherapist = ? WHERE id = ?",
-    [patient.first_name, patient.middle_name, patient.surname, patient.cnic, patient.date_of_birth, patient.age, patient.address, patient.email, patient.gender, patient.mobile_no, patient.date_registered, patient.occupation, patient.physiotherapist_seen_before, patient.patient_concerns_for_previous_physiotherapist, patient.patient_satisfactions_for_previous_physiotherapist, id],
+    "UPDATE patients SET first_name = ?, middle_name = ?, last_name = ?, cnic = ?, date_of_birth = ?, age = ?, address = ?, email = ?, gender = ?, mobile_no = ?, date_registered = ?, occupation = ?, physiotherapist_seen_before = ?, patient_concerns_for_previous_physiotherapist = ?, patient_satisfactions_for_previous_physiotherapist = ? WHERE id = ?",
+    [patient.first_name, patient.middle_name, patient.last_name, patient.cnic, patient.date_of_birth, patient.age, patient.address, patient.email, patient.gender, patient.mobile_no, patient.date_registered, patient.occupation, patient.physiotherapist_seen_before, patient.patient_concerns_for_previous_physiotherapist, patient.patient_satisfactions_for_previous_physiotherapist, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

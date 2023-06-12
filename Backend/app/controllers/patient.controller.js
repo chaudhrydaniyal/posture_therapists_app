@@ -30,7 +30,7 @@ exports.create = (req, res) => {
   // Create a Tutorial
   const patient = new Patient({
 
-    surname: req.body.lastname,
+    last_name: req.body.last_name,
     first_name: req.body.first_name,
     middle_name: req.body.middle_name,
     cnic: req.body.cnic,

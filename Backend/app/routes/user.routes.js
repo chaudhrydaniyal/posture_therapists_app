@@ -1,4 +1,5 @@
 module.exports = (app, upload ) => {
+
   const user = require("../controllers/user.controller.js");
 
   var router = require("express").Router();
@@ -25,4 +26,5 @@ module.exports = (app, upload ) => {
   router.delete("/", user.deleteAll);
 
   app.use('/api/users', router);
+
 };

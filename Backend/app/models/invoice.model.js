@@ -5,7 +5,6 @@ const util = require('util');
 const query = util.promisify(sql.query).bind(sql);
 
 
-
 // constructor
 const Invoice = function (invoice) {
   this.date = invoice.date;
@@ -15,6 +14,7 @@ const Invoice = function (invoice) {
   this.discount = invoice.discount;
   this.tax_rate = invoice.tax_rate;
   this.items = invoice.items;
+  this.patient_visit_id = invoice.patient_visit_id;
   // this.invoice = invoice.invoice;
   // this.price = invoice.price;
 };
@@ -41,6 +41,7 @@ Invoice.create = (invoice,  result) => {
 };
 
 Invoice.findById = (id, result) => {
+
   // sql.query(`SELECT * FROM patients WHERE id = ${id}`, (err, res) => {
   //   if (err) {
   //     console.log("error: ", err);
@@ -57,11 +58,12 @@ Invoice.findById = (id, result) => {
   //   // not found Tutorial with the id
   //   result({ kind: "not_found" }, null);
   // });
-
-
   
-  sql.query(`SELECT * FROM invoice WHERE patient = ${id}`, async (err, res) => {
-
+  sql.query(
+    
+    // `SELECT * FROM invoice WHERE patient_visit_id = ${id}`
+   `SELECT invoice.id, date, sub_total, patient, doctor, discount, tax_rate, patient_visit_id, patients.first_name as patient_first_name , patients.email, patients.address, users.first_name as doctor_first_name FROM invoice  join patients on invoice.patient = patients.id join users on invoice.doctor = users.id WHERE patient_visit_id = ${id}`,
+    async (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -86,16 +88,8 @@ Invoice.findById = (id, result) => {
     }
     // not found Tutorial with the id
     result({ kind: "not_found" }, null);
+
   });
-
-
-
-
-
-
-
-
-
 
 };
 

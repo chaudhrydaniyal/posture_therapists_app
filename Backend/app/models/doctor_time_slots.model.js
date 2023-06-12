@@ -50,16 +50,6 @@ Doctor_time_slots.weeklySchedule = (doctor_time_slots, result) => {
 
   }
 
-
-
-
-
-
-
-
-
-
-
   sql.query("INSERT IGNORE INTO doctor_time_slots (start_time, end_time, doctor) VALUES ?",
 
     [(generatedSlots.map(gs => [gs.start_time, gs.end_time, gs.doctor]))],
@@ -79,6 +69,7 @@ Doctor_time_slots.weeklySchedule = (doctor_time_slots, result) => {
 };
 
 Doctor_time_slots.findById = (id, result) => {
+
   sql.query(`SELECT * FROM doctor_time_slots WHERE doctor = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
