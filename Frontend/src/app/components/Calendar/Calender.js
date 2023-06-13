@@ -340,7 +340,7 @@ class Calender extends Component {
 
               await axios.post(`${process.env.REACT_APP_ORIGIN_URL}api/scheduledappointments`,
                 this.state.items.filter((f) => f.scheduledAppointment && f.currentlyAdded).map(se => ({
-                  start_time: moment.utc(se.start).tz("Asia/Taipei").format(), end_time: moment.utc(se.end).tz("Asia/Taipei").format(), doctor: se.group,
+                  start_time: moment.utc(se.start).tz("Asia/Karachi").format(), end_time: moment.utc(se.end).tz("Asia/Karachi").format(), doctor: se.group,
                   patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
                 }))
               )

@@ -52,6 +52,8 @@ Patient_visit.create = (patient_visit, physical_assessment, result) => {
     result(null, { id: res.insertId, ...patient_visit })
     console.log("physical_assessment", JSON.parse(physical_assessment))
 
+    if (JSON.parse(physical_assessment).length > 0 ){
+
     physical_assessment = JSON.parse(physical_assessment)
 
     sql.query("INSERT INTO patient_visit_physical_assessment (x_coordinate, y_coordinate, visit_assessment_id) VALUES ?", 
@@ -64,6 +66,7 @@ Patient_visit.create = (patient_visit, physical_assessment, result) => {
         return;
       }
     })
+  }
 
 
 

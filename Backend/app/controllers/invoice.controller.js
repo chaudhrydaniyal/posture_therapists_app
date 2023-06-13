@@ -40,6 +40,7 @@ exports.create = (req, res) => {
     items : req.body.items,
     // invoice : req.body.invoice,
     price : req.body.price,
+    patient_visit_id : req.body.patient_visit_id,
 
 
   });
