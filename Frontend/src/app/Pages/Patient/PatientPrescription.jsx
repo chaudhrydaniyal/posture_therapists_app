@@ -189,15 +189,6 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             form_data.append(key, prescriptionDetails[key]);
         }
         form_data.append('audioFile', audioFileBlob)
-<<<<<<< HEAD
-        form_data.append('physical_assessment', JSON.stringify(markers))
-        try {
-            const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
-        } catch (error) {
-            console.log("error", error)
-        }
-        //    history.push({
-=======
         form_data.append('physical_assessment',JSON.stringify(markers))
         // try {
         //     const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
@@ -226,17 +217,10 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         };
 
 //    history.push({
->>>>>>> deae9b076c00e6db959edc764db2e3dffb7aaef8
         // pathname:  "/invoice",
         // state: {
         //   response: messageFromServer 
         // } 
-<<<<<<< HEAD
-        //  });
-
-        navigate('/invoice', { state: { patient: 'kamran ali' } });
-    }
-=======
     //  });
 
     // navigate('/invoice',{state:{patient_visit_id:PatientVisit.data.id,patient_id:PatientVisit.data.patient}});
@@ -245,7 +229,6 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
 
     // }
->>>>>>> deae9b076c00e6db959edc764db2e3dffb7aaef8
 
 
     const handlecharges = (e) => {
