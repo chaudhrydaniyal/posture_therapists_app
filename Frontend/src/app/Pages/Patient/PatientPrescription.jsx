@@ -102,43 +102,41 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         AnticipatedFrequencyDuration: "",
         SpecialInstructions: ""
     })
+
     const [markers, setMarkers] = useState([]);
-  
     const [addMarkerEnabled, setAddMarkerEnabled] = useState(false);
-  
+
     const handleAddMarker = (marker) => {
-  
-      if (addMarkerEnabled) {
-      setMarkers([...markers, marker]);
-      console.log("markers",markers)
-      }
-  
+        if (addMarkerEnabled) {
+            setMarkers([...markers, marker]);
+            console.log("markers", markers)
+        }
     };
-  
-    
-    const handleResetMarker =()=>{
-      setMarkers([])
+
+
+    const handleResetMarker = () => {
+        setMarkers([])
     }
-  
-   
+
+
     const handleToggleAddMarker = () => {
-      setAddMarkerEnabled(!addMarkerEnabled);
+        setAddMarkerEnabled(!addMarkerEnabled);
     };
-   
-  
+
+
     // const handleSubmitImage=async()=>{
     //   const imageData={
     //     image:{complete_body},
     //     marker:markers
     //   }
     //   try{
-  
+
     //     const body_data = await axios.post(process.env.REACT_APP_ORIGIN_URL + '',imageData)
     //   }catch(error){
     //     console.log("image_data_error",error)
-  
+
     //   }
-  
+
     // }
 
     const handleChangePage = (_, newPage) => {
@@ -190,26 +188,20 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             form_data.append(key, prescriptionDetails[key]);
         }
         form_data.append('audioFile', audioFileBlob)
-        form_data.append('physical_assessment',JSON.stringify(markers))
+        form_data.append('physical_assessment', JSON.stringify(markers))
         try {
             const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
         } catch (error) {
             console.log("error", error)
         }
-
-
-//    history.push({
+        //    history.push({
         // pathname:  "/invoice",
         // state: {
         //   response: messageFromServer 
         // } 
-    //  });
+        //  });
 
-    navigate('/invoice',{state:{patient:'kamran ali'}});
-
-
-
-
+        navigate('/invoice', { state: { patient: 'kamran ali' } });
     }
 
 
@@ -217,7 +209,6 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         console.log("object value", e.target.value);
         setservicelist(e.target.value)
         setSelectedService([...selectedService, getService.filter((g) => g.id == e.target.value)[0]])
-
     }
 
 
@@ -237,27 +228,23 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
         console.log("index", index)
     }
 
-    
+
 
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/services/').then((res) => {
             setGetService(res.data); console.log("services", res);
         })
         console.log("getService", values.patient);
-
     }, [])
 
 
     return (
         <Container>
+
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
             </Box>
-        
-            {/* /////////////////////////////Invoice Model Start//////////////////////////// */}
 
-
-            {/* <button onClick={handleOpen}> invoice </button> */}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -276,31 +263,22 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                     <label><strong>Select Services:</strong></label>
                                 </div>
                                 <div style={{ marginTop: '0.5rem' }}>
-
                                     <Form.Select value={servicelist} name="servicecharges" onChange={(e) => handlecharges(e)}>
-
                                         <option value="none" selected disabled hidden>
                                             Select Service...
                                         </option>
-
-
                                         {getService && getService.map((items, i) => (
-
                                             <option value={`${items.id}`} key={items.id} >{`${items.service_name} PKR ${items.charges}`}</option>
-
                                         ))}
                                     </Form.Select>
                                     {!servicelist ? (<p style={{ color: "red" }}>Please select the service</p>) : null}
-
                                 </div>
                             </div>
                             <div>
                                 <div>
-
                                     <label><strong>Discount %:</strong></label>
                                 </div>
                                 <div style={{ marginTop: '0.5rem', marginLeft: '0.5rem' }}>
-
                                     <input type="number" style={{ height: '2.2rem', width: 'auto', border: '0.5px solid gray', borderRadius: '5px', paddingLeft: '0.5rem' }} value={discount} placeholder='%' onChange={(e) => setDiscount(e.target.value)} />
                                 </div>
                             </div>
@@ -321,17 +299,14 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 .map((items, id, index) => (
                                     <TableRow key={id}>
                                         <TableCell align="left">{items.service_name}</TableCell>
-
                                         <TableCell align="center">{items.charges}</TableCell>
                                         <TableCell align="right"><button onClick={() => deleteById(items.id)} style={{ background: 'none', border: 'none', marginTop: '0.5rem' }}>&#x274C;</button></TableCell>
-
                                     </TableRow>
                                 ))}
                         </TableBody>
                     </StyledTable>
 
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-
                         <Button onClick={handleClose}> <strong>Close</strong></Button>
                         <Button onClick={() => { handleClose(); }}  ><Link to="/invoice" state={{ selectedService, discount }}> <strong>Generate</strong></Link></Button>
                     </div>
@@ -339,36 +314,26 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             </Modal>
 
 
-            {/* /////////////////////Invoice modal end////////////////////// */}
-
 
             <div className='card'>
                 <div className='card-body'>
                     <h4>Diagnosis</h4>
-                    <div style={{width: "4in", height: "5in",}}>
-<div style={{display:"flex",justifyContent:"center",marginTop:"1rem",marginBottom:"1rem"}}>
-
-<h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
-
-</div>
-
-<ImageMarker
-src={complete_body}
-markers={markers}
-onAddMarker={handleAddMarker}
-/>
-
-<div style={{display:"flex",marginTop:"1rem",justifyContent:"center"}}>
-
-<Button style={{color:"white",background:"#ED2B2A",border:"none"}} onClick={handleResetMarker} >Reset</Button>
-
-<Button style={{marginLeft:"1rem"}} variant="contained" onClick={handleToggleAddMarker}>
-  {addMarkerEnabled ? 'Disable' : 'Enable'}
-</Button>
-
-</div>
-
-</div>
+                    <div style={{ width: "4in", height: "5in", }}>
+                        <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}>
+                            <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
+                        </div>
+                        <ImageMarker
+                            src={complete_body}
+                            markers={markers}
+                            onAddMarker={handleAddMarker}
+                        />
+                        <div style={{ display: "flex", marginTop: "1rem", justifyContent: "center" }}>
+                            <Button style={{ color: "white", background: "#ED2B2A", border: "none" }} onClick={handleResetMarker} >Reset</Button>
+                            <Button style={{ marginLeft: "1rem" }} variant="contained" onClick={handleToggleAddMarker}>
+                                {addMarkerEnabled ? 'Disable' : 'Enable'}
+                            </Button>
+                        </div>
+                    </div>
                     <Form onSubmit={submitFormData}>
                         <div className="row" style={{ marginTop: "2rem" }}>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -390,9 +355,7 @@ onAddMarker={handleAddMarker}
                             <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <input className="input_width" type="text" name="BriefMedicalHistory" placeholder="Brief-Medical-History..." value={prescriptionDetails.BriefMedicalHistory} onChange={handleInput} />
-
                             </div>
-
                         </div>
 
                         <div className="row">
@@ -428,9 +391,6 @@ onAddMarker={handleAddMarker}
                                     onChange={handleInput}
                                 />
                             </div>
-
-
-
                         </div>
 
                         <div className="row">
@@ -466,9 +426,6 @@ onAddMarker={handleAddMarker}
                                     onChange={handleInput}
                                 />
                             </div>
-
-
-
                         </div>
                         <div style={{ marginTop: '2rem' }}>
 
@@ -476,27 +433,20 @@ onAddMarker={handleAddMarker}
                                 <thead>
                                     <tr>
                                         <th style={{ width: '20%' }}>Precaution</th>
-                                       
                                         <th>If yes, Please describe/define </th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Weight bearing precaution?</td>
-                                     
                                         <td><input className='input_border' style={{ width: '100%' }} name="WeightBearingPrecautions" value={prescriptionDetails.WeightBearingPrecautions} onChange={handleInput} /></td>
-
                                     </tr>
                                     <tr>
                                         <td>Activity restrictions?</td>
-                                       
                                         <td><input className='input_border' style={{ width: '100%' }} name="ActivityRestrictions" value={prescriptionDetails.ActivityRestrictions} onChange={handleInput} /></td>
-
                                     </tr>
                                     <tr>
                                         <td>Other medical consideration?</td>
-                                       
                                         <td><input className='input_border' style={{ width: '100%' }} name="OtherMedicalConsiderations" onChange={handleInput} /></td>
                                     </tr>
                                 </tbody>
@@ -513,14 +463,13 @@ onAddMarker={handleAddMarker}
                             <Button color="primary" variant="contained" onClick={prevStep} style={{ marginRight: '2rem' }}>
                                 Previous
                             </Button>
-                          
+
                             <Button color="primary" variant="contained" type="submit" onClick={() => { handleSubmit(); }}>
                                 <Icon>send</Icon>
                                 <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
                             </Button>
                         </div>
                     </Form>
-
                 </div>
             </div>
         </Container>

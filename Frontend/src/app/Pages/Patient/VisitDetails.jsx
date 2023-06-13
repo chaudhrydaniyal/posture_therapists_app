@@ -257,7 +257,7 @@ const VisitDetails = () => {
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                         <label htmlFor="upper_limb_functions">
                                             {" "}
-                                            <div>Upper Limb Functions :</div>
+                                            <div>Upper Limb Functions:</div>
                                         </label>
                                     </div>
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
