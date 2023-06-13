@@ -9,6 +9,8 @@ import Table from 'react-bootstrap/Table';
 import Input from 'app/components/UI Components/Input';
 import complete_body from './complete_body.jpg'
 import ImageMarker, { Marker } from 'react-image-marker';
+// import Invoice from 'app/components/InvoiceData/Invoice';
+import InvoiceData from 'app/components/InvoiceData/InvoiceData';
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -28,6 +30,7 @@ const VisitDetails = () => {
     { console.log("visitDetails", visitDetails) }
     const [PatientPrescription, setPatientPrescription] = useState([])
     const [data, setData] = useState({
+        id:visitDetails.id,
         personal_conditions: visitDetails.personal_conditions,
         current_treatment: visitDetails.current_treatment,
         remarks: visitDetails.remarks,
@@ -52,6 +55,7 @@ const VisitDetails = () => {
 
         audioFile: visitDetails.audioFile
     })
+    const [invoiceData,setInvoiceData] = useState([])
 {console.log("map",data.physicalAssessment)}
     const handleInput = (e) => {
         let name, value;
@@ -63,12 +67,15 @@ const VisitDetails = () => {
 
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/').then((res) => { setPatientPrescription(res.data); console.log('resss', res) })
+        axios.get(process.env.REACT_APP_ORIGIN_URL + `api/invoice/${data.id}`).then((res)=>setInvoiceData(res.data))
+
         console.log("patientPrescription", PatientPrescription)
-
+        
     }, [])
-
+    
     return (
         <Container>
+            {console.log("getIvoicedata",invoiceData)}
 
             {/* <section className="content"> */}
 
@@ -473,6 +480,8 @@ const VisitDetails = () => {
                 <Accordion.Item eventKey="3">
                     <Accordion.Header>Invoice</Accordion.Header>
                     <Accordion.Body>
+                        
+<InvoiceData patient_invoice_data={invoiceData}/>
 
                     </Accordion.Body>
                 </Accordion.Item>

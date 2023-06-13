@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 // import Body from 'app/components/UI Components/Body_image';
 import ImageMarker, { Marker } from 'react-image-marker';
 import complete_body from './complete_body.jpg'
+import PatientVisit from './PatientVisit';
 // import Button from '@mui/material/Button';
 
 
@@ -188,6 +189,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             form_data.append(key, prescriptionDetails[key]);
         }
         form_data.append('audioFile', audioFileBlob)
+<<<<<<< HEAD
         form_data.append('physical_assessment', JSON.stringify(markers))
         try {
             const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
@@ -195,14 +197,55 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
             console.log("error", error)
         }
         //    history.push({
+=======
+        form_data.append('physical_assessment',JSON.stringify(markers))
+        // try {
+        //     const PatientVisit = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, { 'content-type': 'multipart/form-data' })
+        // console.log("patient visit",PatientVisit)
+        // } catch (error) {
+        //     console.log("error", error)
+        // }
+        try {
+            const response = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patientvisits/', form_data, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            });
+            console.log("Patient visit", response.data);
+        
+            // Access the response data and navigate to the '/invoice' page
+            navigate('/invoice', {
+              state: {
+                patient_visit_id: response.data.id,
+                patient_id: response.data.patient,
+              },
+            });
+          } catch (error) {
+            console.log("Error", error);
+          }
+        };
+
+//    history.push({
+>>>>>>> deae9b076c00e6db959edc764db2e3dffb7aaef8
         // pathname:  "/invoice",
         // state: {
         //   response: messageFromServer 
         // } 
+<<<<<<< HEAD
         //  });
 
         navigate('/invoice', { state: { patient: 'kamran ali' } });
     }
+=======
+    //  });
+
+    // navigate('/invoice',{state:{patient_visit_id:PatientVisit.data.id,patient_id:PatientVisit.data.patient}});
+
+
+
+
+    // }
+>>>>>>> deae9b076c00e6db959edc764db2e3dffb7aaef8
 
 
     const handlecharges = (e) => {

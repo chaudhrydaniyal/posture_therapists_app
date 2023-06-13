@@ -16,7 +16,7 @@ import Input from "app/components/UI Components/Input";
 import items from "app/components/Calendar/items";
 import { ceil, findLastKey } from "lodash";
 import { useFormik } from "formik"
-
+import { leaveValidation } from "app/components/Validation/ValidationSchema";
 const Container = styled("div")(({ theme }) => ({
   margin: "30px",
   [theme.breakpoints.down("sm")]: { margin: "16px" },
@@ -29,6 +29,7 @@ const Container = styled("div")(({ theme }) => ({
 const initialValue={
     doctorName : "",
     email:"",
+    gender:"",
     reason: "",
     dateFrom:"",
     dateTo:"",
@@ -38,11 +39,9 @@ const initialValue={
 }
 
 const LeaveForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [reason, setReason] = useState("");
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [calculatedDays, setCalculatedDays] = useState(0);
   const [docDetails, setDocDetails] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [disable, setDisable] = useState(true);
@@ -51,6 +50,7 @@ const LeaveForm = () => {
 
 const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useFormik({
     initialValues:initialValue,
+    validationSchema:leaveValidation,
     onSubmit:async(values,action)=>{
         try{
             const patientForm = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/patients', {
@@ -58,8 +58,9 @@ const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useF
                 email:docDetails.email,
                 specialization:docDetails.specialization,
                 mobile_no:docDetails.mobile_no,
-                dateFrom:values.dateFrom,
-                dateTo:values.dateTo,
+                gender:values.gender,
+                startDate:startDate,
+                endDate:endDate,
                 reason:values.reason,
                 leaveNature:values.leaveNature,
                 days:docDetails.days
@@ -69,9 +70,27 @@ const { values, errors, handleChange, handleBlur, touched, handleSubmit } = useF
         }catch(error){
 console.log("error",error)
         }
+        action.resetForm()
     }
 })
 
+
+const handleStartDateChange = (event) => {
+  setStartDate(event.target.value);
+};
+
+const handleEndDateChange = (event) => {
+  setEndDate(event.target.value);
+};
+
+
+const calculateDays = () => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const timeDifference = Math.abs(end.getTime() - start.getTime());
+  const days = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  setCalculatedDays(days);
+};
 
   useEffect(() => {
     axios
@@ -82,27 +101,20 @@ console.log("error",error)
       });
   }, []);
 
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [numberOfDays, setNumberOfDays] = useState(0);
+  useEffect(() => {
+    calculateDays();
+  }, [endDate]);
 
-  const handleFromDateChange = (event) => {
-    setFromDate(event.target.value);
-  };
 
-  const handleToDateChange = (event) => {
-    setToDate(event.target.value);
- 
-  };
-
-  const calculateDays = () => {
-    const newStartDate = new Date(fromDate);
-    const newEndDate = new Date(toDate);
+  // const calculateDays = () => {
+  //   const newStartDate = new Date(fromDate);
+  //   const newEndDate = new Date(toDate);
    
-    const one_day = 1000*60*60*24 
-    let result = Math.ceil((newEndDate.getDate()-newStartDate.getDate()));
-   setNumberOfDays(result)
-  };
+  //   const one_day = 1000*60*60*24 
+  //   let result = Math.ceil((newEndDate.getDate()-newStartDate.getDate()));
+  //  setNumberOfDays(result)
+  // };
+ 
   return (
     <Container>
       <Box className="breadcrumb">
@@ -113,13 +125,13 @@ console.log("error",error)
           <h5>DOCTOR LEAVE</h5>
           <div className="row" style={{ marginTop: "2rem" }}>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <label htmlFor="name">
+              <label htmlFor="doctorName">
                 <div>Name</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <Form.Select
-                name="doctorDetails"
+                name="doctorName"
                 onChange={(e) =>
                   setSelectedDoctor(
                     docDetails.filter((g) => g.id == e.target.value)[0]
@@ -127,7 +139,7 @@ console.log("error",error)
                 }
               >
                 <option value="none" selected disabled hidden>
-                  Choose Name
+                  Choose Doctor
                 </option>
                 {docDetails &&
                   docDetails.map((items, i) => (
@@ -136,10 +148,11 @@ console.log("error",error)
                     </option>
                   ))}
               </Form.Select>
+              {/* {errors.doctorName && touched.doctorName ? (<p style={{ color: "red" }}>{errors.doctorName}</p>) : null} */}
               {console.log("log details", selectedDoctor)}
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <label htmlFor="last_name">
+              <label htmlFor="email">
                 {" "}
                 <div>Email</div>
               </label>
@@ -166,6 +179,8 @@ console.log("error",error)
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <input
+              type="text"
+              name="gender"
                 value={selectedDoctor.gender}
                 style={{
                   width: "100%",
@@ -185,11 +200,11 @@ console.log("error",error)
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
               <input
-                value={selectedDoctor.specialization}
+                value={selectedDoctor.specialization === null ?"":selectedDoctor.specialization}
                 disabled={disable}
                 type="text"
-                name="specialization"
-                label="Specialization"
+                name="doctorName"
+               
                 style={{
                   width: "100%",
                   height: "2.5rem",
@@ -226,7 +241,7 @@ console.log("error",error)
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <Form.Select name="gender" value={values.leaveNature} onChange={handleChange}>
+              <Form.Select name="leaveNature" value={values.leaveNature} onChange={handleChange}>
                 <option>Leave Nature</option>
                 <option value="Sick">Sick</option>
                 <option value="Casual">Casual</option>
@@ -237,57 +252,38 @@ console.log("error",error)
               </Form.Select>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <label htmlFor="datefrom">
+              <label htmlFor="startDate">
                 {" "}
                 <div>From</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <Input
-                style={{ paddingLeft: "0.3rem" }}
-                type="date"
-                name="dateFrom"
-                value={values.dateFrom}
-                onChange={handleChange}
-              />
+              <input type="date" id="startDate" name="startDate" value={startDate} onChange={handleStartDateChange} />
             </div>
+            {errors.startDate && touched.startDate ? (<p style={{ color: "red" }}>{errors.startDate}</p>) : null}
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <label htmlFor="dateto">
+              <label htmlFor="endDate">
                 {" "}
                 <div>To</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <Input
-                style={{ paddingLeft: "0.3rem" }}
-                type="date"
-                name="dateTo"
-                value={values.dateTo}
-                onChange={() => {
-                  handleChange();
-                  calculateDays();
-                }}
-              />
+              <input type="date" id="endDate" name="endDate" value={endDate} onChange={handleEndDateChange} />
             </div>
+            {errors.endDate && touched.endDate ? (<p style={{ color: "red" }}>{errors.endDate}</p>) : null}
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label>
-                <div>Days</div>
+                <div>Total Days</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <input
-                style={{ paddingLeft: "0.3rem" }}
-                type="text"
-                name="totaldays"
-                label="0"
-                value={numberOfDays > 0 ? numberOfDays : ""} // Use 'days' instead of 'numberOfDays'
-              />
+              <p> {calculatedDays}</p>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <label htmlFor="Reason">
+              <label htmlFor="reason">
                 {" "}
                 <div>Reason</div>
               </label>
@@ -297,7 +293,7 @@ console.log("error",error)
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 type="text"
-                name="Reason"
+                name="reason"
                 label="Enter Reason"
                 value = {values.reason}
                 onChange = {handleChange}

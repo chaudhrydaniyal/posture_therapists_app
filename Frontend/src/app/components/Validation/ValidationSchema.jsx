@@ -14,8 +14,12 @@ const doctorValidation = Yup.object({
     mobile_no:Yup.number().required("Please Enter Doctor Mobile Number"),
     email:Yup.string().email().required("Please Enter Doctor Email"),
     cnic:Yup.string().required("Please Enter Doctor CNIC"),
-
-
 })
 
-export {patientValidation,doctorValidation}
+const leaveValidation = Yup.object({
+    doctorName:Yup.string().required("Please Choose Doctor Name"),
+    startDate:Yup.string().required("Please Enter From Date"),
+    endDate:Yup.string().required("Please Enter To Date")
+})
+
+export {patientValidation,doctorValidation,leaveValidation}

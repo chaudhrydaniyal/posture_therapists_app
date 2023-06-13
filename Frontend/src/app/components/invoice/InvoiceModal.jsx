@@ -9,7 +9,7 @@ import { BiPaperPlane, BiCloudDownload } from "react-icons/bi";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'
 import { MatxLogo } from 'app/components';
-
+import axios from 'axios';
 
 
 function GenerateInvoice() {
@@ -36,6 +36,7 @@ class InvoiceModal extends React.Component {
   }
 
   render() {
+
 
     return(
 
@@ -161,8 +162,32 @@ class InvoiceModal extends React.Component {
           <div className="pb-4 px-4">
             <Row>
               <Col md={6}>
-                <Button variant="primary" className="d-block w-100" onClick={GenerateInvoice}>
-                  <BiPaperPlane style={{width: '15px', height: '15px', marginTop: '-3px'}} className="me-2"/>Send Invoice
+                <Button variant="primary" className="d-block w-100" onClick={async()=>{
+                  try{
+                    await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/invoice/',{
+                      date:this.props.info.dateOfIssue,
+                      sub_total:this.props.subTotal,
+                      doctor:this.props.info.selectedDoctor.id,
+                      patient:this.props.info.selectedPatient.id,
+                      discount:this.props.discountAmmount,
+                      patient_visit_id:this.props.patient_visit_id,
+                      tax_rate:this.props.taxAmmount,
+                      items:this.props.items.map((item)=>({
+                        title: item.name,
+                        qty: item.quantity,
+                        price: item.price,
+                        description:item.description
+
+                      }))
+
+                    })
+
+                  } catch (error) {
+                    console.log("error",error)
+                  }
+
+                }}>
+                  <BiPaperPlane style={{width: '15px', height: '15px', marginTop: '-3px'}} className="me-2"/>save Invoice
                 </Button>
               </Col>
               <Col md={6}>
