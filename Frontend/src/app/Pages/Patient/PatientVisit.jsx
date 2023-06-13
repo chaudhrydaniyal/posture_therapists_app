@@ -44,7 +44,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     useEffect(() => {
         axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/current/').then((res) => {
 
-            setPatients(res.data.map((d) => ({ id: d.patientId, first_name: d.patient }))).catch(e => console.log("E", e));
+            console.log("resssss",res);setPatients(res.data.map((d) => ({ id: d.patientId, first_name: d.patient,last_name:d.patient_last_name }))).catch(e => console.log("E", e));
         })
     }, [])
 
@@ -108,13 +108,13 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
                         console.log("selected patient", selectedPatient)
                     }}>
-                        {patients.map((p) => <MenuItem value={p.id}>{p.first_name}</MenuItem>
+                        {patients.map((p) => <MenuItem value={p.id}>{p.first_name + " " + (p.last_name === null ? " " :p.last_name)}</MenuItem>
                         )}
 
                     </Select>
                     {!selectedPatient ? (<p style={{ color: "red" }}>Please Select Patient </p>) : null}
 
-
+{console.log("patientfull",patients)}
 
                     <h5>Personal Factors</h5>
 

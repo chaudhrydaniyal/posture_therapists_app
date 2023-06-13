@@ -5,8 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import InvoiceItem from './InvoiceItem';
-import InvoiceModal from './InvoiceModal';
+import InvoiceItemData from './InvoiceItemData';
+// import InvoiceModal from './InvoiceModal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const withRouter = WrappedComponent => props => {
 
 
 
-class Invoice extends React.Component {
+class InvoiceData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -135,16 +135,16 @@ class Invoice extends React.Component {
 
     onItemizedItemEdit(evt) {
 
-        const InvoiceItem = JSON.parse(evt.target.value)
+        const InvoiceItemData = JSON.parse(evt.target.value)
 
 
         var item = {
-            id: InvoiceItem.key,
-            serviceID : InvoiceItem.id,
-            name: InvoiceItem.service_name,
-            // value: InvoiceItem.value,
-            price: InvoiceItem.charges,
-            description: InvoiceItem.description,
+            id: InvoiceItemData.key,
+            serviceID : InvoiceItemData.id,
+            name: InvoiceItemData.service_name,
+            // value: InvoiceItemData.value,
+            price: InvoiceItemData.charges,
+            description: InvoiceItemData.description,
         };
 
 
@@ -191,9 +191,9 @@ class Invoice extends React.Component {
 
     render() {
 
-        console.log("received props", this)
-
+        
         return (<Form onSubmit={this.openModal}>
+            {console.log("received props", this.props)}
             <Row style={{marginLeft:"5px"}}>
                 <Col md={8} lg={9}>
                     <Card className="p-4 p-xl-5 my-3 my-xl-4">
@@ -201,17 +201,17 @@ class Invoice extends React.Component {
                             <div class="d-flex flex-column">
                                 <div className="d-flex flex-column">
                                     <div class="mb-2">
-                                        <span className="fw-bold">Current&nbsp;Date:&nbsp;</span>
-                                        <span className="current-date">{new Date().toLocaleDateString()}</span>
+                                        <span className="fw-bold">Due&nbsp;Date:&nbsp;</span>
+                                        <span className="current-date">{this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].date}</span>
                                     </div>
                                 </div>       
 
-                                <div className="d-flex flex-row align-items-center">
+                                {/* <div className="d-flex flex-row align-items-center">
                                     <span className="fw-bold d-block me-2">Due&nbsp;Date:</span>
                                     <Form.Control type="date" value={this.state.dateOfIssue} name={"dateOfIssue"} onChange={(event) => this.editField(event)} style={{
                                         maxWidth: '150px'
                                     }} required="required" />
-                                </div>
+                                </div> */}
                             </div>
                             <div className="d-flex flex-row align-items-center">
                                 <span className="fw-bold me-2">Invoice&nbsp;Number:&nbsp;</span>
@@ -232,10 +232,10 @@ class Invoice extends React.Component {
                                     <p></p>{d.first_name}
                                  ))}</Form.Control>
                                 */}
-                                <select
+                                {/* <select
                                     style={{ width: "100%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
-                                    // value={this.state.patientName}
-                                    // onChange={(e) => this.editField(e)}
+                                    value={this.state.patientName}
+                                    onChange={(e) => this.editField(e)}
                                     onChange={(e) => { console.log(e.target.value); this.setState({ selectedPatient: this.state.patientName.filter((g) => g.id == e.target.value)[0] }) }}
                                     name="patientName"
                                     value={this.props.params.state && this.state.selectedPatient.first_name}
@@ -251,13 +251,14 @@ class Invoice extends React.Component {
                                                 {d.first_name}
                                             </option>
                                         ))}
-                                </select>
+                                </select> */}
+                                 <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].patient_first_name} placeholder="patient Name.." disabled={this.state.disabled} />
                                 <br></br>
 
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
-                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.state.selectedPatient.email} placeholder="Email" disabled={this.state.disabled} /><br></br>
+                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].email} placeholder="Email" disabled={this.state.disabled} /><br></br>
                                 <br></br>
-                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }} value={this.state.selectedPatient.address} placeholder="Address" disabled={this.state.disabled} />
+                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }}  placeholder="Address" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].address} disabled={this.state.disabled} />
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" /> */}
 
                             </Col>
@@ -273,16 +274,17 @@ class Invoice extends React.Component {
                                 <Form.Label className="fw-bold">Doctor name:</Form.Label>
 
                                 <br></br>
+                                <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }}  placeholder="Address" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].doctor_first_name} disabled={this.state.disabled} />
                                 {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
                                  className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
                                     <p></p>{d.first_name}
                                  ))}</Form.Control>
                                 */}
-                                <select
+                                {/* <select
                                     style={{ width: "100%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
                                     // value={this.state.patientName}
                                     // onChange={(e) => this.editField(e)}
-                                    onChange={(e) => { this.setState({ selectedDoctor: this.state.doctorName.filter((g) => g.id == e.target.value)[0] }) }}
+                                  
                                     name="doctorName"
                                 >
                                     <option value="none" selected disabled hidden>
@@ -295,19 +297,20 @@ class Invoice extends React.Component {
                                                 {d.first_name}
                                             </option>
                                         ))}
-                                </select>
+                                </select> */}
                                 </Col>
                         </Row>
                         </div>
-                        <InvoiceItem onItemizedItemEdit={this.onItemizedItemEdit.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} currency={this.state.currency} items={this.state.items} />
+                        {console.log("send props",this.props.patient_invoice_data)}
+                        <InvoiceItemData onItemizedItemEdit={this.onItemizedItemEdit.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} invoice_item={this.props.patient_invoice_data && this.props.patient_invoice_data.length >0 && this.props.patient_invoice_data[0].invoice_items } />
 
                         <Row className="mt-4 justify-content-end">
                             <Col lg={6}>
-                                <div className="d-flex flex-row align-items-start justify-content-between">
+                                {/* <div className="d-flex flex-row align-items-start justify-content-between">
                                     <span className="fw-bold">Subtotal:
                                     </span>
                                     <span>{this.state.currency} &nbsp;
-                                        {this.state.subTotal}</span>
+                                        {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].sub_total}</span>
                                 </div>
                                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
                                     <span className="fw-bold">Discount: </span>
@@ -323,7 +326,7 @@ class Invoice extends React.Component {
                                         <span className="small ">({this.state.taxRate || 0}%) &nbsp;</span>
                                         {this.state.currency} &nbsp;
                                         {this.state.taxAmmount || 0}</span>
-                                </div>
+                                </div> */}
                                 <hr />
                                 <div className="d-flex flex-row align-items-start justify-content-between" style={{
                                     fontSize: '1.125rem'
@@ -331,7 +334,7 @@ class Invoice extends React.Component {
                                     <span className="fw-bold">Total:
                                     </span>
                                     <span className="fw-bold">{this.state.currency} &nbsp;
-                                        {this.state.total || 0}</span>
+                                        {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].sub_total || 0}</span>
                                 </div>
                             </Col>
                         </Row>
@@ -342,8 +345,8 @@ class Invoice extends React.Component {
                 </Col>
                 <Col md={4} lg={3}>
                     <div className="sticky-top pt-md-3 pt-xl-4">
-                        <Button variant="primary" type="submit" className="d-block w-100">Review Invoice</Button>
-                        <InvoiceModal showModal={this.state.isOpen} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmmount={this.state.taxRate} discountAmmount={this.state.discountRate} total={this.state.total} patient_visit_id={this.props.params.state.patient_visit_id} />
+                        {/* <Button variant="primary" type="submit" className="d-block w-100">Review Invoice</Button> */}
+                        {/* <InvoiceModal showModal={this.state.isOpen} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmmount={this.state.taxRate} discountAmmount={this.state.discountRate} total={this.state.total} patient_visit_id={this.props.params.state.patient_visit_id} /> */}
                         <Form.Group className="mb-3">
                             <Form.Label className="fw-bold">Currency:</Form.Label>
                             <Form.Select onChange={event => this.onCurrencyChange({ currency: event.target.value })} className="btn btn-light my-1" aria-label="Change Currency">
@@ -354,7 +357,7 @@ class Invoice extends React.Component {
                         <Form.Group className="my-3">
                             <Form.Label className="fw-bold">Tax rate:</Form.Label>
                             <InputGroup className="my-1 flex-nowrap">
-                                <Form.Control name="taxRate" type="number" value={this.state.taxRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00" />
+                                <Form.Control name="taxRate" type="number" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00" />
                                 <InputGroup.Text className="bg-light fw-bold text-secondary small">
                                     %
                                 </InputGroup.Text>
@@ -363,7 +366,7 @@ class Invoice extends React.Component {
                         <Form.Group className="my-3">
                             <Form.Label className="fw-bold">Discount rate:</Form.Label>
                             <InputGroup className="my-1 flex-nowrap">
-                                <Form.Control name="discountRate" type="number" value={this.state.discountRate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00" />
+                                <Form.Control name="discountRate" type="number" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].discount} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00" />
                                 <InputGroup.Text className="bg-light fw-bold text-secondary small">
                                     %
                                 </InputGroup.Text>
@@ -376,4 +379,4 @@ class Invoice extends React.Component {
     }
 }
 
-export default withRouter(Invoice);
+export default withRouter(InvoiceData);
