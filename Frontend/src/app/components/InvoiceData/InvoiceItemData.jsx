@@ -66,7 +66,7 @@ class InvoiceItemData extends React.Component {
           
               <TableCell align="left">ITEM</TableCell>
               {/* <th>QTY</th> */}
-              <TableCell align="center">DESCRIPTION</TableCell>
+              <TableCell align="left">DESCRIPTION</TableCell>
               <TableCell align="right">PRICE/RATE</TableCell>
            
               </TableRow>
@@ -96,7 +96,7 @@ class InvoiceItemData extends React.Component {
         // </div>
         <TableRow key={id}>
           <TableCell align="left">{g.item}</TableCell>
-          <TableCell align="center">{g.description}</TableCell>
+          <TableCell align="left">{g.description}</TableCell>
           <TableCell align="right">{g.price}</TableCell>
           </TableRow>
             )

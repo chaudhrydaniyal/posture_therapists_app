@@ -1,3 +1,5 @@
+const verifyJWT = require("../middleware/verifyJWT.JS");
+
 module.exports = (app, upload ) => {
 
   const user = require("../controllers/user.controller.js");
@@ -8,7 +10,7 @@ module.exports = (app, upload ) => {
   router.post("/",  user.create);
 
   // Retrieve all Tutorials
-  router.get("/", user.findAll);
+  router.get("/",verifyJWT, user.findAll);
 
   // Retrieve all published Tutorials
   router.get("/published", user.findAllPublished);

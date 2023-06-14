@@ -5,9 +5,11 @@
 //   DB: "sql12620096"
 // };
 
+
+
 module.exports = {
   HOST: "localhost",
-  USER: "root",
-  PASSWORD: "password",
-  DB: "postureapp"
+  USER: "sagaohje_mstackusr",
+  PASSWORD: "lqWGwX0n+S{;cOZvwam^6ua(",
+  DB: "sagaohje_mstack"
 };

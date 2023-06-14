@@ -211,14 +211,11 @@ const VisitDetails = () => {
                                             style={{ paddingLeft: '0.3rem' }}
                                             type="text"
                                             name="cardio_vascular_status"
-
                                             value={visitDetails.cardio_vascular_status}
                                             onChange={handleInput}
-
                                         />
                                     </div>
                                 </div>
-
                                 <h5 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h5>
                                 <div className="row" style={{ marginTop: "2rem" }}>
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -242,7 +239,6 @@ const VisitDetails = () => {
                                         <Input style={{ paddingLeft: '0.3rem' }} type="text" name="transfers" value={data.transfers} onChange={handleInput} />
                                     </div>
                                 </div>
-
                                 <div className="row">
                                     <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                         <label htmlFor="balance">
@@ -253,10 +249,8 @@ const VisitDetails = () => {
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         <Input
                                             style={{ paddingLeft: '0.3rem' }}
-
                                             type="text"
                                             name="balance"
-
                                             value={data.balance}
                                             onChange={handleInput}
                                         />
@@ -271,18 +265,12 @@ const VisitDetails = () => {
                                         {" "}
                                         <Input
                                             style={{ paddingLeft: '0.3rem' }}
-
                                             name="upper_limb_functions"
                                             type="text"
-
                                             value={data.upper_limb_functions}
                                             onChange={handleInput}
-
                                         />
-
                                     </div>
-
-
                                 </div>
 
                                 <div className="row">
@@ -295,13 +283,10 @@ const VisitDetails = () => {
                                     <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
                                         <Input
                                             style={{ paddingLeft: '0.3rem' }}
-
                                             type="text"
                                             name="daily_life_activities"
-
                                             value={data.daily_life_activities}
                                             onChange={handleInput}
-
                                         />
                                     </div>
 

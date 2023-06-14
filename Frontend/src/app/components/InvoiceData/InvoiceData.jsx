@@ -347,7 +347,7 @@ class InvoiceData extends React.Component {
                                     <span>
                                         <span className="small ">({this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].discount || 0}%) &nbsp;</span>
                                         {/* {this.state.currency} &nbsp; */}
-                                       RS {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].discount || 0}</span>
+                                       RS {this.props.patient_invoice_data[0] && (this.props.patient_invoice_data[0].discount / 100 ) * this.props.patient_invoice_data[0].sub_total || 0}</span>
                                 </div>
                                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
                                     <span className="fw-bold">Tax:
@@ -355,7 +355,7 @@ class InvoiceData extends React.Component {
                                     <span>
                                         <span className="small ">({this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate|| 0}%) &nbsp;</span>
                                         {/* {this.state.currency} &nbsp; */}
-                                       RS {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate || 0}</span>
+                                       RS {this.props.patient_invoice_data[0] && (this.props.patient_invoice_data[0].tax_rate / 100 ) * this.props.patient_invoice_data[0].sub_total || 0}</span>
                                 </div>
 
                                 <hr />
@@ -380,7 +380,7 @@ class InvoiceData extends React.Component {
                                         {
                                         this.props.patient_invoice_data[0] 
                                         && 
-                                        this.props.patient_invoice_data[0].sub_total 
+                                        this.props.patient_invoice_data[0].sub_total +  ((this.props.patient_invoice_data[0].tax_rate / 100 ) * this.props.patient_invoice_data[0].sub_total || 0) - ((this.props.patient_invoice_data[0].discount / 100 ) * this.props.patient_invoice_data[0].sub_total)
                                         || 0
                                         }
                                         </span>
