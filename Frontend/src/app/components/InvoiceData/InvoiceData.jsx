@@ -10,7 +10,7 @@ import InvoiceItemData from './InvoiceItemData';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 import { useLocation, useNavigate } from "react-router-dom";
-
+import moment from "moment";
 
 
 
@@ -118,10 +118,10 @@ class InvoiceData extends React.Component {
             subTotal: parseFloat(subTotal).toFixed(2)
         }, () => {
             this.setState({
-                taxAmmount: parseFloat(parseFloat(subTotal) * (this.state.taxRate / 100)).toFixed(2)
+                taxAmmount: parseFloat(parseFloat(subTotal) * (this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate / 100)).toFixed(2)
             }, () => {
                 this.setState({
-                    discountAmmount: parseFloat(parseFloat(subTotal) * (this.state.discountRate / 100)).toFixed(2)
+                    discountAmmount: parseFloat(parseFloat(subTotal) * (this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].discount / 100)).toFixed(2)
                 }, () => {
                     this.setState({
                         total: ((subTotal - this.state.discountAmmount) + parseFloat(this.state.taxAmmount))
@@ -201,8 +201,12 @@ class InvoiceData extends React.Component {
                             <div class="d-flex flex-column">
                                 <div className="d-flex flex-column">
                                     <div class="mb-2">
-                                        <span className="fw-bold">Due&nbsp;Date:&nbsp;</span>
-                                        <span className="current-date">{this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].date}</span>
+                                        <span className="fw-bold">
+                                            Due&nbsp;Date:&nbsp;
+                                            </span>
+                                        <span className="current-date">
+                                            {(moment(this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].date).utc().format('DD-MM-YYYY '))}
+                                            </span>
                                     </div>
                                 </div>       
 
@@ -213,25 +217,33 @@ class InvoiceData extends React.Component {
                                     }} required="required" />
                                 </div> */}
                             </div>
+
                             <div className="d-flex flex-row align-items-center">
                                 <span className="fw-bold me-2">Invoice&nbsp;Number:&nbsp;</span>
-                                <Form.Control type="number" value={this.state.invoiceNumber} name={"invoiceNumber"} onChange={(event) => this.editField(event)} min="1" style={{
+                                <Form.Control 
+                                type="number" value={this.state.invoiceNumber} name={"invoiceNumber"} 
+                                onChange={(event) => this.editField(event)} min="1" style={{
                                     maxWidth: '70px'
                                 }} required="required" />
                             </div>
                         </div>
+
                         <hr className="my-4" />
+
                         <div style={{display: "flex", flexWrap: 'wrap' ,justifyContent: "space-between", width: "100%", "@media screen (max-width: 600px)": {flexDirection: 'column',}}}>
+                        
                         <Row className="mb-5 col-xl-5">
                             <Col>
                                 <Form.Label className="fw-bold">Bill to:</Form.Label>
 
                                 <br></br>
+
                                 {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
                                  className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
                                     <p></p>{d.first_name}
                                  ))}</Form.Control>
                                 */}
+
                                 {/* <select
                                     style={{ width: "100%", height: "2.5rem", borderRadius: "6px", marginTop: "0.5rem" }}
                                     value={this.state.patientName}
@@ -252,29 +264,41 @@ class InvoiceData extends React.Component {
                                             </option>
                                         ))}
                                 </select> */}
+
                                  <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].patient_first_name} placeholder="patient Name.." disabled={this.state.disabled} />
                                 <br></br>
 
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Email address"} value={this.state.billToEmail} type="email" name="billToEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" /> */}
+                                
                                 <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", marginTop: "1.5rem", borderRadius: "6px", }} value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].email} placeholder="Email" disabled={this.state.disabled} /><br></br>
+                                
                                 <br></br>
+                                
                                 <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }}  placeholder="Address" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].address} disabled={this.state.disabled} />
+                                
                                 {/* <Form.Control style={{width:"50%"}} placeholder={"Billing address"} value={this.state.billToAddress} type="text" name="billToAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" /> */}
 
                             </Col>
+
                             {/* <Col>
                                 <Form.Label className="fw-bold">Bill from:</Form.Label>
                                 <Form.Control placeholder={"Who is this invoice from?"} rows={3} value={this.state.billFrom} type="text" name="billFrom" className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" />
                                 <Form.Control placeholder={"Email address"} value={this.state.billFromEmail} type="email" name="billFromEmail" className="my-2" onChange={(event) => this.editField(event)} autoComplete="email" required="required" />
                                 <Form.Control placeholder={"Billing address"} value={this.state.billFromAddress} type="text" name="billFromAddress" className="my-2" autoComplete="address" onChange={(event) => this.editField(event)} required="required" />
                             </Col> */}
+
                         </Row>
+
                         <Row className="mb-5 col-xl-4">
+
                             <Col>
+
                                 <Form.Label className="fw-bold">Doctor name:</Form.Label>
 
                                 <br></br>
+
                                 <input style={{ width: "100%", height: "2.5rem", border: "0.5px solid grey", borderRadius: "6px", }}  placeholder="Address" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].doctor_first_name} disabled={this.state.disabled} />
+
                                 {/* <Form.Control placeholder={"Who is this invoice to?"} rows={3} value={item} type="text" name="billTo"
                                  className="my-2" onChange={(event) => this.editField(event)} autoComplete="name" required="required" > {this.state.patientName && this.state.patientName.map((d)=>(
                                     <p></p>{d.first_name}
@@ -298,15 +322,21 @@ class InvoiceData extends React.Component {
                                             </option>
                                         ))}
                                 </select> */}
+
                                 </Col>
                         </Row>
+
                         </div>
+
                         {console.log("send props",this.props.patient_invoice_data)}
+
                         <InvoiceItemData onItemizedItemEdit={this.onItemizedItemEdit.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} invoice_item={this.props.patient_invoice_data && this.props.patient_invoice_data.length >0 && this.props.patient_invoice_data[0].invoice_items } />
 
                         <Row className="mt-4 justify-content-end">
+
                             <Col lg={6}>
-                                {/* <div className="d-flex flex-row align-items-start justify-content-between">
+
+                                <div className="d-flex flex-row align-items-start justify-content-between">
                                     <span className="fw-bold">Subtotal:
                                     </span>
                                     <span>{this.state.currency} &nbsp;
@@ -315,31 +345,57 @@ class InvoiceData extends React.Component {
                                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
                                     <span className="fw-bold">Discount: </span>
                                     <span>
-                                        <span className="small ">({this.state.discountRate || 0}%) &nbsp;</span>
-                                        {this.state.currency} &nbsp;
-                                        {this.state.discountAmmount || 0}</span>
+                                        <span className="small ">({this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].discount || 0}%) &nbsp;</span>
+                                        {/* {this.state.currency} &nbsp; */}
+                                       RS {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].discount || 0}</span>
                                 </div>
                                 <div className="d-flex flex-row align-items-start justify-content-between mt-2">
                                     <span className="fw-bold">Tax:
                                     </span>
                                     <span>
-                                        <span className="small ">({this.state.taxRate || 0}%) &nbsp;</span>
-                                        {this.state.currency} &nbsp;
-                                        {this.state.taxAmmount || 0}</span>
-                                </div> */}
-                                <hr />
-                                <div className="d-flex flex-row align-items-start justify-content-between" style={{
-                                    fontSize: '1.125rem'
-                                }}>
-                                    <span className="fw-bold">Total:
-                                    </span>
-                                    <span className="fw-bold">{this.state.currency} &nbsp;
-                                        {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].sub_total || 0}</span>
+                                        <span className="small ">({this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate|| 0}%) &nbsp;</span>
+                                        {/* {this.state.currency} &nbsp; */}
+                                       RS {this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate || 0}</span>
                                 </div>
+
+                                <hr />
+
+                                <div className="d-flex flex-row align-items-start justify-content-between"
+                                 style={{
+                                    fontSize: '1.125rem'
+                                }}
+                                >
+
+                                    <span className="fw-bold">
+
+                                        Total:
+
+                                    </span>
+
+                                    <span className="fw-bold">
+                                        {
+                                        this.state.currency
+                                        } 
+                                        &nbsp;
+                                        {
+                                        this.props.patient_invoice_data[0] 
+                                        && 
+                                        this.props.patient_invoice_data[0].sub_total 
+                                        || 0
+                                        }
+                                        </span>
+                                </div>
+
                             </Col>
+
                         </Row>
+
                         <hr className="my-4" />
-                        <Form.Label className="fw-bold">Notes:</Form.Label>
+
+                        <Form.Label className="fw-bold">
+                            Notes:
+                            </Form.Label>
+                        
                         <Form.Control placeholder="Thanks for your business!" name="notes" value={this.state.notes} onChange={(event) => this.editField(event)} as="textarea" className="my-2" rows={1} />
                     </Card>
                 </Col>
@@ -357,7 +413,9 @@ class InvoiceData extends React.Component {
                         <Form.Group className="my-3">
                             <Form.Label className="fw-bold">Tax rate:</Form.Label>
                             <InputGroup className="my-1 flex-nowrap">
-                                <Form.Control name="taxRate" type="number" value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00" />
+                                <Form.Control name="taxRate" 
+                                type="number" 
+ value={this.props.patient_invoice_data[0] && this.props.patient_invoice_data[0].tax_rate} onChange={(event) => this.editField(event)} className="bg-white border" placeholder="0.0" min="0.00" step="0.01" max="100.00" />
                                 <InputGroup.Text className="bg-light fw-bold text-secondary small">
                                     %
                                 </InputGroup.Text>
