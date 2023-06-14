@@ -73,17 +73,12 @@ Invoice.findById = (id, result) => {
     if (res.length) {
 
         const finalResult = await Promise.all(res.map(async (r)=> {
-        
+
         const  invoice_items =  await query(`SELECT * FROM invoice_items WHERE invoice = ${r.id}`)
-
-        return ({ ...r, invoice_items: invoice_items})
-            
+        return ({ ...r, invoice_items: invoice_items})  
       }))
-
-      console.log("final result test", finalResult)
-    
+      console.log("final result test", finalResult)  
       result(null, finalResult);
-
       return;
     }
     // not found Tutorial with the id
@@ -94,11 +89,13 @@ Invoice.findById = (id, result) => {
 };
 
 Invoice.getAll =  (title, result) => {
+
   let query = "SELECT * FROM patients";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
   }
+
   const allp =  sql.query(query, (err, res) => {
 
     if (err) {
@@ -109,26 +106,19 @@ Invoice.getAll =  (title, result) => {
 
     result(null, res);
 
-
-
   });
-
 
 };
 
 Invoice.getAllPublished = result => {
-
   sql.query("SELECT * FROM patients WHERE published=true", (err, res) => {
-
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
-
     console.log("invoice: ", res);
     result(null, res);
-
   });
 };
 
@@ -144,13 +134,11 @@ Invoice.updateById = (id, invoice, result) => {
         result(null, err);
         return;
       }
-
       if (res.affectedRows == 0) {
         // not found Tutorial with the id
         result({ kind: "not_found" }, null);
         return;
       }
-
       console.log("updated invoice: ", { id: id, ...invoice });
       result(null, { id: id, ...invoice });
     }
@@ -158,7 +146,9 @@ Invoice.updateById = (id, invoice, result) => {
 };
 
 Invoice.remove = (id, result) => {
+
   sql.query("DELETE FROM patients WHERE id = ?", id, (err, res) => {
+
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -172,20 +162,23 @@ Invoice.remove = (id, result) => {
     }
 
     console.log("deleted patients with id: ", id);
+
     result(null, res);
   });
 };
 
 Invoice.removeAll = result => {
+
   sql.query("DELETE FROM patients", (err, res) => {
+
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} patients`);
     result(null, res);
+
   });
 };
 
