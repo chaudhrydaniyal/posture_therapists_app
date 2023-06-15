@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Box,
   Icon,
@@ -12,10 +12,9 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 // import { Link } from 'react-router-dom'
-import { Breadcrumb, SimpleCard } from 'app/components';
-
+import { Breadcrumb, SimpleCard } from "app/components";
 
 // import Sonnet from '../../components/Sonnet';
 
@@ -29,18 +28,17 @@ const StyledTable = styled(Table)(() => ({
   },
 }));
 
-const Container = styled('div')(({ theme }) => ({
-  margin: '30px',
-  [theme.breakpoints.down('sm')]: { margin: '16px' },
-  '& .breadcrumb': {
-    marginBottom: '30px',
-    [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
-  }
+const Container = styled("div")(({ theme }) => ({
+  margin: "30px",
+  [theme.breakpoints.down("sm")]: { margin: "16px" },
+  "& .breadcrumb": {
+    marginBottom: "30px",
+    [theme.breakpoints.down("sm")]: { marginBottom: "16px" },
+  },
 }));
 
-
 const RegisteredDoctors = () => {
-  const [doctors, setDoctors] = useState([])
+  const [doctors, setDoctors] = useState([]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -55,22 +53,24 @@ const RegisteredDoctors = () => {
   };
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/').then((res) => setDoctors(res.data))
-  }, [])
+    axios
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/users/")
+      .then((res) => setDoctors(res.data));
+  }, []);
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Available Doctors' }]} />
+        <Breadcrumb routeSegments={[{ name: "Available Doctors" }]} />
       </Box>
 
-      <div className='card'>
-        <div className='card-body'>
-
-
+      <div className="card">
+        <div className="card-body">
           <StyledTable>
             <TableHead>
               <TableRow>
-                <TableCell align="left" width={50}>Sr</TableCell>
+                <TableCell align="left" width={50}>
+                  Sr
+                </TableCell>
                 <TableCell align="left">First Name</TableCell>
                 <TableCell align="left">Last Name</TableCell>
                 <TableCell align="center">CNIC</TableCell>
@@ -89,27 +89,34 @@ const RegisteredDoctors = () => {
                     <TableCell align="left">{items.surname}</TableCell>
                     <TableCell align="center">{items.cnic}</TableCell>
                     <TableCell align="center">{items.mobile_no}</TableCell>
-                    <TableCell align="center">{items.practitioner_type}</TableCell>
-                    <TableCell align="right"><Link
-                      to="/registeredDoctors/doctordetails"
-                      state={{ doctors: items }}
-
-                      style={{ textDecoration: "none" }}
-                    >
-                      <button
-                        style={{ padding: "0.2rem", border: "0.1px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }}
-                        variant="success"
+                    <TableCell align="center">
+                      {items.practitioner_type}
+                    </TableCell>
+                    <TableCell align="right">
+                      <Link
+                        to="/registeredDoctors/doctordetails"
+                        state={{ doctors: items }}
+                        style={{ textDecoration: "none" }}
                       >
-                        Details
-                      </button>
-                    </Link>
-
+                        <button
+                          style={{
+                            padding: "0.2rem",
+                            border: "0.1px solid grey",
+                            borderRadius: "5px",
+                            fontWeight: "bold",
+                            background: "#365CAD",
+                            color: "white",
+                          }}
+                          variant="success"
+                        >
+                          Details
+                        </button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
           </StyledTable>
-
 
           <TablePagination
             sx={{ px: 2 }}
@@ -126,9 +133,7 @@ const RegisteredDoctors = () => {
         </div>
       </div>
     </Container>
+  );
+};
 
-
-  )
-}
-
-export default RegisteredDoctors
+export default RegisteredDoctors;
