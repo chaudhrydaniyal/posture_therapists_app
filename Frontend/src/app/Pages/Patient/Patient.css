@@ -1,25 +1,21 @@
-.input_width{
+.input_width {
   width: 100%;
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
 }
-.input_border{
+.input_border {
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
   /* border-bottom: 0.5px; */
-
 }
-
 
 .tabs {
   position: relative;
   margin: 3rem 0;
   background: #1abc9c;
   height: 14.75rem;
- 
-
 }
 .tabs::before,
 .tabs::after {
@@ -44,11 +40,8 @@
   /* background: #1abc9c; */
   /* border-right: 0.125rem solid #16a085; */
 
-
   background: #1976d2;
 
-
-  
   color: #fff;
   cursor: pointer;
   top: 0;
@@ -77,8 +70,6 @@
   border-bottom: 0;
   border-right: 0.125rem solid #fff;
 
-
-  
   /* transition: all 0.35s; */
   z-index: 1;
   top: -0.0625rem;
@@ -88,5 +79,3 @@
   opacity: 1;
   /* transition: all 0.35s; */
 }
-
-
