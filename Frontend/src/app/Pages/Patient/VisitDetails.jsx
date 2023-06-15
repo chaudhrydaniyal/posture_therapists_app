@@ -473,47 +473,71 @@ const VisitDetails = () => {
                       <tr>
                         <td>Other medical consideration?</td>
 
-                                                <td><Input style={{ width: '100%', paddingLeft: '0.3rem' }} name="OtherMedicalConsiderations" /></td>
-                                            </tr>
-                                        </tbody>
-                                        <div style={{ marginTop: '2rem' }}>
-                                            <audio controls>
-                                                <source src={process.env.REACT_APP_ORIGIN_URL + `${data.audioFile}`} type="audio/ogg" />
-                                                {console.log("audioFile", data.audioFile)}
+                        <td>
+                          <Input
+                            style={{ width: "100%", paddingLeft: "0.3rem" }}
+                            name="OtherMedicalConsiderations"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                    <div style={{ marginTop: "2rem" }}>
+                      <audio controls>
+                        <source
+                          src={
+                            process.env.REACT_APP_ORIGIN_URL +
+                            `${data.audioFile}`
+                          }
+                          type="audio/ogg"
+                        />
+                        {console.log("audioFile", data.audioFile)}
+                      </audio>
+                    </div>
+                  </Table>
+                </div>
+                <div id="AudioRecorder">
+                  {/* <Button style={{ marginTop: "1rem", color: "red" }}>
+                    Stop recording
+                  </Button> */}
+                </div>
+                <div style={{display:"flex",justifyContent:"center"}}>
+              
+                <h6>
+                BODY PAIN DIAGRAM<br></br>
+                </h6><br></br>
+                </div>
+                <div style={{display:"flex",justifyContent:"center"}}>
+                <p>Marks where patient felt the described sensations.</p>
+                </div>
+                <div style={{display:"flex",justifyContent:"center"}}>
+              
+                <div style={{ width: "4in", height: "5in", marginTop: "2rem" }}>
+                  <ImageMarker
+                    src={complete_body}
+                    markers={data.physicalAssessment.map((item) => ({
+                      top: item.x_coordinate,
+                      left: item.y_coordinate,
+                      id: item.id,
+                    }))}
+                  />
+                </div>
+                </div>
+              </div>
+            </div>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="3">
+          <Accordion.Header>Invoice</Accordion.Header>
+          <Accordion.Body>
+            
+          <div style={{display:"flex",justifyContent:"center"}}>
+            <InvoiceData patient_invoice_data={invoiceData} />
+         </div>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    </Container>
+  );
+};
 
-                                            </audio>
-                                        </div>
-                                    </Table>
-                                </div>
-                                <div id='AudioRecorder'>
-                                    {/* <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button> */}
-                                </div>
-                                    <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
-                                <div style={{ width: "4in", height: "5in", marginTop: "2rem" }}>
-                                    <ImageMarker
-                                  
-                                        src={complete_body}
-                                        markers={data.physicalAssessment.map(item => ({
-                                            top: item.x_coordinate,
-                                            left: item.y_coordinate,
-                                            id: item.id
-                                          }))}
-
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="3">
-                    <Accordion.Header>Invoice</Accordion.Header>
-                    <Accordion.Body>
-                        
-<InvoiceData patient_invoice_data={invoiceData}/>
-
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-        </Container>
-    )
-}
+export default VisitDetails;

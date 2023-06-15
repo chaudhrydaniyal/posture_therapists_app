@@ -90,8 +90,11 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
         <div className="card-body">
           <h5>Select the patient:</h5>
 
-                    <Select size="small" style={{ width: 600, margin: "30px" }} onChange={(e) => {
-                        setSelectedPatient(e.target.value)
+          <Select
+            size="small"
+            style={{ width: 600, margin: "30px" }}
+            onChange={(e) => {
+              setSelectedPatient(e.target.value);
 
               values.patient = e.target.value;
 
@@ -110,6 +113,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <p style={{ color: "red" }}>Please Select Patient </p>
           ) : null}
 
+          {console.log("patientfull", patients)}
 
           <h5>Personal Factors</h5>
 
@@ -156,56 +160,63 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
             </div>
 
-                        <div className="row">
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="remarks">
-                                    {" "}
-                                    <div>Remarks:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <Input
-                                    style={{ paddingLeft: '0.3rem' }}
-                                    type="text"
-                                    name="remarks"
-                                    label="Remarks"
-
-                                    defaultValue={values.remarks}
-                                    onChange={handleFormData("remarks")}
-
-
-                                />
-                            </div>
-
-
-
-                        </div>
-                        <h5 style={{ marginTop: '1rem' }}>Body Structure And Function Impairments   </h5>
-                        <div className="row" style={{ marginTop: "2rem" }}>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="AssTrauma_diseases">
-                                    {" "}
-                                    <div>Ass.trauma & Disease:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
-                                {" "}
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="AssTrauma_diseases" label="Ass.trauma & disease" defaultValue={values.AssTrauma_diseases} onChange={handleFormData("AssTrauma_diseases")} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="ROMstatus">
-                                    {" "}
-                                    <div>R.O.M status:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                {" "}
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="ROMstatus" label="R.O.M status" defaultValue={values.ROMstatus} onChange={handleFormData("ROMstatus")} />
-
-                            </div>
-
-
-                        </div>
+            <div className="row">
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="remarks">
+                  {" "}
+                  <div>Remarks:</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                <Input
+                  style={{ paddingLeft: "0.3rem" }}
+                  type="text"
+                  name="remarks"
+                  label="Remarks"
+                  defaultValue={values.remarks}
+                  onChange={handleFormData("remarks")}
+                />
+              </div>
+            </div>
+            <h5 style={{ marginTop: "1rem" }}>
+              Body Structure And Function Impairments{" "}
+            </h5>
+            <div className="row" style={{ marginTop: "2rem" }}>
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="AssTrauma_diseases">
+                  {" "}
+                  <div>Ass.trauma & Disease:</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                {" "}
+                <Input
+                  style={{ paddingLeft: "0.3rem" }}
+                  type="text"
+                  name="AssTrauma_diseases"
+                  label="Ass.trauma & disease"
+                  defaultValue={values.AssTrauma_diseases}
+                  onChange={handleFormData("AssTrauma_diseases")}
+                />
+              </div>
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="ROMstatus">
+                  {" "}
+                  <div>R.O.M status:</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                {" "}
+                <Input
+                  style={{ paddingLeft: "0.3rem" }}
+                  type="text"
+                  name="ROMstatus"
+                  label="R.O.M status"
+                  defaultValue={values.ROMstatus}
+                  onChange={handleFormData("ROMstatus")}
+                />
+              </div>
+            </div>
 
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -263,32 +274,45 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
             </div>
 
-                        <h5 style={{ marginTop: '1rem' }}>Activity Limitations & Participation Restriction  </h5>
-                        <div className="row" style={{ marginTop: "2rem" }}>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="general_mobility">
-                                    {" "}
-                                    <div>General Mobility(gait):</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3" >
-                                {" "}
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="general_mobility" label="General mobility" defaultValue={values.general_mobility} onChange={handleFormData("general_mobility")} />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="transfers">
-                                    {" "}
-                                    <div>Transfers:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                {" "}
-                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="transfers" label="Transfers" defaultValue={values.transfers} onChange={handleFormData("transfers")} />
-
-                            </div>
-
-
-                        </div>
+            <h5 style={{ marginTop: "1rem" }}>
+              Activity Limitations & Participation Restriction{" "}
+            </h5>
+            <div className="row" style={{ marginTop: "2rem" }}>
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="general_mobility">
+                  {" "}
+                  <div>General Mobility(gait):</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                {" "}
+                <Input
+                  style={{ paddingLeft: "0.3rem" }}
+                  type="text"
+                  name="general_mobility"
+                  label="General mobility"
+                  defaultValue={values.general_mobility}
+                  onChange={handleFormData("general_mobility")}
+                />
+              </div>
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="transfers">
+                  {" "}
+                  <div>Transfers:</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                {" "}
+                <Input
+                  style={{ paddingLeft: "0.3rem" }}
+                  type="text"
+                  name="transfers"
+                  label="Transfers"
+                  defaultValue={values.transfers}
+                  onChange={handleFormData("transfers")}
+                />
+              </div>
+            </div>
 
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -360,8 +384,8 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                     </Form>
                 </div>
             </div>
-            </div>
+        </div>
     )
 }
 
-export default PatientVisit   
+export default PatientVisit     

@@ -514,85 +514,132 @@ const PatientPrescription = ({
               </div>
             </div>
 
-                        <div className="row">
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="AnticipatedFrequencyDuration">
-                                    {" "}
-                                    <div>Anticipated-Frequency-Duration:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
-                                    type="text"
-                                    name="AnticipatedFrequencyDuration"
-                                    placeholder="Anticipated-Frequency-Duration..."
-                                    className="input_width"
-                                    value={prescriptionDetails.AnticipatedFrequencyDuration}
-                                    onChange={handleInput}
-                                />
-                            </div>
-                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <label htmlFor="Special-Instructions">
-                                    {" "}
-                                    <div>Special-Instructions:</div>
-                                </label>
-                            </div>
-                            <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                                <input
-                                    type="text"
-                                    name="SpecialInstructions"
-                                    placeholder="SpecialInstructions..."
-                                    className="input_width"
-                                    value={prescriptionDetails.SpecialInstructions}
-                                    onChange={handleInput}
-                                />
-                            </div>
-                        </div>
-                        <div style={{ marginTop: '2rem' }}>
+            <div className="row">
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="AnticipatedFrequencyDuration">
+                  {" "}
+                  <div>Anticipated-Frequency-Duration:</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                <Input
+                  type="text"
+                  name="AnticipatedFrequencyDuration"
+                  label="Anticipated-Frequency-Duration"
 
-                            <Table bordered >
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: '20%' }}>Precaution</th>
-                                        <th>If yes, Please describe/define </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Weight bearing precaution?</td>
-                                        <td><input className='input_border' style={{ width: '100%' }} name="WeightBearingPrecautions" value={prescriptionDetails.WeightBearingPrecautions} onChange={handleInput} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Activity restrictions?</td>
-                                        <td><input className='input_border' style={{ width: '100%' }} name="ActivityRestrictions" value={prescriptionDetails.ActivityRestrictions} onChange={handleInput} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Other medical consideration?</td>
-                                        <td><input className='input_border' style={{ width: '100%' }} name="OtherMedicalConsiderations" onChange={handleInput} /></td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </div>
-                        <div id='AudioRecorder'>
-                            <AudioRecorder
-                                onRecordingComplete={(blob) => addAudioElement(blob)}
-                                recorderControls={recorderControls}
-                            />
-                            {/* <Button style={{ marginTop: '3rem', color: 'red' }} onClick={recorderControls.stopRecording}>Stop recording</Button> */}
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
-                            <Button color="primary" variant="contained" onClick={prevStep} style={{ marginRight: '2rem' }}>
-                                Previous
-                            </Button>
-
-                            <Button color="primary" variant="contained" type="submit" onClick={() => { handleSubmit(); }}>
-                                <Icon>send</Icon>
-                                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
-                            </Button>
-                        </div>
-                    </Form>
-                </div>
+                  value={prescriptionDetails.AnticipatedFrequencyDuration}
+                  onChange={handleInput}
+                />
+              </div>
+              <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                <label htmlFor="Special-Instructions">
+                  {" "}
+                  <div>Special-Instructions:</div>
+                </label>
+              </div>
+              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+                <Input
+                  type="text"
+                  name="SpecialInstructions"
+                  label="Special_Instructions"
+                 
+                  value={prescriptionDetails.SpecialInstructions}
+                  onChange={handleInput}
+                />
+              </div>
             </div>
+            <div style={{ marginTop: "2rem" }}>
+              <Table bordered>
+                <thead>
+                  <tr>
+                    <th style={{ width: "20%" }}>Precaution</th>
+                    <th>If yes, Please describe/define </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Weight bearing precaution?</td>
+                    <td>
+                      <Input
+                
+                        style={{ width: "100%" }}
+                        name="WeightBearingPrecautions"
+                        value={prescriptionDetails.WeightBearingPrecautions}
+                        onChange={handleInput}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Activity restrictions?</td>
+                    <td>
+                      <Input
+      
+                        style={{ width: "100%" }}
+                        name="ActivityRestrictions"
+                        value={prescriptionDetails.ActivityRestrictions}
+                        onChange={handleInput}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Other medical consideration?</td>
+                    <td>
+                      <Input
+                 
+                        style={{ width: "100%" }}
+                        name="OtherMedicalConsiderations"
+                        onChange={handleInput}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+            <div id="AudioRecorder" style={{marginTop:"3rem"}}>
+              <AudioRecorder
+                onRecordingComplete={(blob) => addAudioElement(blob)}
+                recorderControls={recorderControls}
+              />
+              <Button
+                style={{ marginTop: "3rem", color: "red" }}
+                onClick={recorderControls.stopRecording}
+              >
+                Stop recording
+              </Button>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "1rem",
+              }}
+            >
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={prevStep}
+                style={{ marginRight: "2rem" }}
+              >
+                Previous
+              </Button>
+
+              <Button
+                color="primary"
+                variant="contained"
+                type="submit"
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
+                <Icon>send</Icon>
+                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
+              </Button>
+            </div>
+          </Form>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
+
+export default PatientPrescription;

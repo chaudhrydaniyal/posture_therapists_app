@@ -116,18 +116,21 @@ class ItemRow extends React.Component {
 
             {console.log("selected service", this.state.selectedService)}
 
-            <input style={{ height: '2.5rem', marginLeft: '1rem', width: '50%', borderRadius: "6px" }} placeholder='Description' value={this.state.selectedService.description ? this.state.selectedService.description : ""} disabled={this.state.disabled} />
-
-            {/* <EditableField
-          style={{height:'2rem',marginLeft:'1rem'}}
-            onItemizedItemEdit={this.props.onItemizedItemEdit}
-            cellData={{
-            type: "text",
-            name: "description",
-            placeholder: "Item description",
-            value: this.props.item.description,
-            id: this.props.item.id
-          }}/> */}
+            <input
+              style={{
+                height: "2.5rem",
+                marginLeft: "1rem",
+                width: "50%",
+                borderRadius: "6px",
+              }}
+              placeholder="Discription"
+              value={
+                this.state.selectedService.description
+                  ? this.state.selectedService.description
+                  : ""
+              }
+              disabled={this.state.disabled}
+            />
           </div>
         </td>
 
