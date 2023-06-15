@@ -26,6 +26,7 @@ Invoice.create = (invoice,  result) => {
   delete invoice.items;
 
   sql.query("INSERT INTO invoice SET ?", invoice, (err, res) => {
+    
     if (err) {
       console.log("error:", err);
       result(err, null);
@@ -103,21 +104,16 @@ Invoice.getAll =  (title, result) => {
       result(null, err);
       return;
     }
-
     result(null, res);
-
   });
-
 };
 
 Invoice.getAllPublished = result => {
   sql.query("SELECT * FROM patients WHERE published=true", (err, res) => {
     if (err) {
-      console.log("error: ", err);
       result(null, err);
       return;
     }
-    console.log("invoice: ", res);
     result(null, res);
   });
 };
@@ -150,7 +146,6 @@ Invoice.remove = (id, result) => {
   sql.query("DELETE FROM patients WHERE id = ?", id, (err, res) => {
 
     if (err) {
-      console.log("error: ", err);
       result(null, err);
       return;
     }
@@ -161,10 +156,10 @@ Invoice.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted patients with id: ", id);
-
     result(null, res);
+
   });
+
 };
 
 Invoice.removeAll = result => {
@@ -180,6 +175,9 @@ Invoice.removeAll = result => {
     result(null, res);
 
   });
+
 };
+
+
 
 module.exports = Invoice;

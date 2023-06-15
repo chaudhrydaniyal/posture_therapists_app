@@ -1,5 +1,8 @@
+require("dotenv").config();
+
 const User = require("../models/user.model.js");
 const { hash: hashPassword, compare: comparePassword } = require('../utils/password');
+const jwt = require("jsonwebtoken")
 
 // const bcrypt = require('bcrypt')
 
@@ -14,15 +17,10 @@ exports.signin = (req, res) => {
   }
 
   const { email, password } = req.body;
-  console.log("req.body", req.body)
 
   User.findByEmail(email.trim(), async (err, data) => {
 
-    console.log("data", data)
-
     if (err) {
-
-
       if (err.kind === "not_found") {
         res.status(404).send({
           status: 'error',
@@ -35,76 +33,37 @@ exports.signin = (req, res) => {
         message: err.message
       });
       return;
-
     }
 
-
-
-
-
-
-
     if (data) {
-      if (
-        
-        
-        // await bcrypt.compare(password, data.password)
-        true
-        
-        ) {
+
+      const user = {email: data.email}
+
+      const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+     
         // const token = generateToken(data.id);
         res.status(200).send({
           status: 'success',
+          accessToken: accessToken,
           data: {
-            // token,
-            // firstname: data.firstname,
-            // lastname: data.lastname,
-            // email: data.email
-
-
             age: 25,
             avatar: "/assets/images/face-6.jpg",
             email: data.email,
             id: data.id,
-
             name: data.first_name,
             role: data.role,
             username: data.surname
-
-
-
-
-
-
-
-
           }
         });
         return;
-      }
-      res.status(401).send({
-        status: 'error',
-        message: 'Incorrect password'
-      });
     }
+
+    res.status(401).send({
+      status: 'error',
+      message: 'Incorrect password'
+    });
+
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 };
 
