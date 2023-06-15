@@ -443,7 +443,7 @@ const VisitDetails = () => {
                                     </Table>
                                 </div>
                                 <div id='AudioRecorder'>
-                                    <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button>
+                                    {/* <Button style={{ marginTop: '1rem', color: 'red' }} >Stop recording</Button> */}
                                 </div>
                                     <h6 >PHYSICAL ASSESSMENT<br></br>SEE  DIAGRAM</h6>
                                 <div style={{ width: "4in", height: "5in", marginTop: "2rem" }}>

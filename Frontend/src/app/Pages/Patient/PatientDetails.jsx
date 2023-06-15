@@ -83,23 +83,23 @@ const PatientDetails = () => {
         mobile_no: patientData.mobile_no,
         email: patientData.email,
         occupation: patientData.occupation,
-        designation:patientData.designation,
+        designation: patientData.designation,
         cnic: patientData.cnic,
         physiotherapist_seen_before: patientData.physiotherapist_seen_before,
-        not_happy:patientData.not_happy,
-        most_happy:patientData.most_happy,
-        today_session:patientData.today_session,
-        stopping_you:patientData.stopping_you,
-        fixed_now:patientData.fixed_now,
-        blood_group:patientData.blood_group,
-        medical_status:patientData.medical_status,
-        emergency_contact_person:patientData.emergency_contact_person,
-        emergency_person_relation:patientData.emergency_person_relation,
-        emergency_person_mobile:patientData.emergency_person_mobile,
-        country:patientData.country,
-        state:patientData.state,
-        city:patientData.city,
-        
+        not_happy: patientData.not_happy,
+        most_happy: patientData.most_happy,
+        today_session: patientData.today_session,
+        stopping_you: patientData.stopping_you,
+        fixed_now: patientData.fixed_now,
+        blood_group: patientData.blood_group,
+        medical_status: patientData.medical_status,
+        emergency_contact_person: patientData.emergency_contact_person,
+        emergency_person_relation: patientData.emergency_person_relation,
+        emergency_person_mobile: patientData.emergency_person_mobile,
+        country: patientData.country,
+        state: patientData.state,
+        city: patientData.city,
+
     });
     const openPatientInformation = () => {
         setPatientInformation(true)
@@ -142,22 +142,22 @@ const PatientDetails = () => {
                     mobile_no: data.mobile_no,
                     email: data.email,
                     occupation: data.occupation,
-                    designation:data.designation,
+                    designation: data.designation,
                     cnic: data.cnic,
                     physiotherapist_seen_before: data.physiotherapist_seen_before,
-                    not_happy:data.not_happy,
-                    most_happy:data.most_happy,
-                    today_session:data.today_session,
-                    stopping_you:data.stopping_you,
-                    fixed_now:data.fixed_now,
-                    blood_group:data.blood_group,
-                    medical_status:data.medical_status,
-                    emergency_contact_person:data.emergency_contact_person,
-                    emergency_person_relation:data.emergency_person_relation,
-                    emergency_person_mobile:data.emergency_person_mobile,
-                    country:data.country,
-                    state:data.state,
-                    city:data.city,
+                    not_happy: data.not_happy,
+                    most_happy: data.most_happy,
+                    today_session: data.today_session,
+                    stopping_you: data.stopping_you,
+                    fixed_now: data.fixed_now,
+                    blood_group: data.blood_group,
+                    medical_status: data.medical_status,
+                    emergency_contact_person: data.emergency_contact_person,
+                    emergency_person_relation: data.emergency_person_relation,
+                    emergency_person_mobile: data.emergency_person_mobile,
+                    country: data.country,
+                    state: data.state,
+                    city: data.city,
                 })
 
             NotificationManager.success("Successfully Updated");
@@ -224,7 +224,7 @@ const PatientDetails = () => {
 
             <br />
             <br />
-           
+
 
 
 
@@ -256,10 +256,10 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <Input style={{ paddingLeft: '0.3rem' }} type="text" name="first_name" value={data.first_name} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="last_name">
@@ -270,10 +270,10 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <Input style={{ paddingLeft: '0.3rem' }} type="text" name="last_name" value={data.last_name} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
 
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -285,10 +285,10 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <Form.Select name="gender" class="form-control dropdown" value={data.blood_group} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  >
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }}  >
                                     <option
                                         value=""
                                         selected="selected"
@@ -323,10 +323,10 @@ const PatientDetails = () => {
                                     value={data.date_of_birth}
                                     onChange={(e) => { handleInput(e); ageCalculator(e) }}
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -351,10 +351,10 @@ const PatientDetails = () => {
                                     value={data.age}
                                     onChange={handleInput}
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 />
 
                             </div>
@@ -367,10 +367,10 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 {" "}
                                 <Form.Select name="gender" class="form-control dropdown" value={data.gender} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  >
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }}  >
                                     <option
                                         value=""
                                         selected="selected"
@@ -394,7 +394,7 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
 
-{console.log("country",Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0])}
+                                {console.log("country", Country.getAllCountries().filter((f) => f.name == selectedCountry)[0])}
 
                                 <Select
                                     options={Country.getAllCountries()}
@@ -404,15 +404,15 @@ const PatientDetails = () => {
                                     getOptionValue={(options) => {
                                         return options["name"];
                                     }}
-                                    value={Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]}
+                                    value={Country.getAllCountries().filter((f) => f.name == selectedCountry)[0]}
                                     onChange={(item) => {
                                         setSelectedCountry(item.name);
                                     }}
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 />
 
                             </div>
@@ -424,9 +424,9 @@ const PatientDetails = () => {
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
 
 
-{console.log("state", State?.getStatesOfCountry(
-                                        Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
-                                    ))}
+                                {console.log("state", State?.getStatesOfCountry(
+                                    Country.getAllCountries().filter((f) => f.name == selectedCountry)[0]?.isoCode
+                                ))}
 
                                 <Select
                                     options={State?.getStatesOfCountry(
@@ -439,16 +439,16 @@ const PatientDetails = () => {
                                         return options["name"];
                                     }}
                                     value={State?.getStatesOfCountry(
-                                        Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
-                                    ).filter((f)=>f.name == selectedState)}
+                                        Country.getAllCountries().filter((f) => f.name == selectedCountry)[0]?.isoCode
+                                    ).filter((f) => f.name == selectedState)}
                                     onChange={(item) => {
                                         setSelectedState(item.name);
                                     }}
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 />
 
                             </div>
@@ -471,20 +471,20 @@ const PatientDetails = () => {
                                     }}
                                     value={City.getCitiesOfState(
                                         State?.getStatesOfCountry(
-                                            Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
-                                        ).filter((f)=>f.name == selectedState)[0]?.countryCode,
+                                            Country.getAllCountries().filter((f) => f.name == selectedCountry)[0]?.isoCode
+                                        ).filter((f) => f.name == selectedState)[0]?.countryCode,
                                         State?.getStatesOfCountry(
-                                            Country.getAllCountries().filter((f)=>f.name==selectedCountry)[0]?.isoCode
-                                        ).filter((f)=>f.name == selectedState)[0]?.isoCode
+                                            Country.getAllCountries().filter((f) => f.name == selectedCountry)[0]?.isoCode
+                                        ).filter((f) => f.name == selectedState)[0]?.isoCode
                                     )}
                                     onChange={(item) => {
                                         setSelectedCity(item.name);
                                     }}
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 />
                             </div>
                         </div>
@@ -496,11 +496,11 @@ const PatientDetails = () => {
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                                <Input style={{ paddingLeft: '0.3rem' }}  type="text" name="medical_status" value={data.medical_status} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                <Input style={{ paddingLeft: '0.3rem' }} type="text" name="medical_status" value={data.medical_status} onChange={handleInput} disabled={disableFields} sx={{
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="email">
@@ -509,10 +509,10 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <Input style={{ paddingLeft: '0.3rem' }} type="email" name="email" value={data.email} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="mobile_no">
@@ -525,10 +525,10 @@ const PatientDetails = () => {
                                         .toString()
                                         .slice(0, 11);
                                 }} value={data.mobile_no} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
 
                         </div>
@@ -542,10 +542,10 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                 <Input style={{ paddingLeft: '0.3rem' }} type="text" name="address" value={data.address} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="occupation">
@@ -554,29 +554,29 @@ const PatientDetails = () => {
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <Input style={{ paddingLeft: '0.3rem' }} type="text" name="occupation" value={data.occupation} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
 
                         </div>
 
-                     
+
 
 
                         <div className="row">
-                        <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="designation">
                                     <div>Designation:</div>
                                 </label>
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <Input style={{ paddingLeft: '0.3rem' }} type="text" name="designation" value={data.designation} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                    "& .MuiInputBase-input.Mui-disabled": {
+                                        WebkitTextFillColor: "#000000",
+                                    },
+                                }} />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                 <label htmlFor="cnic">
@@ -602,10 +602,10 @@ const PatientDetails = () => {
                                     value={data.cnic}
                                     onChange={handleInput}
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 />
                             </div>
                             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -619,10 +619,10 @@ const PatientDetails = () => {
 
                                 <Form.Select class="form-control dropdown"
                                     disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }}
                                 >
                                     <option value="none" selected disabled hidden>
                                         Select Disease...
@@ -643,8 +643,8 @@ const PatientDetails = () => {
                         </div>
                         <div className="row">
 
-                           
-                            
+
+
                         </div>
 
                     </div>
@@ -666,10 +666,10 @@ const PatientDetails = () => {
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="emergency_contact_person" value={data.emergency_contact_person} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="emergency_person_relation">
@@ -679,10 +679,10 @@ const PatientDetails = () => {
 
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="emergency_person_relation" value={data.emergency_person_relation} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
                                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                                     <label htmlFor="emergency_person_mobile">
@@ -696,10 +696,10 @@ const PatientDetails = () => {
                                             .toString()
                                             .slice(0, 11);
                                     }} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
 
                                 </div>
                             </div>
@@ -729,10 +729,10 @@ const PatientDetails = () => {
 
                                         {" "}
                                         <Form.Select name="physiotherapist_seen_before" class="form-control dropdown" value={data.physiotherapist_seen_before} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}  >
+                                            "& .MuiInputBase-input.Mui-disabled": {
+                                                WebkitTextFillColor: "#000000",
+                                            },
+                                        }}  >
                                             <option
                                                 value=""
                                                 selected="selected"
@@ -760,10 +760,10 @@ const PatientDetails = () => {
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="not_happy" value={data.not_happy} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
 
 
@@ -778,10 +778,10 @@ const PatientDetails = () => {
                                 </div>
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="most_happy" value={data.most_happy} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
 
 
@@ -797,10 +797,10 @@ const PatientDetails = () => {
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="today_session" value={data.today_session} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
 
 
@@ -815,10 +815,10 @@ const PatientDetails = () => {
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="stopping_you" value={data.stopping_you} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
 
 
@@ -832,10 +832,10 @@ const PatientDetails = () => {
 
                                 <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
                                     <Input style={{ paddingLeft: '0.3rem' }} type="text" name="fixed_now" value={data.fixed_now} onChange={handleInput} disabled={disableFields} sx={{
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#000000",
-    },
-  }}   />
+                                        "& .MuiInputBase-input.Mui-disabled": {
+                                            WebkitTextFillColor: "#000000",
+                                        },
+                                    }} />
                                 </div>
 
 

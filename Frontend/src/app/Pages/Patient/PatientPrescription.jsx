@@ -265,7 +265,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
 
 
     return (
-        <Container>
+        <div>
 
             <Box className="breadcrumb">
                 <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
@@ -478,12 +478,24 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                                 </tbody>
                             </Table>
                         </div>
+
+
+<br />
+
                         <div id='AudioRecorder'>
-                            <AudioRecorder
-                                onRecordingComplete={(blob) => addAudioElement(blob)}
-                                recorderControls={recorderControls}
-                            />
-                            <Button style={{ marginTop: '3rem', color: 'red' }} onClick={recorderControls.stopRecording}>Stop recording</Button>
+                            <div style={{ fontWeight: '600', display: "flex" }}>Doctor voice notes:</div>
+
+                            <div>For adding voice notes regarding click on below icon:</div>
+
+                            <div>
+                                <AudioRecorder
+
+                                    style={{ marginLeft: "40px" }}
+                                    onRecordingComplete={(blob) => addAudioElement(blob)}
+                                    recorderControls={recorderControls}
+                                />
+                            </div>
+                            {/* <Button style={{ marginTop: '3rem', color: 'red' }} onClick={recorderControls.stopRecording}>Stop recording</Button> */}
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
                             <Button color="primary" variant="contained" onClick={prevStep} style={{ marginRight: '2rem' }}>
@@ -498,7 +510,7 @@ const PatientPrescription = ({ nextStep, handleFormData, values, prevStep }) => 
                     </Form>
                 </div>
             </div>
-        </Container>
+        </div>
     )
 }
 
