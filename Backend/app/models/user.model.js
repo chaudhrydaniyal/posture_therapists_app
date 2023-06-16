@@ -52,7 +52,6 @@ User.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found user: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -76,7 +75,6 @@ User.getAll = (title, result) => {
       return;
     }
 
-    console.log("tutorials: ", res);
     result(null, res);
   });
 };
@@ -91,7 +89,6 @@ User.getAllPublished = result => {
       return;
     }
 
-    console.log("user: ", res);
     result(null, res);
 
   });

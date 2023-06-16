@@ -31,8 +31,6 @@ Doctor_time_slots.weeklySchedule = (doctor_time_slots, result) => {
 
   const noOfWeeks = Math.trunc(doctor_time_slots.validity_months * 30 / 7);
 
-  console.log(noOfWeeks)
-
   var generatedSlots = []
 
   for (let i = 0; i < noOfWeeks; i++) {
@@ -58,7 +56,6 @@ Doctor_time_slots.weeklySchedule = (doctor_time_slots, result) => {
     (err, res) => {
 
       if (err) {
-        console.log("error: ", err);
         result(err, null);
         return;
       }
@@ -80,7 +77,6 @@ Doctor_time_slots.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found disease: ", res);
       result(null, res);
       return;
     }
@@ -105,7 +101,6 @@ Doctor_time_slots.getAll = (title, result) => {
       return;
     }
 
-    console.log("diseases: ", res);
     result(null, res);
   });
 };
@@ -120,7 +115,6 @@ Doctor_time_slots.getAllPublished = result => {
       return;
     }
 
-    console.log("doctor_time_slots: ", res);
     result(null, res);
 
   });
@@ -144,7 +138,6 @@ Doctor_time_slots.updateById = (id, doctor_time_slots, result) => {
         return;
       }
 
-      console.log("updated doctor_time_slots: ", { id: id, ...doctor_time_slots });
       result(null, { id: id, ...doctor_time_slots });
     }
   );
@@ -165,7 +158,6 @@ Doctor_time_slots.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted doctor_time_slots with id: ", id);
     result(null, res);
   });
 };
@@ -179,7 +171,6 @@ Doctor_time_slots.removeAll = result => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} doctor_time_slots`);
     result(null, res);
   });
 };

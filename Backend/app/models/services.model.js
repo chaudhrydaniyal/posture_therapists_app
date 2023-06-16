@@ -13,10 +13,7 @@ services.create = (newService, result) => {
         result(err, null);
         return;
       }
-      console.log(res,"response")
-      console.log("created newService: ", { id: res.insertId, ...newService });
       result(null, { id: res.insertId, ...newService });
-    
     });
   };
 
@@ -29,7 +26,6 @@ services.create = (newService, result) => {
             results(null,err);
             return;
         }
-        console.log("service",res);
         results(null,res)
     })
   }
@@ -42,7 +38,6 @@ services.create = (newService, result) => {
             return;
         }
         if(res.length){
-            console.log("service",res[0]);
             result(null,res[0]);
             return;
         }

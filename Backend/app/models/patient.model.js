@@ -45,13 +45,11 @@ Patient.create = (newPatient, diseases, result) => {
     }
 
 
-    console.log("array to be inserted", [diseases.map((d)=>[d , res.insertId])])
 
     sql.query("INSERT INTO patient_diseases (diseaseID, patientID) VALUES ?", [diseases.map((d)=>[parseInt(d) , res.insertId])], (err, res) => {
       console.log("patient_diseases inserted", err)
     })
 
-    console.log("created Patient: ", { id: res.insertId, ...newPatient });
     result(null, { id: res.insertId, ...newPatient });
   });
 };
@@ -65,7 +63,6 @@ Patient.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found patient: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -108,7 +105,6 @@ Patient.getAllPublished = result => {
       return;
     }
 
-    console.log("patient: ", res);
     result(null, res);
 
   });
@@ -133,7 +129,6 @@ Patient.updateById = (id, patient, result) => {
         return;
       }
 
-      console.log("updated patient: ", { id: id, ...patient });
       result(null, { id: id, ...patient });
     }
   );
@@ -153,7 +148,6 @@ Patient.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted patients with id: ", id);
     result(null, res);
   });
 };
@@ -166,7 +160,6 @@ Patient.removeAll = result => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} patients`);
     result(null, res);
   });
 };

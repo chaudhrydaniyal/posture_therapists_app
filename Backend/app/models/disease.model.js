@@ -14,7 +14,6 @@ Disease.create = (newDisease, result) => {
       return;
     }
 
-    console.log("created newDisease: ", { id: res.insertId, ...newDisease });
     result(null, { id: res.insertId, ...newDisease });
   });
 };
@@ -28,7 +27,6 @@ Disease.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found disease: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -52,7 +50,6 @@ Disease.getAll = (title, result) => {
       return;
     }
 
-    console.log("diseases: ", res);
     result(null, res);
   });
 };
@@ -65,7 +62,6 @@ Disease.getAllPublished = result => {
       return;
     }
 
-    console.log("diseases: ", res);
     result(null, res);
   });
 };
@@ -87,7 +83,6 @@ Disease.updateById = (id, disease, result) => {
         return;
       }
 
-      console.log("updated diseases: ", { id: id, ...disease });
       result(null, { id: id, ...disease });
     }
   );
@@ -107,7 +102,6 @@ Disease.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted diseases with id: ", id);
     result(null, res);
   });
 };
@@ -120,7 +114,6 @@ Disease.removeAll = result => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} diseases`);
     result(null, res);
   });
 };

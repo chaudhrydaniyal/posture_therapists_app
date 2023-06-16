@@ -34,7 +34,6 @@ Invoice.create = (invoice,  result) => {
     }
 
     sql.query("INSERT INTO invoice_items (item , description, qty , price, invoice ) VALUES ?", [invoiceItems.map((d)=>[d.title, d.description, d.qty, d.price, res.insertId])], (err, res) => {
-      console.log("patient_diseases inserted", err)
     })
 
     result(null, { id: res.insertId });
@@ -78,7 +77,6 @@ Invoice.findById = (id, result) => {
         const  invoice_items =  await query(`SELECT * FROM invoice_items WHERE invoice = ${r.id}`)
         return ({ ...r, invoice_items: invoice_items})  
       }))
-      console.log("final result test", finalResult)  
       result(null, finalResult);
       return;
     }
@@ -135,7 +133,6 @@ Invoice.updateById = (id, invoice, result) => {
         result({ kind: "not_found" }, null);
         return;
       }
-      console.log("updated invoice: ", { id: id, ...invoice });
       result(null, { id: id, ...invoice });
     }
   );
