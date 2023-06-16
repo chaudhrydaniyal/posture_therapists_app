@@ -206,7 +206,7 @@ const DoctorForm = () => {
           <h5>DOCTOR INFORMATION</h5>
 
           <Form className="mb-3 d-flex mt-3 " controlId="formGridProfilePic">
-            <div>
+            <div >
               <div>
                 <Form.Label htmlFor="uploadpic">
                   {file ? (
@@ -241,12 +241,17 @@ const DoctorForm = () => {
                     await uploadImage(e);
                   }}
                 />
+                 
               </div>
-              <label style={{ marginTop: "1rem" }}>
-                <strong>Upload Picture</strong>
-              </label>
+             
+             
             </div>
+           
           </Form>
+
+          <label style={{ marginTop: "0rem", marginLeft:"5px", fontWeight:"500" }}>
+                Upload Picture
+              </label>
 
           <div className="row" style={{ marginTop: "2rem" }}>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">

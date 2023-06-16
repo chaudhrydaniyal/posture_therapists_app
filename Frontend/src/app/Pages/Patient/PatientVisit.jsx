@@ -92,7 +92,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
           <Select
             size="small"
-            style={{ width: 600, margin: "30px" }}
+            style={{ width: 600, margin: "20px",marginLeft: "0px"  }}
             onChange={(e) => {
               setSelectedPatient(e.target.value);
 

@@ -135,7 +135,7 @@ const PatientDetails = () => {
           id: data.id,
           first_name: data.first_name,
           last_name: data.last_name,
-          date_of_birth: data.date_of_birth,
+          date_of_birth: data.date_of_birth && data.date_of_birth.split('T')[0],
           age: data.age,
           gender: data.gender,
           address: data.address,
@@ -766,11 +766,6 @@ const PatientDetails = () => {
 
                 </div>
               </div>
-            </div>
-
-            {/* ************In Case of emergencygency*********** */}
-
-            <div className="card" style={{ marginTop: "2rem" }}>
               <div className="card-body" style={{ margin: "10px" }}>
                 <h5>In Case of emergencygency</h5>
 
@@ -845,10 +840,6 @@ const PatientDetails = () => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* ***********Previous Treatment*************** */}
-            <div className="card" style={{ marginTop: "2rem" }}>
               <div className="card-body" style={{ margin: "10px" }}>
                 <h5>PREVIOUS TREATMENT</h5>
 
@@ -1015,6 +1006,8 @@ const PatientDetails = () => {
                 </div>
               </div>
             </div>
+
+
           </>
         ) : null}
       </div>

@@ -495,6 +495,8 @@ const VisitDetails = () => {
                     </div>
                   </Table>
                 </div>
+                <div style={{fontWeight:"600"}}>Doctor voice notes:</div>
+
                 <div id="AudioRecorder">
                   {/* <Button style={{ marginTop: "1rem", color: "red" }}>
                     Stop recording

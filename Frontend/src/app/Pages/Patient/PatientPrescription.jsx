@@ -596,16 +596,20 @@ const PatientPrescription = ({
               </Table>
             </div>
             <div id="AudioRecorder" style={{marginTop:"3rem"}}>
+              
+              <div style={{fontWeight:"600"}}>Doctor voice notes:</div>
+              
               <AudioRecorder
                 onRecordingComplete={(blob) => addAudioElement(blob)}
                 recorderControls={recorderControls}
               />
-              <Button
+
+              {/* <Button
                 style={{ marginTop: "3rem", color: "red" }}
                 onClick={recorderControls.stopRecording}
               >
                 Stop recording
-              </Button>
+              </Button> */}
             </div>
             <div
               style={{
