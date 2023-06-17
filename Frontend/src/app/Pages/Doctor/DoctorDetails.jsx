@@ -112,7 +112,7 @@ const DoctorDetails = () => {
           picture: data.picture,
           first_name: data.first_name,
           last_name: data.last_name,
-          date_of_birth: data.date_of_birth,
+          date_of_birth: data.date_of_birth.split('T')[0],
           age: data.age,
           gender: data.gender,
           address: data.address,

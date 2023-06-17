@@ -307,7 +307,7 @@ const Services = () => {
                 <TableCell align="left" width={100}>
                   Services
                 </TableCell>
-                <TableCell align="center" width={100}>
+                <TableCell align="left" width={100}>
                   Description
                 </TableCell>
                 <TableCell align="center" width={20}>
@@ -332,7 +332,7 @@ const Services = () => {
                     <TableCell align="left" width={100}>
                       {items.service_name}
                     </TableCell>
-                    <TableCell align="center" width={100}>
+                    <TableCell align="left" width={100}>
                       {items.description}
                     </TableCell>
                     <TableCell align="center" width={20}>

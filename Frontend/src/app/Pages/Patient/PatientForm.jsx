@@ -604,12 +604,7 @@ const PatientForm = () => {
           </div>
           <div className="row"></div>
         </div>
-      </div>
-
-      {/* ************In Case of Emergency******************* */}
-
-      <div className="card" style={{ marginTop: "2rem" }}>
-        <div className="card-body" style={{ margin: "10px" }}>
+        <div className="card-body" style={{ margin: "5px" }}>
           <h5>In Case of Emergency</h5>
 
           <div className="row" style={{ marginTop: "2rem" }}>
@@ -672,19 +667,7 @@ const PatientForm = () => {
             </div>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            margin: "1rem",
-          }}
-        ></div>
-      </div>
-
-      {/* *****************Previous Treatment************ */}
-
-      <div className="card" style={{ marginTop: "2rem" }}>
-        <div className="card-body" style={{ margin: "10px" }}>
+        <div className="card-body" style={{ margin: "5px" }}>
           <h5>PREVIOUS TREATMENT</h5>
 
           <div className="row" style={{ marginTop: "2rem" }}>
@@ -853,6 +836,8 @@ const PatientForm = () => {
           </div>
         </div>
       </div>
+
+
     </Container>
   );
 };

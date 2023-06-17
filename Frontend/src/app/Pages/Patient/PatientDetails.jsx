@@ -135,7 +135,7 @@ const PatientDetails = () => {
           id: data.id,
           first_name: data.first_name,
           last_name: data.last_name,
-          date_of_birth: data.date_of_birth,
+          date_of_birth: data.date_of_birth && data.date_of_birth.split('T')[0],
           age: data.age,
           gender: data.gender,
           address: data.address,
@@ -254,8 +254,10 @@ const PatientDetails = () => {
           <>
             <div className="card" style={{ borderTopLeftRadius: "0" }}>
               <div className="card-body" style={{ margin: "10px" }}>
+
+                <div style={{display:"flex"}}>
                 <h5>PATIENT INFORMATION</h5>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <div style={{ marginLeft:"auto", display: "flex", justifyContent: "flex-end" }}>
                   <Button
                     color="primary"
                     variant="contained"
@@ -280,6 +282,8 @@ const PatientDetails = () => {
                       Save
                     </Span>
                   </Button>
+                </div>
+
                 </div>
                 <div className="row" style={{ marginTop: "2rem" }}>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
@@ -766,12 +770,7 @@ const PatientDetails = () => {
 
                 </div>
               </div>
-            </div>
-
-            {/* ************In Case of emergencygency*********** */}
-
-            <div className="card" style={{ marginTop: "2rem" }}>
-              <div className="card-body" style={{ margin: "10px" }}>
+              <div className="card-body" style={{ margin: "5px" }}>
                 <h5>In Case of emergencygency</h5>
 
                 <div className="row" style={{ marginTop: "2rem" }}>
@@ -845,11 +844,7 @@ const PatientDetails = () => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* ***********Previous Treatment*************** */}
-            <div className="card" style={{ marginTop: "2rem" }}>
-              <div className="card-body" style={{ margin: "10px" }}>
+              <div className="card-body" style={{ margin: "5px" }}>
                 <h5>PREVIOUS TREATMENT</h5>
 
                 <div className="row" style={{ marginTop: "2rem" }}>
@@ -1015,6 +1010,8 @@ const PatientDetails = () => {
                 </div>
               </div>
             </div>
+
+
           </>
         ) : null}
       </div>

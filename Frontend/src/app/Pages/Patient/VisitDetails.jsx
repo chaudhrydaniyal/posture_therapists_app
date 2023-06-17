@@ -251,7 +251,7 @@ const VisitDetails = () => {
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="general_mobility">
                       {" "}
-                      <div>General Mobility(gait):</div>
+                      <div>General Mobility (gait):</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -487,7 +487,12 @@ const VisitDetails = () => {
                         </td>
                       </tr>
                     </tbody>
-                    <div style={{ marginTop: "2rem" }}>
+                
+                  </Table>
+                </div>
+                <div style={{fontWeight:"600"}}>Doctor voice notes:</div>
+
+                <div style={{ }}>
                       <audio controls>
                         <source
                           src={
@@ -499,12 +504,9 @@ const VisitDetails = () => {
                         {console.log("audioFile", data.audioFile)}
                       </audio>
                     </div>
-                  </Table>
-                </div>
+
                 <div id="AudioRecorder">
-                  <Button style={{ marginTop: "1rem", color: "red" }}>
-                    Stop recording
-                  </Button>
+             
                 </div>
                 <div style={{display:"flex",justifyContent:"center"}}>
               

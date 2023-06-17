@@ -9,18 +9,10 @@ const Scheduled_appointments = function(scheduled_appointments) {
 
 Scheduled_appointments.create = (scheduled_appointments, result) => {
 
-  // console.log("first", scheduled_appointments)
-  // console.log("second", scheduled_appointments.map(ds => [ds.start_time, ds.end_time]))
-  console.log("scheduled appointments", scheduled_appointments)
-
   sql.query("INSERT IGNORE INTO scheduled_appointments (date, start_time, end_time, doctor, patient, title) VALUES ?",
 
 
-
-
-
     [(scheduled_appointments.map(ds => [ds.date, ds.start_time, ds.end_time, ds.doctor, ds.patient, ds.title ]))],
-
 
     //  [ ['02-02-2023',    '03-03-2023']],
     (err, res) => {
@@ -30,7 +22,6 @@ Scheduled_appointments.create = (scheduled_appointments, result) => {
         return;
       }
 
-      console.log("created scheduled_appointments: ", { id: res.insertId, ...scheduled_appointments });
       result(null, { id: res.insertId, ...scheduled_appointments });
     });
 };
@@ -44,7 +35,6 @@ Scheduled_appointments.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found disease: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -66,12 +56,10 @@ Scheduled_appointments.getAll = (title, result) => {
 
   sql.query(query, (err, res) => {
     if (err) {
-      console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("diseases: ", res);
     result(null, res);
   });
 };
@@ -92,7 +80,6 @@ Scheduled_appointments.getAllForDoctor = (id, result) => {
       return;
     }
 
-    console.log("diseases: ", res);
     result(null, res);
   });
 };
@@ -116,7 +103,6 @@ Scheduled_appointments.getAllScheduledToday = ( result) => {
       return;
     }
 
-    console.log("diseases: ", res);
     result(null, res);
   });
 };

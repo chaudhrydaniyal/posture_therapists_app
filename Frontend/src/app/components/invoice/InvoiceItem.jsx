@@ -123,7 +123,7 @@ class ItemRow extends React.Component {
                 width: "50%",
                 borderRadius: "6px",
               }}
-              placeholder="Discription"
+              placeholder="Description"
               value={
                 this.state.selectedService.description
                   ? this.state.selectedService.description

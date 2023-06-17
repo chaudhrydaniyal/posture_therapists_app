@@ -10,7 +10,7 @@ module.exports = (app, upload ) => {
   router.post("/",  user.create);
 
   // Retrieve all Tutorials
-  router.get("/",verifyJWT, user.findAll);
+  router.get("/", user.findAll);
 
   // Retrieve all published Tutorials
   router.get("/published", user.findAllPublished);

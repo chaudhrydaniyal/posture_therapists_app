@@ -50,7 +50,6 @@ Patient_visit.create = (patient_visit, physical_assessment, result) => {
     }
     // console.log("created user: ", { id: res.insertId, ...patient_visit });
     result(null, { id: res.insertId, ...patient_visit })
-    console.log("physical_assessment", JSON.parse(physical_assessment))
 
     if (JSON.parse(physical_assessment).length > 0 ){
 
@@ -94,9 +93,7 @@ Patient_visit.findById =  (id, result) => {
         return ({ ...r, physical_assessment: physical_assessment})
             
       }))
-
-      console.log("final result test", finalResult)
-    
+  
       result(null, finalResult);
 
       return;
@@ -118,7 +115,6 @@ Patient_visit.getAll = (title, result) => {
       result(null, err);
       return;
     }
-    console.log("patient_visits: ", res);
     result(null, res);
   });
 };
@@ -130,7 +126,6 @@ Patient_visit.getAllPublished = result => {
       result(null, err);
       return;
     }
-    console.log("user: ", res);
     result(null, res);
   });
 };
@@ -152,7 +147,6 @@ Patient_visit.updateById = (id, user, result) => {
         result({ kind: "not_found" }, null);
         return;
       }
-      console.log("updated patient: ", { id: id, ...user });
       result(null, { id: id, ...user });
     }
   );
@@ -170,7 +164,6 @@ Patient_visit.remove = (id, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
-    console.log("deleted users with id: ", id);
     result(null, res);
   });
 };
@@ -183,7 +176,6 @@ Patient_visit.removeAll = result => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} users`);
     result(null, res);
   });
 };

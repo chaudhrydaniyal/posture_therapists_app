@@ -14,12 +14,7 @@ import {  Button } from '@mui/material';
 
 
 
-
-
 export default class DemoApp extends React.Component {
-
-
-
 
 
   state = {
@@ -29,11 +24,7 @@ export default class DemoApp extends React.Component {
   }
 
 
-
-
   async componentDidMount() {
-
-    console.log("doctor time slots", this.props.data)
 
     let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`)).data
 
@@ -41,7 +32,7 @@ export default class DemoApp extends React.Component {
 
     let array1 = events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green", id: e.id, title: "event" }))
 
-    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id }))
+    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id, scheduledAppointment: true }))
 
     this.setState({ INITIAL_EVENTS: array1.concat(array2) })
 
@@ -50,8 +41,6 @@ export default class DemoApp extends React.Component {
 
 
   render() {
-
-    console.log("this props", this.props)
 
 
     return (
@@ -64,9 +53,11 @@ export default class DemoApp extends React.Component {
          
         <Button color="primary" variant="contained" type="submit" onClick={async () => {
 
+          console.log("this.state.currentEvents",this.state.currentEvents)
+
             try {
              const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
-              this.state.currentEvents.map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
+              this.state.currentEvents.filter((ce)=>ce._def.extendedProps.scheduledAppointment != true).map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
             )
 
             res && NotificationManager.success("Successfully added time slots");

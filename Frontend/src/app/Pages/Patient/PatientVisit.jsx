@@ -77,16 +77,14 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     }
   };
 
-  return (
-    <Container>
-      {/* <section className="content"> */}
+    return (
 
-      <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Patient Visit" }]} />
-      </Box>
-      <NotificationContainer />
-
-      {/* ************************Patient Visit**************** */}
+<div>
+            <Box className="breadcrumb">
+                <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
+            </Box>
+            <NotificationContainer />
+            
 
       <div className="card">
         <div className="card-body">
@@ -94,7 +92,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
           <Select
             size="small"
-            style={{ width: 600, margin: "30px" }}
+            style={{ width: 600, margin: "20px",marginLeft: "0px"  }}
             onChange={(e) => {
               setSelectedPatient(e.target.value);
 
@@ -283,7 +281,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="general_mobility">
                   {" "}
-                  <div>General Mobility(gait):</div>
+                  <div>General Mobility (gait):</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
@@ -375,23 +373,19 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 <Body markers={markers} setMarkers={setMarkers} />
 </div> */}
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: "1rem",
-              }}
-            >
-              <Button color="primary" variant="contained" type="submit">
-                {/* <Icon>send</Icon> */}
-                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Next</Span>
-              </Button>
-            </div>
-          </Form>
-        </div>
-      </div>
-    </Container>
-  );
-};
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
 
-export default PatientVisit;
+
+                            <Button color="primary" variant="contained" type="submit">
+                                {/* <Icon>send</Icon> */}
+                                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Next</Span>
+                            </Button>
+                        </div>
+                    </Form>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default PatientVisit     

@@ -270,11 +270,12 @@ const PatientPrescription = ({
     console.log("getService", values.patient);
   }, []);
 
-  return (
-    <Container>
-      <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Patient Visit" }]} />
-      </Box>
+    return (
+        <div>
+
+            <Box className="breadcrumb">
+                <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
+            </Box>
 
       <Modal
         open={open}
@@ -595,12 +596,16 @@ const PatientPrescription = ({
               </Table>
             </div>
             <div id="AudioRecorder" style={{marginTop:"3rem"}}>
+              
+              <div style={{fontWeight:"600"}}>Doctor voice notes:</div>
+              
               <AudioRecorder
                 onRecordingComplete={(blob) => addAudioElement(blob)}
                 recorderControls={recorderControls}
               />
+
               <Button
-                style={{ marginTop: "3rem", color: "red" }}
+                style={{ color: "red" }}
                 onClick={recorderControls.stopRecording}
               >
                 Stop recording
@@ -637,7 +642,7 @@ const PatientPrescription = ({
           </Form>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
