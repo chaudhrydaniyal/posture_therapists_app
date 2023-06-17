@@ -7,6 +7,7 @@ const patientValidation = Yup.object({
   mobile_no: Yup.number().required("Please Enter Patient Mobile Number"),
   cnic: Yup.string().required("Please Enter Patient CNIC"),
 });
+
 const doctorValidation = Yup.object({
   first_name: Yup.string().required("Please Enter Doctor Name"),
   date_of_birth: Yup.string().required("Please Enter Doctor DOB"),

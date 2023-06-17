@@ -335,11 +335,17 @@ const VisitDetails = () => {
                 </div>
               </div>
             </div>
+
           </Accordion.Body>
+
         </Accordion.Item>
+
         <Accordion.Item eventKey="1">
+
           <Accordion.Header>Patient Prescription</Accordion.Header>
+
           <Accordion.Body>
+
             <div className="card">
               <div className="card-body">
                 <h5>Diagnosis</h5>
@@ -524,18 +530,28 @@ const VisitDetails = () => {
                 </div>
               </div>
             </div>
+
           </Accordion.Body>
+
         </Accordion.Item>
+
+
         <Accordion.Item eventKey="3">
+
           <Accordion.Header>Invoice</Accordion.Header>
+
           <Accordion.Body>
             
           <div style={{display:"flex",justifyContent:"center"}}>
             <InvoiceData patient_invoice_data={invoiceData} />
          </div>
+
           </Accordion.Body>
+
         </Accordion.Item>
+
       </Accordion>
+      
     </Container>
   );
 };

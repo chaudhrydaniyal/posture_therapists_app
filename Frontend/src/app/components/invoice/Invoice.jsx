@@ -265,6 +265,8 @@ class Invoice extends React.Component {
 
                     <br></br>
 
+                    {console.log('thisSelectedpatient',this.state.selectedPatient)}
+                    {console.log('thispatient',this.props.params.state)}
                     <select
                       style={{
                         width: "100%",
@@ -283,10 +285,10 @@ class Invoice extends React.Component {
                       name="patientName"
                       value={
                         this.props.params.state &&
-                        this.state.selectedPatient.first_name
+                        this.state.selectedPatient.id
                       }
                       disabled={this.props.params.state}
-                    >
+                      >
                       <option value="none" selected disabled hidden>
                         Select Patient Name...
                       </option>
