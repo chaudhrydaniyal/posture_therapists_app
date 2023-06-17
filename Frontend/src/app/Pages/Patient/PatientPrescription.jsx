@@ -604,12 +604,12 @@ const PatientPrescription = ({
                 recorderControls={recorderControls}
               />
 
-              {/* <Button
-                style={{ marginTop: "3rem", color: "red" }}
+              <Button
+                style={{ color: "red" }}
                 onClick={recorderControls.stopRecording}
               >
                 Stop recording
-              </Button> */}
+              </Button>
             </div>
             <div
               style={{

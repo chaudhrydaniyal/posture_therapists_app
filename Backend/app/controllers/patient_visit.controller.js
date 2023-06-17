@@ -85,7 +85,7 @@ exports.create = async (req, res) => {
 
   if (req.files) {
 
-    let filePath = __dirname + '/../../FileSystem/' + uniqueFileName + '.mp4';
+    let filePath = __dirname + '/../../FileSystem/' + uniqueFileName + '.mp3';
     let fileUpload = req.files.audioFile;
 
     await fileUpload.mv(filePath, function (err) {

@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
     // title: req.body.title,
     // description: req.body.description,
     // published: req.body.published || false
-    surname: req.body.surname,
+    last_name: req.body.last_name,
     first_name: req.body.first_name,
     middle_name: req.body.middle_name,
     // password: hashedPassword,

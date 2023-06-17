@@ -5,7 +5,7 @@ const User = function(user) {
 
   this.first_name = user.first_name;
   this.middle_name = user.middle_name;
-  this.surname = user.surname;
+  this.last_name = user.last_name;
   this.password = user.password;
   this.date_of_birth = user.date_of_birth;
   this.age = user.age;
@@ -19,14 +19,12 @@ const User = function(user) {
   this.cnic = user.cnic;
   this.role = user.role;  
   this.remarks = user.remarks;
-
   this.specialization = user.specialization;
   this.engagement_terms = user.engagement_terms;
   this.country = user.country;
   this.state = user.state;
   this.city = user.city;
   this.picture = user.picture;
-
 
 };
 
@@ -99,7 +97,7 @@ User.getAllPublished = result => {
 User.updateById = (id, user, result) => {
   sql.query(
     "UPDATE users SET first_name = ?, middle_name = ?, surname = ?, cnic = ?, date_of_birth = ?, age = ?, address = ?, email = ?, gender = ?, home_phone = ?, mobile_no = ?, practitioner_type = ?, work_phone = ?, remarks = ? WHERE id = ?",
-    [user.first_name, user.middle_name, user.surname, user.cnic, user.date_of_birth, user.age, user.address, user.email, user.gender, user.home_phone, user.mobile_no, user.practitioner_type, user.work_phone, user.remarks,  id],
+    [user.first_name, user.middle_name, user.last_name, user.cnic, user.date_of_birth, user.age, user.address, user.email, user.gender, user.home_phone, user.mobile_no, user.practitioner_type, user.work_phone, user.remarks,  id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

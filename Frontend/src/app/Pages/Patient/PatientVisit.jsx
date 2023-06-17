@@ -281,7 +281,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="general_mobility">
                   {" "}
-                  <div>General Mobility(gait):</div>
+                  <div>General Mobility (gait):</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
