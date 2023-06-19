@@ -16,7 +16,8 @@ import { City, Country, State } from "country-state-city";
 import Select from "react-select";
 // import {Select,MenuItem } from '@mui/material';
 import pp from "./avatar.png";
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import Form from "react-bootstrap/Form";
 import Body from "app/components/UI Components/Body_image";
 const initialValue = {
@@ -38,6 +39,7 @@ const initialValue = {
   engagement_terms: "",
   financial_information: "",
   salary: "",
+  phone:""
 };
 
 const Container = styled("div")(({ theme }) => ({
@@ -61,6 +63,8 @@ const DoctorForm = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [file, setfile] = useState();
   const [doctorPicture, setDoctorPicture] = useState("");
+  const [disableFields, setDisableFields] = useState(true);
+
 
   useEffect(() => {
     setStateData(State.getStatesOfCountry(country?.isoCode));
@@ -256,12 +260,12 @@ const DoctorForm = () => {
           <div className="row" style={{ marginTop: "2rem" }}>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="first_name">
-                {" "}
+      
                 <div>First Name:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3 ">
-              {" "}
+        
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 type="text"
@@ -277,12 +281,12 @@ const DoctorForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="last_name">
-                {" "}
+    
                 <div>Last Name:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              {" "}
+            
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 type="text"
@@ -317,7 +321,7 @@ const DoctorForm = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="date_of_birth">
-                {" "}
+        
                 <div>Date of Birth:</div>
               </label>
             </div>
@@ -338,12 +342,12 @@ const DoctorForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="age">
-                {" "}
+           
                 <div>Age:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2  p-3">
-              {" "}
+        
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 name="age"
@@ -357,16 +361,17 @@ const DoctorForm = () => {
                 value={values.age}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                disabled={disableFields}
               />
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="gender">
-                {" "}
+    
                 <div>Gender:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              {" "}
+       
               <Form.Select
                 name="gender"
                 value={values.gender}
@@ -386,7 +391,7 @@ const DoctorForm = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
               <label htmlFor="address">
-                {" "}
+        
                 <div>Address:</div>
               </label>
             </div>
@@ -413,7 +418,7 @@ const DoctorForm = () => {
               <PatternFormat
                 style={{
                   height: "2rem",
-                  width: "11rem",
+                  width: "90%",
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
                   boxSizing: "border-box",
@@ -435,12 +440,12 @@ const DoctorForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="work_phone">
-                {" "}
+       
                 <div>Work Phone No:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <Input
+              {/* <phone
                 style={{ paddingLeft: "0.3rem" }}
                 type="text"
                 name="work_phone"
@@ -448,7 +453,18 @@ const DoctorForm = () => {
                 value={values.work_phone}
                 onChange={handleChange}
                 onBlur={handleBlur}
-              />
+              /> */}
+              <PhoneInput
+              // style={{width:"10%"}}
+  country="pk"
+  value={values.work_phone}
+  inputProps={{
+    name: "work_phone",
+    onBlur: handleBlur,
+    style: { width: "100%" }
+  }}
+  onChange={(work_phone) => handleChange({ target: { name: "work_phone", value: work_phone } })}
+/>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="mobile_no">
@@ -456,7 +472,7 @@ const DoctorForm = () => {
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <Input
+              {/* <Input
                 style={{ paddingLeft: "0.3rem" }}
                 type="number"
                 name="mobile_no"
@@ -469,7 +485,17 @@ const DoctorForm = () => {
                     .toString()
                     .slice(0, 11);
                 }}
-              />
+              /> */}
+                      <PhoneInput
+  country="pk"
+  value={values.mobile_no}
+  inputProps={{
+    name: "mobile_no",
+    onBlur: handleBlur,
+     style: { width: "100%" }
+  }}
+  onChange={(mobile_no) => handleChange({ target: { name: "mobile_no", value: mobile_no } })}
+/>
               {errors.mobile_no && touched.mobile_no ? (
                 <p style={{ color: "red" }}>{errors.mobile_no}</p>
               ) : null}
@@ -653,7 +679,7 @@ const DoctorForm = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
               <label htmlFor="remarks">
-                {" "}
+       
                 <div>Remarks:</div>
               </label>
             </div>

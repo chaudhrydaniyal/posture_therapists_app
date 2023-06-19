@@ -17,6 +17,9 @@ import BloodtypeIcon from "@mui/icons-material/Bloodtype";
 import { Country, City, State } from "country-state-city";
 import Select from "react-select";
 import Form from "react-bootstrap/Form";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 
 const initialValue = {
   first_name: "",
@@ -61,6 +64,7 @@ const PatientForm = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [cnic, setCnic] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [disableFields, setDisableFields] = useState(true);
 
   const { values, errors, handleChange, handleBlur, touched, handleSubmit } =
     useFormik({
@@ -113,6 +117,7 @@ const PatientForm = () => {
         setSelectedCountry(null);
         setSelectedState(null);
         setSelectedCity(null);
+        setDiseases(null)
       },
     });
 
@@ -311,6 +316,7 @@ const PatientForm = () => {
                 // defaultValue={ageCalculator()}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                disabled={disableFields}
               />
               {/* {errors.age && touched.age ? (<p style={{ color: "red" }}>{errors.age}</p>) : null} */}
             </div>
@@ -449,7 +455,7 @@ const PatientForm = () => {
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <Input
+              {/* <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_border"
                 type="number"
@@ -463,7 +469,17 @@ const PatientForm = () => {
                     .toString()
                     .slice(0, 11);
                 }}
-              />
+              /> */}
+                             <PhoneInput
+  country="pk"
+  value={values.mobile_no}
+  inputProps={{
+    name: "mobile_no",
+    onBlur: handleBlur,
+     style: { width: "100%" }
+  }}
+  onChange={(mobile_no) => handleChange({ target: { name: "mobile_no", value: mobile_no } })}
+/>
               {errors.mobile_no && touched.mobile_no ? (
                 <p style={{ color: "red" }}>{errors.mobile_no}</p>
               ) : null}
@@ -537,7 +553,7 @@ const PatientForm = () => {
                 className="Input_border"
                 style={{
                   height: "2rem",
-                  width: "11rem",
+                  width: "90%",
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
                   boxSizing: "border-box",
@@ -549,7 +565,7 @@ const PatientForm = () => {
                 format="#####-#######-#"
                 allowEmptyFormatting
                 mask="x"
-                defaultValue={values.cnic}
+                value={values.cnic}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
@@ -649,7 +665,7 @@ const PatientForm = () => {
             </div>
 
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-              <Input
+              {/* <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_border"
                 type="number"
@@ -662,7 +678,18 @@ const PatientForm = () => {
                     .toString()
                     .slice(0, 11);
                 }}
-              />
+              /> */}
+                   <PhoneInput
+              // style={{width:"10%"}}
+  country="pk"
+  value={values.emergency_person_mobile}
+  inputProps={{
+    name: "emergency_person_mobile",
+    onBlur: handleBlur,
+    style: { width: "100%" }
+  }}
+  onChange={(emergency_person_mobile) => handleChange({ target: { name: "emergency_person_mobile", value: emergency_person_mobile } })}
+/>
               {/* {errors.prevmobileno && touched.prevmobileno ? (<p style={{ color: "red" }}>{errors.prevmobileno}</p>) : null} */}
             </div>
           </div>

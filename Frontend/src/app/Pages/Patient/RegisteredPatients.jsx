@@ -91,7 +91,7 @@ const RegisteredPatients = () => {
                     {console.log("items", items)}
                     <TableCell align="left">{id}</TableCell>
                     <TableCell align="left">{items.first_name}</TableCell>
-                    <TableCell align="left">{items.surname}</TableCell>
+                    <TableCell align="left">{items.last_name}</TableCell>
                     <TableCell align="center">{items.cnic}</TableCell>
                     <TableCell align="center">{items.mobile_no}</TableCell>
                     <TableCell align="center">

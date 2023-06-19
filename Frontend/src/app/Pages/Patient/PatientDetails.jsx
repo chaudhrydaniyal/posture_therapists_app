@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { Span } from "app/components/Typography";
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 import { Breadcrumb, SimpleCard } from "app/components";
 import "./Patient.css";
 import PatientVisit from "./PatientVisit";
@@ -29,6 +29,24 @@ import { Country, City, State } from "country-state-city";
 import Select from "react-select";
 import Form from "react-bootstrap/Form";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+
 const StyledTable = styled(Table)(() => ({
   whiteSpace: "pre",
   "& thead": {
@@ -64,6 +82,11 @@ const PatientDetails = () => {
   const [selectedCity, setSelectedCity] = useState(patientData.city);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
 
   const handleChangePage = (_, newPage) => {
     setPage(newPage);
@@ -197,7 +220,7 @@ const PatientDetails = () => {
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases")
-      .then((res) => setGetDiseases(res.data));
+      .then((res) => {setGetDiseases(res.data);console.log("diseaseRes",res)});
     axios
       .get(process.env.REACT_APP_ORIGIN_URL + `api/patientvisits/${data.id}`)
       .then((res) => {
@@ -379,7 +402,7 @@ const PatientDetails = () => {
                       style={{ paddingLeft: "0.3rem" }}
                       type="date"
                       name="date_of_birth"
-                      value={data.date_of_birth}
+                      value={moment(data.date_of_birth).utc().format("YYYY-MM-DD")}
                       onChange={(e) => {
                         handleInput(e);
                         ageCalculator(e);
@@ -713,7 +736,7 @@ const PatientDetails = () => {
                     <PatternFormat
                      style={{
                       height: "2rem",
-                      width: "11rem",
+                      width: "90%",
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
                       boxSizing: "border-box",
@@ -744,7 +767,7 @@ const PatientDetails = () => {
                   </div>
 
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                    <Form.Select
+                    {/* <Form.Select
                       class="form-control dropdown"
                       disabled={disableFields}
                       sx={{
@@ -754,16 +777,38 @@ const PatientDetails = () => {
                       }}
                     >
                       <option value="none" selected disabled hidden>
-                        Select Disease...
+                        Patient Disease...
                       </option>
 
-                      {getDiseases &&
+                      
+                    </Form.Select> */}
+                    <h6>Patient Diagnosis Diseases</h6>
+                    <Button onClick={handleOpen}>view...</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+          Patient Diagnosis Diseases
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          {getDiseases &&
                         getDiseases.map((d) => (
-                          <option value={`${d.id}`} key={d.id}>
-                            {d.name}
-                          </option>
+                          <ul>                         
+                            <li value={`${d.id}`} key={d.id}>
+                          {d.name}
+                          </li>
+                          </ul>
+ 
                         ))}
-                    </Form.Select>
+          </Typography>
+        </Box>
+      </Modal>
+                    {console.log("getDiseaseMap",getDiseases)}
+                   
                   </div>
                 </div>
                 <div className="row">

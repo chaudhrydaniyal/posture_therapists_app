@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { PatternFormat } from "react-number-format";
 import axios from "axios";
 import { createRoot } from "react-dom/client";
-
+import moment from "moment";
 import {
   NotificationContainer,
   NotificationManager,
@@ -407,7 +407,7 @@ const DoctorDetails = () => {
                   <Input
                     type="date"
                     name="date_of_birth"
-                    value={data.date_of_birth}
+                    value={moment(data.date_of_birth).utc().format("YYYY-MM-DD")}
                     onChange={(e) => {
                       handleInput(e);
                       ageCalculator(e);
@@ -510,7 +510,7 @@ const DoctorDetails = () => {
                   <PatternFormat
                     style={{
                       height: "2rem",
-                      width: "11rem",
+                      width: "90%",
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
                       boxSizing: "border-box",
