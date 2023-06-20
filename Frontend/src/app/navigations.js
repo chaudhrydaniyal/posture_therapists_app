@@ -88,11 +88,12 @@ export const navigations = [
     name: 'Diseases',
     path: '/addDiseases',
    
-  },{
-    name: 'Branches',
-    path: '/addBranches',
-   
   },
+  // {
+  //   name: 'Branches',
+  //   path: '/addBranches',
+   
+  // },
   {
     name: 'Services',
     path: '/services',

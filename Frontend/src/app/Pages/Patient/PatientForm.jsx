@@ -118,6 +118,7 @@ const PatientForm = () => {
         setSelectedState(null);
         setSelectedCity(null);
         setDiseases(null)
+        setSelectedDisease([])
       },
     });
 
@@ -154,7 +155,9 @@ const PatientForm = () => {
       setDiseases(res.data);
       console.log("res", res);
     });
+    
   }, []);
+ 
 
   const handleChanges = (e) => {
     setDiseaseList(e.target.value);

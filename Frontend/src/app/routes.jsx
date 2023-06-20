@@ -116,10 +116,10 @@ const routes = [
         element: <AddDisease/>
 
       },
-      {
-        path: '/addBranches',
-        element: <AddBranches/>
-      },
+      // {
+      //   path: '/addBranches',
+      //   element: <AddBranches/>
+      // },
 
 
 
