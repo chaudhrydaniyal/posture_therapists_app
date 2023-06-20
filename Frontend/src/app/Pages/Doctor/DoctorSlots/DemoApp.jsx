@@ -26,9 +26,17 @@ export default class DemoApp extends React.Component {
 
   async componentDidMount() {
 
-    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`)).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
-    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`)).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     let array1 = events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green", id: e.id, title: "event" }))
 
@@ -48,7 +56,10 @@ export default class DemoApp extends React.Component {
         <NotificationContainer />
 
         {/* <h6>Name:{this.props.data.first_name}</h6> */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem'}}>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '1rem'}}>
+        <span style={{fontWeight:600}}>Mark the doctor availability slots from the timeline below and press the save button for submitting:</span>
+
          
          
         <Button color="primary" variant="contained" type="submit" onClick={async () => {
@@ -58,7 +69,11 @@ export default class DemoApp extends React.Component {
             try {
              const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
               this.state.currentEvents.filter((ce)=>ce._def.extendedProps.scheduledAppointment != true).map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
-            )
+              ,{
+                headers:{
+                  Authorization: `Bearer ${localStorage.getItem('user')}`,
+                }
+              } )
 
             res && NotificationManager.success("Successfully added time slots");
 

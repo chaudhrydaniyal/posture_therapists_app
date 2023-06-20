@@ -36,7 +36,11 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     axios
       .get(
         process.env.REACT_APP_ORIGIN_URL + "api/scheduledappointments/current/"
-      )
+        ,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem('user')}`,
+          }
+        })
       .then((res) => {
         console.log("resssss", res);
         setPatients(

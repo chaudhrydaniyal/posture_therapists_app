@@ -1,3 +1,6 @@
+const verifyJWT = require("../middleware/verifyJWT.JS");
+
+
 module.exports = app => {
   
   const invoice = require("../controllers/invoice.controller.js");
@@ -5,25 +8,25 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Create a new Tutorial
-  router.post("/", invoice.create);
+  router.post("/",verifyJWT,  invoice.create);
 
   // Retrieve all Tutorials
-  router.get("/", invoice.findAll);
+  router.get("/", verifyJWT, invoice.findAll);
 
   // Retrieve all published Tutorials
-  router.get("/published", invoice.findAllPublished);
+  router.get("/published", verifyJWT, invoice.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", invoice.findOne);
+  router.get("/:id", verifyJWT, invoice.findOne);
 
   // Update a Tutorial with id
-  router.put("/:id", invoice.update);
+  router.put("/:id", verifyJWT, invoice.update);
 
   // Delete a Tutorial with id
-  router.delete("/:id", invoice.delete);
+  router.delete("/:id",verifyJWT,  invoice.delete);
 
   // Delete all Tutorials
-  router.delete("/", invoice.deleteAll);
+  router.delete("/", verifyJWT, invoice.deleteAll);
 
   app.use('/api/invoice', router);
 

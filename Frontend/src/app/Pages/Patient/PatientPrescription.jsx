@@ -208,7 +208,9 @@ const PatientPrescription = ({
         {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+            Authorization: `Bearer ${localStorage.getItem('user')}`,
+          }
+          
         }
       );
       console.log("Patient visit", response.data);
@@ -262,7 +264,11 @@ const PatientPrescription = ({
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/services/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/services/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         setGetService(res.data);
         console.log("services", res);

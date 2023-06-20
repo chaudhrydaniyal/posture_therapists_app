@@ -1,3 +1,7 @@
+const verifyJWT = require("../middleware/verifyJWT.JS");
+
+
+
 module.exports = app =>{
     const services = require("../controllers/services.controller.js");
 

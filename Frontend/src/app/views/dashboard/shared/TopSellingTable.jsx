@@ -67,7 +67,11 @@ const TopSellingTable = () => {
 
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/').then((res) => { setScheduledappointments(res.data); console.log("res", res) })
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => { setScheduledappointments(res.data); console.log("res", res) })
 
   }, [])
 

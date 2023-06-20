@@ -61,7 +61,11 @@ const LeaveForm = () => {
               leaveNature: values.leaveNature,
               days: docDetails.days,
             }
-          );
+            ,{
+              headers:{
+                Authorization: `Bearer ${localStorage.getItem('user')}`,
+              }
+            });
         } catch (error) {
           console.log("error", error);
         }
@@ -86,7 +90,11 @@ const LeaveForm = () => {
   };
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + "api/users/").then((res) => {
+    axios.get(process.env.REACT_APP_ORIGIN_URL + "api/users/",{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => {
       setDocDetails(res.data);
       console.log("res2", res);
     });

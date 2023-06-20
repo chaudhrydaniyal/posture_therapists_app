@@ -49,9 +49,17 @@ export default class AppointmentSchedule extends React.Component {
 
   async componentDidMount() {
 
-    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/')).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
-    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/')).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     console.log("time of app", events[0].start_time)
 
@@ -61,11 +69,19 @@ export default class AppointmentSchedule extends React.Component {
 
     this.setState({ INITIAL_EVENTS: array1.concat(array2) })
 
-    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/')).data
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     this.setState({ doctors: doctors })
 
-    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients')).data
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     this.setState({ patients: patients })
 

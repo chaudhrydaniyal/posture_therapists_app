@@ -194,7 +194,11 @@ class InvoiceModal extends React.Component {
                             description: item.description,
                           })),
                         }
-                      );
+                        ,{
+                          headers:{
+                            Authorization: `Bearer ${localStorage.getItem('user')}`,
+                          }
+                        });
                     } catch (error) {
                       console.log("error", error);
                     }

@@ -182,7 +182,11 @@ const PatientDetails = () => {
           state: data.state,
           city: data.city,
         }
-      );
+        ,{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem('user')}`,
+          }
+        });
 
       NotificationManager.success("Successfully Updated");
     } catch (error) {
@@ -219,10 +223,18 @@ const PatientDetails = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {setGetDiseases(res.data);console.log("diseaseRes",res)});
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + `api/patientvisits/${data.id}`)
+      .get(process.env.REACT_APP_ORIGIN_URL + `api/patientvisits/${data.id}`,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         setVisitsHistory(res.data);
         console.log("res333", res);
@@ -893,13 +905,13 @@ const PatientDetails = () => {
                 <h5>PREVIOUS TREATMENT</h5>
 
                 <div className="row" style={{ marginTop: "2rem" }}>
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <label htmlFor="physiotherapist_seen_before">
                       <div>Have you seen another physiotherapist before?</div>
                     </label>
                   </div>
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
-                    <div style={{ marginLeft: "4rem" }}>
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
+                    <div style={{ marginLeft: "0rem" }}>
                       {" "}
                       <Form.Select
                         name="physiotherapist_seen_before"
@@ -927,14 +939,14 @@ const PatientDetails = () => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <label htmlFor="not_happy">
                       <div>
                         If Yes, was there anything you were not happy about?
                       </div>
                     </label>
                   </div>
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
@@ -953,12 +965,12 @@ const PatientDetails = () => {
                 </div>
 
                 <div className="row">
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <label htmlFor="most_happy">
                       <div>What aspects were you most happy with?</div>
                     </label>
                   </div>
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -976,7 +988,7 @@ const PatientDetails = () => {
                 </div>
 
                 <div className="row">
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <label htmlFor="today_session">
                       <div>
                         What are the main things you would like to achieve by
@@ -985,7 +997,7 @@ const PatientDetails = () => {
                     </label>
                   </div>
 
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -1003,7 +1015,7 @@ const PatientDetails = () => {
                 </div>
 
                 <div className="row">
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <label htmlFor="stopping_you">
                       <div>
                         What is this problem you are here for stopping you from
@@ -1012,7 +1024,7 @@ const PatientDetails = () => {
                     </label>
                   </div>
 
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -1029,7 +1041,7 @@ const PatientDetails = () => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <label htmlFor="fixed_now">
                       <div>
                         Why is it important that you get this problem fixed NOW?
@@ -1037,7 +1049,7 @@ const PatientDetails = () => {
                     </label>
                   </div>
 
-                  <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+                  <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"

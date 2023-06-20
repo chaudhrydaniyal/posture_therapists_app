@@ -119,7 +119,11 @@ const DoctorForm = () => {
           const addDoctor = await axios.post(
             process.env.REACT_APP_ORIGIN_URL + "api/users",
             data
-          );
+            ,{
+              headers:{
+                Authorization: `Bearer ${localStorage.getItem('user')}`,
+              }
+            });
 
           addDoctor && NotificationManager.success("Successfully Registered");
         } catch (error) {

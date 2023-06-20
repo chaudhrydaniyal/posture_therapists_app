@@ -82,6 +82,10 @@ const AddDisease = () => {
     try {
       axios.post(process.env.REACT_APP_ORIGIN_URL + "api/diseases", {
         name: disease,
+      },{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
       });
       NotificationManager.succes("Something went wrong");
     } catch {
@@ -100,7 +104,11 @@ const AddDisease = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         setGetDisease(res.data);
         console.log("res", res);
@@ -215,7 +223,11 @@ const AddDisease = () => {
                           // id:editDisease.id,
                           name: editDisease.name,
                         }
-                      );
+                        ,{
+                          headers:{
+                            Authorization: `Bearer ${localStorage.getItem('user')}`,
+                          }
+                        });
                       NotificationManager.success("Successfully Updated");
                     } catch (error) {
                       NotificationManager.error("Something went wrong");
@@ -268,7 +280,11 @@ const AddDisease = () => {
                           await axios.delete(
                             process.env.REACT_APP_ORIGIN_URL +
                               `api/diseases/${items.id}`
-                          );
+                              ,{
+                                headers:{
+                                  Authorization: `Bearer ${localStorage.getItem('user')}`,
+                                }
+                              });
                           setUpdate(!update);
                         }}
                         style={{

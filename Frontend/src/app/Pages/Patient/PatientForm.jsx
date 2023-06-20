@@ -105,7 +105,11 @@ const PatientForm = () => {
               city: selectedCity && selectedCity.name,
               diseases: selectedDisease.map((sd) => sd.id),
             }
-          );
+            ,{
+              headers:{
+                Authorization: `Bearer ${localStorage.getItem('user')}`,
+              }
+            });
 
           NotificationManager.success("Successfully Registered");
         } catch (error) {
@@ -150,7 +154,11 @@ const PatientForm = () => {
   };
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + "api/diseases").then((res) => {
+    axios.get(process.env.REACT_APP_ORIGIN_URL + "api/diseases",{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => {
       setDiseases(res.data);
       console.log("res", res);
     });
@@ -493,7 +501,7 @@ const PatientForm = () => {
                 <div>Address:</div>
               </label>
             </div>
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_width"
@@ -698,13 +706,13 @@ const PatientForm = () => {
           <h5>PREVIOUS TREATMENT</h5>
 
           <div className="row" style={{ marginTop: "2rem" }}>
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <label htmlFor="physiotherapist_seen_before">
                 <div>Have you seen another physiotherapist before?</div>
               </label>
             </div>
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-1">
-              <div style={{ marginLeft: "4rem" }}>
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-1">
+              <div style={{ marginLeft: "0rem" }}>
                 {" "}
                 <Form.Select
                   name="physiotherapist_seen_before"
@@ -729,12 +737,12 @@ const PatientForm = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <label htmlFor="not_happy">
                 <div>If Yes, was there anything you were not happy about?</div>
               </label>
             </div>
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-2">
               {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
               <Input
                 style={{ paddingLeft: "0.3rem" }}
@@ -750,12 +758,12 @@ const PatientForm = () => {
           </div>
 
           <div className="row">
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <label htmlFor="most_happy">
                 <div>What aspects were you most happy with?</div>
               </label>
             </div>
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-2">
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_width"
@@ -770,7 +778,7 @@ const PatientForm = () => {
           </div>
 
           <div className="row">
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <label htmlFor="today_session">
                 <div>
                   What are the main things you would like to achieve by the end
@@ -779,7 +787,7 @@ const PatientForm = () => {
               </label>
             </div>
 
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-2">
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_width"
@@ -794,7 +802,7 @@ const PatientForm = () => {
           </div>
 
           <div className="row">
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <label htmlFor="stopping_you">
                 <div>
                   What is this problem you are here for stopping you from doing?
@@ -802,7 +810,7 @@ const PatientForm = () => {
               </label>
             </div>
 
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-2">
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_width"
@@ -816,7 +824,7 @@ const PatientForm = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-3">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
               <label htmlFor="fixed_now">
                 <div>
                   Why is it important that you get this problem fixed NOW?
@@ -824,7 +832,7 @@ const PatientForm = () => {
               </label>
             </div>
 
-            <div className="col-xl-6 col-lg-2 col-sm-2 border p-2">
+            <div className="col-xl-6 col-lg-6 col-sm-6 border p-2">
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_width"
