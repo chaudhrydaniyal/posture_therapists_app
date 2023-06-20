@@ -65,11 +65,19 @@ class Invoice extends React.Component {
 
   componentDidMount() {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/patients/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/patients/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         this.setState({ patientName: res.data });
       });
-    axios.get(process.env.REACT_APP_ORIGIN_URL + "api/users/").then((res) => {
+    axios.get(process.env.REACT_APP_ORIGIN_URL + "api/users/",{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => {
       this.setState({ doctorName: res.data }, () => {
         this.props.params.state &&
           this.setState({

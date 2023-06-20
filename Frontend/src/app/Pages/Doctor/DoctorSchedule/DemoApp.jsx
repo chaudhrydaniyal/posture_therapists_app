@@ -25,9 +25,17 @@ export default class DemoApp extends React.Component {
 
   async componentDidMount() {
 
-    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`)).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/doctortimeslots/${this.props.data}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
-    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`)).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + `api/scheduledappointments/${this.props.data}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     let array1 = events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green", id: e.id, title: "event", ignoreSlots: true }))
 
@@ -42,11 +50,11 @@ export default class DemoApp extends React.Component {
       <div className='demo-app'>
         <NotificationContainer />
         {/* <h6>Name:{this.props.data.first_name}</h6> */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '1rem' }}>
-          <span style={{ marginRight: "auto", paddingRight: "30px" }}>
-              Select the doctor's weekly time schedule from the calendar below:
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '1rem' }}>
+          <span style={{ marginRight: "auto", fontWeight:600}}>
+              Mark the doctor's weekly schedule from the timeline below and select scheduling period for which to implement the current schedule:
           </span>
-          <span className='me-3'>
+          <span className='me-3 ms-3'>
             <label for="schedulingPeriod">Scheduling Period:</label>
             &nbsp;
             <select name="schedulingPeriod" id="schedulingPeriod" onClick={(e) => { this.setState({ schedulingPeriod: e.target.value }) }}>
@@ -56,35 +64,31 @@ export default class DemoApp extends React.Component {
             </select>
           </span>
 
-
-          <Button color="primary" variant="contained" type="submit" onClick={async () => {
+          <Button color="primary" variant="contained" type="submit" style={{height:'35px'}} onClick={async () => {
 
             const postObject = {
-
               date_started: new Date(this.state.currentEvents[0]._instance.range.start),
               doctor: this.props.data,
               slots: this.state.currentEvents.filter((ce)=>ce._def.extendedProps.ignoreSlots != true).map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end) })),
               validity_months: this.state.schedulingPeriod
-
             }
 
             try {
-
               const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/weeklyschedule',
-                postObject
+                postObject,{
+                  headers:{
+                    Authorization: `Bearer ${localStorage.getItem('user')}`,
+                  }
+                }
               )
               res && NotificationManager.success("Successfully added time slots");
-
             }
-
             catch {
-
               NotificationManager.error("Something went wrong")
-
             }
             // console.log("current",this.state.currentEvents.map(ce=>({start_time:ce._instance.range.start, end_time:ce._instance.range.end})))
           }}
-          >Update</Button>
+          >Save</Button>
         </div>
         {/* {this.renderSidebar()} */}
         <div className='demo-app-main'>

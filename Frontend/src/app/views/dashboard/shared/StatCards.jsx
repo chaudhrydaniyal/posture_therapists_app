@@ -34,10 +34,22 @@ const StatCards = () => {
   const [doctorCount,setDoctorCount] = useState([])
   const [scheduledAppointment,setScheduledAppointment] = useState([])
   useEffect(() => {
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/').then((res) => { setPatientCount(res.data.length)})
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => { setPatientCount(res.data.length)})
     console.log("patientCount",patientCount)
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/').then((res) => setDoctorCount(res.data.length))
-    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/').then((res)=>{setScheduledAppointment(res.data.length)})
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => setDoctorCount(res.data.length))
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res)=>{setScheduledAppointment(res.data.length)})
   
   }, [])
   const cardList = [

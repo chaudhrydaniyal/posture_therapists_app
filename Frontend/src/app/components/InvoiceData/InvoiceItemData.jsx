@@ -39,7 +39,11 @@ class InvoiceItemData extends React.Component {
 
   componentDidMount() {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/services/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/services/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         this.setState({ service: res.data });
       });

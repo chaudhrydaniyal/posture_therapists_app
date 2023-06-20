@@ -117,9 +117,17 @@ class Calender extends Component {
   async componentDidMount() {
 
 
-    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/')).data
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
-    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/')).data
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
 
     let array1 = events.map((e, i) => ({
@@ -149,7 +157,11 @@ class Calender extends Component {
     this.setState({ items: array1.concat(array2) })
 
 
-    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/')).data
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     let doctorsArray = doctors.map((e, i) => ({
       id: e.id,
@@ -160,7 +172,11 @@ class Calender extends Component {
     this.setState({ groups: doctorsArray })
 
 
-    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients')).data
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     this.setState({ patients: patients })
 
@@ -343,7 +359,11 @@ class Calender extends Component {
                   start_time: moment.utc(se.start).tz("Asia/Karachi").format(), end_time: moment.utc(se.end).tz("Asia/Karachi").format(), doctor: se.group,
                   patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
                 }))
-              )
+                ,{
+                  headers:{
+                    Authorization: `Bearer ${localStorage.getItem('user')}`,
+                  }
+                } )
               NotificationManager.success("Successfully updated appointment scheduling");
             }
             catch {

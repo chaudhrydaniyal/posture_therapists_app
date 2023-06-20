@@ -36,7 +36,11 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     axios
       .get(
         process.env.REACT_APP_ORIGIN_URL + "api/scheduledappointments/current/"
-      )
+        , {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('user')}`,
+          }
+        })
       .then((res) => {
         console.log("resssss", res);
         setPatients(
@@ -56,18 +60,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     if (
       validator.isEmpty(values.personal_conditions) ||
       values.patient == null
-      // validator.isEmpty(values.current_treatment) ||
-      // validator.isEmpty(values.remarks) ||
-      // validator.isEmpty(values.AssTrauma_diseases) ||
-      // validator.isEmpty(values.ROMstatus) ||
-      // validator.isEmpty(values.muscle_status) ||
-      // validator.isEmpty(values.skin_soft_tissues_pain) ||
-      // validator.isEmpty(values.cardio_vascular_status) ||
-      // validator.isEmpty(values.general_mobility) ||
-      // validator.isEmpty(values.transfers) ||
-      // validator.isEmpty(values.balance) ||
-      // validator.isEmpty(values.upper_limb_functions) ||
-      // validator.isEmpty(values.daily_life_activities)
+
     ) {
       NotificationManager.error("Please enter the required fields");
       console.log("setError");
@@ -77,14 +70,14 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
     }
   };
 
-    return (
+  return (
 
-<div>
-            <Box className="breadcrumb">
-                <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
-            </Box>
-            <NotificationContainer />
-            
+    <div>
+      <Box className="breadcrumb">
+        <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
+      </Box>
+      <NotificationContainer />
+
 
       <div className="card">
         <div className="card-body">
@@ -92,7 +85,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
           <Select
             size="small"
-            style={{ width: 600, margin: "20px",marginLeft: "0px"  }}
+            style={{ width: 600, margin: "20px", marginLeft: "0px" }}
             onChange={(e) => {
               setSelectedPatient(e.target.value);
 
@@ -125,7 +118,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Personal Conditions:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -147,7 +140,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Current Treatment:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -167,7 +160,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Remarks:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -188,7 +181,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Ass.trauma & Disease:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -205,7 +198,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>R.O.M status:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -225,7 +218,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Muscle status:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   className="Input_width"
@@ -242,7 +235,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Skin & Soft tissue/pain:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -262,7 +255,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Cardio vascular status:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -284,7 +277,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>General Mobility (gait):</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -301,7 +294,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Transfers:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -321,7 +314,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Balance:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -337,7 +330,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Upper Limb Functions:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 {" "}
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
@@ -357,7 +350,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
                   <div>Daily Life Activities:</div>
                 </label>
               </div>
-              <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
+              <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -373,19 +366,19 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 <Body markers={markers} setMarkers={setMarkers} />
 </div> */}
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
 
 
-                            <Button color="primary" variant="contained" type="submit">
-                                {/* <Icon>send</Icon> */}
-                                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Next</Span>
-                            </Button>
-                        </div>
-                    </Form>
-                </div>
+              <Button color="primary" variant="contained" type="submit">
+                {/* <Icon>send</Icon> */}
+                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Next</Span>
+              </Button>
             </div>
+          </Form>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default PatientVisit     

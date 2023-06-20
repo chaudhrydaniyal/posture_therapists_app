@@ -77,6 +77,9 @@ export const AuthProvider = ({ children }) => {
 
     console.log("response of api", response)
 
+    localStorage.setItem("user", response.data.accessToken)
+
+
     const  user  = response.data.data;
 
     console.log("login", user)

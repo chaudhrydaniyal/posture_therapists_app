@@ -83,7 +83,11 @@ class AddItemsForm extends React.Component {
 
   async componentDidMount() {
 
-    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/')).data
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     let array2 = doctors.map((e, i) => ({
       id: e.id,
@@ -92,7 +96,11 @@ class AddItemsForm extends React.Component {
 
     this.setState({ mentorsList: array2 })
 
-    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients')).data
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients',{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    })).data
 
     this.setState({ patients: patients })
 

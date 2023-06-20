@@ -89,6 +89,10 @@ const Services = () => {
       service_name: service.service,
       charges: service.price,
       description: service.description,
+    },{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
     });
   };
   const handleInput = (e) => {
@@ -106,7 +110,11 @@ const Services = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/services/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/services/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         setGetService(res.data);
         console.log("get", res);
@@ -279,7 +287,11 @@ const Services = () => {
                           charges: editService.price,
                           description: editService.description,
                         }
-                      );
+                        ,{
+                          headers:{
+                            Authorization: `Bearer ${localStorage.getItem('user')}`,
+                          }
+                        } );
                       NotificationManager.success("Successfully Updated");
                     } catch (error) {
                       NotificationManager.error("Something went wrong");
@@ -344,7 +356,11 @@ const Services = () => {
                           await axios.delete(
                             process.env.REACT_APP_ORIGIN_URL +
                               `api/Services/${items.id}`
-                          );
+                              ,{
+                                headers:{
+                                  Authorization: `Bearer ${localStorage.getItem('user')}`,
+                                }
+                              });
                           setUpdate(!update);
                         }}
                         style={{

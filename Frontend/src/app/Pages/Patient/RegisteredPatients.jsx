@@ -52,7 +52,11 @@ const RegisteredPatients = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/patients/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/patients/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         setPatients(res.data);
         console.log("res", res);

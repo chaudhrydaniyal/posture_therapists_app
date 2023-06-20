@@ -1,3 +1,6 @@
+const verifyJWT = require("../middleware/verifyJWT.JS");
+
+
 module.exports = app => {
 
   const patient_visit = require("../controllers/patient_visit.controller.js");
@@ -5,25 +8,25 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Create a new Tutorial
-  router.post("/", patient_visit.create);
+  router.post("/",verifyJWT, patient_visit.create);
 
   // Retrieve all Tutorials
-  router.get("/", patient_visit.findAll);
+  router.get("/",verifyJWT, patient_visit.findAll);
 
   // Retrieve all published Tutorials
-  router.get("/published", patient_visit.findAllPublished);
+  router.get("/published",verifyJWT, patient_visit.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", patient_visit.findOne);
+  router.get("/:id",verifyJWT, patient_visit.findOne);
 
   // Update a Tutorial with id
-  router.put("/:id", patient_visit.update);
+  router.put("/:id",verifyJWT, patient_visit.update);
 
   // Delete a Tutorial with id
-  router.delete("/:id", patient_visit.delete);
+  router.delete("/:id",verifyJWT, patient_visit.delete);
 
   // Delete all Tutorials
-  router.delete("/", patient_visit.deleteAll);
+  router.delete("/",verifyJWT, patient_visit.deleteAll);
 
   app.use('/api/patientvisits', router);
   

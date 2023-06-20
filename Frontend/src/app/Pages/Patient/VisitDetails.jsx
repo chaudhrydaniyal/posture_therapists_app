@@ -69,13 +69,21 @@ const VisitDetails = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/patientvisits/")
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/patientvisits/",{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => {
         setPatientPrescription(res.data);
         console.log("resss", res);
       });
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + `api/invoice/${data.id}`)
+      .get(process.env.REACT_APP_ORIGIN_URL + `api/invoice/${data.id}`,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      })
       .then((res) => setInvoiceData(res.data));
 
     console.log("patientPrescription", PatientPrescription);

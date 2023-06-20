@@ -131,6 +131,10 @@ const DoctorDetails = () => {
           country: data.country,
           state: data.state,
           city: data.city,
+        },{
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem('user')}`,
+          }
         })
         .then((user) => {
           data.picture = user.data.picture;
