@@ -38,9 +38,9 @@ export default class DemoApp extends React.Component {
       }
     })).data
 
-    let array1 = events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green", id: e.id, title: "event" }))
+    let array1 = events.map((e) => ({ start: e.start_time, end: e.end_time, title: e.first_name, color: "green", id: e.id, title: "event" , ignoreSlots: true}))
 
-    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id, scheduledAppointment: true }))
+    let array2 = scheduledAppointments.map((e) => ({ start: e.start_time, end: e.end_time, title: e.patient, color: "purple", id: e.id, scheduledAppointment: true ,ignoreSlots: true}))
 
     this.setState({ INITIAL_EVENTS: array1.concat(array2) })
 
@@ -68,7 +68,7 @@ export default class DemoApp extends React.Component {
 
             try {
              const res = await axios.post(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots',
-              this.state.currentEvents.filter((ce)=>ce._def.extendedProps.scheduledAppointment != true).map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
+              this.state.currentEvents.filter((ce)=> ce._def.extendedProps.ignoreSlots != true).map(ce => ({ start_time: new Date(ce._instance.range.start), end_time: new Date(ce._instance.range.end), doctor: this.props.data }))
               ,{
                 headers:{
                   Authorization: `Bearer ${localStorage.getItem('user')}`,

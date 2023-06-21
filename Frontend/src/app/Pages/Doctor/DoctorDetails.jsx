@@ -231,7 +231,7 @@ const DoctorDetails = () => {
           }}
         />
         <label for="tab-2" class="tab-label">
-          Available Slots
+        Add availability slots
         </label>
       </div>
       <div class="tab">
@@ -246,7 +246,7 @@ const DoctorDetails = () => {
           }}
         />
         <label for="tab-3" class="tab-label">
-          Weekly Schedule
+        Create weekly schedule
         </label>
       </div>
       <br />

@@ -19,48 +19,87 @@ const Invoice = function (invoice) {
   // this.price = invoice.price;
 };
 
-Invoice.create = (invoice,  result) => {
+
+
+
+// Invoice.create = (invoice,  result) => {
+
+//   const invoiceItems = invoice.items;
+
+//   delete invoice.items;
+
+//   sql.query("INSERT INTO invoice SET ?", invoice, (err, res) => {
+    
+//     if (err) {
+//       console.log("error:", err);
+//       result(err, null);
+//       return;
+//     }
+
+//     sql.query("INSERT INTO invoice_items (item , description, qty , price, invoice ) VALUES ?", [invoiceItems.map((d)=>[d.title, d.description, d.qty, d.price, res.insertId])], (err, res) => {
+//     })
+
+//     result(null, { id: res.insertId });
+//   });
+// };
+
+
+
+
+
+//*************************************testing************************ */
+
+Invoice.create = async (invoice, result) => {
 
   const invoiceItems = invoice.items;
 
   delete invoice.items;
 
-  sql.query("INSERT INTO invoice SET ?", invoice, (err, res) => {
-    
-    if (err) {
-      console.log("error:", err);
-      result(err, null);
-      return;
-    }
+  sql.beginTransaction()
 
-    sql.query("INSERT INTO invoice_items (item , description, qty , price, invoice ) VALUES ?", [invoiceItems.map((d)=>[d.title, d.description, d.qty, d.price, res.insertId])], (err, res) => {
-    })
+  try {
 
-    result(null, { id: res.insertId });
-  });
+    sql.query("INSERT INTO invoice SET ?", invoice, (err, res_invoice) => {
+
+      if (err) {
+        console.log("error:", err);
+        sql.rollback()
+        result(err, null);
+        return;
+      }
+
+      sql.query("INSERT INTO invoice_items (item , description, qty , price, invoice ) VALUES ?", [invoiceItems.map((d) => [d.title, d.description, d.qty, d.price, res_invoice.insertId])], (err, res) => {
+
+        if (err) {
+          console.log("error:", err);
+          sql.rollback()
+          result(err, null);
+          return;
+        }
+
+        sql.commit()
+
+        result(null, { id: res_invoice.insertId });
+
+      })
+
+    });
+  }
+  catch (err) {
+
+    result(err, null)
+
+  }
 };
 
+
+
+
+
+
 Invoice.findById = (id, result) => {
-
-  // sql.query(`SELECT * FROM patients WHERE id = ${id}`, (err, res) => {
-  //   if (err) {
-  //     console.log("error: ", err);
-  //     result(err, null);
-  //     return;
-  //   }
-
-  //   if (res.length) {
-  //     console.log("found invoice: ", res[0]);
-  //     result(null, res[0]);
-  //     return;
-  //   }
-
-  //   // not found Tutorial with the id
-  //   result({ kind: "not_found" }, null);
-  // });
   
   sql.query(
-    
     // `SELECT * FROM invoice WHERE patient_visit_id = ${id}`
    `SELECT invoice.id, date, sub_total, patient, doctor, discount, tax_rate, patient_visit_id, patients.first_name as patient_first_name , patients.email, patients.address, users.first_name as doctor_first_name FROM invoice  join patients on invoice.patient = patients.id join users on invoice.doctor = users.id WHERE patient_visit_id = ${id}`,
     async (err, res) => {
@@ -71,9 +110,7 @@ Invoice.findById = (id, result) => {
     }
 
     if (res.length) {
-
         const finalResult = await Promise.all(res.map(async (r)=> {
-
         const  invoice_items =  await query(`SELECT * FROM invoice_items WHERE invoice = ${r.id}`)
         return ({ ...r, invoice_items: invoice_items})  
       }))
@@ -82,10 +119,52 @@ Invoice.findById = (id, result) => {
     }
     // not found Tutorial with the id
     result({ kind: "not_found" }, null);
-
   });
 
 };
+
+
+
+
+// Invoice.findById = (id, result) => {
+
+//   sql.query(
+//     `SELECT invoice.id, date, sub_total, patient, doctor, discount, tax_rate, patient_visit_id, patients.first_name as patient_first_name , patients.email, patients.address, users.first_name as doctor_first_name, item as 'invoice_items.item', description as 'invoice_items.description', qty as 'invoice_items.qty', price as 'invoice_items.price' FROM invoice join invoice_items on invoice_items.invoice = invoice.id join patients on invoice.patient = patients.id join users on invoice.doctor = users.id WHERE patient_visit_id = ${id}`,
+//     async (err, res) => {
+//       if (err) {
+//         console.log("error: ", err);
+//         result(err, null);
+//         return;
+//       }
+//       // if (res.length) {
+//       //   const finalResult = await Promise.all(res.map(async (r) => {
+//       //     const invoice_items = await query(`SELECT * FROM invoice_items WHERE invoice = ${r.id}`)
+//       //     return ({ ...r, invoice_items: invoice_items })
+//       //   }))
+//       //   result(null, finalResult);
+//       //   return;
+       
+//       // }
+
+//       result(null, res);
+
+//       // not found Tutorial with the id
+//       // result({ kind: "not_found" }, null);
+//     });
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Invoice.getAll =  (title, result) => {
 
