@@ -74,7 +74,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
 
     <div>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
+        <Breadcrumb routeSegments={[{ name: 'Patient Visit', value : "Posture Physio" }]} />
       </Box>
       <NotificationContainer />
 
@@ -114,12 +114,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row" style={{ marginTop: "2rem" }}>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="personal_conditions">
-                  {" "}
+               
                   <div>Personal Conditions:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+       
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -136,12 +136,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="current_treatment">
-                  {" "}
+             
                   <div>Current Treatment:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+                
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -156,7 +156,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="remarks">
-                  {" "}
+                
                   <div>Remarks:</div>
                 </label>
               </div>
@@ -172,17 +172,17 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
             </div>
             <h5 style={{ marginTop: "1rem" }}>
-              Body Structure And Function Impairments{" "}
+              Body Structure And Function Impairments
             </h5>
             <div className="row" style={{ marginTop: "2rem" }}>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="AssTrauma_diseases">
-                  {" "}
+                 
                   <div>Ass.trauma & Disease:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+            
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -194,12 +194,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="ROMstatus">
-                  {" "}
+                  
                   <div>R.O.M status:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+               
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -214,7 +214,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="muscle_status">
-                  {" "}
+                
                   <div>Muscle status:</div>
                 </label>
               </div>
@@ -231,12 +231,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="skin_soft_tissues_pain">
-                  {" "}
+                 
                   <div>Skin & Soft tissue/pain:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+            
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   name="skin_soft_tissues_pain"
@@ -251,7 +251,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="cardio_vascular_status">
-                  {" "}
+                 
                   <div>Cardio vascular status:</div>
                 </label>
               </div>
@@ -268,17 +268,17 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             </div>
 
             <h5 style={{ marginTop: "1rem" }}>
-              Activity Limitations & Participation Restriction{" "}
+              Activity Limitations & Participation Restriction
             </h5>
             <div className="row" style={{ marginTop: "2rem" }}>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="general_mobility">
-                  {" "}
+                  
                   <div>General Mobility (gait):</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+             
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -290,12 +290,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="transfers">
-                  {" "}
+                
                   <div>Transfers:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+                
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   type="text"
@@ -310,7 +310,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="balance">
-                  {" "}
+                  
                   <div>Balance:</div>
                 </label>
               </div>
@@ -326,12 +326,12 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               </div>
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="upper_limb_functions">
-                  {" "}
+                
                   <div>Upper Limb Functions:</div>
                 </label>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                {" "}
+               
                 <Input
                   style={{ paddingLeft: "0.3rem" }}
                   name="upper_limb_functions"
@@ -346,7 +346,7 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="daily_life_activities">
-                  {" "}
+                  
                   <div>Daily Life Activities:</div>
                 </label>
               </div>

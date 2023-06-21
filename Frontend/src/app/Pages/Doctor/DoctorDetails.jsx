@@ -10,7 +10,6 @@ import {
 } from "react-notifications";
 import DemoApp from "./DoctorSlots/DemoApp";
 import DoctorWeeklySchedule from "./DoctorSchedule/DemoApp";
-
 import { Box, styled, Icon, Button } from "@mui/material";
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from "app/components";
@@ -196,7 +195,7 @@ const DoctorDetails = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Doctor Details" }]} />
+        <Breadcrumb routeSegments={[{ name: "Doctor Details", value : "Posture Physio" }]} />
       </Box>
 
       <NotificationContainer />

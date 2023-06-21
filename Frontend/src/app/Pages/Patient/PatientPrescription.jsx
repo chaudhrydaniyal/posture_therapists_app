@@ -280,7 +280,7 @@ const PatientPrescription = ({
         <div>
 
             <Box className="breadcrumb">
-                <Breadcrumb routeSegments={[{ name: 'Patient Visit' }]} />
+                <Breadcrumb routeSegments={[{ name: 'Patient Visit', value : "Posture Physio" }]} />
             </Box>
 
       <Modal

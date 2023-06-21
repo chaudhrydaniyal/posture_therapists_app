@@ -66,7 +66,7 @@ const AddBranches = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Add Branches" }]} />
+        <Breadcrumb routeSegments={[{ name: "Add Branches", value : "Posture Physio" }]} />
       </Box>
 
       <div className="card">

@@ -117,7 +117,7 @@ const AddDisease = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Add Disease" }]} />
+        <Breadcrumb routeSegments={[{ name: "Add Disease", value : "Posture Physio" }]} />
       </Box>
       <NotificationContainer />
 
