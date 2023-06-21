@@ -68,7 +68,7 @@ const RegisteredPatients = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Registered Patients" }]} />
+        <Breadcrumb routeSegments={[{ name: "Registered Patients", value : "Posture Physio" }]} />
       </Box>
 
       <div className="card">

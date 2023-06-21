@@ -123,7 +123,7 @@ const Services = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Services" }]} />
+        <Breadcrumb routeSegments={[{ name: "Services" , value : "Posture Physio"}]} />
       </Box>
       <NotificationContainer />
       <div className="card">

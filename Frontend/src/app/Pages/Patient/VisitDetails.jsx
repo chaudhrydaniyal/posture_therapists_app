@@ -46,7 +46,7 @@ const VisitDetails = () => {
     DiagnosisICD10code: visitDetails.DiagnosisICD10code,
     BriefMedicalHistory: visitDetails.BriefMedicalHistory,
     PhysicalTherapyEvaluationTreatment:
-      visitDetails.PhysicalTherapyEvaluationTreatment,
+    visitDetails.PhysicalTherapyEvaluationTreatment,
     AnticipatedFrequencyDuration: visitDetails.AnticipatedFrequencyDuration,
     SpecialInstructions: visitDetails.SpecialInstructions,
     WeightBearingPrecautions: visitDetails.WeightBearingPrecautions,
@@ -96,7 +96,7 @@ const VisitDetails = () => {
       {/* <section className="content"> */}
 
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Visit Details" }]} />
+        <Breadcrumb routeSegments={[{ name: "Visit Details" , value : "Posture Physio"}]} />
       </Box>
 
       {/* ************************Patient Visit**************** */}
@@ -111,12 +111,12 @@ const VisitDetails = () => {
                 <div className="row" style={{ marginTop: "2rem" }}>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="personal_conditions">
-                      {" "}
+                     
                       <div>Personal Conditions:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-4 col-sm-4 border p-3">
-                    {" "}
+                  
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -127,12 +127,12 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="current_treatment">
-                      {" "}
+                     
                       <div>Current Treatment:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+                   
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -146,7 +146,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="remarks">
-                      {" "}
+                    
                       <div>Remarks:</div>
                     </label>
                   </div>
@@ -168,12 +168,12 @@ const VisitDetails = () => {
                 <div className="row" style={{ marginTop: "2rem" }}>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="AssTrauma_diseases">
-                      {" "}
+                    
                       <div>Ass.trauma & Disease:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+                   
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -184,12 +184,12 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="ROMstatus">
-                      {" "}
+                      
                       <div>R.O.M status:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+                    
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -203,7 +203,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="muscle_status">
-                      {" "}
+                      
                       <div>Muscle status:</div>
                     </label>
                   </div>
@@ -218,12 +218,12 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="skin_soft_tissues_pain">
-                      {" "}
+                   
                       <div>Skin & Soft tissue/pain:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+             
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       name="skin_soft_tissues_pain"
@@ -237,7 +237,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="cardio_vascular_status">
-                      {" "}
+                    
                       <div>Cardio vascular status:</div>
                     </label>
                   </div>
@@ -253,17 +253,17 @@ const VisitDetails = () => {
                 </div>
 
                 <h5 style={{ marginTop: "1rem" }}>
-                  Activity Limitations & Participation Restriction{" "}
+                  Activity Limitations & Participation Restriction
                 </h5>
                 <div className="row" style={{ marginTop: "2rem" }}>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="general_mobility">
-                      {" "}
+                      
                       <div>General Mobility (gait):</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+             
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -274,12 +274,12 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="transfers">
-                      {" "}
+                     
                       <div>Transfers:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+                    
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -293,7 +293,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="balance">
-                      {" "}
+                 
                       <div>Balance:</div>
                     </label>
                   </div>
@@ -308,12 +308,12 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="upper_limb_functions">
-                      {" "}
+                    
                       <div>Upper Limb Functions:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+                   
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       name="upper_limb_functions"
@@ -327,7 +327,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="daily_life_activities">
-                      {" "}
+                    
                       <div>Daily Life Activities:</div>
                     </label>
                   </div>
@@ -361,12 +361,12 @@ const VisitDetails = () => {
                 <div className="row" style={{ marginTop: "2rem" }}>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="DiagnosisICD10code">
-                      {" "}
+                    
                       <div>Diagnosis-ICD10-code:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+               
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -376,12 +376,12 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="BriefMedicalHistory">
-                      {" "}
+                    
                       <div>Brief-Medical-History:</div>
                     </label>
                   </div>
                   <div className="col-xl-4 col-lg-2 col-sm-2 border p-3">
-                    {" "}
+                   
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -394,7 +394,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="PhysicalTherapyEvaluationTreatment">
-                      {" "}
+                   
                       <div>Physical-Therapy-Evaluation-Treatment:</div>
                     </label>
                   </div>
@@ -408,7 +408,7 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="Other">
-                      {" "}
+                    
                       <div>Other:</div>
                     </label>
                   </div>
@@ -426,7 +426,7 @@ const VisitDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="AnticipatedFrequencyDuration">
-                      {" "}
+                      
                       <div>Anticipated-Frequency-Duration:</div>
                     </label>
                   </div>
@@ -440,7 +440,7 @@ const VisitDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="SpecialInstructions">
-                      {" "}
+                      
                       <div>Special-Instructions:</div>
                     </label>
                   </div>

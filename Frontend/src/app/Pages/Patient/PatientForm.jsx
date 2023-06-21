@@ -21,6 +21,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 
+
+
 const initialValue = {
   first_name: "",
   last_name: "",
@@ -196,7 +198,7 @@ const PatientForm = () => {
       {/* <section className="content"> */}
 
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Patient Registration" }]} />
+        <Breadcrumb routeSegments={[{ name: "Patient Registration" , value : "Posture Physio"}]} />
       </Box>
       <NotificationContainer />
 
@@ -209,12 +211,12 @@ const PatientForm = () => {
           <div className="row" style={{ marginTop: "2rem" }}>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="first_name">
-                {" "}
+  
                 <div>First Name:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              {" "}
+    
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_border"
@@ -231,12 +233,12 @@ const PatientForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="last_name">
-                {" "}
+             
                 <div>Last Name:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              {" "}
+           
               <Input
                 style={{ paddingLeft: "0.3rem" }}
                 className="Input_border"
@@ -250,14 +252,14 @@ const PatientForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="middle_name">
-                {" "}
+           
                 <div>
                   Blood Group <BloodtypeIcon /> :
                 </div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              {" "}
+           
               <Form.Select
                 name="blood_group"
                 class="form-control dropdown"
@@ -333,12 +335,12 @@ const PatientForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="gender">
-                {" "}
+               
                 <div>Gender:</div>
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-2">
-              {" "}
+             
               <Form.Select
                 name="gender"
                 class="form-control dropdown"
@@ -427,7 +429,7 @@ const PatientForm = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
               <label htmlFor="medical_status">
-                {" "}
+             
                 <div>Medical Status:</div>
               </label>
             </div>
@@ -481,7 +483,8 @@ const PatientForm = () => {
                     .slice(0, 11);
                 }}
               /> */}
-                             <PhoneInput
+
+ <PhoneInput
   country="pk"
   value={values.mobile_no}
   inputProps={{
@@ -500,7 +503,7 @@ const PatientForm = () => {
           <div className="row">
             <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
               <label htmlFor="address">
-                {" "}
+             
                 <div>Address:</div>
               </label>
             </div>
@@ -690,7 +693,7 @@ const PatientForm = () => {
                     .slice(0, 11);
                 }}
               /> */}
-                   <PhoneInput
+<PhoneInput
               // style={{width:"10%"}}
   country="pk"
   value={values.emergency_person_mobile}
@@ -716,7 +719,7 @@ const PatientForm = () => {
             </div>
             <div className="col-xl-6 col-lg-6 col-sm-6 border p-1">
               <div style={{ marginLeft: "0rem" }}>
-                {" "}
+                
                 <Form.Select
                   name="physiotherapist_seen_before"
                   class="form-control dropdown"
@@ -856,7 +859,7 @@ const PatientForm = () => {
             }}
           >
             <div>
-              {/* <button style={{ padding: "0.5rem", border: "0.5px solid grey", borderRadius: "5px", fontWeight: "bold", background: "#365CAD", color: "white" }} type="button" onClick={handleSubmit}>Submit</button> */}
+             
               <Button
                 color="primary"
                 variant="contained"

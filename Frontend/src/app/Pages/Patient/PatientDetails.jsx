@@ -29,23 +29,20 @@ import { Country, City, State } from "country-state-city";
 import Select from "react-select";
 import Form from "react-bootstrap/Form";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
-
 
 const StyledTable = styled(Table)(() => ({
   whiteSpace: "pre",
@@ -158,7 +155,7 @@ const PatientDetails = () => {
           id: data.id,
           first_name: data.first_name,
           last_name: data.last_name,
-          date_of_birth: data.date_of_birth && data.date_of_birth.split('T')[0],
+          date_of_birth: data.date_of_birth && data.date_of_birth.split("T")[0],
           age: data.age,
           gender: data.gender,
           address: data.address,
@@ -181,12 +178,13 @@ const PatientDetails = () => {
           country: data.country,
           state: data.state,
           city: data.city,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("user")}`,
+          },
         }
-        ,{
-          headers:{
-            Authorization: `Bearer ${localStorage.getItem('user')}`,
-          }
-        });
+      );
 
       NotificationManager.success("Successfully Updated");
     } catch (error) {
@@ -223,17 +221,20 @@ const PatientDetails = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases",{
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem('user')}`,
-        }
+      .get(process.env.REACT_APP_ORIGIN_URL + "api/diseases", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
       })
-      .then((res) => {setGetDiseases(res.data);console.log("diseaseRes",res)});
+      .then((res) => {
+        setGetDiseases(res.data);
+        console.log("diseaseRes", res);
+      });
     axios
-      .get(process.env.REACT_APP_ORIGIN_URL + `api/patientvisits/${data.id}`,{
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem('user')}`,
-        }
+      .get(process.env.REACT_APP_ORIGIN_URL + `api/patientvisits/${data.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("user")}`,
+        },
       })
       .then((res) => {
         setVisitsHistory(res.data);
@@ -244,7 +245,7 @@ const PatientDetails = () => {
   return (
     <Container>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Patient Details" }]} />
+        <Breadcrumb routeSegments={[{ name: "Patient Details", value : "Posture Physio" }]} />
       </Box>
       <NotificationContainer />
 
@@ -289,46 +290,48 @@ const PatientDetails = () => {
           <>
             <div className="card" style={{ borderTopLeftRadius: "0" }}>
               <div className="card-body" style={{ margin: "10px" }}>
-
-                <div style={{display:"flex"}}>
-                <h5>PATIENT INFORMATION</h5>
-                <div style={{ marginLeft:"auto", display: "flex", justifyContent: "flex-end" }}>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                      setDisableFields(false);
+                <div style={{ display: "flex" }}>
+                  <h5>PATIENT INFORMATION</h5>
+                  <div
+                    style={{
+                      marginLeft: "auto",
+                      display: "flex",
+                      justifyContent: "flex-end",
                     }}
                   >
-                    <Span sx={{ pl: 0, textTransform: "capitalize" }}>
-                      Edit
-                    </Span>
-                  </Button>
-                  <Button
-                    style={{ marginLeft: "1rem" }}
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                      setDisableFields(true);
-                      updatePatient();
-                    }}
-                  >
-                    <Span sx={{ pl: 0, textTransform: "capitalize" }}>
-                      Save
-                    </Span>
-                  </Button>
-                </div>
-
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => {
+                        setDisableFields(false);
+                      }}
+                    >
+                      <Span sx={{ pl: 0, textTransform: "capitalize" }}>
+                        Edit
+                      </Span>
+                    </Button>
+                    <Button
+                      style={{ marginLeft: "1rem" }}
+                      color="primary"
+                      variant="contained"
+                      onClick={() => {
+                        setDisableFields(true);
+                        updatePatient();
+                      }}
+                    >
+                      <Span sx={{ pl: 0, textTransform: "capitalize" }}>
+                        Save
+                      </Span>
+                    </Button>
+                  </div>
                 </div>
                 <div className="row" style={{ marginTop: "2rem" }}>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="first_name">
-                      {" "}
                       <div>First Name:</div>
                     </label>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                    {" "}
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -345,12 +348,10 @@ const PatientDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="last_name">
-                      {" "}
                       <div>Last Name:</div>
                     </label>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                    {" "}
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -367,14 +368,12 @@ const PatientDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="middle_name">
-                      {" "}
                       <div>
                         Blood Group <BloodtypeIcon /> :
                       </div>
                     </label>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                    {" "}
                     <Form.Select
                       name="gender"
                       class="form-control dropdown"
@@ -405,7 +404,6 @@ const PatientDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="date_of_birth">
-                      {" "}
                       <div>Date of Birth:</div>
                     </label>
                   </div>
@@ -414,7 +412,9 @@ const PatientDetails = () => {
                       style={{ paddingLeft: "0.3rem" }}
                       type="date"
                       name="date_of_birth"
-                      value={moment(data.date_of_birth).utc().format("YYYY-MM-DD")}
+                      value={moment(data.date_of_birth)
+                        .utc()
+                        .format("YYYY-MM-DD")}
                       onChange={(e) => {
                         handleInput(e);
                         ageCalculator(e);
@@ -429,12 +429,10 @@ const PatientDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="age">
-                      {" "}
                       <div>Age:</div>
                     </label>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                    {" "}
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       name="age"
@@ -456,12 +454,10 @@ const PatientDetails = () => {
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="gender">
-                      {" "}
                       <div>Gender:</div>
                     </label>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-                    {" "}
                     <Form.Select
                       name="gender"
                       class="form-control dropdown"
@@ -607,7 +603,6 @@ const PatientDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                     <label htmlFor="medical_status">
-                      {" "}
                       <div>Medical Status:</div>
                     </label>
                   </div>
@@ -676,7 +671,6 @@ const PatientDetails = () => {
                 <div className="row">
                   <div className="col-xl-2 col-lg-2 col-sm-2 border  p-3">
                     <label htmlFor="address">
-                      {" "}
                       <div>Address:</div>
                     </label>
                   </div>
@@ -746,16 +740,15 @@ const PatientDetails = () => {
 
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <PatternFormat
-                     style={{
-                      height: "2rem",
-                      width: "90%",
-                      border: "1px solid #c0c0c0",
-                      borderRadius: "4px",
-                      boxSizing: "border-box",
-                      paddingBottom: "5px",
-                      marginTop:"0.2rem"
-                      
-                    }}
+                      style={{
+                        height: "2rem",
+                        width: "90%",
+                        border: "1px solid #c0c0c0",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                        paddingBottom: "5px",
+                        marginTop: "0.2rem",
+                      }}
                       className="Input_border"
                       required
                       name="cnic"
@@ -796,36 +789,36 @@ const PatientDetails = () => {
                     </Form.Select> */}
                     <h6>Patient Diagnosis Diseases</h6>
                     <Button onClick={handleOpen}>view...</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-          Patient Diagnosis Diseases
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {getDiseases &&
-                        getDiseases.map((d) => (
-                          <ul>                         
-                            <li value={`${d.id}`} key={d.id}>
-                          {d.name}
-                          </li>
-                          </ul>
- 
-                        ))}
-          </Typography>
-        </Box>
-      </Modal>
-                    {console.log("getDiseaseMap",getDiseases)}
-                   
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box sx={style}>
+                        <Typography
+                          id="modal-modal-title"
+                          variant="h6"
+                          component="h2"
+                        >
+                          Patient Diagnosis Diseases
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                          {getDiseases &&
+                            getDiseases.map((d) => (
+                              <ul>
+                                <li value={`${d.id}`} key={d.id}>
+                                  {d.name}
+                                </li>
+                              </ul>
+                            ))}
+                        </Typography>
+                      </Box>
+                    </Modal>
+                    {console.log("getDiseaseMap", getDiseases)}
                   </div>
                 </div>
-                <div className="row">
-
-                </div>
+                <div className="row"></div>
               </div>
               <div className="card-body" style={{ margin: "5px" }}>
                 <h5>In Case of emergencygency</h5>
@@ -947,7 +940,6 @@ const PatientDetails = () => {
                     </label>
                   </div>
                   <div className="col-xl-6 col-lg-6 col-sm-6 border p-3">
-                    {/* <Input type="text" name="patient_concerns_for_previous_physiotherapist " value={values.patient_concerns_for_previous_physiotherapist } onChange={handleChange} onBlur={handleBlur} /> */}
                     <Input
                       style={{ paddingLeft: "0.3rem" }}
                       type="text"
@@ -1067,8 +1059,6 @@ const PatientDetails = () => {
                 </div>
               </div>
             </div>
-
-
           </>
         ) : null}
       </div>
@@ -1152,9 +1142,7 @@ const PatientDetails = () => {
         ) : null}
       </div>
     </Container>
-    
   );
-
 };
 
 export default PatientDetails;

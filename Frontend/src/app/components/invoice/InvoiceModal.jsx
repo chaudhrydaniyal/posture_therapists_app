@@ -32,7 +32,34 @@ class InvoiceModal extends React.Component {
   constructor(props) {
     super(props);
   }
-
+saveInvoice=async () => {
+  try {
+    await axios.post(
+      process.env.REACT_APP_ORIGIN_URL + "api/invoice/",
+      {
+        date: this.props.info.dateOfIssue,
+        sub_total: this.props.subTotal,
+        doctor: this.props.info.selectedDoctor.id,
+        patient: this.props.info.selectedPatient.id,
+        discount: this.props.discountAmmount,
+        patient_visit_id: this.props.patient_visit_id,
+        tax_rate: this.props.taxAmmount,
+        items: this.props.items.map((item) => ({
+          title: item.name,
+          qty: item.quantity,
+          price: item.price,
+          description: item.description,
+        })),
+      }
+      ,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`,
+        }
+      });
+  } catch (error) {
+    console.log("error", error);
+  }
+}
   render() {
     return (
       <div>
@@ -215,13 +242,13 @@ class InvoiceModal extends React.Component {
                 <Button
                   variant="outline-primary"
                   className="d-block w-100 mt-3 mt-md-0"
-                  onClick={GenerateInvoice}
+                  onClick={()=>{GenerateInvoice();this.saveInvoice()}}
                 >
                   <BiCloudDownload
                     style={{ width: "16px", height: "16px", marginTop: "-3px" }}
                     className="me-2"
                   />
-                  Download Copy
+                  Download & Save 
                 </Button>
               </Col>
             </Row>
