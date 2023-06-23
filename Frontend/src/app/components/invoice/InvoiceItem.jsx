@@ -50,7 +50,7 @@ class InvoiceItem extends React.Component {
           <thead>
             <tr>
               <th>ITEM</th>
-              {/* <th>QTY</th> */}
+              <th>Description</th>
               <th>PRICE/RATE</th>
               <th className="text-center">ACTION</th>
             </tr>
@@ -81,10 +81,10 @@ class ItemRow extends React.Component {
   render() {
     return (
       <tr>
-        <td style={{ width: "100%" }}>
-          <div style={{ display: "flex" }}>
+        <td>
+          <div>
             <select
-              style={{ height: "2.5rem", borderRadius: "6px", width: "50%" }}
+              style={{ height: "2.5rem", borderRadius: "6px", width: "100%" }}
               name="name"
               onChange={(e) => {
                 this.props.onItemizedItemEdit(e);
@@ -119,12 +119,15 @@ class ItemRow extends React.Component {
             </select>
 
             {console.log("selected service", this.state.selectedService)}
-
-            <input
+            </div>
+            
+        </td>
+<td>
+<input
               style={{
                 height: "2.5rem",
-                marginLeft: "1rem",
-                width: "50%",
+                // marginLeft: "1rem",
+                width: "100%",
                 borderRadius: "6px",
               }}
               placeholder="Description"
@@ -135,13 +138,12 @@ class ItemRow extends React.Component {
               }
               disabled={this.state.disabled}
             />
-          </div>
-        </td>
-
+       
+</td>
         <td style={{ minWidth: "130px" }}>
           <p
             style={{
-              width: "70%",
+              width: "80%",
               height: "2.5rem",
               border: "0.5px solid grey",
               borderRadius: "6px",
