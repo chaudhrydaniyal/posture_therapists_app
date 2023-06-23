@@ -159,13 +159,6 @@ Invoice.findById = (id, result) => {
 
 
 
-
-
-
-
-
-
-
 Invoice.getAll =  (title, result) => {
 
   let query = "SELECT * FROM patients";

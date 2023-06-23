@@ -108,8 +108,9 @@ export default class AppointmentSchedule extends React.Component {
     return (
 
       <Container>
+        
         <Box className="breadcrumb">
-          <Breadcrumb routeSegments={[{ name: 'Appointment Scheduling' }]} />
+          <Breadcrumb routeSegments={[{ name: 'Appointment Scheduling', value:'Posture Physio' }]} />
         </Box>
 
         <div className='card'>
@@ -118,11 +119,7 @@ export default class AppointmentSchedule extends React.Component {
             <Calender />
 
           </div>
-
         </div>
-
-
-
 
       </Container>
     )

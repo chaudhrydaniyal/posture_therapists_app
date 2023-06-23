@@ -46,6 +46,7 @@ const styles = theme => ({
       margin: '1rem 1rem',
     },
   },
+
   paper: {
     padding: theme.spacing.unit * 2,
     color: theme.palette.text.secondary,
@@ -376,7 +377,7 @@ class Calender extends Component {
         <br />
 
         <Timeline
-          style={{ width: "90vw" }}
+          style={{ width: "79vw" }}
           keys={keys}
           groups={groups}
           onItemClick={(e) => {
