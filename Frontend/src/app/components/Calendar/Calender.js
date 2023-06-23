@@ -79,9 +79,6 @@ class Calender extends Component {
     y19: new Date('2023/04/12'),
     patients: [],
     refresh: false,
-
-
-
     doctor: '',
     status: '',
     start: '2019-01-01',
@@ -91,18 +88,7 @@ class Calender extends Component {
     patients: [],
     patient: '',
     patientName: '',
-
-
-
-
     selectedSlot: {}
-
-
-
-
-
-
-
   }
 
 
@@ -116,8 +102,6 @@ class Calender extends Component {
 
 
   async componentDidMount() {
-
-
     let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/',{
       headers:{
         Authorization: `Bearer ${localStorage.getItem('user')}`,
@@ -169,9 +153,7 @@ class Calender extends Component {
       title: e.first_name
     }))
 
-
     this.setState({ groups: doctorsArray })
-
 
     let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients',{
       headers:{
@@ -180,7 +162,6 @@ class Calender extends Component {
     })).data
 
     this.setState({ patients: patients })
-
 
   }
 
@@ -441,7 +422,7 @@ class Calender extends Component {
               <Grid item xs={12}>
 
 
-                <h4>Schedule an appointment</h4>
+                <h5>Schedule an appointment</h5>
 
                 <form onSubmit={this.formSubmitHandler}>
                   {/*Mentors list*/}
@@ -547,7 +528,7 @@ class Calender extends Component {
                         fullWidth={true}
                       /> */}
 
-                      Start time: &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start} onChange={(e) => {
+<span style={{ fontWeight: 600 }}> Start time:</span> &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start} onChange={(e) => {
 
                         console.log("timeinput", new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')))
 
@@ -590,7 +571,7 @@ class Calender extends Component {
                         fullWidth={true}
                       /> */}
 
-                      End time: &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e) => {
+<span style={{ fontWeight: 600 }}>  End time:</span> &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e) => {
 
 
 
@@ -616,7 +597,12 @@ class Calender extends Component {
                   <br />
 
                   {/*Submit*/}
-                  <Button onClick={() => {
+                  <div>
+                  <Button
+                  
+                  style={{marginLeft:'auto'}}
+                  
+                  onClick={() => {
 
                     this.onCloseModal()
 
@@ -641,6 +627,7 @@ class Calender extends Component {
                     variant="contained" color="primary">
                     <AddIcon /> add
                   </Button>
+                  </div>
                 </form>
               </Grid>
             </Grid>

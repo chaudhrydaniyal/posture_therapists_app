@@ -254,7 +254,7 @@ const DoctorDetails = () => {
         {selectedTab == 1 ? (
           <div className="card" style={{ borderTopLeftRadius: "0" }}>
             <div className="card-body" style={{ margin: "0px" }}>
-              <h5>DOCTOR INFORMATION</h5>
+              <h5>Doctor Information</h5>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
                   color="primary"
@@ -328,9 +328,9 @@ const DoctorDetails = () => {
                       }}
                     />
                   </div>
-                  <label style={{ marginTop: "1rem" }}>
-                    <strong>Upload Picture</strong>
-                  </label>
+                  <label style={{ marginTop: "0rem", marginLeft:"8px", fontWeight:"500" }}>
+                    Upload Picture
+                    </label>
                 </div>
               </Form>
               <div className="row" style={{ marginTop: "2rem" }}>

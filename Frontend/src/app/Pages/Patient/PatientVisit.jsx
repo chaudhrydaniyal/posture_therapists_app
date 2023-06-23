@@ -157,7 +157,6 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <div className="row">
               <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                 <label htmlFor="remarks">
-                
                   <div>Remarks:</div>
                 </label>
               </div>

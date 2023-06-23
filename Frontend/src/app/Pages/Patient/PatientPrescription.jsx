@@ -402,7 +402,7 @@ const PatientPrescription = ({
 
       <div className="card">
         <div className="card-body">
-          <h4>Diagnosis</h4>
+          <h5>Diagnosis</h5>
           <div style={{ width: "4in", height: "5in" ,marginLeft:"30%"}}>
             <div
               style={{

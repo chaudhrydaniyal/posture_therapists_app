@@ -125,7 +125,7 @@ const LeaveForm = () => {
       </Box>
       <div className="card">
         <div className="card-body">
-          <h5>DOCTOR LEAVE</h5>
+          <h5>Doctor Leave Form</h5>
           <div className="row" style={{ marginTop: "2rem" }}>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="doctorName">

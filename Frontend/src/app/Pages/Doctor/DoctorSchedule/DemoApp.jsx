@@ -20,7 +20,7 @@ export default class DemoApp extends React.Component {
     weekendsVisible: true,
     currentEvents: [],
     INITIAL_EVENTS: [],
-    schedulingPeriod: null
+    schedulingPeriod: 1
   }
 
   async componentDidMount() {

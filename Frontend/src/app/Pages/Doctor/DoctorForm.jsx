@@ -211,7 +211,7 @@ const DoctorForm = () => {
 
       <div className="card">
         <div className="card-body" style={{ margin: "10px" }}>
-          <h5>DOCTOR INFORMATION</h5>
+          <h5>Doctor Information</h5>
 
           <Form className="mb-3 d-flex mt-3 " controlId="formGridProfilePic">
             <div >
@@ -257,7 +257,7 @@ const DoctorForm = () => {
            
           </Form>
 
-          <label style={{ marginTop: "0rem", marginLeft:"5px", fontWeight:"500" }}>
+          <label style={{ marginTop: "0rem", marginLeft:"8px", fontWeight:"500" }}>
                 Upload Picture
               </label>
 
