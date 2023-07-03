@@ -52,12 +52,9 @@ Patient_visit.create = (patient_visit, physical_assessment, result) => {
     result(null, { id: res.insertId, ...patient_visit })
 
     if (JSON.parse(physical_assessment).length > 0 ){
-
     physical_assessment = JSON.parse(physical_assessment)
 
-    sql.query("INSERT INTO patient_visit_physical_assessment (x_coordinate, y_coordinate, visit_assessment_id) VALUES ?", 
-    
-    
+    sql.query("INSERT INTO patient_visit_physical_assessment (x_coordinate, y_coordinate, visit_assessment_id) VALUES ?",     
     [physical_assessment.map((pa)=>[pa.top, pa.left,res.insertId ])], (err, res) => {
       if (err) {
         console.log("error:", err);
@@ -86,10 +83,8 @@ Patient_visit.findById =  (id, result) => {
 
       const finalResponse = [];
 
-        const finalResult = await Promise.all(res.map(async (r)=> {
-        
+        const finalResult = await Promise.all(res.map(async (r)=> {     
         const  physical_assessment =  await query(`SELECT * FROM patient_visit_physical_assessment WHERE visit_assessment_id = ${r.id}`)
-
         return ({ ...r, physical_assessment: physical_assessment})
             
       }))
@@ -160,7 +155,6 @@ Patient_visit.remove = (id, result) => {
       return;
     }
     if (res.affectedRows == 0) {
-      // not found Tutorial with the id
       result({ kind: "not_found" }, null);
       return;
     }

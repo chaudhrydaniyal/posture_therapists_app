@@ -40,8 +40,6 @@ app.use(express.json()); /* bodyParser.json() is deprecated */
 // const upload = multer({ storage: storage })
 
 
-
-
 require("./app/routes/patient_visit.routes.js")(app);
 require("./app/routes/patient.routes.js")(app);
 require("./app/routes/user.routes.js")(app);

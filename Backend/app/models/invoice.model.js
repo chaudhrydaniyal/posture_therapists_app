@@ -129,7 +129,7 @@ Invoice.findById = (id, result) => {
 // Invoice.findById = (id, result) => {
 
 //   sql.query(
-//     `SELECT invoice.id, date, sub_total, patient, doctor, discount, tax_rate, patient_visit_id, patients.first_name as patient_first_name , patients.email, patients.address, users.first_name as doctor_first_name, item as 'invoice_items.item', description as 'invoice_items.description', qty as 'invoice_items.qty', price as 'invoice_items.price' FROM invoice join invoice_items on invoice_items.invoice = invoice.id join patients on invoice.patient = patients.id join users on invoice.doctor = users.id WHERE patient_visit_id = ${id}`,
+//     'SELECT `invoice`.`id`, `invoice`.`date`, `invoice`.`sub_total`, `invoice`.`patient`, `invoice`.`doctor`, `invoice`.`discount`, `invoice`.`tax_rate`, `invoice`.`patient_visit_id`,   `invoice_items`.`item` as `invoice_items.item`, `invoice_items`.`description` as `invoice_items.description`, `invoice_items`.`qty` as `invoice_items.qty`, `invoice_items`.`price` as `invoice_items.price` FROM invoice as invoice left outer join invoice_items as invoice_items on `invoice_items`.`invoice` = `invoice`.`id` ',
 //     async (err, res) => {
 //       if (err) {
 //         console.log("error: ", err);
@@ -213,7 +213,6 @@ Invoice.updateById = (id, invoice, result) => {
 Invoice.remove = (id, result) => {
 
   sql.query("DELETE FROM patients WHERE id = ?", id, (err, res) => {
-
     if (err) {
       result(null, err);
       return;
@@ -232,19 +231,14 @@ Invoice.remove = (id, result) => {
 };
 
 Invoice.removeAll = result => {
-
   sql.query("DELETE FROM patients", (err, res) => {
-
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
-
     result(null, res);
-
   });
-
 };
 
 

@@ -226,6 +226,7 @@ class Calender extends Component {
           }))
 
           NotificationManager.success("Successfully scheduled an appointment");
+          doctorAvailable = true
 
           console.log("new state", this.state.items)
 
@@ -246,7 +247,7 @@ class Calender extends Component {
     })
 
     if (!doctorAvailable) {
-      NotificationManager.error("No Doctor available at this time slot");
+      NotificationManager.error("Doctor not available at this time slot");
     }
 
   }
@@ -295,22 +296,17 @@ class Calender extends Component {
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <h5>Appointment scheduling</h5>
-
           <Button color="primary" variant="contained" type="submit" onClick={async () => {
-
             try {
-
-
               await axios.post(`${process.env.REACT_APP_ORIGIN_URL}api/scheduledappointments`,
                 this.state.items.filter((f) => f.scheduledAppointment && f.currentlyAdded).map(se => ({
                   start_time: moment.utc(se.start).tz("Asia/Karachi").format(), end_time: moment.utc(se.end).tz("Asia/Karachi").format(), doctor: se.group,
                   patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
-                }))
-                ,{
+                })),{
                   headers:{
                     Authorization: `Bearer ${localStorage.getItem('user')}`,
                   }
-                } )
+                })
               NotificationManager.success("Successfully updated appointment scheduling");
             }
             catch {
