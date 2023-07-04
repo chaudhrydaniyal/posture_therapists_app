@@ -43,18 +43,18 @@ const styles = theme => ({
 })
 
 const mentorsList = [
-  {
-    value: '1',
-    label: 'Mia Michelle',
-  },
-  {
-    value: '2',
-    label: 'Joe Johnson',
-  },
-  {
-    value: '3',
-    label: 'Kim Karlsen',
-  },
+  // {
+  //   value: '1',
+  //   label: 'Mia Michelle',
+  // },
+  // {
+  //   value: '2',
+  //   label: 'Joe Johnson',
+  // },
+  // {
+  //   value: '3',
+  //   label: 'Kim Karlsen',
+  // },
 ]
 
 class AddItemsForm extends React.Component {

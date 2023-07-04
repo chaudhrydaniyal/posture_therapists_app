@@ -147,6 +147,53 @@ class Calender extends Component {
 
     this.setState({ patients: patients })
 
+
+
+
+
+    // ********************          Calling the graphql query endpoint
+
+
+
+    // const data = await axios.post("http://localhost:8081/graphql", {
+    //   query: `query {doctor_availability_slots {
+    //     id
+    //     availability_start_time
+    //     availability_end_time
+    //     doctorID      
+    //     doctor_first_name
+    //     doctor_last_name
+    // } 
+    // scheduled_appointments{
+    //      id
+    //     doctor_availability_slot_id
+    //     date
+    //     appointment_start_time
+    //     appointment_end_time
+    //     patientID
+    //     patient_first_name
+    //     doctorID
+    //     doctorName
+    // }
+    // patients{  
+    //      id
+    //     first_name
+    //     last_name
+    // }
+    // doctors{      id
+    //     first_name
+    //     last_name}}
+        
+    //     `
+    // }, {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+
+
+
+
   }
 
   onOpenModal = () => this.setState({ open: true })
