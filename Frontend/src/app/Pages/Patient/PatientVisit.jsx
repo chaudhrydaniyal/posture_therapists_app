@@ -95,7 +95,9 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
               console.log("selected patient", selectedPatient);
             }}
           >
-            {patients.map((p) => (
+            {
+            
+            patients.map((p) => (
               <MenuItem value={p.id}>
                 {p.first_name +
                   " " +
@@ -107,7 +109,6 @@ const PatientVisit = ({ nextStep, handleFormData, values }) => {
             <p style={{ color: "red" }}>Please Select Patient </p>
           ) : null}
 
-          {console.log("patientfull", patients)}
 
           <h5>Personal Factors</h5>
 

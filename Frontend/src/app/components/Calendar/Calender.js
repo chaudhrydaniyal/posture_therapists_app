@@ -88,14 +88,16 @@ class Calender extends Component {
   // }
 
   async componentDidMount() {
-    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/',{
-      headers:{
+
+
+    let events = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctortimeslots/', {
+      headers: {
         Authorization: `Bearer ${localStorage.getItem('user')}`,
       }
     })).data
 
-    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/',{
-      headers:{
+    let scheduledAppointments = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/scheduledappointments/', {
+      headers: {
         Authorization: `Bearer ${localStorage.getItem('user')}`,
       }
     })).data
@@ -126,8 +128,8 @@ class Calender extends Component {
 
     this.setState({ items: array1.concat(array2) })
 
-    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/',{
-      headers:{
+    let doctors = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/users/', {
+      headers: {
         Authorization: `Bearer ${localStorage.getItem('user')}`,
       }
     })).data
@@ -139,8 +141,8 @@ class Calender extends Component {
 
     this.setState({ groups: doctorsArray })
 
-    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients',{
-      headers:{
+    let patients = await (await axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/patients', {
+      headers: {
         Authorization: `Bearer ${localStorage.getItem('user')}`,
       }
     })).data
@@ -183,7 +185,7 @@ class Calender extends Component {
     // doctors{      id
     //     first_name
     //     last_name}}
-        
+
     //     `
     // }, {
     //   headers: {
@@ -236,20 +238,15 @@ class Calender extends Component {
         let alreadyScheduledAppointment = false
 
         this.state.items.filter((i) => i.group == item.doctor && i.scheduledAppointment).forEach((ff) => {
-
           if (new Date(item.start) >= new Date(ff.start) && new Date(item.start) <= new Date(ff.end) ||
-
-           new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
-
-           alreadyScheduledAppointment = true
-
+            new Date(item.end) <= new Date(ff.end) && new Date(item.end) >= new Date(ff.start)) {
+            alreadyScheduledAppointment = true
           } else {
             console.log("inside else")
           }
         })
 
         if (!alreadyScheduledAppointment) {
-
           const newItem = {
             id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
             group: item.doctor,
@@ -267,36 +264,28 @@ class Calender extends Component {
             scheduledAppointment: true,
             currentlyAdded: true,
           }
-
           this.setState(state => ({
             items: [...state.items, newItem]
           }))
-
-          NotificationManager.success("Successfully scheduled an appointment");
+          NotificationManager.success("Appointment added to schedule");
           doctorAvailable = true
-
           console.log("new state", this.state.items)
-
+          this.onCloseModal()
           return;
         }
 
         if (alreadyScheduledAppointment) {
-
           NotificationManager.error("Doctor has already an appointment");
         }
         doctorAvailable = true
-
       }
       else {
         // console.log("it is outside the doctor slots")
       }
-
     })
-
     if (!doctorAvailable) {
       NotificationManager.error("Doctor not available at this time slot");
     }
-
   }
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
     // const {items, groups} = this.state
@@ -341,19 +330,23 @@ class Calender extends Component {
 
       <>
 
+        <h5>Appointment scheduling</h5>
+
+        <br />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <h5>Appointment scheduling</h5>
+          <span style={{ fontWeight: 600 }}>Select the doctor slot to book an appointment and click the Update button to confirm:</span>
+
           <Button color="primary" variant="contained" type="submit" onClick={async () => {
             try {
               await axios.post(`${process.env.REACT_APP_ORIGIN_URL}api/scheduledappointments`,
                 this.state.items.filter((f) => f.scheduledAppointment && f.currentlyAdded).map(se => ({
                   start_time: moment.utc(se.start).tz("Asia/Karachi").format(), end_time: moment.utc(se.end).tz("Asia/Karachi").format(), doctor: se.group,
                   patient: se.patient, title: '', date: "2023-03-01T00:00:00.000Z"
-                })),{
-                  headers:{
-                    Authorization: `Bearer ${localStorage.getItem('user')}`,
-                  }
-                })
+                })), {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('user')}`,
+                }
+              })
               NotificationManager.success("Successfully updated appointment scheduling");
             }
             catch {
@@ -364,16 +357,19 @@ class Calender extends Component {
 
         <br />
 
+<div style={{border:"solid 1px gray"}}>
         <Timeline
-          style={{  '@media (max-width: 1389px)': {
-            width: '100rem',
-          }  }}
+          style={{
+            '@media (max-width: 1389px)': {
+              width: '100rem',
+            }            
+          }}
           keys={keys}
           groups={groups}
-          onItemClick={(e) => {
+          onItemSelect={(e) => {
             console.log("item click", e)
             // this.setState({ refresh: !this.state.refresh })
-            console.log("object to add", items)
+            // console.log("object to add", items)
             this.setState({ selectedSlot: { id: items[e].group, name: items[e].title, start: items[e].start, end: items[e].end } })
             this.setState({ open: true })
           }}
@@ -391,15 +387,15 @@ class Calender extends Component {
           // defaultTimeEnd={moment(y19).add(1, 'day')}
           maxZoom={1.5 * 365.24 * 86400 * 1000}
           minZoom={1.24 * 86400 * 1000 * 7 * 3}
-          fullUpdate
-          itemTouchSendsClick={false}
+          // fullUpdate
+          itemTouchSendsClick={true}
           stackItems
           itemHeightRatio={0.75}
           showCursorLine
           canMove={false}
-          canResize={'both'}
-          onItemMove={this.handleItemMove}
-          onItemResize={this.handleItemResize}
+        // canResize={'both'}
+        // onItemMove={this.handleItemMove}
+        // onItemResize={this.handleItemResize}
         >
           {/* <TimelineMarkers>
               <TodayMarker>
@@ -408,6 +404,8 @@ class Calender extends Component {
               <SundaysMarker />
             </TimelineMarkers> */}
         </Timeline>
+
+        </div>
         {/* <AddItemsForm onAddItem={this.addItemHandler} /> */}
         <NotificationContainer />
         <Modal open={this.state.open} onClose={this.onCloseModal} center>
@@ -422,10 +420,13 @@ class Calender extends Component {
 
                 <form onSubmit={this.formSubmitHandler}>
                   {/*Mentors list*/}
-                  <span style={{ fontWeight: 600 }}>Doctor:</span> <span> {this.state.selectedSlot.name}</span>
-                  <br />
-                  <span style={{ fontWeight: 600 }}>Date:</span> <span> {this.state.selectedSlot.start && this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')}</span>
-                  <br />
+                  <div style={{display:"flex", justifyContent:"space-between"}}>
+
+                    <div>
+                  <span style={{ fontWeight: 600 }}>Doctor:</span> <span > {this.state.selectedSlot.name}</span></div>
+                  <div><span style={{ fontWeight: 600 }}>Date:</span> <span> {this.state.selectedSlot.start && this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')}</span></div>
+                  </div>
+                  
                   <span style={{ fontWeight: 600 }}>Availability time:</span> <span> {this.state.selectedSlot.start && this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LT')}</span>
                   <span style={{ fontWeight: 600 }}> to </span> <span> {this.state.selectedSlot.end && this.state.selectedSlot.end.utc().tz("Asia/Karachi").format('LT')}</span>
                   {/* <TextField
@@ -442,7 +443,7 @@ class Calender extends Component {
                       </MenuItem>
                     ))}
                   </TextField> */}
-                  <br />
+
                   <TextField
                     select
                     label="Chose Patient"
@@ -470,7 +471,7 @@ class Calender extends Component {
                     ))}
                   </TextField>
                   <br />
-                  <br />
+           
                   {/*status*/}
                   {/* <TextField
                     id="standard-name"
@@ -482,6 +483,9 @@ class Calender extends Component {
                     fullWidth={true}
                   /> */}
                   {/*Date*/}
+
+                  <div style={{marginBottom:"5px", marginTop:"5px"}}>Select the appointment time from within the availability time indicated above:</div>
+
                   <Grid container spacing={24}>
                     {/*start*/}
                     <Grid item md={8}>
@@ -506,9 +510,7 @@ class Calender extends Component {
                         fullWidth={true}
                       /> */}
 
-<span style={{ fontWeight: 600 }}> Start time:</span> &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start} onChange={(e) => {
-
-                        console.log("timeinput", new Date(this.state.selectedSlot.start.utc().tz("Asia/Karachi").format('LL')))
+                      <span style={{ fontWeight: 600 }}> Start time:</span> &nbsp; <input type="time" defaultValue={this.state.selectedSlot.start} onChange={(e) => {
                         let startDateTime = new Date(this.state.selectedSlot.start)
                         startDateTime.setHours(e.target.value.split(":")[0])
                         startDateTime.setMinutes(e.target.value.split(":")[1])
@@ -534,10 +536,7 @@ class Calender extends Component {
                         fullWidth={true}
                       /> */}
 
-<span style={{ fontWeight: 600 }}>  End time:</span> &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e) => {
-
-
-
+                      <span style={{ fontWeight: 600 }}>  End time:</span> &nbsp; &nbsp; <input type="time" defaultValue={this.state.selectedSlot.end} onChange={(e) => {
                         let endDateTime = new Date(this.state.selectedSlot.end)
                         endDateTime.setHours(e.target.value.split(":")[0])
                         endDateTime.setMinutes(e.target.value.split(":")[1])
@@ -548,29 +547,23 @@ class Calender extends Component {
                   <br />
                   {/*Submit*/}
                   <div>
-                  <Button
-                  
-                  style={{marginLeft:'auto'}}
-                  
-                  onClick={() => {
-
-                    this.onCloseModal()
-                    console.log("itemAdded", this.state)
-                    const addAppointment = {
-                      doctor: this.state.selectedSlot.id,
-                      patient: this.state.patient,
-                      start: this.state.start,
-                      end: this.state.end,
-                      patientName: this.state.patientName
-                    }
-                    console.log("itemAddedForaddAppointment", addAppointment)
-                    this.addItemHandler(addAppointment)
-                    // return this.props.onAddItem(this.state)
-                  }}
-                    //  className={classes.mt1} 
-                    variant="contained" color="primary">
-                    <AddIcon /> add
-                  </Button>
+                    <Button
+                      style={{ marginLeft: 'auto' }}
+                      onClick={() => {
+                        const addAppointment = {
+                          doctor: this.state.selectedSlot.id,
+                          patient: this.state.patient,
+                          start: this.state.start,
+                          end: this.state.end,
+                          patientName: this.state.patientName
+                        }
+                        this.addItemHandler(addAppointment)
+                        // return this.props.onAddItem(this.state)
+                      }}
+                      //  className={classes.mt1} 
+                      variant="contained" color="primary">
+                      <AddIcon /> add
+                    </Button>
                   </div>
                 </form>
               </Grid>
