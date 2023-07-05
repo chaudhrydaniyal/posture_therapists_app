@@ -11,6 +11,11 @@ import items from "app/components/Calendar/items";
 import { ceil, findLastKey } from "lodash";
 import { useFormik } from "formik";
 import { leaveValidation } from "app/components/Validation/ValidationSchema";
+import DoctorDetails from "./DoctorDetails";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 const Container = styled("div")(({ theme }) => ({
   margin: "30px",
   [theme.breakpoints.down("sm")]: { margin: "16px" },
@@ -21,14 +26,11 @@ const Container = styled("div")(({ theme }) => ({
 }));
 
 const initialValue = {
-  doctorName: "",
-  email: "",
-  gender: "",
+
   reason: "",
-  dateFrom: "",
-  dateTo: "",
+ 
   leaveNature: "",
-  days: "",
+
 };
 
 const LeaveForm = () => {
@@ -40,36 +42,43 @@ const LeaveForm = () => {
   const [disable, setDisable] = useState(true);
   const [days, setDays] = useState(0);
   //   const [numberofDays, setNumberofDays] = useState(0);
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const { values, errors, handleChange, handleBlur, touched, handleSubmit } =
     useFormik({
       initialValues: initialValue,
-      validationSchema: leaveValidation,
+      // validationSchema: leaveValidation,
       onSubmit: async (values, action) => {
+        console.log("error");
         try {
-          const patientForm = await axios.post(
-            process.env.REACT_APP_ORIGIN_URL + "api/patients",
+          const leaveForm = await axios.post(
+            process.env.REACT_APP_ORIGIN_URL + "api/doctor_leaves",
             {
-              doctorName: docDetails.first_name,
-              email: docDetails.email,
-              specialization: docDetails.specialization,
-              mobile_no: docDetails.mobile_no,
-              gender: values.gender,
-              startDate: startDate,
-              endDate: endDate,
+              doctorID:selectedDoctor.id,
+              from: startDate,
+              to: endDate,
               reason: values.reason,
               leaveNature: values.leaveNature,
-              days: docDetails.days,
             }
             ,{
               headers:{
                 Authorization: `Bearer ${localStorage.getItem('user')}`,
               }
-            });
+            } 
+            );
+            NotificationManager.success("Successfully Registered");
         } catch (error) {
           console.log("error", error);
+          NotificationManager.error("Something went wrong");
         }
-        action.resetForm();
+        // action.resetForm();
+        // setStartDate("");
+        // setEndDate("");
+        // setSelectedDoctor(null)
+        // setDocDetails(null)
+        // setFormSubmitted(true);
+     
+
+
       },
     });
 
@@ -109,20 +118,13 @@ const LeaveForm = () => {
     }
   }, [endDate]);
 
-  // const calculateDays = () => {
-  //   const newStartDate = new Date(fromDate);
-  //   const newEndDate = new Date(toDate);
-
-  //   const one_day = 1000*60*60*24
-  //   let result = Math.ceil((newEndDate.getDate()-newStartDate.getDate()));
-  //  setNumberOfDays(result)
-  // };
 
   return (
     <Container>
       <Box className="breadcrumb">
         <Breadcrumb routeSegments={[{ name: "Doctor Leave Form", value : "Posture Physio" }]} />
       </Box>
+      <NotificationContainer />
       <div className="card">
         <div className="card-body">
           <h5>Doctor Leave Form</h5>
@@ -184,7 +186,7 @@ const LeaveForm = () => {
               <input
                 type="text"
                 name="gender"
-                value={selectedDoctor.gender}
+                value={formSubmitted ? "" : selectedDoctor.gender}
                 style={{
                   width: "100%",
                   height: "2.5rem",
@@ -206,7 +208,7 @@ const LeaveForm = () => {
                 value={
                   selectedDoctor.specialization === null
                     ? ""
-                    : selectedDoctor.specialization
+                    : selectedDoctor.specialization 
                 }
                 disabled={disable}
                 type="text"
