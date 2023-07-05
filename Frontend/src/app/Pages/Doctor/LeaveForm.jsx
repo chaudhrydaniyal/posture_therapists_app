@@ -306,7 +306,7 @@ const LeaveForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-               { calculatedDays} 
+               {calculatedDays} 
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="reason">
@@ -317,7 +317,7 @@ const LeaveForm = () => {
             <div className="col-xl-10 col-lg-2 col-sm-2 border p-3 ">
               {" "}
               <Input
-                style={{ paddingLeft: "0.3rem" }}
+                style={{paddingLeft: "0.3rem"}}
                 type="text"
                 name="reason"
                 label="Enter Reason"
@@ -339,7 +339,7 @@ const LeaveForm = () => {
                 onClick={handleSubmit}
               >
                 <Icon>send</Icon>
-                <Span sx={{ pl: 1, textTransform: "capitalize" }}>Apply</Span>
+                <Span sx={{ pl: 1, textTransform: "capitalize"}}>Apply</Span>
               </Button>
             </div>
           </div>
