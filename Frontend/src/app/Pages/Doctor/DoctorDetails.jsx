@@ -312,7 +312,7 @@ useEffect(()=>{
           }}
         />
             <label for="tab-4" class="tab-label">
-        Leave Details
+        Leave History
         </label>
         <input
           type="radio"
@@ -974,7 +974,7 @@ useEffect(()=>{
                      <TableCell align="center">Leave Type</TableCell>
                      <TableCell align="center">From</TableCell>
                      <TableCell align="center">To</TableCell>
-                     <TableCell align="right">Leave Reason</TableCell>
+                     <TableCell align="left">Leave Reason</TableCell>
                     
                    </TableRow>
                  </TableHead>
@@ -988,7 +988,7 @@ useEffect(()=>{
                          <TableCell align="center">{items.leave_nature}</TableCell>
                          <TableCell align="center">{items.from}</TableCell>
                          <TableCell align="center">{items.to}</TableCell>
-                         <TableCell align="right">{items.reason}</TableCell>
+                         <TableCell align="left">{items.reason}</TableCell>
                        
                        </TableRow>
                      ))}
