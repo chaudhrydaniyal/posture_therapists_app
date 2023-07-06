@@ -35,14 +35,14 @@ doctorLeaves.getAll = (results) => {
 }
 
 doctorLeaves.findById = (id, result) => {
-  sql.query(`SELECT * FROM doctor_leaves WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT doctor_leaves.id, doctor_id, leave_nature, doctor_leaves.from, doctor_leaves.to, reason, first_name, surname FROM doctor_leaves inner join users on doctor_leaves.doctor_id = users.id WHERE doctor_leaves.doctor_id = ${id}`, (err, res) => {
     if (err) {
       console.log(err);
       result(err, null);
       return;
     }
     if (res.length) {
-      result(null, res[0]);
+      result(null, res);
       return;
     }
     result({ kind: 'not_found' }, null);

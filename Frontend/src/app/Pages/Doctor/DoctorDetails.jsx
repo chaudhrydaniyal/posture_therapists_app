@@ -252,8 +252,7 @@ const DoctorDetails = () => {
           id="tab-2"
           class="tab-switch"
           onClick={() => {
-            handleDoctorSlots();
-            handleAvailableSlots();
+     
             setSelectedTab(2);
           }}
         />
@@ -261,6 +260,7 @@ const DoctorDetails = () => {
         Add availability slots
         </label>
       </div>
+
       <div class="tab">
         <input
           type="radio"
@@ -268,14 +268,18 @@ const DoctorDetails = () => {
           id="tab-3"
           class="tab-switch"
           onClick={() => {
+            handleDoctorSlots();
+            handleAvailableSlots();
             setSelectedTab(3);
-            setDoctorWeeklySchedule(true);
+            // setDoctorWeeklySchedule(true);
+
           }}
         />
-            <label for="tab-3" class="tab-label">
-        Leave Details
+        <label for="tab-3" class="tab-label">
+        Create weekly schedule
         </label>
       </div>
+
       <div class="tab">
         <input
           type="radio"
@@ -285,12 +289,15 @@ const DoctorDetails = () => {
           onClick={() => {
             setSelectedTab(4);
             setDoctorLeaveDetails(true);
+
           }}
         />
-        <label for="tab-5" class="tab-label">
-        Create weekly schedule
+            <label for="tab-4" class="tab-label">
+        Leave Details
         </label>
       </div>
+
+
       <br />
       <br />
       <div style={{ marginTop: "0" }}>
@@ -911,7 +918,7 @@ const DoctorDetails = () => {
       </div>
 
       <div style={{ marginTop: "0" }}>
-        {selectedTab == 5 ? (
+        {selectedTab == 3 ? (
           <div className="card" style={{ borderTopLeftRadius: "0" }}>
             <div className="card-body">
               <div style={{ display: "flex" }}>

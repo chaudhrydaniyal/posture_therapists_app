@@ -24,7 +24,7 @@ exports.create = async(req,res) =>{
 }
 
 exports.getAll = async(req,res) =>{
-    services.getAll((err,data)=>{
+  doctorLeaves.getAll((err,data)=>{
       if(err){
         res.status(500).send({
             message:err.message || "some error occur while getting data"
@@ -35,7 +35,7 @@ exports.getAll = async(req,res) =>{
 }
 
 exports.findOne = (req,res) =>{
-    services.findById(req.params.id,(err,data)=>{
+  doctorLeaves.findById(req.params.id,(err,data)=>{
         if (err) {
             if (err.kind === "not_found") {
               res.status(404).send({
