@@ -74,9 +74,8 @@ const LeaveForm = () => {
         // setSelectedDoctor(null)
         // setDocDetails(null)
         // setFormSubmitted(true);
-     
-
       },
+      
     });
 
   const handleStartDateChange = (event) => {
@@ -246,11 +245,13 @@ const LeaveForm = () => {
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+
               <Form.Select
                 name="leaveNature"
                 value={values.leaveNature}
                 onChange={handleChange}
               >
+
                 <option>Leave Nature</option>
                 <option value="Sick">Sick</option>
                 <option value="Casual">Casual</option>

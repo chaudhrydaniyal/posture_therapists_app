@@ -70,7 +70,7 @@ const DoctorDetails = () => {
     id: doctorDetails.id,
     picture: doctorDetails.picture,
     first_name: doctorDetails.first_name,
-    last_name: doctorDetails.last_name,
+    surname: doctorDetails.surname,
     date_of_birth: doctorDetails.date_of_birth,
     age: doctorDetails.age,
     gender: doctorDetails.gender,
@@ -141,7 +141,7 @@ const DoctorDetails = () => {
           id: data.id,
           picture: data.picture,
           first_name: data.first_name,
-          last_name: data.last_name,
+          surname: data.surname,
           date_of_birth: data.date_of_birth.split('T')[0],
           age: data.age,
           gender: data.gender,
@@ -169,7 +169,7 @@ const DoctorDetails = () => {
         .then((user) => {
           data.picture = user.data.picture;
           data.first_name = user.data.first_name;
-          data.last_name = user.data.last_name;
+          data.surname = user.data.surname;
           data.date_of_birth = user.data.date_of_birth;
           data.age = user.data.age;
           data.gender = user.data.gender;
@@ -235,10 +235,15 @@ useEffect(()=>{
 
   return (
     <Container>
+      <div style={{display:"flex"}}>
       <Box className="breadcrumb">
         <Breadcrumb routeSegments={[{ name: "Doctor Details", value : "Posture Physio" }]} />
       </Box>
-
+      <div style={{marginLeft:"1rem",display:"flex"}}>
+        <h6>Doctor Name:  </h6>
+        <p style={{color:"green",marginLeft:"5px"}}>{doctorDetails.first_name + " " + doctorDetails.surname}</p>
+      </div>
+      </div>
       <NotificationContainer />
 
       <div class="tab">
@@ -447,7 +452,7 @@ useEffect(()=>{
                     className="Input_border"
                     type="text"
                     name="last_name"
-                    value={data.last_name}
+                    value={data.surname}
                     onChange={handleInput}
                     disabled={disableFields}
                     sx={{
@@ -970,7 +975,6 @@ useEffect(()=>{
                      <TableCell align="left" width={50}>
                        Sr
                      </TableCell>
-                     <TableCell align="left">Doctor Name</TableCell>
                      <TableCell align="center">Leave Type</TableCell>
                      <TableCell align="center">From</TableCell>
                      <TableCell align="center">To</TableCell>
@@ -984,7 +988,6 @@ useEffect(()=>{
                      .map((items, id) => (
                        <TableRow key={id}>
                          <TableCell align="left">{id}</TableCell>
-                         <TableCell align="left">{items.first_name + " " + items.surname}</TableCell>
                          <TableCell align="center">{items.leave_nature}</TableCell>
                          <TableCell align="center">{items.from}</TableCell>
                          <TableCell align="center">{items.to}</TableCell>
