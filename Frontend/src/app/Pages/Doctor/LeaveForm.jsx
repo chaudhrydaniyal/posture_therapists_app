@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Icon, IconButton, styled, Button } from "@mui/material";
-
 import Form from "react-bootstrap/Form";
 import { Span } from "app/components/Typography";
-
 import { Breadcrumb, SimpleCard } from "app/components";
 import Input from "app/components/UI Components/Input";
 import items from "app/components/Calendar/items";
@@ -16,6 +14,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+
 const Container = styled("div")(({ theme }) => ({
   margin: "30px",
   [theme.breakpoints.down("sm")]: { margin: "16px" },
@@ -26,11 +25,8 @@ const Container = styled("div")(({ theme }) => ({
 }));
 
 const initialValue = {
-
   reason: "",
- 
   leaveNature: "",
-
 };
 
 const LeaveForm = () => {
@@ -43,6 +39,8 @@ const LeaveForm = () => {
   const [days, setDays] = useState(0);
   //   const [numberofDays, setNumberofDays] = useState(0);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+
   const { values, errors, handleChange, handleBlur, touched, handleSubmit } =
     useFormik({
       initialValues: initialValue,
@@ -65,7 +63,7 @@ const LeaveForm = () => {
               }
             } 
             );
-            NotificationManager.success("Successfully Registered");
+            leaveForm && NotificationManager.success("Successfully Applied");
         } catch (error) {
           console.log("error", error);
           NotificationManager.error("Something went wrong");
@@ -77,7 +75,6 @@ const LeaveForm = () => {
         // setDocDetails(null)
         // setFormSubmitted(true);
      
-
 
       },
     });
