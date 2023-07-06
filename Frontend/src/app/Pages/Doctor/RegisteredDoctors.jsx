@@ -52,6 +52,7 @@ const RegisteredDoctors = () => {
     setPage(0);
   };
 
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_ORIGIN_URL + "api/users/",{
@@ -61,6 +62,8 @@ const RegisteredDoctors = () => {
       })
       .then((res) => setDoctors(res.data));
   }, []);
+
+  
   return (
     <Container>
       <Box className="breadcrumb">

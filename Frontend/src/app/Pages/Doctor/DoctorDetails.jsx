@@ -49,6 +49,8 @@ const Container = styled("div")(({ theme }) => ({
     [theme.breakpoints.down("sm")]: { marginBottom: "16px" },
   },
 }));
+
+
 const DoctorDetails = () => {
   var doctor = useLocation();
   var doctorDetails = doctor.state.doctors;
@@ -62,9 +64,8 @@ const DoctorDetails = () => {
   const [selectedState, setSelectedState] = useState(doctorDetails.state);
   const [selectedCity, setSelectedCity] = useState(doctorDetails.city);
   const [selectedTab, setSelectedTab] = useState(1);
-
+  const [appliedLeaves,setAppliedLeaves] = useState([])
   const [file, setfile] = useState();
-
   const [data, setData] = useState({
     id: doctorDetails.id,
     picture: doctorDetails.picture,
@@ -92,6 +93,8 @@ const DoctorDetails = () => {
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+
   const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
@@ -193,6 +196,16 @@ const DoctorDetails = () => {
     }
   };
 
+
+useEffect(()=>{
+  axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctor_leaves/' + doctorDetails.id,{
+    headers:{
+      Authorization: `Bearer ${localStorage.getItem('user')}`,
+    }
+  }).then((res)=>{setAppliedLeaves(res.data);console.log("leaveData",res)})
+},[])
+
+
   function ageCalculator(e) {
     var userInput = data.date_of_birth;
     var dob = new Date(userInput);
@@ -240,12 +253,16 @@ const DoctorDetails = () => {
             handleAvailableSlot();
             setSelectedTab(1);
           }}
-        />
+        /> 
+
         <label for="tab-1" class="tab-label">
           Doctor Details
         </label>
+
       </div>
+
       <div class="tab">
+
         <input
           type="radio"
           name="css-tabs"
@@ -257,9 +274,11 @@ const DoctorDetails = () => {
             setSelectedTab(2);
           }}
         />
+
         <label for="tab-2" class="tab-label">
         Add availability slots
         </label>
+
       </div>
       <div class="tab">
         <input
@@ -287,9 +306,19 @@ const DoctorDetails = () => {
             setDoctorLeaveDetails(true);
           }}
         />
-        <label for="tab-5" class="tab-label">
+        <label for="tab-4" class="tab-label">
         Create weekly schedule
         </label>
+        <input
+          type="radio"
+          name="css-tabs"
+          id="tab-5"
+          class="tab-switch"
+          onClick={() => {
+            setSelectedTab(5);
+            setDoctorLeaveDetails(true);
+          }}
+        />
       </div>
       <br />
       <br />
@@ -934,50 +963,28 @@ const DoctorDetails = () => {
                      <TableCell align="left" width={50}>
                        Sr
                      </TableCell>
-                     <TableCell align="left">First Name</TableCell>
-                     <TableCell align="left">Last Name</TableCell>
-                     <TableCell align="center">CNIC</TableCell>
-                     <TableCell align="center">Mobile No</TableCell>
-                     <TableCell align="center">Practitioner Type</TableCell>
-                     <TableCell align="right">Details</TableCell>
+                     <TableCell align="left">Doctor Name</TableCell>
+                     <TableCell align="center">Leave Type</TableCell>
+                     <TableCell align="center">From</TableCell>
+                     <TableCell align="center">To</TableCell>
+                     <TableCell align="right">Leave Reason</TableCell>
+                    
                    </TableRow>
                  </TableHead>
                  <TableBody>
-                   {/* {doctors
+                   {appliedLeaves && appliedLeaves
                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                      .map((items, id) => (
                        <TableRow key={id}>
                          <TableCell align="left">{id}</TableCell>
-                         <TableCell align="left">{items.first_name}</TableCell>
-                         <TableCell align="left">{items.surname}</TableCell>
-                         <TableCell align="center">{items.cnic}</TableCell>
-                         <TableCell align="center">{items.mobile_no}</TableCell>
-                         <TableCell align="center">
-                           {items.practitioner_type}
-                         </TableCell>
-                         <TableCell align="right">
-                           <Link
-                             to="/registeredDoctors/doctordetails"
-                             state={{ doctors: items }}
-                             style={{ textDecoration: "none" }}
-                           >
-                             <button
-                               style={{
-                                 padding: "0.2rem",
-                                 border: "0.1px solid grey",
-                                 borderRadius: "5px",
-                                 fontWeight: "bold",
-                                 background: "#365CAD",
-                                 color: "white",
-                               }}
-                               variant="success"
-                             >
-                               Details
-                             </button>
-                           </Link>
-                         </TableCell>
+                         <TableCell align="left">{items.first_name + " " + items.surname}</TableCell>
+                         <TableCell align="center">{items.leave_nature}</TableCell>
+                         <TableCell align="center">{items.from}</TableCell>
+                         <TableCell align="center">{items.to}</TableCell>
+                         <TableCell align="right">{items.reason}</TableCell>
+                       
                        </TableRow>
-                     ))} */}
+                     ))}
                  </TableBody>
                </StyledTable>
      
@@ -986,7 +993,7 @@ const DoctorDetails = () => {
                  page={page}
                  component="div"
                  rowsPerPage={rowsPerPage}
-                //  count={doctors.length}
+                 count={appliedLeaves.length}
                  onPageChange={handleChangePage}
                  rowsPerPageOptions={[5, 10, 25]}
                  onRowsPerPageChange={handleChangeRowsPerPage}
