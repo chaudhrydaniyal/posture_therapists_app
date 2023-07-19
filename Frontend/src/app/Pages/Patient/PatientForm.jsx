@@ -566,8 +566,8 @@ const PatientForm = () => {
               <PatternFormat
                 className="Input_border"
                 style={{
-                  height: "2rem",
-                  width: "90%",
+                  height: "2.2rem",
+                  width: "100%",
                   border: "1px solid #c0c0c0",
                   borderRadius: "4px",
                   boxSizing: "border-box",

@@ -4,12 +4,12 @@ import { Box, Icon, IconButton, styled, Button } from "@mui/material";
 import Form from "react-bootstrap/Form";
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from "app/components";
-import Input from "app/components/UI Components/Input";
 import items from "app/components/Calendar/items";
 import { ceil, findLastKey } from "lodash";
 import { useFormik } from "formik";
 import { leaveValidation } from "app/components/Validation/ValidationSchema";
 import DoctorDetails from "./DoctorDetails";
+import Input from "app/components/UI Components/Input";
 import {
   NotificationContainer,
   NotificationManager,
@@ -160,7 +160,7 @@ const LeaveForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <input
+              <Input
                 style={{
                   width: "100%",
                   height: "2.5rem",
@@ -179,7 +179,7 @@ const LeaveForm = () => {
               </label>
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
-              <input
+              <Input
                 type="text"
                 name="gender"
                 value={formSubmitted ? "" : selectedDoctor.gender}
@@ -200,7 +200,7 @@ const LeaveForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <input
+              <Input
                 value={
                   selectedDoctor.specialization === null
                     ? ""
@@ -225,7 +225,7 @@ const LeaveForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <input
+              <Input
                 value={selectedDoctor.mobile_no}
                 disabled={disable}
                 type="text"
@@ -269,7 +269,7 @@ const LeaveForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <input
+              <Input
                 type="date"
                 id="startDate"
                 name="startDate"
@@ -288,7 +288,7 @@ const LeaveForm = () => {
             </div>
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
-              <input
+              <Input
                 type="date"
                 id="endDate"
                 name="endDate"

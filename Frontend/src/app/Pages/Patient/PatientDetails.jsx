@@ -741,8 +741,8 @@ const PatientDetails = () => {
                   <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <PatternFormat
                       style={{
-                        height: "2rem",
-                        width: "90%",
+                        height: "2.2rem",
+                        width: "100%",
                         border: "1px solid #c0c0c0",
                         borderRadius: "4px",
                         boxSizing: "border-box",

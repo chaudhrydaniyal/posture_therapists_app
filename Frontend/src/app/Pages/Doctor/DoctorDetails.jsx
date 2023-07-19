@@ -22,6 +22,7 @@ import Select from "react-select";
 // import {Select,MenuItem } from '@mui/material';
 import Form from "react-bootstrap/Form";
 import pp from "./avatar.png";
+import PhoneInput from "react-phone-input-2";
 import {
   IconButton,
   Table,
@@ -190,7 +191,8 @@ const DoctorDetails = () => {
           data.state = user.data.state;
           data.city = user.data.city;
         });
-      NotificationManager.success("Successfully Updated");
+     
+     
     } catch (error) {
       NotificationManager.error("Something went wrong");
     }
@@ -237,11 +239,11 @@ useEffect(()=>{
     <Container>
       <div style={{display:"flex"}}>
       <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Doctor Details", value : "Posture Physio" }]} />
+        <Breadcrumb routeSegments={[{ name: "Doctor Details", value : "Posture Physio"}]} />
       </Box>
-      <div style={{marginLeft:"1rem",display:"flex"}}>
-        <h6>Doctor Name:  </h6>
-        <p style={{color:"green",marginLeft:"5px"}}>{doctorDetails.first_name + " " + doctorDetails.surname}</p>
+      <div style={{marginLeft:"0.1rem",display:"flex"}}>
+
+        <Icon style={{marginTop:"0.2rem",color:"#adb5bd"}}>navigate_next</Icon>{doctorDetails.first_name + " " + doctorDetails.surname}
       </div>
       </div>
       <NotificationContainer />
@@ -596,8 +598,8 @@ useEffect(()=>{
                 <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                   <PatternFormat
                     style={{
-                      height: "2rem",
-                      width: "90%",
+                      height: "2.2rem",
+                      width: "100%",
                       border: "1px solid #c0c0c0",
                       borderRadius: "4px",
                       boxSizing: "border-box",
