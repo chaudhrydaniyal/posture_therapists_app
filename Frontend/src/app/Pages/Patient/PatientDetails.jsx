@@ -242,6 +242,35 @@ const PatientDetails = () => {
       });
   }, []);
 
+
+
+  function openCity(evt, cityName) {
+
+
+
+    console.log("event", evt)
+
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    // document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+
   return (
     <Container>
       <Box className="breadcrumb">
@@ -249,7 +278,7 @@ const PatientDetails = () => {
       </Box>
       <NotificationContainer />
 
-      <div class="tab">
+      {/* <div class="tab">
         <input
           type="radio"
           name="css-tabs"
@@ -282,13 +311,37 @@ const PatientDetails = () => {
       </div>
 
       <br />
-      <br />
+
+      <br /> */}
+
+
+
+      
+      <div>
+        <div class="tab" style={{ borderTopLeftRadius: "4px", borderTopRightRadius: "4px" }}>
+          <button class="tablinks active" onClick={(event) => {
+                openPatientInformation();
+                closePatientVisits();
+            openCity(event, 'London')
+          }}>         Patient Information
+          </button>
+          <button class="tablinks" onClick={(event) => {
+            closePatientInformation();
+            openPatientVisits();
+            openCity(event, 'Paris')
+          }}>         Patient Visits
+          </button>
+     
+        </div>
+
+      </div>
+
 
       {/* ************Patient Information*********** */}
       <div style={{ marginTop: "0" }}>
         {patientInformation ? (
           <>
-            <div className="card" style={{ borderTopLeftRadius: "0" }}>
+            <div className="card" style={{ borderTopLeftRadius: "0", borderTopRightRadius: "0" }}>
               <div className="card-body" style={{ margin: "10px" }}>
                 <div style={{ display: "flex" }}>
                   <h5>Patient Information</h5>
@@ -1065,7 +1118,7 @@ const PatientDetails = () => {
       <div style={{ marginTop: "0" }}>
         {patientVisits ? (
           <>
-            <div className="card" style={{ borderTopLeftRadius: "0" }}>
+            <div className="card" style={{ borderTopLeftRadius: "0", borderTopRightRadius: "0" }}>
               <div className="card-body">
                 <div style={{ display: "flex" }}>
                   <div>Name:</div>

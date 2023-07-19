@@ -13,6 +13,7 @@
     cursor: pointer;
     padding: 10px 12px;
     transition: 0.3s;
+    font-weight: 600;
   }
   
   /* Change background color of buttons on hover */
