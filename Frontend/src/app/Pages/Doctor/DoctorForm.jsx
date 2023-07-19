@@ -9,7 +9,7 @@ import {
 import { Box, styled, Button, Icon } from "@mui/material";
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from "app/components";
-import "../Patient/Patient.css";
+// import "../Patient/Patient.css";
 import { doctorValidation } from "app/components/Validation/ValidationSchema";
 import Input from "app/components/UI Components/Input";
 import { City, Country, State } from "country-state-city";

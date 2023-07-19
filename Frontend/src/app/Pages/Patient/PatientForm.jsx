@@ -7,7 +7,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import { PatternFormat } from "react-number-format";
-import "./Patient.css";
+// import "./Patient.css";
 import { Box, styled, Button, Icon } from "@mui/material";
 import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from "app/components";

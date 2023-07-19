@@ -15,7 +15,7 @@ import { Span } from "app/components/Typography";
 import { Breadcrumb, SimpleCard } from "app/components";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import "../../Pages/Patient/Patient.css";
+// import "../../Pages/Patient/Patient.css";
 import Input from "app/components/UI Components/Input";
 import { City, Country, State } from "country-state-city";
 import Select from "react-select";
@@ -32,6 +32,12 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
+
+import './DoctorDetails.css'
+
+
+
+
 
 const StyledTable = styled(Table)(() => ({
   whiteSpace: "pre",
@@ -60,12 +66,11 @@ const DoctorDetails = () => {
   const [availableSlots, setAvailableSlots] = useState(false);
   const [doctorSlots, setDoctorSlots] = useState(true);
   const [doctorWeeklySchedule, setDoctorWeeklySchedule] = useState(false);
-  const [doctorLeaveDetails, setDoctorLeaveDetails] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(doctorDetails.country);
   const [selectedState, setSelectedState] = useState(doctorDetails.state);
   const [selectedCity, setSelectedCity] = useState(doctorDetails.city);
   const [selectedTab, setSelectedTab] = useState(1);
-  const [appliedLeaves,setAppliedLeaves] = useState([])
+  const [appliedLeaves, setAppliedLeaves] = useState([])
   const [file, setfile] = useState();
   const [data, setData] = useState({
     id: doctorDetails.id,
@@ -162,8 +167,8 @@ const DoctorDetails = () => {
           country: data.country,
           state: data.state,
           city: data.city,
-        },{
-          headers:{
+        }, {
+          headers: {
             Authorization: `Bearer ${localStorage.getItem('user')}`,
           }
         })
@@ -191,21 +196,21 @@ const DoctorDetails = () => {
           data.state = user.data.state;
           data.city = user.data.city;
         });
-     
-     
+
+
     } catch (error) {
       NotificationManager.error("Something went wrong");
     }
   };
 
 
-useEffect(()=>{
-  axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctor_leaves/' + doctorDetails.id,{
-    headers:{
-      Authorization: `Bearer ${localStorage.getItem('user')}`,
-    }
-  }).then((res)=>{setAppliedLeaves(res.data);console.log("leaveData",res)})
-},[])
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_ORIGIN_URL + 'api/doctor_leaves/' + doctorDetails.id, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('user')}`,
+      }
+    }).then((res) => { setAppliedLeaves(res.data); console.log("leaveData", res) })
+  }, [])
 
 
   function ageCalculator(e) {
@@ -235,19 +240,52 @@ useEffect(()=>{
     }
   }
 
+
+
+  function openCity(evt, cityName) {
+
+
+
+    console.log("event", evt)
+
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    // document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+
   return (
     <Container>
-      <div style={{display:"flex"}}>
-      <Box className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: "Doctor Details", value : "Posture Physio"}]} />
-      </Box>
-      <div style={{marginLeft:"0.1rem",display:"flex"}}>
+      <div style={{ display: "flex" }}>
+        <Box className="breadcrumb">
+          <Breadcrumb routeSegments={[{ name: "Doctor Details", value: "Posture Physio" }]} />
+        </Box>
+        <div style={{ marginLeft: "0.1rem", display: "flex" }}>
 
-        <Icon style={{marginTop:"0.2rem",color:"#adb5bd"}}>navigate_next</Icon>{doctorDetails.first_name + " " + doctorDetails.surname}
-      </div>
+          <Icon style={{ marginTop: "0.2rem", color: "#adb5bd" }}>navigate_next</Icon>{doctorDetails.first_name + " " + doctorDetails.surname}
+        </div>
       </div>
       <NotificationContainer />
 
+
+
+      {/* *************************** prev tabs *************************************** */}
+      {/* 
       <div class="tab">
         <input
           type="radio"
@@ -314,7 +352,6 @@ useEffect(()=>{
           class="tab-switch"
           onClick={() => {
             setSelectedTab(4);
-            setDoctorLeaveDetails(true);
 
           }}
         />
@@ -328,17 +365,68 @@ useEffect(()=>{
           class="tab-switch"
           onClick={() => {
             setSelectedTab(5);
-            setDoctorLeaveDetails(true);
           }}
         />
       </div>
 
 
       <br />
-      <br />
+      <br /> */}
+
+
+
+      {/* *************************************** prev tabs ******************************************** */}
+
+      <div>
+
+
+        <div class="tab" style={{borderTopLeftRadius:"4px", borderTopRightRadius:"4px"}}>
+          <button class="tablinks active"   onClick={(event) => {
+            setSelectedTab(1);
+            openCity(event, 'London')
+          }}>          Doctor Details
+          </button>
+          <button class="tablinks" onClick={(event) => {
+            setSelectedTab(2);
+            openCity(event, 'Paris')
+          }}>        Add availability slots
+          </button>
+          <button class="tablinks" onClick={(event) => {
+            setSelectedTab(3);
+            openCity(event, 'Tokyo')
+          }}>        Create weekly schedule
+          </button>
+
+          <button class="tablinks" onClick={(event) => {
+            setSelectedTab(4);
+
+
+            openCity(event, 'Tokyo')
+          }}>              Leave History
+
+          </button>
+        </div>
+
+        {/* <div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div> */}
+
+      </div>
+
       <div style={{ marginTop: "0" }}>
         {selectedTab == 1 ? (
-          <div className="card" style={{ borderTopLeftRadius: "0" }}>
+          <div className="card" style={{ borderTopLeftRadius: "0", borderTopRightRadius: "0" }}>
             <div className="card-body" style={{ margin: "0px" }}>
               <h5>Doctor Information</h5>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -414,9 +502,9 @@ useEffect(()=>{
                       }}
                     />
                   </div>
-                  <label style={{ marginTop: "0rem", marginLeft:"8px", fontWeight:"500" }}>
+                  <label style={{ marginTop: "0rem", marginLeft: "8px", fontWeight: "500" }}>
                     Upload Picture
-                    </label>
+                  </label>
                 </div>
               </Form>
               <div className="row" style={{ marginTop: "2rem" }}>
@@ -604,7 +692,7 @@ useEffect(()=>{
                       borderRadius: "4px",
                       boxSizing: "border-box",
                       paddingBottom: "5px",
-                      marginTop:"0.2rem"
+                      marginTop: "0.2rem"
                     }}
                     className="Input_border"
                     required
@@ -941,7 +1029,7 @@ useEffect(()=>{
 
       <div style={{ marginTop: "0" }}>
         {selectedTab == 2 ? (
-          <div className="card" style={{ borderTopLeftRadius: "0" }}>
+          <div className="card" style={{ borderTopLeftRadius: "0", borderTopRightRadius: "0" }}>
             <div className="card-body">
               <div style={{ display: "flex" }}>
                 <div>Doctor Name:</div> &nbsp;
@@ -955,7 +1043,7 @@ useEffect(()=>{
 
       <div style={{ marginTop: "0" }}>
         {selectedTab == 3 ? (
-          <div className="card" style={{ borderTopLeftRadius: "0" }}>
+          <div className="card" style={{ borderTopLeftRadius: "0", borderTopRightRadius: "0" }}>
             <div className="card-body">
               <div style={{ display: "flex" }}>
                 <div>Doctor Name:</div> &nbsp;
@@ -967,55 +1055,55 @@ useEffect(()=>{
         ) : null}
       </div>
 
-      <div style={{margin:"0"}}>
+      <div style={{ margin: "0" }}>
         {selectedTab == 4 ? (
-             <div className="card">
-             <div className="card-body">
-               <StyledTable>
-                 <TableHead>
-                   <TableRow>
-                     <TableCell align="left" width={50}>
-                       Sr
-                     </TableCell>
-                     <TableCell align="center">Leave Type</TableCell>
-                     <TableCell align="center">From</TableCell>
-                     <TableCell align="center">To</TableCell>
-                     <TableCell align="left">Leave Reason</TableCell>
-                    
-                   </TableRow>
-                 </TableHead>
-                 <TableBody>
-                   {appliedLeaves && appliedLeaves
-                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                     .map((items, id) => (
-                       <TableRow key={id}>
-                         <TableCell align="left">{id}</TableCell>
-                         <TableCell align="center">{items.leave_nature}</TableCell>
-                         <TableCell align="center">{items.from}</TableCell>
-                         <TableCell align="center">{items.to}</TableCell>
-                         <TableCell align="left">{items.reason}</TableCell>
-                       
-                       </TableRow>
-                     ))}
-                 </TableBody>
-               </StyledTable>
-     
-               <TablePagination
-                 sx={{ px: 2 }}
-                 page={page}
-                 component="div"
-                 rowsPerPage={rowsPerPage}
-                 count={appliedLeaves.length}
-                 onPageChange={handleChangePage}
-                 rowsPerPageOptions={[5, 10, 25]}
-                 onRowsPerPageChange={handleChangeRowsPerPage}
-                 nextIconButtonProps={{ "aria-label": "Next Page" }}
-                 backIconButtonProps={{ "aria-label": "Previous Page" }}
-               />
-             </div>
-           </div>
+          <div className="card" style={{ borderTopLeftRadius: "0", borderTopRightRadius: "0" }}>
+            <div className="card-body">
+              <StyledTable>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left" width={50}>
+                      Sr
+                    </TableCell>
+                    <TableCell align="center">Leave Type</TableCell>
+                    <TableCell align="center">From</TableCell>
+                    <TableCell align="center">To</TableCell>
+                    <TableCell align="left">Leave Reason</TableCell>
 
-        ):null}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {appliedLeaves && appliedLeaves
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((items, id) => (
+                      <TableRow key={id}>
+                        <TableCell align="left">{id}</TableCell>
+                        <TableCell align="center">{items.leave_nature}</TableCell>
+                        <TableCell align="center">{items.from}</TableCell>
+                        <TableCell align="center">{items.to}</TableCell>
+                        <TableCell align="left">{items.reason}</TableCell>
+
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </StyledTable>
+
+              <TablePagination
+                sx={{ px: 2 }}
+                page={page}
+                component="div"
+                rowsPerPage={rowsPerPage}
+                count={appliedLeaves.length}
+                onPageChange={handleChangePage}
+                rowsPerPageOptions={[5, 10, 25]}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                nextIconButtonProps={{ "aria-label": "Next Page" }}
+                backIconButtonProps={{ "aria-label": "Previous Page" }}
+              />
+            </div>
+          </div>
+
+        ) : null}
 
       </div>
     </Container>

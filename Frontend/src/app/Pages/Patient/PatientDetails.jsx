@@ -22,7 +22,7 @@ import { Span } from "app/components/Typography";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Breadcrumb, SimpleCard } from "app/components";
-import "./Patient.css";
+// import "./Patient.css";
 import PatientVisit from "./PatientVisit";
 import Input from "app/components/UI Components/Input";
 import { Country, City, State } from "country-state-city";

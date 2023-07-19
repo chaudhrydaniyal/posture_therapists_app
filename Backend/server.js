@@ -59,9 +59,6 @@ app.use('/graphql', graphqlHTTP({
       first_name: String,
       last_name: String,
     }
-
-
-
   
     type RootQuery {
       doctor_availability_slots: [doctor_availability_slot],
@@ -73,7 +70,6 @@ app.use('/graphql', graphqlHTTP({
     schema {
       query: RootQuery
     }
-
    `),
 
   rootValue: {
@@ -94,7 +90,6 @@ app.use('/graphql', graphqlHTTP({
             return 
           });
         })
-
 
         return sqlRes
 
@@ -129,11 +124,8 @@ app.use('/graphql', graphqlHTTP({
     },
 
     scheduled_appointments: async () => {
-
       let query = "SELECT scheduled_appointments.id as id, date as date, start_time as appointment_start_time,	end_time as appointment_end_time,	title,	doctor as doctorID, users.first_name as doctorName, patients.first_name as patient_first_name  FROM scheduled_appointments INNER JOIN patients on scheduled_appointments.patient = patients.id INNER JOIN users on scheduled_appointments.doctor = users.id;";
-
       try {
-
         const sqlRes = await new Promise((resolve, reject) => {
           sql.query(query, (err, res) => {
             if (err) {
@@ -142,20 +134,15 @@ app.use('/graphql', graphqlHTTP({
               return;
             }
 
-
             resolve(res)
             return 
           });
         })
         console.log("The result from sql", sqlRes)
-
         return sqlRes
-
       }
       catch (err) {
-
         console.log("error", err)
-
       }
     },
 
@@ -164,7 +151,6 @@ app.use('/graphql', graphqlHTTP({
       let query = "SELECT id , first_name, surname as last_name FROM users where  isnull(role)";
 
       try {
-
         const sqlRes = await new Promise((resolve, reject) => {
           sql.query(query, (err, res) => {
             if (err) {
@@ -172,21 +158,15 @@ app.use('/graphql', graphqlHTTP({
               reject(`Error in SQL query: ${err}`)
               return;
             }
-
-
             resolve(res)
             return 
           });
         })
         console.log("The result from sql", sqlRes)
-
         return sqlRes
-
       }
       catch (err) {
-
         console.log("error", err)
-
       }
     },
 
@@ -203,8 +183,6 @@ app.use('/graphql', graphqlHTTP({
               reject(`Error in SQL query: ${err}`)
               return;
             }
-
-
             resolve(res)
             return 
           });
