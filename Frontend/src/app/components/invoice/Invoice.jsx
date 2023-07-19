@@ -420,7 +420,7 @@ class Invoice extends React.Component {
                     <span className="fw-bold">Total:</span>
                     <span className="fw-bold">
                       {this.state.currency} &nbsp;
-                      {this.state.total || 0}
+                      {parseFloat(this.state.total).toFixed(2) || 0}
                     </span>
                   </div>
                 </Col>

@@ -46,7 +46,7 @@ const Footer = () => {
             </a> */}
             <Span sx={{ m: 'auto' }}></Span>
             <Paragraph sx={{ m: 0 }}>
-              Design and Developed by <a href="http://sagacious.pk/sagacious-sys/">Sagacious Systems</a>
+              Design and Developed by <a href="http://sagacious.systems/">Sagacious Systems</a>
             </Paragraph>
           </FooterContent>
         </AppFooter>

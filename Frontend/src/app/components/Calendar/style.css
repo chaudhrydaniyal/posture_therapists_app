@@ -54,3 +54,27 @@ body {
 .rct-label{
     width:"4px" !important
 }
+
+
+
+.box {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    /* border: 1px solid black; */
+    border-radius: 3px;
+    clear: both;
+  }
+  
+  .red {
+    background-color: red;
+  }
+  
+  .green {
+    background-color: #198754;
+  }
+  
+  .blue {
+    background-color: #3788d8;
+  }

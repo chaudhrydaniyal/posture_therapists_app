@@ -1,9 +1,12 @@
+require('dotenv').config();
+
+
 
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "password",
-  DB: "postureapp"
+  HOST: process.env.DB_HOST,
+  USER: process.env.DB_USER,
+  PASSWORD: process.env.DB_PASSWORD,
+  DB: process.env.DB_DATABASE
 };
 
 
@@ -13,3 +16,5 @@ module.exports = {
 //   PASSWORD: "lqWGwX0n+S{;cOZvwam^6ua(",
 //   DB: "sagaohje_mstack"
 // };
+
+

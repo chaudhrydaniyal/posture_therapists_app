@@ -588,7 +588,7 @@ const PatientForm = () => {
               ) : null}
             </div>
 
-            <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+            {/* <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               <label htmlFor="past_medical_history">
                 <div>Disease:</div>
               </label>
@@ -630,7 +630,7 @@ const PatientForm = () => {
               ))}
 
               {console.log("selectedDisease", selectedDisease)}
-            </div>
+            </div> */}
           </div>
           <div className="row"></div>
         </div>

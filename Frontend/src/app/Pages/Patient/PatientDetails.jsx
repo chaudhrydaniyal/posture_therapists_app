@@ -765,13 +765,13 @@ const PatientDetails = () => {
                       }}
                     />
                   </div>
-                  <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                  {/* <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
                     <label htmlFor="past_medical_history">
                       <div>Disease:</div>
                     </label>
-                  </div>
+                  </div> */}
 
-                  <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
+                  {/* <div className="col-xl-2 col-lg-2 col-sm-2 border p-3"> */}
                     {/* <Form.Select
                       class="form-control dropdown"
                       disabled={disableFields}
@@ -787,7 +787,7 @@ const PatientDetails = () => {
 
                       
                     </Form.Select> */}
-                    <h6>Patient Diagnosis Diseases</h6>
+                    {/* <h6>Patient Diagnosis Diseases</h6>
                     <Button onClick={handleOpen}>view...</Button>
                     <Modal
                       open={open}
@@ -816,7 +816,7 @@ const PatientDetails = () => {
                       </Box>
                     </Modal>
                     {console.log("getDiseaseMap", getDiseases)}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row"></div>
               </div>

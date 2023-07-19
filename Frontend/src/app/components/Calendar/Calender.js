@@ -357,6 +357,11 @@ class Calender extends Component {
 
         <br />
 
+<div style={{display:'flex'}}>
+        <div><div class='box green'></div>&nbsp;Doctor availability slot</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div><div class='box blue'></div>&nbsp; Patient scheduled appointment</div></div>
+<br />
+
 <div style={{border:"solid 1px gray"}}>
         <Timeline
           style={{
@@ -381,7 +386,7 @@ class Calender extends Component {
           defaultTimeStart={moment().add(-1, 'day')}
           defaultTimeEnd={moment().add(7, 'day')}
           sidebarContent="Doctors"
-          lineHeight={50}
+          lineHeight={40}
           itemRenderer={itemRender}
           // defaultTimeStart={moment(y19).add(0, 'day')}
           // defaultTimeEnd={moment(y19).add(1, 'day')}
@@ -390,7 +395,7 @@ class Calender extends Component {
           // fullUpdate
           itemTouchSendsClick={true}
           stackItems
-          itemHeightRatio={0.75}
+          itemHeightRatio={0.90}
           showCursorLine
           canMove={false}
         // canResize={'both'}
