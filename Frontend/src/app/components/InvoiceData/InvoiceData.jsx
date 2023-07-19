@@ -429,20 +429,14 @@ class InvoiceData extends React.Component {
                           this.props.patient_invoice_data[0].tax_rate) || 0) / 100 ) * (this.props.patient_invoice_data[0] &&
                           this.props.patient_invoice_data[0].sub_total))
 
-
                         -
-                        
                         
                        // discount amount to subtract
                        
-                       
+              
                        ((((this.props.patient_invoice_data[0] &&
                         this.props.patient_invoice_data[0].discount) || 0) / 100 ) * (this.props.patient_invoice_data[0] &&
                         this.props.patient_invoice_data[0].sub_total))
-                        
-                        
-                        
-                        
                         
                         }
                     </span>

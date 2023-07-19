@@ -42,7 +42,7 @@ const Breadcrumb = ({ routeSegments }) => {
     <BreadcrumbRoot>
       {routeSegments ? (
         <Hidden xsDown>
-          <BreadcrumbName>{routeSegments[routeSegments.length - 1]['name','value'] }</BreadcrumbName>
+          <BreadcrumbName>{routeSegments[routeSegments.length - 1]['name','value']}</BreadcrumbName>
           <Separator>|</Separator>
         </Hidden>
       ) : null}
@@ -62,6 +62,7 @@ const Breadcrumb = ({ routeSegments }) => {
                   <SubName>{route.value}</SubName>
                 </NavLink>
               ) : (
+                
                 <SubName key={index}>{route.name}</SubName>
               );
             })
