@@ -226,11 +226,13 @@ const LeaveForm = () => {
             <div className="col-xl-2 col-lg-2 col-sm-2 border p-3">
               {" "}
               <Input
-                value={selectedDoctor.mobile_no}
+                value={ selectedDoctor.mobile_no === null
+                  ? ""
+                  : selectedDoctor.mobile_no }
                 disabled={disable}
                 type="text"
                 name="mobile-number"
-                label="Mobile Number"
+                // label="Mobile Number"
                 style={{
                   width: "100%",
                   height: "2.5rem",
