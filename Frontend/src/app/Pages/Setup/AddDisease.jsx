@@ -155,7 +155,7 @@ const AddDisease = () => {
                 {/* <hr></hr> */}
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <input
-                    style={{ paddingLeft: "0.3rem" }}
+                    style={{ paddingLeft: "0.3rem",width:"100%" }}
                     placeholder="Enter Disease"
                     value={disease}
                     onChange={(e) => setDisease(e.target.value)}
@@ -164,7 +164,7 @@ const AddDisease = () => {
                     <p style={{ color: "red" }}>Enter Disease Name</p>
                   ) : null}
                 </Typography>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <div style={{ display: "flex", justifyContent: "flex-end",marginTop:"1rem" }}>
                   <Button onClick={handleClose}>
                     {" "}
                     <strong>Close</strong>
@@ -200,7 +200,7 @@ const AddDisease = () => {
               {/* <hr></hr> */}
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <input
-                  style={{ paddingLeft: "0.3rem" }}
+                  style={{ paddingLeft: "0.3rem",width:"100%" }}
                   placeholder="Enter Disease"
                   value={editDisease.name}
                   onChange={(e) =>
@@ -208,7 +208,7 @@ const AddDisease = () => {
                   }
                 />
               </Typography>
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div style={{ display: "flex", justifyContent: "flex-end",marginTop:"1rem" }}>
                 <Button onClick={handleCloseEdit}>
                   {" "}
                   <strong>Close</strong>
@@ -237,7 +237,7 @@ const AddDisease = () => {
                   }}
                 >
                   {" "}
-                  <strong>Add</strong>
+                  <strong>Edit</strong>
                 </Button>
               </div>
             </Box>

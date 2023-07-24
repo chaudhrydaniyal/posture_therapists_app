@@ -165,7 +165,7 @@ const Services = () => {
                   </div>
                   <div>
                     <input
-                      style={{ paddingLeft: "0.3rem" }}
+                      style={{ paddingLeft: "0.3rem",width:"100%" }}
                       placeholder="Enter Service"
                       name="service"
                       value={service.service}
@@ -180,7 +180,7 @@ const Services = () => {
                   </div>
                   <div>
                     <input
-                      style={{ paddingLeft: "0.3rem" }}
+                      style={{ paddingLeft: "0.3rem",width:"100%" }}
                       placeholder="PKR"
                       name="price"
                       value={service.price}
@@ -194,8 +194,8 @@ const Services = () => {
                     <label>Description:</label>
                   </div>
                   <div>
-                    <input
-                      style={{ paddingLeft: "0.3rem" }}
+                    <textarea
+                      style={{ paddingLeft: "0.3rem",width:"100%" }}
                       placeholder="description"
                       name="description"
                       value={service.description}
@@ -203,7 +203,7 @@ const Services = () => {
                     />
                   </div>
                 </Typography>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <div style={{ display: "flex", justifyContent: "flex-end",marginTop:"1rem" }}>
                   <Button onClick={handleClose}>
                     {" "}
                     <strong>Close</strong>
@@ -239,7 +239,7 @@ const Services = () => {
               {/* <hr></hr> */}
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <input
-                  style={{ paddingLeft: "0.3rem" }}
+                  style={{ paddingLeft: "0.3rem",width:"100%" }}
                   placeholder="Edit Service"
                   value={editService.service}
                   onChange={(e) =>
@@ -249,7 +249,7 @@ const Services = () => {
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <input
-                  style={{ paddingLeft: "0.3rem" }}
+                  style={{ paddingLeft: "0.3rem",width:"100%" }}
                   placeholder="Edit charges"
                   value={editService.price}
                   onChange={(e) =>
@@ -258,8 +258,8 @@ const Services = () => {
                 />
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input
-                  style={{ paddingLeft: "0.3rem" }}
+                <textarea
+                  style={{ paddingLeft: "0.3rem",width:"100%" }}
                   placeholder="description"
                   value={editService.description}
                   onChange={(e) =>
@@ -301,7 +301,7 @@ const Services = () => {
                   }}
                 >
                   {" "}
-                  <strong>Add</strong>
+                  <strong>Edit</strong>
                 </Button>
               </div>
             </Box>
