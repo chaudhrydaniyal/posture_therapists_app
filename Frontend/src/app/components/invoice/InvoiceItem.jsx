@@ -49,10 +49,10 @@ class InvoiceItem extends React.Component {
         <Table>
           <thead>
             <tr>
-              <th>ITEM</th>
-              <th>Description</th>
-              <th>PRICE/RATE</th>
-              <th className="text-center">ACTION</th>
+              <th width="35%">ITEM</th>
+              <th width="45%">Description</th>
+              <th width="10%">PRICE/RATE</th>
+              <th width="10%" className="text-center">ACTION</th>
             </tr>
           </thead>
           <tbody>{itemTable}</tbody>
@@ -143,7 +143,7 @@ class ItemRow extends React.Component {
         <td style={{ minWidth: "130px" }}>
           <p
             style={{
-              width: "80%",
+              width: "100%",
               height: "2.5rem",
               border: "0.5px solid grey",
               borderRadius: "6px",

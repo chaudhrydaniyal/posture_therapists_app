@@ -379,35 +379,33 @@ const DoctorDetails = () => {
       {/* *************************************** prev tabs ******************************************** */}
 
       <div>
-
-
-        <div class="tab" style={{borderTopLeftRadius:"4px", borderTopRightRadius:"4px"}}>
-          <button class="tablinks active"   onClick={(event) => {
+        <div class="tab" style={{ borderTopLeftRadius: "4px", borderTopRightRadius: "4px" }}>
+          <button class="tablinks active" onClick={(event) => {
             setSelectedTab(1);
             openCity(event, 'London')
-          }}>          Doctor Details
+          }}>
+            Doctor details
           </button>
           <button class="tablinks" onClick={(event) => {
             setSelectedTab(2);
             openCity(event, 'Paris')
-          }}>        Add availability slots
+          }}>
+            Add availability slots
           </button>
           <button class="tablinks" onClick={(event) => {
             setSelectedTab(3);
             openCity(event, 'Tokyo')
-          }}>        Create weekly schedule
+          }}>
+            Create weekly schedule
           </button>
-
           <button class="tablinks" onClick={(event) => {
             setSelectedTab(4);
-
-
             openCity(event, 'Tokyo')
-          }}>              Leave History
-
+          }}>
+            Leaves history
           </button>
         </div>
-
+      </div>
         {/* <div id="London" class="tabcontent">
   <h3>London</h3>
   <p>London is the capital city of England.</p>
@@ -423,7 +421,7 @@ const DoctorDetails = () => {
   <p>Tokyo is the capital of Japan.</p>
 </div> */}
 
-      </div>
+    
 
       <div style={{ marginTop: "0" }}>
         {selectedTab == 1 ? (

@@ -80,7 +80,7 @@ const TopSellingTable = () => {
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>Scheduled Appointments</Title>
+        <Title>Upcoming Appointments</Title>
         {/* <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>
@@ -91,11 +91,9 @@ const TopSellingTable = () => {
         <ProductTable>
           <TableHead>
             <TableRow>
-
               <TableCell sx={{ px: 3 }} colSpan={2}>
                 Date
               </TableCell>
-
               <TableCell sx={{ px: 0 }} colSpan={3}>
                 Patient Name
               </TableCell>
@@ -112,21 +110,22 @@ const TopSellingTable = () => {
           </TableHead>
 
           <TableBody>
-            {scheduledappointments.map((scheduledappointment, index) => (
+            {scheduledappointments.filter((f)=>{   
+            return(new Date(f.start_time) > new Date())
+            
+            } ).map((scheduledappointment, index) => (
               <TableRow key={index} hover>
+
                 <TableCell colSpan={2} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
                   {/* <Box display="flex" alignItems="center">
                     <Avatar src={product.imgUrl} />
                     <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
                   </Box> */}
                   {moment(scheduledappointment.start_time).format('DD/MM/YYYY')}
-
-
                 </TableCell>
 
                 <TableCell align="left" colSpan={3} sx={{ px: 0, textTransform: 'capitalize' }}>
                   {scheduledappointment.patient}
-
                 </TableCell>
 
                 <TableCell align="left" colSpan={3} sx={{ px: 0, textTransform: 'capitalize' }}>
@@ -134,9 +133,7 @@ const TopSellingTable = () => {
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-
                   {moment(scheduledappointment.start_time).format('h:mm:ss a')}
-
                   {/* {product.available ? (
                     product.available < 20 ? (
                       <Small bgcolor={bgSecondary}>{product.available} available</Small>

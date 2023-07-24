@@ -1,6 +1,7 @@
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
+    border-bottom: 0px;
     background-color: #f1f1f1;
   }
   

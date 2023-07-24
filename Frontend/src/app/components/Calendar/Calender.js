@@ -71,8 +71,8 @@ class Calender extends Component {
     refresh: false,
     doctor: '',
     status: '',
-    start: '2019-01-01',
-    end: '2019-01-01',
+    start: '',
+    end: '',
     open: false,
     mentorsList: [],
     patients: [],
@@ -562,6 +562,12 @@ class Calender extends Component {
                           end: this.state.end,
                           patientName: this.state.patientName
                         }
+
+
+
+                        console.log("add appointment", addAppointment)
+
+
                         this.addItemHandler(addAppointment)
                         // return this.props.onAddItem(this.state)
                       }}
