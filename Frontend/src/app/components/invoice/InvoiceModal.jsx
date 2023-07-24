@@ -149,41 +149,41 @@ saveInvoice=async () => {
                   </tr>
                   <tr className="text-end">
                     <td></td>
-                    <td className="fw-bold" style={{ width: "100px" }}>
+                    <td className="fw-bold" style={{ width: "150px" }}>
                       SUBTOTAL
                     </td>
-                    <td className="text-end" style={{ width: "100px" }}>
+                    <td className="text-end" style={{ width: "150px" }}>
                       {this.props.currency} {this.props.subTotal}
                     </td>
                   </tr>
                   {this.props.taxAmmount != 0.0 && (
                     <tr className="text-end">
                       <td></td>
-                      <td className="fw-bold" style={{ width: "100px" }}>
+                      <td className="fw-bold" style={{ width: "150px" }}>
                         TAX
                       </td>
-                      <td className="text-end" style={{ width: "100px" }}>
-                        {this.props.currency} {this.props.taxAmmount}
+                      <td className="text-end" style={{ width: "150px" }}>
+                        {this.props.currency} {(this.props.taxAmmount / 100) * this.props.subTotal}
                       </td>
                     </tr>
                   )}
                   {this.props.discountAmmount != 0.0 && (
                     <tr className="text-end">
                       <td></td>
-                      <td className="fw-bold" style={{ width: "100px" }}>
+                      <td className="fw-bold" style={{ width: "150px" }}>
                         DISCOUNT
                       </td>
-                      <td className="text-end" style={{ width: "100px" }}>
-                        {this.props.currency} {this.props.discountAmmount}
+                      <td className="text-end" style={{ width: "150px" }}>
+                        {this.props.currency} {(this.props.discountAmmount / 100) * this.props.subTotal}
                       </td>
                     </tr>
                   )}
                   <tr className="text-end">
                     <td></td>
-                    <td className="fw-bold" style={{ width: "100px" }}>
+                    <td className="fw-bold" style={{ width: "150px" }}>
                       TOTAL
                     </td>
-                    <td className="text-end" style={{ width: "100px" }}>
+                    <td className="text-end" style={{ width: "150px" }}>
                       {this.props.currency} {this.props.total}
                     </td>
                   </tr>
