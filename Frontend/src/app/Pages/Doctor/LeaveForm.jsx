@@ -230,7 +230,7 @@ const LeaveForm = () => {
                 disabled={disable}
                 type="text"
                 name="mobile-number"
-                label="Mobile Number"
+                // label="Mobile Number"
                 style={{
                   width: "100%",
                   height: "2.5rem",

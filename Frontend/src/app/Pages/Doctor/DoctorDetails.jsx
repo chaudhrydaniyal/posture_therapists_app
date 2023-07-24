@@ -23,6 +23,7 @@ import Select from "react-select";
 import Form from "react-bootstrap/Form";
 import pp from "./avatar.png";
 import PhoneInput from "react-phone-input-2";
+import './DoctorDetails.css'
 import {
   IconButton,
   Table,
@@ -33,7 +34,6 @@ import {
   TableRow,
 } from "@mui/material";
 
-import './DoctorDetails.css'
 
 
 
@@ -48,6 +48,7 @@ const StyledTable = styled(Table)(() => ({
     "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
   },
 }));
+
 const Container = styled("div")(({ theme }) => ({
   margin: "30px",
   [theme.breakpoints.down("sm")]: { margin: "16px" },
