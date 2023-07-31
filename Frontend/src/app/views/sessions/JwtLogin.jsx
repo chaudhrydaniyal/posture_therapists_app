@@ -68,7 +68,7 @@ const JwtLogin = () => {
 
   return (
     <JWTRoot>
-      <Card className="card">
+      <Card className="card" style={{paddingTop:"25px", paddingBottom:"25px"}}>
         <Grid container>
           <Grid item sm={6} xs={12}>
             <JustifyBox p={4} height="100%" sx={{ minWidth: 320 }}>

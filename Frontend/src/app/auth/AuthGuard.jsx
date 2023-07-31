@@ -6,11 +6,8 @@ const AuthGuard = ({ children }) => {
   const { pathname } = useLocation();
 
 
-  console.log("isAuthenticated", isAuthenticated)
-
   if (isAuthenticated) return <>{children}</>;
     // if (true) return <>{children}</>;
-
 
   return <Navigate replace to="/session/signin" state={{ from: pathname }} />;
 };

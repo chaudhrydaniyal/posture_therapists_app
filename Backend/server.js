@@ -7,6 +7,7 @@ const { buildSchema } = require('graphql')
 const bodyParser = require('body-parser');
 
 // const bodyParser = require("body-parser"); /* deprecated */
+
 const cors = require("cors");
 const app = express();
 
